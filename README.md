@@ -1,5 +1,6 @@
 # UrMedia
-CSCI 4805 final project repository
+
+UrMedia
  
 UrMedia is an all-in-one media tracker website where users can rate and create lists of movies, shows, anime, video games, and books.
 
