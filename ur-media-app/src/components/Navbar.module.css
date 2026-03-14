@@ -1,0 +1,40 @@
+.main{
+    display: flex;
+    justify-content: space-between;
+    background-color: #26007a;
+    padding: 10px;
+}
+
+.browseIcon{
+    margin-right: 15px;
+}
+
+.searchBar{
+    display: flex;
+    background-color: #200160;
+    border-radius: 20px;
+    padding-right: 5px;
+}
+
+.searchBarInput{
+    margin-left: 15px;
+    border-radius: 15px;
+}
+
+.searchBarInput:focus {
+    outline: none;
+    box-shadow: 0 0 0 1px #6366f1;
+}
+
+.searchBarButton{
+    margin: 5px;
+}
+
+.logo{
+    font-size: 2em;
+    color: #706177;
+}
+
+.pfp {
+    border-radius: 15%;
+}

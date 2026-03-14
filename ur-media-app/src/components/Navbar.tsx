@@ -1,9 +1,10 @@
 import Link from "next/link"
 import Image from "next/image"
+import styles from "./Navbar.module.css"
 
 export default function Navbar() {
     return (
-        <nav style={{display: "flex", justifyContent: "space-between", backgroundColor: "#26007a", padding: "10px"}}>
+        <nav className={styles.main} style={{}}>
             <div style={{display: "flex", height: "40px"}}>
                 <Link href="/catalog">
                 <Image
@@ -12,25 +13,24 @@ export default function Navbar() {
                 alt="Browse"
                 width={40}
                 height={40}
-                style={{marginRight: "15px"}}
+                className={styles.browseIcon}
                 />
                 </Link>
-                <div style={{display: "flex", backgroundColor: "#200160", borderRadius:"20px"}}>
-                    <input type="text" placeholder="Search..." style={{marginLeft:"4px"}}/>
-                    <Link href="/catalog" style={{margin: "5px"}}>
+                <div className={styles.searchBar}>
+                    <input type="text" placeholder="Search..." className={styles.searchBarInput}/>
+                    <Link href="/catalog" className={styles.searchBarButton}>
                         <Image
                         src="/navbar-icons/search.png"
                         title="Search"
                         alt="Search"
                         width={25}
                         height={20}
-                        style={{marginRight:"2px"}}
                         />
                     </Link>
                 </div>
             </div>
             <Link href="/">
-                <h1 style={{fontSize: "2em", color: "#4e5150"}}>UrMedia</h1>
+                <h1 className={styles.logo} >UrMedia</h1>
             </Link>
             <div>
                 <Link href="profile">
@@ -39,7 +39,7 @@ export default function Navbar() {
                     alt="Profile"
                     width={40}
                     height={40}
-                    style={{ borderRadius: "15%"}}
+                    className={styles.pfp}
                     />
                 </Link>
             </div>
