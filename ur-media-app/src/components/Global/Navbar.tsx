@@ -14,7 +14,7 @@ export default function Navbar() {
                     width={40}
                     height={40}
                     className={styles.browseIcon}
-                />
+                    />
                 </Link>
                 <div className={styles.searchBar}>
                     <input type="text" placeholder="Search..." className={styles.searchBarInput}/>
@@ -36,6 +36,7 @@ export default function Navbar() {
                 <Link href="profile">
                     <Image
                     src="/test-images/azusa.jpg"
+                    title="Username"
                     alt="Profile"
                     width={40}
                     height={40}
