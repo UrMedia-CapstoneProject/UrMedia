@@ -1,8 +1,8 @@
 .main{
     display: flex;
     justify-content: space-between;
-    background-color: #26007a;
-    padding: 10px;
+    background-color: #1d0a46;
+    padding: 15px;
 }
 
 .browseIcon{
@@ -41,7 +41,7 @@
 }
 
 .logoText {
-    color: #706177;
+    color: #737374;
     font-size: 2.3em;
 }
 
