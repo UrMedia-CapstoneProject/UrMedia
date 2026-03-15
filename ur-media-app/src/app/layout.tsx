@@ -1,15 +1,4 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 import Navbar from "@/components/Global/Navbar";
->>>>>>> Stashed changes
-=======
-import Navbar from "@/components/Global/Navbar";
->>>>>>> Stashed changes
-=======
-import Navbar from "@/components/Global/Navbar";
->>>>>>> Stashed changes
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css"
