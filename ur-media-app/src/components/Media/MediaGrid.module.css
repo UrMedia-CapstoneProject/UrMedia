@@ -1,0 +1,13 @@
+.posterGrid{
+    background-color: rgba(56, 18, 87, 0.5);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.poster{
+    width: 100%;
+    aspect-ratio: 2/3;
+    position: relative;
+}

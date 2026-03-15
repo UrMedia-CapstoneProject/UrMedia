@@ -36,6 +36,7 @@ export default function Navbar() {
                 <Link href="profile">
                     <Image
                     src="/test-images/azusa.jpg"
+                    title="Username"
                     alt="Profile"
                     width={40}
                     height={40}
