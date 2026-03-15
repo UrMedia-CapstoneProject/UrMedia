@@ -6,6 +6,9 @@ import PopularMedia from "@/components/Media/PopularMedia";
 import Countdown from "@/components/Media/Countdown";
 import Friends from "@/components/Media/Friends";
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
