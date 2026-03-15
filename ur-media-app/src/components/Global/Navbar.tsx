@@ -7,13 +7,13 @@ export default function Navbar() {
         <nav className={styles.main}>
             <div className={styles.search}>
                 <Link href="/catalog">
-                <Image
-                src="/navbar-icons/browse.png"
-                title="Browse Catalog"
-                alt="Browse"
-                width={40}
-                height={40}
-                className={styles.browseIcon}
+                    <Image
+                    src="/navbar-icons/browse.png"
+                    title="Browse Catalog"
+                    alt="Browse"
+                    width={40}
+                    height={40}
+                    className={styles.browseIcon}
                 />
                 </Link>
                 <div className={styles.searchBar}>
