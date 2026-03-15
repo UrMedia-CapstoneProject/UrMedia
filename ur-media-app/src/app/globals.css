@@ -20,7 +20,16 @@
 }
 
 body {
+<<<<<<< Updated upstream
   background: var(--background);
+=======
+  background: linear-gradient(
+    150deg,
+    #26007a 0%,
+    #14003d 50%,
+    #070018 100%
+  );
+>>>>>>> Stashed changes
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
