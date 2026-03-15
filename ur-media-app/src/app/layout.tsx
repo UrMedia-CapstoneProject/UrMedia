@@ -1,4 +1,8 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+import Navbar from "@/components/Global/Navbar";
+>>>>>>> Stashed changes
 =======
 import Navbar from "@/components/Global/Navbar";
 >>>>>>> Stashed changes
