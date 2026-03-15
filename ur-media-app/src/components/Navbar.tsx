@@ -4,8 +4,8 @@ import styles from "./Navbar.module.css"
 
 export default function Navbar() {
     return (
-        <nav className={styles.main} style={{}}>
-            <div style={{display: "flex", height: "40px"}}>
+        <nav className={styles.main}>
+            <div className={styles.search}>
                 <Link href="/catalog">
                 <Image
                 src="/navbar-icons/browse.png"
@@ -29,8 +29,8 @@ export default function Navbar() {
                     </Link>
                 </div>
             </div>
-            <Link href="/">
-                <h1 className={styles.logo} >UrMedia</h1>
+            <Link href="/" className={styles.logo}>
+                <h1 className={styles.logoText}>UrMedia</h1>
             </Link>
             <div>
                 <Link href="profile">

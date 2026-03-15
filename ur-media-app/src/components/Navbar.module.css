@@ -9,6 +9,10 @@
     margin-right: 15px;
 }
 
+.search{
+    display: flex;
+}
+
 .searchBar{
     display: flex;
     background-color: #200160;
@@ -19,20 +23,26 @@
 .searchBarInput{
     margin-left: 15px;
     border-radius: 15px;
+    background-color: transparent;
+    border-color: transparent;
 }
-
 .searchBarInput:focus {
     outline: none;
+    border-color: #6366f1;
     box-shadow: 0 0 0 1px #6366f1;
 }
 
 .searchBarButton{
-    margin: 5px;
+    margin: 10px;
 }
 
 .logo{
-    font-size: 2em;
+    text-decoration: none;
+}
+
+.logoText {
     color: #706177;
+    font-size: 2.3em;
 }
 
 .pfp {
