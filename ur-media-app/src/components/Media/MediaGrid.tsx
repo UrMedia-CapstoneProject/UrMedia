@@ -11,6 +11,9 @@ export default function () {
                     fill
                     style={{ objectFit: "cover" }}
                 />
+                <div className={styles.hoverInfo}>
+                    <p>This is the hover text</p>
+                </div>
             </div>
         </div>
     )
