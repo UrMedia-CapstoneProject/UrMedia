@@ -3,7 +3,10 @@ import styles from "./Countdown.module.css"
 export default function() {
     return (
         <div className={styles.main}>
-            <h1>Countdown</h1>
+            <h2 className={styles.sectionHeader}>Countdown</h2>
+            <div className={styles.tabs}>
+
+            </div>
         </div>
     )
 }
