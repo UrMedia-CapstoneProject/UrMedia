@@ -1,0 +1,51 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    padding-top: 2rem;
+    padding-right: 5rem;
+    padding-left: 5rem;
+    justify-content: space-between;
+    position: relative;
+}
+
+.podium {
+    display: flex;
+    flex-direction: column;
+}
+
+.podiumLabel {
+    text-align: center;
+    padding-top: 3%;
+}
+
+.media {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.secondPlace {
+    margin-top: 7%;
+}
+
+.secondRibbon {
+    position: absolute;
+    bottom: 13px;
+    left: 65px;
+}
+
+.firstRibbon {
+    position: absolute;
+    bottom: 30px;
+    left: 148px;
+}
+
+.thirdPlace {
+    margin-top: 10%;
+}
+
+.thirdRibbon {
+    position: absolute;
+    bottom: 6px;
+    left: 286px;
+}
