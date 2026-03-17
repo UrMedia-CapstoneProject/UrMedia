@@ -6,7 +6,7 @@ export default function () {
         <div className={styles.posterGrid}>
             <div className={styles.poster}>
                 <Image
-                    src="/test-images/example-poster.png"
+                    src="/test-images/example-poster2.jpg"
                     alt="Poster"
                     fill
                     style={{ objectFit: "cover" }}

@@ -1,8 +1,12 @@
+"useClient"
+import { useState } from "react"
 import styles from "./PopularMedia.module.css"
-import Image from "next/image"
 import MediaGrid from "./MediaGrid"
+import EditModal from "../Profile/EditModal"
 
 export default function PopularMedia() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return(
         <div className={styles.main}>
             <div>
