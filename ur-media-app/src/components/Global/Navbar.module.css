@@ -1,0 +1,50 @@
+.main{
+    display: flex;
+    justify-content: space-between;
+    background-color: #1d0a46;
+    padding: 15px;
+}
+
+.browseIcon{
+    margin-right: 15px;
+}
+
+.search{
+    display: flex;
+}
+
+.searchBar{
+    display: flex;
+    background-color: #200160;
+    border-radius: 20px;
+    padding-right: 5px;
+}
+
+.searchBarInput{
+    margin-left: 15px;
+    border-radius: 15px;
+    background-color: transparent;
+    border-color: transparent;
+}
+.searchBarInput:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 1px #6366f1;
+}
+
+.searchBarButton{
+    margin: 10px;
+}
+
+.logo{
+    text-decoration: none;
+}
+
+.logoText {
+    color: #737374;
+    font-size: 2.3em;
+}
+
+.pfp {
+    border-radius: 15%;
+}
