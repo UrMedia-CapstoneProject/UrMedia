@@ -1,9 +1,10 @@
 import styles from "./page.module.css"
+import UserBio from "@/components/Profile/UserBio"
 
 export default function Profile() {
     return (
-        <div>
-            <h1>Profile page</h1>
+        <div className={styles.main}>
+            <UserBio />
         </div>
     )
 }
