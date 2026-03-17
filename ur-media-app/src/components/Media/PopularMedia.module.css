@@ -1,0 +1,9 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.sectionHeader{
+    margin-bottom: 0.5rem;
+}

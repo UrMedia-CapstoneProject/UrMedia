@@ -1,0 +1,12 @@
+.main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  padding: 5rem 10rem;
+}
+
+.sidebar {
+  display: grid;
+  gap: 2rem;
+  height: 100vh
+}
