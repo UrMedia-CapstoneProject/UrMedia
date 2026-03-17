@@ -1,4 +1,4 @@
-"useClient"
+'use client'
 import { useState } from "react"
 import styles from "./PopularMedia.module.css"
 import MediaGrid from "./MediaGrid"
