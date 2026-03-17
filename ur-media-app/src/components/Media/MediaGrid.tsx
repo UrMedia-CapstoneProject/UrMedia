@@ -6,11 +6,14 @@ export default function () {
         <div className={styles.posterGrid}>
             <div className={styles.poster}>
                 <Image
-                    src="/test-images/example-poster.png"
+                    src="/test-images/example-poster2.jpg"
                     alt="Poster"
                     fill
                     style={{ objectFit: "cover" }}
                 />
+                <div className={styles.hoverInfo}>
+                    <p>This is the hover text</p>
+                </div>
             </div>
         </div>
     )

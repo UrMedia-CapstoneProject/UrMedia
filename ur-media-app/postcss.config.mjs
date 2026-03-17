@@ -1,7 +1,5 @@
-const config = {
-  plugins: {
-    autoprefixer: {},
-  },
-};
+import autoprefixer from "autoprefixer"
 
-export default config;
+export default {
+  plugins: [autoprefixer()],
+}

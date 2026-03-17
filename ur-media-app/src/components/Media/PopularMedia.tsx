@@ -1,24 +1,28 @@
+'use client'
+import { useState } from "react"
 import styles from "./PopularMedia.module.css"
-import Image from "next/image"
 import MediaGrid from "./MediaGrid"
+import EditModal from "../Profile/EditModal"
 
 export default function PopularMedia() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     return(
         <div className={styles.main}>
             <div>
-                <h2>Popular Movies</h2>
+                <h2 className={styles.sectionHeader}>Popular Movies</h2>
                 <MediaGrid />
             </div>
             <div>
-                <h2>Popular Shows</h2>
+                <h2 className={styles.sectionHeader}>Popular Shows</h2>
                 <MediaGrid />
             </div>
             <div>
-                <h2>Popular Games</h2>
+                <h2 className={styles.sectionHeader}>Popular Games</h2>
                 <MediaGrid />
             </div>
             <div>
-                <h2>Popular Books</h2>
+                <h2 className={styles.sectionHeader}>Popular Books</h2>
                 <MediaGrid />
             </div>
         </div>
