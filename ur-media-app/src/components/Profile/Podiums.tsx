@@ -1,6 +1,10 @@
 import styles from "./Podiums.module.css"
 import Image from "next/image"
 
+const width: number = 67.5
+const height: number = 100
+const ribbon: number = 50
+
 export default function() {
     return (
         <div className={styles.main}>
@@ -10,49 +14,49 @@ export default function() {
                 <div className={styles.media}>
 
                     <Image
-                        src="/profile-icons/2nd place icon.png"
+                        src="/test-images/example-poster2.jpg"
                         alt="2nd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.secondPlace}
                     />
 
                     <Image
                         src="/profile-icons/badge.png"
                         alt="2nd Place"
-                        width={50}
-                        height={50}
+                        width={ribbon}
+                        height={ribbon}
                         className={styles.secondRibbon}
                     />
 
                     <Image
                         src="/profile-icons/1st place icon.png"
                         alt="1st Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                     />
 
                     <Image
                         src="/profile-icons/badge.png"
                         alt="1st Place"
-                        width={50}
-                        height={50}
+                        width={ribbon}
+                        height={ribbon}
                         className={styles.firstRibbon}
                     />
 
                     <Image
                         src="/profile-icons/3rd place icon.png"
                         alt="3rd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.thirdPlace}
                     />
 
                     <Image
                         src="/profile-icons/badge.png"
                         alt="3rd Place"
-                        width={50}
-                        height={50}
+                        width={ribbon}
+                        height={ribbon}
                         className={styles.thirdRibbon}
                     />
                 </div>
@@ -71,24 +75,48 @@ export default function() {
                     <Image
                         src="/profile-icons/2nd place icon.png"
                         alt="2nd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.secondPlace}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="2nd Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.secondRibbon}
                     />
 
                     <Image
                         src="/profile-icons/1st place icon.png"
                         alt="1st Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="1st Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.firstRibbon}
                     />
 
                     <Image
                         src="/profile-icons/3rd place icon.png"
                         alt="3rd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.thirdPlace}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="3rd Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.thirdRibbon}
                     />
                 </div>
 
@@ -106,24 +134,48 @@ export default function() {
                     <Image
                         src="/profile-icons/2nd place icon.png"
                         alt="2nd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.secondPlace}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="2nd Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.secondRibbon}
                     />
 
                     <Image
                         src="/profile-icons/1st place icon.png"
                         alt="1st Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="1st Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.firstRibbon}
                     />
 
                     <Image
                         src="/profile-icons/3rd place icon.png"
                         alt="3rd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.thirdPlace}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="3rd Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.thirdRibbon}
                     />
                 </div>
 
@@ -141,24 +193,48 @@ export default function() {
                     <Image
                         src="/profile-icons/2nd place icon.png"
                         alt="2nd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.secondPlace}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="2nd Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.secondRibbon}
                     />
 
                     <Image
                         src="/profile-icons/1st place icon.png"
                         alt="1st Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="1st Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.firstRibbon}
                     />
 
                     <Image
                         src="/profile-icons/3rd place icon.png"
                         alt="3rd Place"
-                        width={75}
-                        height={100}
+                        width={width}
+                        height={height}
                         className={styles.thirdPlace}
+                    />
+
+                    <Image
+                        src="/profile-icons/badge.png"
+                        alt="3rd Place"
+                        width={ribbon}
+                        height={ribbon}
+                        className={styles.thirdRibbon}
                     />
                 </div>
 

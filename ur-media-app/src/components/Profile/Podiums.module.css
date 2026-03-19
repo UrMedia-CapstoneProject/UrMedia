@@ -5,12 +5,12 @@
     padding-right: 5rem;
     padding-left: 5rem;
     justify-content: space-between;
-    position: relative;
 }
 
 .podium {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .podiumLabel {
@@ -30,14 +30,14 @@
 
 .secondRibbon {
     position: absolute;
-    bottom: 13px;
-    left: 65px;
+    bottom: 12px;
+    left: -15px;
 }
 
 .firstRibbon {
     position: absolute;
-    bottom: 30px;
-    left: 148px;
+    bottom: 27px;
+    left: 107px;
 }
 
 .thirdPlace {
@@ -46,6 +46,6 @@
 
 .thirdRibbon {
     position: absolute;
-    bottom: 6px;
-    left: 286px;
+    bottom: 5px;
+    left: 183px;
 }

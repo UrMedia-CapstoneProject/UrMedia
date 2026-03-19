@@ -8,8 +8,8 @@ export default function() {
             <Image 
             src="/profile-icons/default icon.png"
             alt="Profile Picture"
-            width={250}
-            height={250}
+            width={200}
+            height={200}
             />
 
             <div>
