@@ -20,9 +20,6 @@
 
 // }
 
-
-
-
 // <button onClick="signInWithGoogle()">click here</button>
 
 'use client'
