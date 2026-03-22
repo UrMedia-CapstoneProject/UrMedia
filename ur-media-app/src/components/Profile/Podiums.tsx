@@ -1,9 +1,11 @@
 import styles from "./Podiums.module.css"
 import Image from "next/image"
+import Poster from "@/components/Global/Poster"
 
 const width: number = 67.5
 const height: number = 100
-const ribbon: number = 50
+const ribbonHeight: number = 45
+const ribbonWidth: number = 30
 
 export default function() {
     return (
@@ -13,50 +15,39 @@ export default function() {
             <div className={styles.podium}>
                 <div className={styles.media}>
 
-                    <Image
-                        src="/test-images/example-poster2.jpg"
-                        alt="2nd Place"
-                        width={width}
-                        height={height}
-                        className={styles.secondPlace}
-                    />
+                    <div className={styles.secondPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/silver ribbon.png"
                         alt="2nd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.secondRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/1st place icon.png"
-                        alt="1st Place"
-                        width={width}
-                        height={height}
-                    />
+                    <div className={styles.firstPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/gold ribbon.png"
                         alt="1st Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.firstRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/3rd place icon.png"
-                        alt="3rd Place"
-                        width={width}
-                        height={height}
-                        className={styles.thirdPlace}
-                    />
+                    <div className={styles.thirdPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/bronze ribbon.png"
                         alt="3rd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.thirdRibbon}
                     />
                 </div>
@@ -72,50 +63,39 @@ export default function() {
             <div className={styles.podium}>
                 <div className={styles.media}>
 
-                    <Image
-                        src="/profile-icons/2nd place icon.png"
-                        alt="2nd Place"
-                        width={width}
-                        height={height}
-                        className={styles.secondPlace}
-                    />
+                    <div className={styles.secondPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/silver ribbon.png"
                         alt="2nd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.secondRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/1st place icon.png"
-                        alt="1st Place"
-                        width={width}
-                        height={height}
-                    />
+                    <div className={styles.firstPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/gold ribbon.png"
                         alt="1st Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.firstRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/3rd place icon.png"
-                        alt="3rd Place"
-                        width={width}
-                        height={height}
-                        className={styles.thirdPlace}
-                    />
+                    <div className={styles.thirdPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/bronze ribbon.png"
                         alt="3rd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.thirdRibbon}
                     />
                 </div>
@@ -131,50 +111,39 @@ export default function() {
             <div className={styles.podium}>
                 <div className={styles.media}>
 
-                    <Image
-                        src="/profile-icons/2nd place icon.png"
-                        alt="2nd Place"
-                        width={width}
-                        height={height}
-                        className={styles.secondPlace}
-                    />
+                    <div className={styles.secondPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/silver ribbon.png"
                         alt="2nd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.secondRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/1st place icon.png"
-                        alt="1st Place"
-                        width={width}
-                        height={height}
-                    />
+                    <div className={styles.firstPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/gold ribbon.png"
                         alt="1st Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.firstRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/3rd place icon.png"
-                        alt="3rd Place"
-                        width={width}
-                        height={height}
-                        className={styles.thirdPlace}
-                    />
+                    <div className={styles.thirdPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/bronze ribbon.png"
                         alt="3rd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.thirdRibbon}
                     />
                 </div>
@@ -190,50 +159,39 @@ export default function() {
             <div className={styles.podium}>
                 <div className={styles.media}>
 
-                    <Image
-                        src="/profile-icons/2nd place icon.png"
-                        alt="2nd Place"
-                        width={width}
-                        height={height}
-                        className={styles.secondPlace}
-                    />
+                    <div className={styles.secondPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/silver ribbon.png"
                         alt="2nd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.secondRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/1st place icon.png"
-                        alt="1st Place"
-                        width={width}
-                        height={height}
-                    />
+                    <div className={styles.firstPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/gold ribbon.png"
                         alt="1st Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.firstRibbon}
                     />
 
-                    <Image
-                        src="/profile-icons/3rd place icon.png"
-                        alt="3rd Place"
-                        width={width}
-                        height={height}
-                        className={styles.thirdPlace}
-                    />
+                    <div className={styles.thirdPlace}>
+                        <Poster />
+                    </div>
 
                     <Image
-                        src="/profile-icons/badge.png"
+                        src="/profile-icons/bronze ribbon.png"
                         alt="3rd Place"
-                        width={ribbon}
-                        height={ribbon}
+                        width={ribbonWidth}
+                        height={ribbonHeight}
                         className={styles.thirdRibbon}
                     />
                 </div>

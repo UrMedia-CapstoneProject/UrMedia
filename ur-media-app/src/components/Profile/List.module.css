@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    background-color: rgb(56, 18, 87);
+    margin-right: 2.5rem;
+    margin-left: 2.5rem;
+    padding: 1rem;
+}
+
+.tabList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1;
+}

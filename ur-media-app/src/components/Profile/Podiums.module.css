@@ -4,6 +4,7 @@
     padding-top: 2rem;
     padding-right: 5rem;
     padding-left: 5rem;
+    padding-bottom: 2rem;
     justify-content: space-between;
 }
 
@@ -26,26 +27,35 @@
 
 .secondPlace {
     margin-top: 7%;
+    height: 100;
+    width: 67.5;
 }
 
 .secondRibbon {
     position: absolute;
-    bottom: 12px;
-    left: -15px;
+    bottom: 7px;
+    left: -8px;
+}
+
+.firstPlace {
+    height: 100;
+    width: 67.5;
 }
 
 .firstRibbon {
     position: absolute;
-    bottom: 27px;
-    left: 107px;
+    bottom: 24px;
+    left: 118px;
 }
 
 .thirdPlace {
     margin-top: 10%;
+    height: 100;
+    width: 67.5;
 }
 
 .thirdRibbon {
     position: absolute;
-    bottom: 5px;
-    left: 183px;
+    bottom: -3px;
+    left: 194px;
 }
