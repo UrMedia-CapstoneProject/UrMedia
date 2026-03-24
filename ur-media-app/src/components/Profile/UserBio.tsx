@@ -10,23 +10,24 @@ export default function() {
             alt="Profile Picture"
             width={200}
             height={200}
+            className={styles.Pfp}
             />
 
-            <div>
-                <h2 className={styles.Username}>
-                    Username
-                    </h2>
-                <p>This is a biography.</p>
+            <h2 className={styles.Username}>
+                UsernameOOOOOOOO
+            </h2>
+            <p className={styles.Bio}>
+                This is a biography.
+            </p>
 
-                <Image
-                src="/profile-icons/settings icon.png"
-                title="Settings"
-                alt="Settings"
-                width={40}
-                height={40}
-                className={styles.SettingsIcon}
-                />
-            </div>
+            <Image
+            src="/profile-icons/settings icon.png"
+            title="Settings"
+            alt="Settings"
+            width={40}
+            height={40}
+            className={styles.SettingsIcon}
+            />
         </div>
     )
 }
