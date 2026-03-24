@@ -28,7 +28,6 @@ export default function() {
                     <button className={`${styles.tabLink} ${activeTab === "books" ? styles.active : ""}`}
                         onClick={() => setActiveTab("books")}
                     >Books</button>
-
                 </div>
 
                 <div className={styles.tabContent}>

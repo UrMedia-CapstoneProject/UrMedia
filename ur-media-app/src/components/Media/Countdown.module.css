@@ -1,8 +1,6 @@
 .main{
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 0.5rem;
 }
 
@@ -19,4 +17,12 @@
 .tabBar{
     display: flex;
     justify-content: space-evenly;
+    padding: .5rem;
+}
+
+.tabLink{
+    background-color: transparent;
+    color: var(--foreground);
+    border: none;
+    font-size: large;
 }
