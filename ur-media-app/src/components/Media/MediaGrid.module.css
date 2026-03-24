@@ -4,5 +4,6 @@
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 1rem;
     padding: 1rem;
+    border-radius: 15px;
     box-shadow: 4px 4px 4px rgba(24, 0, 37, 0.5);
 }

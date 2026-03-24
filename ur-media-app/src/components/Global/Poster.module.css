@@ -4,6 +4,7 @@
     position: relative;
     overflow: hidden;
     box-shadow: 4px 4px 4px rgba(32, 8, 51, 0.5);
+    border-radius: 3px;
 }
 .poster:hover{
     opacity: 1;
