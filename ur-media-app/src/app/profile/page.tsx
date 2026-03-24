@@ -12,6 +12,7 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
 import SignOutButton from '@/components/auth/SignOutButton'
+import AddMovieTrackerButton from '@/components/auth/AddMovieTrackerButton'
 
 export default async function ProfilePage() {
     const supabase = await createClient()
@@ -34,6 +35,8 @@ export default async function ProfilePage() {
             </div>
 
             <SignOutButton />
+            <AddMovieTrackerButton />
+
         </main>
     )
 
