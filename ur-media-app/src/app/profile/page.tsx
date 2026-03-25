@@ -11,8 +11,8 @@
 
 import { redirect } from 'next/navigation'
 import { createClient } from '@/lib/supabase/server'
-import SignOutButton from '@/components/auth/SignOutButton'
-import AddMovieTrackerButton from '@/components/auth/AddMovieTrackerButton'
+import SignOutButton from '@/components/Media/SignOutButton'
+import AddMovieTrackerButton from '@/components/Media/AddMovieTrackerButton'
 
 export default async function ProfilePage() {
     const supabase = await createClient()
@@ -35,7 +35,23 @@ export default async function ProfilePage() {
             </div>
 
             <SignOutButton />
-            <AddMovieTrackerButton />
+            {/* <AddMovieTrackerButton
+                tmdbId={movie.id}
+                title={movie.title}
+                imageUrl={
+                    movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : null
+                }
+                releaseDate={movie.release_date}
+            /> */}
+
+            <AddMovieTrackerButton
+                tmdbId={11111}
+                title={"Batman Begins"}
+                imageUrl={ "http:something else"}
+                releaseDate={"1/1/2012"}
+            />
 
         </main>
     )
