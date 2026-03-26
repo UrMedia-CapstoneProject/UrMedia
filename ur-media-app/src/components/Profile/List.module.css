@@ -1,6 +1,7 @@
 .main {
     display: flex;
-    background-color: rgba(56, 18, 87, 0.5);
+    flex-direction: column;
+    background-color: rgba(57, 3, 128, 0.5);
     margin-right: 2.5rem;
     margin-left: 2.5rem;
     padding: 1rem;
@@ -13,4 +14,16 @@
     flex-direction: row;
     justify-content: space-between;
     flex: 1;
+}
+
+.tabLink {
+    background-color: transparent;
+    color: var(--foreground);
+    border: none;
+    font-size: large;
+}
+
+.tabLink:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }

@@ -1,5 +1,5 @@
 .posterGrid{
-    background-color: rgba(56, 18, 87, 0.5);
+    background-color: rgba(57, 3, 128, 0.5);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 1rem;
