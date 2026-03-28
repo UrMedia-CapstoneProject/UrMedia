@@ -84,6 +84,7 @@ export default function MediaDetailModal({
               <textarea rows={4} placeholder="Write your thoughts here..." />
             </div>
 
+            {/* Is this how we want to display it?*/}
             {media.mediaType === "game" && (
               <div>
                 <label>Time Played</label>
