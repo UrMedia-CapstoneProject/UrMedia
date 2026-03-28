@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react"
 import styles from "./CountdownGrid.module.css"
-import Poster from "../Global/Poster"
+import Poster from "../../Global/Poster"
 
 export default function CountdownGrid({}){
     return(
