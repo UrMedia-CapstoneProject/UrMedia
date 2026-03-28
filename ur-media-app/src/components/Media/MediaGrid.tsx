@@ -5,7 +5,7 @@ export default function () {
     return (
         <div className={styles.posterGrid}>
             <div>
-                <Poster />
+                <Poster imageId={"/test-images/example-poster.png"}/>
             </div>
         </div>
     )

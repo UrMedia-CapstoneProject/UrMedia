@@ -1,6 +1,7 @@
 "use client"
 import styles from "./Countdown.module.css"
 import { useState } from "react"
+import CountdownGrid from "./CountdownGrid"
 
 export default function() {
 
@@ -31,10 +32,10 @@ export default function() {
                 </div>
 
                 <div className={styles.tabContent}>
-                    {activeTab === "movies" && <p>Upcoming Movies</p>}
-                    {activeTab === "shows" && <p>Upcoming Shows</p>}
-                    {activeTab === "games" && <p>Upcoming Games</p>}
-                    {activeTab === "books" && <p>Upcoming Books</p>}
+                    {activeTab === "movies" && <CountdownGrid/>}
+                    {activeTab === "shows" && <p>Hi</p>}
+                    {activeTab === "games" && <p>Hey</p>}
+                    {activeTab === "books" && <p>Hoe</p>}
                 </div>
 
             </div>
