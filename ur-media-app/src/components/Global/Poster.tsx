@@ -1,9 +1,6 @@
 import Image from "next/image"
 import styles from "./Poster.module.css"
-
-type PosterProps = {
-  imageId: string;
-};
+import { PosterProps } from "../../types/types"
 
 export default function Poster({imageId}: PosterProps) {
     return(
