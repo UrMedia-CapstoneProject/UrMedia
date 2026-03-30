@@ -2,11 +2,26 @@
 import { useState } from "react"
 import styles from "./CountdownGrid.module.css"
 import Poster from "../../Global/Poster"
+import MediaCard from "./MediaCard"
 
 export default function CountdownGrid({}){
     return(
-        <div>
-            <Poster imageId = {"/test-images/example-poster2.jpg"}/>
+        <div className={styles.main}>
+            <div className={styles.content}>
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+                <MediaCard />
+            </div>
         </div>
     )
 }

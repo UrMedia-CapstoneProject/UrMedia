@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    height: 40vh;
 }
 
 .sectionHeader{
@@ -11,9 +12,13 @@
 .content{
     background-color: rgba(56, 18, 87, 0.5);
     width: 100%;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px rgba(24, 0, 37, 0.5);
+    height: 100%;
 }
 
 .tabBar{
+    margin-top: 20px;
     display: flex;
     justify-content: space-evenly;
     padding: .5rem;
