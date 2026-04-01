@@ -7,21 +7,19 @@ import MediaCard from "./MediaCard"
 export default function CountdownGrid({}){
     return(
         <div className={styles.main}>
-            <div className={styles.content}>
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-                <MediaCard />
-            </div>
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
+            <MediaCard />
         </div>
     )
 }

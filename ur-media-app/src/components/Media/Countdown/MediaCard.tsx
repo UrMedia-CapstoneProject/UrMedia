@@ -7,6 +7,14 @@ export default function MediaCard(){
             <div className={styles.poster}>
                 <Poster imageId = {"/test-images/example-poster2.jpg"}/>
             </div>
+            <div className={styles.info}>
+                <div className={styles.title}>
+                    <h2>Name of movie</h2>
+                </div>
+                <div className={styles.countdown}>
+                    <p>Countdown to movie</p>
+                </div>
+            </div>
         </div>
     )
 }

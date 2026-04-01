@@ -1,7 +1,14 @@
 .main{
     height: 20%;
+    display: flex;
+    gap: 1rem;
 }
 
 .poster{
     width:25%;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
 }
