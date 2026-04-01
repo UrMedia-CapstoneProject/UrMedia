@@ -2,13 +2,18 @@ import styles from "./MediaGrid.module.css";
 import Poster from "../Global/Poster";
 
 export type MediaItem = {
-  id: number;
+  id: number
+  source?: "movie" | "jikan" | "rawg" | "google_books"
+  mediaType?: "movie" | "show" | "anime_movie" | "anime_show" | "game" | "book"
+  externalId?: string
   title: string;
-  imageURL: string;
+  imageUrl: string;
   synopsis?: string;
   releaseDate?: string | null;
-  mediaType?: "movie" | "show" | "anime" | "game" | "book"; // Remove "anime" if we decide to combine it with movies/shows
+  
 };
+
+
 
 type MediaGridProps = {
   items: MediaItem[];
@@ -22,7 +27,7 @@ export default function MediaGrid({ items, onPosterClick }: MediaGridProps) {
         <div key={item.id}>
           <Poster
             title={item.title}
-            imageURL={item.imageURL}
+            imageUrl={item.imageUrl}
             onClick={() => onPosterClick?.(item)}
           />
         </div>

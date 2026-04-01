@@ -10,6 +10,29 @@ type MediaDetailModalProps = {
   onClose: () => void;
 };
 
+export function formatMediaType(mediaType?: string) {
+  switch (mediaType) {
+    case "movie": {
+      return "Movie"
+    }
+    case "show": {
+      return "Show"
+    }
+    case "anime_movie": {
+      return "Anime Movie"
+    }
+    case "anime_show": {
+      return "Anime Show"
+    }
+    case "game": {
+      return "Game"
+    }
+    case "book": {
+      return "Book"
+    }
+  }
+}
+
 export default function MediaDetailModal({
   media,
   isOpen,
@@ -18,6 +41,8 @@ export default function MediaDetailModal({
   if (!isOpen || !media) {
     return null;
   }
+
+
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -32,7 +57,7 @@ export default function MediaDetailModal({
         <div className={styles.content}>
           <div className={styles.imageWrapper}>
             <Image
-              src={media.imageURL}
+              src={media.imageUrl}
               alt={media.title}
               fill
               style={{ objectFit: "cover" }}
@@ -42,7 +67,7 @@ export default function MediaDetailModal({
           <div className={styles.info}>
             <h2>{media.title}</h2>
             <p>
-              <strong>Type:</strong> {media.mediaType ?? "Unknown"}
+              <strong>Type:</strong> {formatMediaType(media.mediaType) ?? "Unknown"}
             </p>
             <p>
               <strong>Release Date:</strong> {media.releaseDate ?? "N/A"}
@@ -64,6 +89,14 @@ export default function MediaDetailModal({
               </select>
             </div>
 
+            {/* Is this how we want to display it?*/}
+            {media.mediaType === "game" && (
+              <div>
+                <label>Time Played</label>
+                <input type="number" placeholder="Enter hours played" />
+              </div>
+            )}
+
             {/*Change the rating to be from 1-10 deciaml format later on*/}
             <div>
               <label>Rating</label>
@@ -83,14 +116,6 @@ export default function MediaDetailModal({
               <label>Notes / Review</label>
               <textarea rows={4} placeholder="Write your thoughts here..." />
             </div>
-
-            {/* Is this how we want to display it?*/}
-            {media.mediaType === "game" && (
-              <div>
-                <label>Time Played</label>
-                <input type="number" placeholder="Enter hours played" />
-              </div>
-            )}
           </div>
         </div>
       </div>
