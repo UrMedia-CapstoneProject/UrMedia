@@ -5,12 +5,11 @@
 }
 
 .sectionHeader{
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
 .content{
-    background-color: rgba(56, 18, 87, 0.5);
+    background-color: rgba(57, 3, 128, 0.5);
     width: 100%;
 }
 
@@ -25,4 +24,11 @@
     color: var(--foreground);
     border: none;
     font-size: large;
+}
+.tabLink:hover{
+    cursor: pointer;
+}
+
+.tabContent{
+    padding: 1.8rem;
 }

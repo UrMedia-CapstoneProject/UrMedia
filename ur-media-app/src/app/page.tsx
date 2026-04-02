@@ -1,6 +1,6 @@
 import styles from "./page.module.css"
 import PopularMedia from "@/components/Media/PopularMedia";
-import Countdown from "@/components/Media/Countdown";
+import Countdown from "@/components/Media/Countdown/Countdown";
 import Friends from "@/components/Media/Friends";
 
 export default function Home() {

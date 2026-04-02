@@ -1,6 +1,6 @@
 :root {
-  --background: #171717;
-  --foreground: #e8e7fa;
+  --background: #0a0a0a;
+  --foreground: #ddd8e7;
 }
 
 :root {
@@ -13,7 +13,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #ddd8e7;
   }
 }
 
@@ -32,14 +32,19 @@ input, textarea, select {
   font-size: 1rem;
 }
 
-body {
+html{
   background: linear-gradient(
-    150deg,
+    160deg,
     #26007a 0%,
-    #14003d 50%,
-    #070018 100%
+    #180048 50%,
+    #100036 100%
   );
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
-  min-height: 100vh;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: transparent;
 }

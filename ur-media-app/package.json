@@ -13,14 +13,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@lorenzopant/tmdb": "^1.17.5",
+    "@rushelasli/jikants": "^1.1.2",
     "@supabase/ssr": "^0.9.0",
     "@supabase/supabase-js": "^2.99.2",
+    "axios": "^1.14.0",
+    "axios-cache-interceptor": "^1.12.0",
     "next": "^16.1.7",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19",
