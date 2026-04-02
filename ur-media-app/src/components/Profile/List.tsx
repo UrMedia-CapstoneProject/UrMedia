@@ -1,6 +1,7 @@
 "use client"
 import styles from "./List.module.css"
 import { useState } from "react"
+import MediaList from "@/components/Profile/MediaList";
 
 export default function () {
 
@@ -31,11 +32,11 @@ export default function () {
             </div>
 
             <div className={styles.tabContent}>
-                {activeTab === "movies" && <p>Movies List</p>}
-                {activeTab === "shows" && <p>Shows List</p>}
-                {activeTab === "games" && <p>Games List</p>}
-                {activeTab === "books" && <p>Books List</p>}
-                {activeTab === "filter" && <p>Filters List</p>}
+                {activeTab === "movies" && <MediaList />}
+                {activeTab === "shows" && <MediaList />}
+                {activeTab === "games" && <MediaList />}
+                {activeTab === "books" && <MediaList />}
+                {activeTab === "filter" && <p>Filter</p>}
             </div>
         </div>
     )

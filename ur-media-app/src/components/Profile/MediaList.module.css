@@ -1,0 +1,14 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    justify-content: space-between;
+}
+
+.member {
+    height: 250;
+    width: 168.75;
+    margin: 1rem;
+}

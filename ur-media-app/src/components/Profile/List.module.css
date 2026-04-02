@@ -25,5 +25,9 @@
 
 .tabLink:hover {
     cursor: pointer;
-    text-decoration: underline;
+    color: #ddd8e77c;
+}
+
+.active {
+    color: #ddd8e77c;
 }
