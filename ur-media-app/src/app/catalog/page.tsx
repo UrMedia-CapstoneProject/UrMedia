@@ -1,7 +1,8 @@
+import styles from "./page.module.css"
+
 export default function CatalogPage(){
     return (
-        <main>
-            
-        </main>
+        <div className={styles.main}>
+        </div>
     )
 }
