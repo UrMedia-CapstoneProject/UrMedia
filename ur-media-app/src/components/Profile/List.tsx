@@ -6,6 +6,14 @@ import MediaList from "@/components/Profile/MediaList";
 export default function () {
 
     const [activeTab, setActiveTab] = useState("movies")
+    const [filterOpen, setFilterOpen] = useState(false)
+    const [activeFilter, setActiveFilter] = useState<string | null>(null)
+
+    function handleFilterSelect(filter: string) {
+        setActiveFilter(filter)
+        setActiveTab("filter")
+        setFilterOpen(false)
+    }
 
     return (
         <div className={styles.main}>
@@ -26,9 +34,30 @@ export default function () {
                     onClick={() => setActiveTab("books")}
                 >Books</button>
 
-                <button className={`${styles.tabLink} ${activeTab === "filter" ? styles.active : ""}`}
-                    onClick={() => setActiveTab("filter")}
-                >Filter</button>
+                <div 
+                    className={styles.dropdown}
+                    onBlur={(e) => {
+                        if (!e.currentTarget.contains(e.relatedTarget)) {
+                            setFilterOpen(false)
+                        }
+                    }}
+                >
+                    <button
+                        className={`${styles.dropdown} ${activeTab === "filter"}`}
+                        onClick={() => setFilterOpen(prev => !prev)}
+                    >
+                        {activeFilter ? `Filter: ${activeFilter}` : "Filter"}
+                    </button>
+
+                    {filterOpen && (
+                        <div className={styles.dropdownMenu}>
+                            <button onClick={() => handleFilterSelect("A-Z")}>A–Z</button>
+                            <button onClick={() => handleFilterSelect("Z-A")}>Z–A</button>
+                            <button onClick={() => handleFilterSelect("Rating")}>Rating</button>
+                            <button onClick={() => handleFilterSelect("Date Added")}>Date Added</button>
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div className={styles.tabContent}>
