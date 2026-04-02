@@ -18,9 +18,12 @@
     background-color: rgba(24, 24, 24, .8);
     padding: .2rem;
     text-wrap: nowrap;
+    text-align: center;
     height: 30%;
     opacity: 0;
     transition: .1s ease;
+    width: 100%;
+    overflow-x: auto;
 }
 .poster:hover .hoverInfo{
     opacity: 1;
