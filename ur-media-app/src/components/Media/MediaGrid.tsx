@@ -10,9 +10,8 @@ export type MediaItem = {
   imageUrl: string;
   synopsis?: string;
   releaseDate?: string | null;
-  
+  totalEpisodes?: number | null; // Needed for keeping track how many max episodes that the user can track. Might not need it
 };
-
 
 
 type MediaGridProps = {

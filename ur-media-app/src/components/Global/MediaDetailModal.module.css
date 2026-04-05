@@ -12,9 +12,11 @@
 .modal {
   background: rgb(138, 5, 205);
   width: 100%;
-  max-width: 900px;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
   border-radius: 12px;
-  padding: 20px;
+  padding: 24px;
   position: relative;
 }
 
@@ -27,27 +29,96 @@
 
 .content {
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 300px 1fr;
   gap: 24px;
+}
+
+.imageSection {
+  width: 100%;
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 440px;
   overflow: hidden;
   border-radius: 10px;
 }
 
-.info {
+.infoSection {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
-.info textarea,
-.info select,
-.info input {
-  width: 100%;
+.title {
+  margin: 0;
+}
+
+.synopsisBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.notesGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.formGroup input,
+.formGroup select,
+.notesGroup textarea {
   padding: 8px;
+}
+
+.buttonRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.errorText {
+  color: red;
+  font-weight: bold;
+}
+
+.successText {
+  color: green;
+  font-weight: bold;
+}
+
+.saveButton {
+  background-color: #4da6d9; /* light blue */
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+/* Hover effect */
+.saveButton:hover {
+  background-color: #3b94c4;
+}
+
+/* Click effect */
+.saveButton:active {
+  transform: scale(0.98);
 }
