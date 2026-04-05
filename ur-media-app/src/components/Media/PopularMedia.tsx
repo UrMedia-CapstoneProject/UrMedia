@@ -107,7 +107,7 @@ export default function PopularMedia() {
     }
 
     return (
-        <>
+        <div>
             <section>
                 <h2>Popular Movies</h2>
                 <MediaGrid items={movies} onPosterClick={handlePosterClick} />
@@ -137,6 +137,6 @@ export default function PopularMedia() {
                 isOpen={isModalOpen}
                 onClose={handleCloseModal}
             />
-        </>
+        </div>
     )
 }
