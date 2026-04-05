@@ -4,7 +4,7 @@ import styles from "./CountdownGrid.module.css"
 import Poster from "../../Global/Poster"
 import MediaCard from "./MediaCard"
 
-export default function CountdownGrid({}){
+export default function CountdownGrid(){
     return(
         <div className={styles.main}>
             <MediaCard />

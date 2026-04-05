@@ -32,17 +32,25 @@ export default function Navbar() {
             <Link href="/" className={styles.logo}>
                 <h1 className={styles.logoText}>UrMedia</h1>
             </Link>
-            <div>
+            <div className={styles.profile}>
                 <Link href="profile">
                     <Image
                     src="/test-images/azusa.jpg"
                     title="Username"
                     alt="Profile"
-                    width={40}
-                    height={40}
+                    width={45}
+                    height={45}
                     className={styles.pfp}
                     />
                 </Link>
+                <Image 
+                    src="/navbar-icons/caret-down.png"
+                    title="Dropdown"
+                    alt=""
+                    width={18}
+                    height={18}
+                    className={styles.dropdown}
+                />
             </div>
         </div>
     )

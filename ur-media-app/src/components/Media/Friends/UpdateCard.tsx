@@ -1,5 +1,5 @@
 import Poster from "@/components/Global/Poster";
-import styles from "./MediaCard.module.css"
+import styles from "./UpdateCard.module.css"
 
 export default function MediaCard(){
     return(
@@ -9,10 +9,10 @@ export default function MediaCard(){
             </div>
             <div className={styles.info}>
                 <div className={styles.title}>
-                    <h2>The Odyssey</h2>
+                    <h3>Joimes</h3>
                 </div>
                 <div className={styles.countdown}>
-                    <p>3 Months, 13 Days</p>
+                    <p>Plans to watch The Odyssey</p>
                 </div>
             </div>
         </div>
