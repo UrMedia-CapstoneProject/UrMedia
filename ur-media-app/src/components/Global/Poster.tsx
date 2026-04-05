@@ -1,11 +1,12 @@
 import Image from "next/image"
 import styles from "./Poster.module.css"
+import { PosterProps } from "../../types/types"
 
-export default function() {
+export default function Poster({imageId}: PosterProps) {
     return(
         <div className={styles.poster}>
             <Image
-                src="/test-images/example-poster2.jpg"
+                src={imageId}
                 alt="Poster"
                 fill
                 style={{ objectFit: "cover" }}

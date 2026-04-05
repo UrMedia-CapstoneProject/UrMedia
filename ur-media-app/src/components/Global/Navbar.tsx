@@ -4,7 +4,7 @@ import styles from "./Navbar.module.css"
 
 export default function Navbar() {
     return (
-        <nav className={styles.main}>
+        <div className={styles.main}>
             <div className={styles.search}>
                 <Link href="/catalog">
                     <Image
@@ -44,6 +44,6 @@ export default function Navbar() {
                     />
                 </Link>
             </div>
-        </nav>
+        </div>
     )
 }
