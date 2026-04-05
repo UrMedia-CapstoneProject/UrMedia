@@ -5,51 +5,111 @@ import { createClient } from "@/lib/supabase/client"
 import MediaGrid, { MediaItem } from "./MediaGrid"
 import MediaDetailModal from "../Global/MediaDetailModal"
 
-type PopularMediaRow = {
-    media_group: "movies" | "shows" | "games" | "books"
+type MediaCategory = "movies" | "shows" | "games" | "books"
+
+type DatabaseMediaRecord = {
+    id: number
+    source: string
+    media_type: string
+    external_id: string
+    title: string
+    image_url: string | null
+    synopsis: string | null
+    release_date: string | null
+}
+
+type PopularMediaCacheRow = {
+    media_group: MediaCategory
     rank: number
     follow_count: number
-    media: {
-        id: number
-        source: string
-        media_type: string
-        external_id: string
-        title: string
-        image_url: string | null
-        synopsis: string | null
-        release_date: string | null
-    } | null
+    media: DatabaseMediaRecord | null
+}
+
+type PopularMediaByCategory = Record<MediaCategory, MediaItem[]>
+
+/*
+This function fixes the raw Supabase response shape. Convert media into a single object or null.
+*/
+function normalizePopularMediaCacheRows(rawRows: any[]): PopularMediaCacheRow[] {
+    return rawRows.map((row) => ({
+        media_group: row.media_group,
+        rank: row.rank,
+        follow_count: row.follow_count,
+        media: Array.isArray(row.media) ? row.media[0] ?? null : row.media ?? null,
+    }))
+}
+
+/*
+Convert one database media record into the MediaItem shape used by MediaGrid and the modal.
+*/
+function convertDatabaseMediaToMediaItem(mediaRecord: DatabaseMediaRecord): MediaItem {
+    return {
+        id: mediaRecord.id,
+        source: mediaRecord.source as MediaItem["source"],
+        mediaType: mediaRecord.media_type as MediaItem["mediaType"],
+        externalId: mediaRecord.external_id,
+        title: mediaRecord.title,
+        imageUrl: mediaRecord.image_url ?? "/test-images/default_no_image.png",
+        synopsis: mediaRecord.synopsis ?? undefined,
+        releaseDate: mediaRecord.release_date ?? null,
+    }
+}
+
+/*
+Take the cleaned query rows and sort them into 4 grouped arrays for the page.
+*/
+function buildPopularMediaByCategory(
+    popularMediaRows: PopularMediaCacheRow[]
+): PopularMediaByCategory {
+    const groupedMedia: PopularMediaByCategory = {
+        movies: [],
+        shows: [],
+        games: [],
+        books: [],
+    }
+
+    for (const row of popularMediaRows) {
+        if (!row.media) continue
+
+        groupedMedia[row.media_group].push(
+            convertDatabaseMediaToMediaItem(row.media)
+        )
+    }
+
+    return groupedMedia
 }
 
 export default function PopularMedia() {
     const supabase = createClient()
 
-    const [movies, setMovies] = useState<MediaItem[]>([])
-    const [shows, setShows] = useState<MediaItem[]>([])
-    const [games, setGames] = useState<MediaItem[]>([])
-    const [books, setBooks] = useState<MediaItem[]>([])
+    const [popularMedia, setPopularMedia] = useState<PopularMediaByCategory>({
+        movies: [],
+        shows: [],
+        games: [],
+        books: [],
+    })
     const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
-        const loadPopularMedia = async () => {
+        const fetchPopularMedia = async () => {
             const { data, error } = await supabase
                 .from("popular_media_cache")
                 .select(`
-            media_group,
-            rank,
-            follow_count,
-            media:media_id (
-            id,
-            source,
-            media_type,
-            external_id,
-            title,
-            image_url,
-            synopsis,
-            release_date
-          )
-        `)
+                    media_group,
+                    rank,
+                    follow_count,
+                    media:media_id (
+                        id,
+                        source,
+                        media_type,
+                        external_id,
+                        title,
+                        image_url,
+                        synopsis,
+                        release_date
+                    )
+                `)
                 .eq("timeframe", "all_time")
                 .order("media_group", { ascending: true })
                 .order("rank", { ascending: true })
@@ -59,42 +119,15 @@ export default function PopularMedia() {
                 return
             }
 
-            const mappedItems: Record<"movies" | "shows" | "games" | "books", MediaItem[]> = {
-                movies: [],
-                shows: [],
-                games: [],
-                books: [],
-            }
+            const normalizedRows = normalizePopularMediaCacheRows(data ?? [])
+            const groupedMedia = buildPopularMediaByCategory(normalizedRows)
 
-            for (const row of (data ?? []) as PopularMediaRow[]) {
-                const media = row.media
-
-                if (!media) continue
-
-                mappedItems[row.media_group].push({
-                    id: media.id,
-                    source: media.source as MediaItem["source"],
-                    mediaType: media.media_type as MediaItem["mediaType"],
-                    externalId: media.external_id,
-                    title: media.title,
-                    imageUrl: media.image_url ?? "/test-images/default_no_image.png",
-                    synopsis: media.synopsis ?? undefined,
-                    releaseDate: media.release_date ?? null,
-                })
-            }
-
-            setMovies(mappedItems.movies)
-            setShows(mappedItems.shows)
-            setGames(mappedItems.games)
-            setBooks(mappedItems.books)
-
-            console.log("popular media raw data:", data)
-            console.log("first row:", data?.[0])
-            console.log("first row media:", data?.[0]?.media)
+            setPopularMedia(groupedMedia)
         }
 
-        loadPopularMedia()
+        fetchPopularMedia()
     }, [supabase])
+
 
     const handlePosterClick = (item: MediaItem) => {
         setSelectedMedia(item)
@@ -110,25 +143,37 @@ export default function PopularMedia() {
         <div>
             <section>
                 <h2>Popular Movies</h2>
-                <MediaGrid items={movies} onPosterClick={handlePosterClick} />
+                <MediaGrid
+                    items={popularMedia.movies}
+                    onPosterClick={handlePosterClick}
+                />
             </section>
             <br />
 
             <section>
                 <h2>Popular Shows</h2>
-                <MediaGrid items={shows} onPosterClick={handlePosterClick} />
+                <MediaGrid
+                    items={popularMedia.shows}
+                    onPosterClick={handlePosterClick}
+                />
             </section>
             <br />
 
             <section>
                 <h2>Popular Games</h2>
-                <MediaGrid items={games} onPosterClick={handlePosterClick} />
+                <MediaGrid
+                    items={popularMedia.games}
+                    onPosterClick={handlePosterClick}
+                />
             </section>
             <br />
 
             <section>
                 <h2>Popular Books</h2>
-                <MediaGrid items={books} onPosterClick={handlePosterClick} />
+                <MediaGrid
+                    items={popularMedia.books}
+                    onPosterClick={handlePosterClick}
+                />
             </section>
             <br />
 
