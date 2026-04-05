@@ -1,15 +1,10 @@
 .main {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     margin-top: 2rem;
     margin-bottom: 2rem;
     margin-left: 1rem;
     margin-right: 1rem;
     justify-content: space-between;
-}
-
-.member {
-    height: 250;
-    width: 168.75;
-    margin: 1rem;
+    gap: 2rem;
 }
