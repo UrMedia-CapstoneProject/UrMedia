@@ -24,8 +24,3 @@
 .title{
     color: var(--foreground);
 }
-
-.countdown{
-    color: var(--foreground);
-    height: 100%;
-}

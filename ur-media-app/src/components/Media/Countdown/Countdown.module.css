@@ -36,6 +36,12 @@
     cursor: pointer;
 }
 
+.upcomingHeader{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .tabContent{
     padding: 1.8rem;
     flex: 1;

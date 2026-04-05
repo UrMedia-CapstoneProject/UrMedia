@@ -31,6 +31,8 @@ export default function() {
                     >Books</button>
                 </div>
 
+                <h3 className={styles.upcomingHeader}>Upcoming {activeTab}</h3>
+
                 <div className={styles.tabContent}>
                     {activeTab === "movies" && <CountdownGrid/>}
                     {activeTab === "shows" && <CountdownGrid/>}
