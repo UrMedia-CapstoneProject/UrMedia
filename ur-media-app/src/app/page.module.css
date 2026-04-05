@@ -2,11 +2,25 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 3rem;
-  padding: 5rem 10rem;
+  padding: 5rem 15rem;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
   gap: 5rem;
+}
+
+@media (max-width: 1024px) {
+  .pageLayout {
+    grid-template-columns: 1.5fr 1fr;
+    padding: 1rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main{
+    grid-template-columns: 1fr;
+    padding: 1rem 2rem;
+  }
 }

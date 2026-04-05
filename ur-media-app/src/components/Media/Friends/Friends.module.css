@@ -1,0 +1,73 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 50vh;
+}
+
+.content{
+    background-color: rgba(57, 3, 128, 0.5);
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 4px 4px 4px rgba(24, 0, 37, 0.5);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchBar{
+    width: 100%;
+    display: flex;
+}
+
+.searchBarInput{
+    border-radius: 15px;
+    background-color: #1b0942;
+    border-color: transparent;
+    width: 100%;
+    margin: 10px 5px 0px 3%;
+}
+.searchBarInput:focus {
+    outline: none;
+    border-color: none;
+}
+
+.add{
+    background-color: rgb(3, 77, 102);
+    color:#1b0942;
+    border-radius: 8px;
+    margin: 10px 3% 2px 5px;
+    padding: 0px 5px 0px 5px;
+}
+
+.recentHeader{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.updateCards{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-height: 0;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
+    padding: 1.8rem;
+    flex: 1;
+    min-height: 0;
+}
+
+.main::-webkit-scrollbar {
+  width: 8px;
+}
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+.main::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+.main::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
