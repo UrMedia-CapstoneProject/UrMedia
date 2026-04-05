@@ -36,10 +36,10 @@ export default function PopularMedia() {
             const { data, error } = await supabase
                 .from("popular_media_cache")
                 .select(`
-          media_group,
-          rank,
-          follow_count,
-          media:media_id (
+            media_group,
+            rank,
+            follow_count,
+            media:media_id (
             id,
             source,
             media_type,

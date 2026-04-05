@@ -5,7 +5,7 @@ export default function MediaCard(){
     return(
         <div className={styles.main}>
             <div className={styles.poster}>
-                <Poster imageId = {"/test-images/example-poster2.jpg"}/>
+                <Poster title = {"Interstellar"} imageUrl = {"/test-images/example-poster2.jpg"}/>
             </div>
             <div className={styles.info}>
                 <div className={styles.title}>

@@ -1,5 +1,5 @@
 .poster{
-    width: 100%;
+    max-width: 100%;
     aspect-ratio: 2/3;
     position: relative;
     overflow: hidden;
