@@ -33,9 +33,9 @@ export default function() {
 
                 <div className={styles.tabContent}>
                     {activeTab === "movies" && <CountdownGrid/>}
-                    {activeTab === "shows" && <p>Hi</p>}
-                    {activeTab === "games" && <p>Hey</p>}
-                    {activeTab === "books" && <p>Hoe</p>}
+                    {activeTab === "shows" && <CountdownGrid/>}
+                    {activeTab === "games" && <CountdownGrid/>}
+                    {activeTab === "books" && <CountdownGrid/>}
                 </div>
 
             </div>

@@ -4,25 +4,19 @@
     flex-direction: column;
     overflow-y: auto;
     min-height: 0;
+    scrollbar-color: rgba(255,255,255,0.3) transparent;
 }
 
-/* width */
 .main::-webkit-scrollbar {
   width: 8px;
 }
-
-/* track (background) */
 .main::-webkit-scrollbar-track {
   background: transparent;
 }
-
-/* thumb (the draggable part) */
 .main::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.2);
   border-radius: 10px;
 }
-
-/* hover effect */
 .main::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.4);
 }
