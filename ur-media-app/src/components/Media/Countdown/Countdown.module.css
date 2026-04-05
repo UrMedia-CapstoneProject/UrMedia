@@ -7,7 +7,6 @@
 
 .sectionHeader{
     justify-content: center;
-    height: 10%
 }
 
 .content{
@@ -16,6 +15,8 @@
     border-radius: 15px;
     box-shadow: 4px 4px 4px rgba(24, 0, 37, 0.5);
     height: 90%;
+    display: flex;
+    flex-direction: column;
 }
 
 .tabBar{
@@ -37,5 +38,6 @@
 
 .tabContent{
     padding: 1.8rem;
-    height: 35vh;
+    flex: 1;
+    min-height: 0;
 }

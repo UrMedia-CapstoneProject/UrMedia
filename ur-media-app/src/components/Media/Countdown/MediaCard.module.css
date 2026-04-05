@@ -1,14 +1,29 @@
 .main{
-    height: 20%;
     display: flex;
     gap: 1rem;
+    align-items: flex-start;
+    padding-bottom: 5%;
 }
 
 .poster{
-    width:25%;
+    width: 25%;
+    min-width: 60px;
 }
 
 .info{
     display: flex;
     flex-direction: column;
+    height: 100%;
+}
+
+.title{
+    color: var(--foreground);
+}
+
+.countdown{
+    color: var(--foreground);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

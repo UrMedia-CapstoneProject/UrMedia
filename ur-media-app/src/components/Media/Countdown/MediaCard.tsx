@@ -9,10 +9,10 @@ export default function MediaCard(){
             </div>
             <div className={styles.info}>
                 <div className={styles.title}>
-                    <h2>Name of movie</h2>
+                    <h2>The Odyssey</h2>
                 </div>
                 <div className={styles.countdown}>
-                    <p>Countdown to movie</p>
+                    <p>3 Months, 13 Days</p>
                 </div>
             </div>
         </div>
