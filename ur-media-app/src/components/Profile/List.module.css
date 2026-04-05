@@ -31,3 +31,53 @@
 .active {
     color: #ddd8e77c;
 }
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdownMenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #3d36be;
+    border: 1px solid #7b7bad;
+    border-radius: 6px;
+    min-width: 160px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-direction: column;
+}
+
+.dropdownMenu button {
+    padding: 10px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--foreground);
+}
+
+.dropdownMenu button:hover {
+    background-color: #5f50cd;
+    color: var(--foreground);
+}
+
+.dropdown:focus-within .dropdownMenu {
+    display: flex;
+}
+
+.filterButton {
+    border-radius: 999px;
+    border-color: #7b7bad;
+    border-style: solid;
+    width: 90px;
+    height: 30px;
+    background-color: #3d36be;
+    color: var(--foreground);
+    cursor: pointer;
+}
