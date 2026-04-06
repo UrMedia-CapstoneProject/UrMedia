@@ -13,22 +13,22 @@ type MediaDetailModalProps = {
 export function formatMediaType(mediaType?: string) {
   switch (mediaType) {
     case "movie": {
-      return "Movie"
+      return "Movie";
     }
     case "show": {
-      return "Show"
+      return "Show";
     }
     case "anime_movie": {
-      return "Anime Movie"
+      return "Anime Movie";
     }
     case "anime_show": {
-      return "Anime Show"
+      return "Anime Show";
     }
     case "game": {
-      return "Game"
+      return "Game";
     }
     case "book": {
-      return "Book"
+      return "Book";
     }
   }
 }
@@ -41,8 +41,6 @@ export default function MediaDetailModal({
   if (!isOpen || !media) {
     return null;
   }
-
-
 
   return (
     <div className={styles.overlay} onClick={onClose}>
@@ -67,7 +65,8 @@ export default function MediaDetailModal({
           <div className={styles.info}>
             <h2>{media.title}</h2>
             <p>
-              <strong>Type:</strong> {formatMediaType(media.mediaType) ?? "Unknown"}
+              <strong>Type:</strong>{" "}
+              {formatMediaType(media.mediaType) ?? "Unknown"}
             </p>
             <p>
               <strong>Release Date:</strong> {media.releaseDate ?? "N/A"}
