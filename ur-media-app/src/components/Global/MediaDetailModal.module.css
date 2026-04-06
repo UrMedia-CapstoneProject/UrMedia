@@ -10,7 +10,7 @@
 }
 
 .modal {
-  background: rgb(138, 5, 205);
+  background: rgba(57, 3, 128, .95);
   width: 100%;
   max-width: 1000px;
   max-height: 90vh;
@@ -18,13 +18,6 @@
   border-radius: 12px;
   padding: 24px;
   position: relative;
-}
-
-.closeButton {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  cursor: pointer;
 }
 
 .content {
@@ -83,6 +76,12 @@
 .formGroup select,
 .notesGroup textarea {
   padding: 8px;
+  outline: none;
+  border-color: none;
+}
+
+.scoreBox{
+  width: 115px;
 }
 
 .buttonRow {
@@ -92,17 +91,17 @@
 }
 
 .errorText {
-  color: red;
+  color: rgb(236, 56, 56);
   font-weight: bold;
 }
 
 .successText {
-  color: green;
+  color:rgb(31, 221, 31);
   font-weight: bold;
 }
 
 .saveButton {
-  background-color: #4da6d9; /* light blue */
+  background-color: #116494; /* light blue */
   color: white;
   border: none;
   padding: 12px 24px;
@@ -113,12 +112,10 @@
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
-/* Hover effect */
 .saveButton:hover {
-  background-color: #3b94c4;
+  background-color: #1c83bb;
 }
 
-/* Click effect */
 .saveButton:active {
   transform: scale(0.98);
 }

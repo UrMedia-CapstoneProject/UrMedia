@@ -6,6 +6,12 @@ import styles from "./MediaDetailModal.module.css"
 import type { MediaItem } from "../Media/MediaGrid"
 import { createClient } from "@/lib/supabase/client"
 
+type MediaDetailModalProps = {
+  media: MediaItem | null
+  isOpen: boolean
+  onClose: () => void
+}
+
 export function formatMediaType(mediaType?: string) {
   switch (mediaType) {
     case "movie": {
@@ -27,12 +33,6 @@ export function formatMediaType(mediaType?: string) {
       return "Book"
     }
   }
-}
-
-type MediaDetailModalProps = {
-  media: MediaItem | null
-  isOpen: boolean
-  onClose: () => void
 }
 
 export default function MediaDetailModal({
@@ -322,12 +322,6 @@ export default function MediaDetailModal({
               <p>{media.synopsis ?? "No synopsis available."}</p>
             </div>
 
-            {!isLoggedIn && (
-              <p className={styles.errorText}>
-                Sign in to save changes or update your podium.
-              </p>
-            )}
-
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
                 <label>Status</label>
@@ -357,6 +351,7 @@ export default function MediaDetailModal({
                     onChange={(e) => handleScoreChange(e.target.value)}
                     placeholder="1.0 - 10.0"
                     disabled={!isLoggedIn}
+                    className={styles.scoreBox}
                   />
                 </div>
               </div>
@@ -464,7 +459,7 @@ export default function MediaDetailModal({
             <div className={styles.notesGroup}>
               <label>Notes / Review</label>
               <textarea
-                rows={4}
+                // rows={4} take this out
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Write your thoughts here..."
@@ -478,6 +473,12 @@ export default function MediaDetailModal({
 
             {successMessage && (
               <p className={styles.successText}>{successMessage}</p>
+            )}
+
+            {!isLoggedIn && (
+              <p className={styles.errorText}>
+                Sign in to save changes or update your podium.
+              </p>
             )}
 
             <div className={styles.buttonRow}>
