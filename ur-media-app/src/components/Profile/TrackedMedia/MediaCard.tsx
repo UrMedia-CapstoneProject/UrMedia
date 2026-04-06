@@ -7,15 +7,22 @@ export default function () {
     return (
         <div className={styles.main}>
             <div className={styles.poster}>
-                <Poster title = {"The Odyssey"} imageUrl = {"/test-images/the-odyssey.jpg"}/>
-            </div>
+                <Poster title={"The Odyssey"} imageUrl={"/test-images/the-odyssey.jpg"} />
+                <div className={styles.mediaInfo}>
+                    <div>
+                        <p className={styles.title}>
+                            <span className={styles.titleText}>
+                                {"The Odyssey and what if the name is a little longer? and what if the name is a little longer?"}
+                            </span>
+                        </p>
 
-            <div className={styles.info}>
-                <p>{"The Odyssey"}</p>
+                    </div>
 
-                <div className={styles.userInfo}>
-                    <p>Status: Plan to Watch</p>
-                    <p>10/10</p>
+                    <div className={styles.userStats}>
+                        <p className={styles.epWatched}>0</p>
+                        <p className={styles.score}>7/10</p>
+                    </div>
+
                 </div>
             </div>
         </div>

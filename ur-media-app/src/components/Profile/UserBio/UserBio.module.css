@@ -3,7 +3,6 @@
     flex-direction: row;
     position: relative;
     background-color: rgba(var(--surface-primary-rgb), 0.5);
-
     box-shadow: 4px 4px 4px rgba(var(--box-shadow-rgb), 0.5);
 }
 
