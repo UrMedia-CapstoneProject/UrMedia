@@ -10,7 +10,7 @@
 }
 
 .modal {
-    background: rgba(57, 3, 128, .95);
+    background: rgba(var(--surface-primary-rgb), .95);
     width: 100%;
     max-width: 1000px;
     max-height: 90vh;
@@ -34,7 +34,7 @@
     background-color: #1b0942;
     padding: 1rem;
     border-radius: 15px;
-    box-shadow: 4px 4px 8px rgba(24, 0, 37, 0.5);
+    box-shadow: 4px 4px 8px rgba(var(--box-shadow-rgb), 0.5);
 }
 
 .contentBottom {
@@ -48,7 +48,6 @@
 .imageSection {
     width: 100%;
     position: relative;
-    background-color: #1b0942;
 }
 
 .imageWrapper {
@@ -63,7 +62,6 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
-    background-color: #1b0942;
 }
 
 

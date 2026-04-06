@@ -3,7 +3,7 @@
     gap: 1rem;
     align-items: flex-start;
     padding: 3% 1% 5% 3%;
-    background-color: #1b0942;
+    background-color: rgba(var(--surface-secondary-rgb), 0.8);
     border-radius: 1rem;
     margin-bottom: 5%;
     margin-right: 10px;

@@ -2,10 +2,14 @@
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    background-color: #1b0942;
     padding: 15px;
     padding-left: 5rem;
     padding-right: 5rem;
+    position:sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(var(--surface-secondary-rgb), 0.8);
+    backdrop-filter: blur(10px);
 }
 
 .browseIcon{
