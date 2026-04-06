@@ -1,0 +1,26 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(26, 0, 60, 0.5);
+    border-radius: 5%;
+    padding: 0.55rem;
+}
+
+.poster {
+    width: 80%;
+    min-width: 100px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    gap: 1rem;
+}

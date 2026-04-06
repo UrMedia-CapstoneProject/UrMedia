@@ -1,6 +1,6 @@
 import styles from "./Podiums.module.css"
 import Image from "next/image"
-import Poster from "@/components/Global/Poster"
+import PodiumPoster from "@/components/Profile/PodiumPoster";
 
 const width: number = 67.5
 const height: number = 100
@@ -16,7 +16,7 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -28,7 +28,7 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -40,7 +40,7 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -64,7 +64,7 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -76,7 +76,7 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -88,7 +88,7 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -112,7 +112,7 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -124,7 +124,7 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -136,7 +136,7 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -160,7 +160,7 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -172,7 +172,7 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
@@ -184,7 +184,7 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <Poster />
+                        <PodiumPoster />
                     </div>
 
                     <Image
