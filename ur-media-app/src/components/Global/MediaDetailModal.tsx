@@ -290,32 +290,38 @@ export default function MediaDetailModal({
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.content}>
-          <div className={styles.imageSection}>
-            <div className={styles.imageWrapper}>
-              <Image
-                src={media.imageUrl}
-                alt={media.title}
-                fill
-                style={{ objectFit: "cover" }}
-              />
+
+          <div className={styles.contentTop}>
+            <div className={styles.imageSection}>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={media.imageUrl}
+                  alt={media.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </div>
+
+            <div className={styles.infoSection}>
+                <h2 className={styles.title}>{media.title}</h2>
+
+                <p>
+                  <strong>Type:</strong> {formatMediaType(media.mediaType)}
+                </p>
+
+                <p>
+                  <strong>Release Date:</strong> {media.releaseDate ?? "N/A"}
+                </p>
+
+                <div className={styles.synopsisBlock}>
+                  <strong>Synopsis:</strong>
+                  <p className={styles.synopsisText}>{media.synopsis ?? "No synopsis available."}</p>
+                </div>
             </div>
           </div>
 
-          <div className={styles.infoSection}>
-            <h2 className={styles.title}>{media.title}</h2>
-
-            <p>
-              <strong>Type:</strong> {formatMediaType(media.mediaType)}
-            </p>
-
-            <p>
-              <strong>Release Date:</strong> {media.releaseDate ?? "N/A"}
-            </p>
-
-            <div className={styles.synopsisBlock}>
-              <strong>Synopsis:</strong>
-              <p>{media.synopsis ?? "No synopsis available."}</p>
-            </div>
+          <div className={styles.contentBottom}>
 
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
@@ -344,10 +350,43 @@ export default function MediaDetailModal({
                     step={0.1}
                     value={score}
                     onChange={(e) => handleScoreChange(e.target.value)}
-                    placeholder="1.0 - 10.0"
+                    placeholder="-"
                     disabled={!isLoggedIn}
                     className={styles.scoreBox}
                   />
+
+                  <div className={styles.podiumRow}>
+                    <button
+                      type="button"
+                      onClick={handleTogglePodium}
+                      disabled={!isLoggedIn}
+                      className={styles.favoriteButton}
+                    >
+                      <Image
+                        src={podiumEnabled ? "/heart1.png" : "/heart2.png"}
+                        alt={podiumEnabled ? "Remove from favorites" : "Add to favorites"}
+                        width={30}
+                        height={30}
+                      />
+                    </button>
+
+
+                    <select
+                      value={podiumRank}
+                      onChange={(e) =>
+                        setPodiumRank(
+                          e.target.value === "" ? "" : Number(e.target.value)
+                        )
+                      }
+                      disabled={!isLoggedIn || !podiumEnabled}
+                      className={styles.podiumInput}
+                    >
+                      <option value="">Add to Favorites</option>
+                      <option value="1">Top 1</option>
+                      <option value="2">Top 2</option>
+                      <option value="3">Top 3</option>
+                    </select>
+                  </div>
                 </div>
               </div>
 
@@ -387,7 +426,7 @@ export default function MediaDetailModal({
                         e.target.value === "" ? "" : Number(e.target.value)
                       )
                     }
-                    placeholder="Enter episodes watched"
+                    placeholder="0"
                     disabled={!isLoggedIn}
                   />
                 </div>
@@ -406,7 +445,7 @@ export default function MediaDetailModal({
                         e.target.value === "" ? "" : Number(e.target.value)
                       )
                     }
-                    placeholder="Enter rewatches"
+                    placeholder="0"
                     disabled={!isLoggedIn}
                   />
                 </div>
@@ -432,45 +471,24 @@ export default function MediaDetailModal({
                 />
               </div>
 
-              <div className={styles.formGroup}>
-                <label>Podium Rank</label>
-                <div className={styles.podiumRow}></div>
-                <select
-                  value={podiumRank}
-                  onChange={(e) =>
-                    setPodiumRank(
-                      e.target.value === "" ? "" : Number(e.target.value)
-                    )
-                  }
-                  disabled={!isLoggedIn || !podiumEnabled}
-                >
-                  <option value="">Not in Podium</option>
-                  <option value="1">Top 1</option>
-                  <option value="2">Top 2</option>
-                  <option value="3">Top 3</option>
-                </select>
 
-                <button
-                  type="button"
-                  onClick={handleTogglePodium}
-                  disabled={!isLoggedIn}
-                >
-                  {podiumEnabled ? "Remove" : "Add"}
-                </button>
-              </div>
             </div>
-
             <div className={styles.notesGroup}>
-              <label>Notes / Review</label>
+              <label>Review</label>
               <textarea
-                // rows={4} take this out
+                rows={10}
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="Write your thoughts here..."
                 disabled={!isLoggedIn}
+
               />
             </div>
 
+
+          </div>
+
+          <div className={styles.messages}>
             {errorMessage && (
               <p className={styles.errorText}>{errorMessage}</p>
             )}
@@ -484,35 +502,36 @@ export default function MediaDetailModal({
                 Sign in to save changes.
               </p>
             )}
+          </div>
 
-            <div className={styles.buttonRow}>
+          <div className={styles.buttonRow}>
+            <button
+              className={styles.saveButton}
+              onClick={handleSaveChanges}
+              disabled={!isLoggedIn}
+            >
+              Save Changes
+            </button>
+
+            <button
+              // type="button"
+              className={styles.saveButton}
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+
+            {isTracked && (
               <button
                 className={styles.saveButton}
-                onClick={handleSaveChanges}
+                onClick={handleDeleteTracked}
                 disabled={!isLoggedIn}
               >
-                Save Changes
+                Delete
               </button>
-
-              <button
-                // type="button"
-                className={styles.saveButton}
-                onClick={handleCancel}
-              >
-                Cancel
-              </button>
-
-              {isTracked && (
-                <button
-                  className={styles.saveButton}
-                  onClick={handleDeleteTracked}
-                  disabled={!isLoggedIn}
-                >
-                  Delete
-                </button>
-              )}
-            </div>
+            )}
           </div>
+
         </div>
       </div>
     </div>
