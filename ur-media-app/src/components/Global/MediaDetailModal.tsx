@@ -53,6 +53,7 @@ export default function MediaDetailModal({
   const [startDate, setStartDate] = useState("")
   const [finishDate, setFinishDate] = useState("")
   const [notes, setNotes] = useState("")
+  const [podiumEnabled, setPodiumEnabled] = useState(false)
   const [podiumRank, setPodiumRank] = useState<number | "">("")
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
@@ -78,6 +79,7 @@ export default function MediaDetailModal({
     setFinishDate("")
     setNotes("")
     setPodiumRank("")
+    setPodiumEnabled(false)
     setErrorMessage("")
     setSuccessMessage("")
     setIsTracked(false)
@@ -149,16 +151,6 @@ export default function MediaDetailModal({
     setScore(value)
   }
 
-  const changeScoreByStep = (amount: number) => {
-    const current = score === "" ? 1 : Number(score)
-    let next = current + amount
-
-    if (next < 1) next = 1
-    if (next > 10) next = 10
-
-    setScore(next.toFixed(1))
-  }
-
   const validateForm = () => {
     if (score !== "") {
       const num = Number(score)
@@ -202,8 +194,26 @@ export default function MediaDetailModal({
       return "Finish date cannot be before start date."
     }
 
-    return ""
+    if (podiumEnabled && podiumRank === "") {
+      return "Please select a podium rank."
+    }
   }
+
+  const handleTogglePodium = () => {
+    if (!isLoggedIn) return
+
+    if (podiumEnabled) {
+      setPodiumEnabled(false)
+      setPodiumRank("")
+    } else {
+      setPodiumEnabled(true)
+
+      if (podiumRank === "") {
+        setPodiumRank(1)
+      }
+    }
+  }
+
 
   const handleSaveChanges = async () => {
     if (!isLoggedIn) return
@@ -230,6 +240,8 @@ export default function MediaDetailModal({
       startDate: startDate || null,
       finishDate: finishDate || null,
       notes: notes || null,
+      podiumEnabled,
+      podiumRank: podiumEnabled ? podiumRank : null,
     }
 
     console.log("Save Changes payload:", payload)
@@ -240,27 +252,10 @@ export default function MediaDetailModal({
     setSuccessMessage("Added to your tracked list.")
   }
 
-  const handleSavePodium = async () => {
-    if (!isLoggedIn) return
-
+  const handleCancel = () => {
     setErrorMessage("")
     setSuccessMessage("")
-
-    const payload = {
-      mediaId: media.id,
-      mediaType: media.mediaType,
-      podiumRank: podiumRank === "" ? null : podiumRank,
-    }
-
-    console.log("Save Podium payload:", payload)
-
-    // Later: await fetch("/api/media/podium", { ... })
-
-    setSuccessMessage(
-      podiumRank === ""
-        ? "Removed from podium."
-        : `Saved as Top ${podiumRank}.`
-    )
+    onClose()
   }
 
   const handleDeleteTracked = async () => {
@@ -439,6 +434,7 @@ export default function MediaDetailModal({
 
               <div className={styles.formGroup}>
                 <label>Podium Rank</label>
+                <div className={styles.podiumRow}></div>
                 <select
                   value={podiumRank}
                   onChange={(e) =>
@@ -446,13 +442,21 @@ export default function MediaDetailModal({
                       e.target.value === "" ? "" : Number(e.target.value)
                     )
                   }
-                  disabled={!isLoggedIn}
+                  disabled={!isLoggedIn || !podiumEnabled}
                 >
                   <option value="">Not in Podium</option>
                   <option value="1">Top 1</option>
                   <option value="2">Top 2</option>
                   <option value="3">Top 3</option>
                 </select>
+
+                <button
+                  type="button"
+                  onClick={handleTogglePodium}
+                  disabled={!isLoggedIn}
+                >
+                  {podiumEnabled ? "Remove" : "Add"}
+                </button>
               </div>
             </div>
 
@@ -477,7 +481,7 @@ export default function MediaDetailModal({
 
             {!isLoggedIn && (
               <p className={styles.errorText}>
-                Sign in to save changes or update your podium.
+                Sign in to save changes.
               </p>
             )}
 
@@ -491,11 +495,11 @@ export default function MediaDetailModal({
               </button>
 
               <button
+                // type="button"
                 className={styles.saveButton}
-                onClick={handleSavePodium}
-                disabled={!isLoggedIn}
+                onClick={handleCancel}
               >
-                Save Podium
+                Cancel
               </button>
 
               {isTracked && (
