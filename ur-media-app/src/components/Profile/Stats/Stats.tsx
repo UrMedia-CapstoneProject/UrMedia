@@ -6,6 +6,9 @@ export default function() {
             <div className={styles.statBox}>
                 <h1>Stats section</h1>
             </div>
+            <div className={styles.statBox}>
+                <h1>Stats section</h1>
+            </div>
         </div>
     )
 }

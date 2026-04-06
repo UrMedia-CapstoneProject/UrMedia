@@ -1,26 +1,72 @@
 .main {
     display: flex;
     flex-direction: row;
-    background-color: rgba(26, 0, 60, 0.5);
     border-radius: 5%;
-    padding: 0.55rem;
 }
 
-.poster {
-    width: 80%;
-    min-width: 100px;
+.poster{
+    width: 150px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 4px 4px 4px rgba(32, 8, 51, 0.5);
+    border-radius: 3px;
 }
 
-.info {
+.mediaInfo{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    background-color: rgba(24, 24, 24, 0.8);
+    padding: 10px;
+
     display: flex;
     flex-direction: column;
-    padding-top: 0.5rem;
-    padding-left: 0.5rem;
+    justify-content: space-between;
+
+    min-height: 60px;
+    max-height: 100px;
+
+    transition: 0.1s ease;
 }
 
-.userInfo {
+.userStats{
     display: flex;
-    flex-direction: column;
-    margin-top: auto;
-    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title{
+    max-height: 40px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+}
+.title:hover .titleText {
+    animation: scrollText 3s linear forwards;
+}
+
+.titleText {
+    display: inline-block;
+    padding-right: 20px;
+}
+
+.epWatched{
+    bottom: 3;
+    left: 3;
+}
+
+.score{
+    bottom: 3;
+    right: 3;
+}
+
+@keyframes scrollText {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
 }
