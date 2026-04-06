@@ -1,7 +1,7 @@
 "use client"
-import styles from "./List.module.css"
+import styles from "./TrackedMedia.module.css"
 import { useState } from "react"
-import MediaList from "@/components/Profile/MediaList";
+import MediaList from "./MediaList";
 
 export default function () {
 

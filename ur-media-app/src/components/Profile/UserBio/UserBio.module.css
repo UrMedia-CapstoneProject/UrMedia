@@ -3,10 +3,15 @@
     flex-direction: row;
     position: relative;
     background-color: rgba(var(--surface-primary-rgb), 0.5);
-    padding-left: 2.5rem;
-    padding-bottom: 0.75rem;
-    padding-right: 10rem;
+
     box-shadow: 4px 4px 4px rgba(var(--box-shadow-rgb), 0.5);
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .Username{

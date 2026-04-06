@@ -1,5 +1,5 @@
 "use client"
-import styles from "./Media.module.css"
+import styles from "./MediaCard.module.css"
 import { useState } from "react"
 import Poster from "@/components/Global/Poster";
 

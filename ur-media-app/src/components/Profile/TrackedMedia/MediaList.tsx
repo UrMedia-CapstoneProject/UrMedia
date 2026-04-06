@@ -1,7 +1,7 @@
 "use client"
 import styles from "./MediaList.module.css"
 import { useState } from "react"
-import Media from "@/components/Profile/Media";
+import Media from "./MediaCard";
 
 export default function() {
     return (

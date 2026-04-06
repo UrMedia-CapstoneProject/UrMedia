@@ -1,6 +1,6 @@
 import styles from "./Podiums.module.css"
 import Image from "next/image"
-import PodiumPoster from "@/components/Profile/PodiumPoster";
+import PodiumPoster from "./PodiumPoster";
 
 const width: number = 67.5
 const height: number = 100

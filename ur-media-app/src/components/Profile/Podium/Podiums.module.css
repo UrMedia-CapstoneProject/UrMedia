@@ -1,11 +1,9 @@
 .main {
     display: flex;
     flex-direction: row;
-    padding-top: 2rem;
-    padding-right: 5rem;
-    padding-left: 5rem;
-    padding-bottom: 2rem;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 3rem;
 }
 
 .podium {
