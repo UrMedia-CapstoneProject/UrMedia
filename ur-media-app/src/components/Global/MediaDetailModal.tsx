@@ -35,6 +35,17 @@ export function formatMediaType(mediaType?: string) {
   }
 }
 
+export function formatDate(releaseDate?: string | null) {
+  if (!releaseDate) return "N/A" // This handles the issue with Date() can't take a null or undefined value. This is will act as default value.
+  const date = new Date(releaseDate)
+
+  return date.toLocaleDateString("en-US", {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  })
+}
+
 export default function MediaDetailModal({
   media,
   isOpen,
@@ -57,6 +68,31 @@ export default function MediaDetailModal({
   const [podiumRank, setPodiumRank] = useState<number | "">("")
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
+
+  useEffect(() => {
+    if (!media || !isOpen || !media.mediaType) {
+      console.log("Modal fetch blocked. media or mediaType missing:", media)
+      return
+    }
+
+    const loadTrackedData = async () => {
+      const url = `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`
+
+      console.log("Media object being sent:", media)
+      console.log("Fetch URL:", url)
+
+      try {
+        const response = await fetch(url)
+        const data = await response.json()
+
+        console.log("Tracked route response:", data)
+      } catch (error) {
+        console.error("Failed to load tracked data:", error)
+      }
+    }
+
+    loadTrackedData()
+  }, [media, isOpen])
 
   useEffect(() => {
     const checkUser = async () => {
@@ -124,6 +160,15 @@ export default function MediaDetailModal({
       ]
     }
 
+    if (isMovie) {
+      return [
+        { value: "plan", label: "Plan to Watch" },
+        { value: "paused", label: "Paused" },
+        { value: "completed", label: "Completed" },
+        { value: "dropped", label: "Dropped" },
+      ]
+    }
+
     return [
       { value: "plan", label: "Plan to Watch" },
       { value: "watching", label: "Watching" },
@@ -145,10 +190,15 @@ export default function MediaDetailModal({
     if (isNaN(num)) return
     if (num < 1 || num > 10) return
 
-    const decimalPart = value.split(".")[1]
-    if (decimalPart && decimalPart.length > 1) return
-
     setScore(value)
+  }
+
+  const formatScore = () => {
+    if (score === "") return
+
+    const num = Number(score)
+    if (isNaN(num)) return
+    setScore(num.toFixed(1))
   }
 
   const validateForm = () => {
@@ -274,7 +324,6 @@ export default function MediaDetailModal({
     // Later:
     // await fetch("/api/media/untrack", { ... })
 
-    setIsTracked(false)
     setStatus("")
     setScore("")
     setHoursPlayed("")
@@ -283,6 +332,10 @@ export default function MediaDetailModal({
     setStartDate("")
     setFinishDate("")
     setNotes("")
+    setPodiumRank("")
+    setPodiumEnabled(false)
+    setIsTracked(false)
+
     setSuccessMessage("Removed from your tracked list.")
   }
 
@@ -304,20 +357,21 @@ export default function MediaDetailModal({
             </div>
 
             <div className={styles.infoSection}>
-                <h2 className={styles.title}>{media.title}</h2>
+              <h2 className={styles.title}>{media.title}</h2>
 
-                <p>
-                  <strong>Type:</strong> {formatMediaType(media.mediaType)}
-                </p>
+              <p>
+                <strong>Type:</strong> {formatMediaType(media.mediaType)}
+              </p>
 
-                <p>
-                  <strong>Release Date:</strong> {media.releaseDate ?? "N/A"}
-                </p>
+              <p>
+                {/* <strong>Release Date:</strong> {media.releaseDate ?? "N/A"} */}
+                <strong>Release Date:</strong> {formatDate(media.releaseDate)}
+              </p>
 
-                <div className={styles.synopsisBlock}>
-                  <strong>Synopsis:</strong>
-                  <p className={styles.synopsisText}>{media.synopsis ?? "No synopsis available."}</p>
-                </div>
+              <div className={styles.synopsisBlock}>
+                <strong>Synopsis:</strong>
+                <p className={styles.synopsisText}>{media.synopsis ?? "No synopsis available."}</p>
+              </div>
             </div>
           </div>
 
