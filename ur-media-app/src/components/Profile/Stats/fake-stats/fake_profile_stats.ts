@@ -19,7 +19,7 @@ export type ReleaseYearItem = {
 }
 
 export type MediaStats = {
-  mediaType: "anime" | "movies" | "games" | "books"
+  mediaType: "movies" | "shows" | "games" | "books"
   summary: {
     totalCount: number
     totalLabel: string
