@@ -16,6 +16,7 @@
     display: grid;
     grid-template-columns: .5fr 2fr;
     gap: 4rem;
+    align-items: start; /*Fixes issue with TrackedMedia section trying to scale vertically with Stats section*/
 }
 
 .signOutButton {
