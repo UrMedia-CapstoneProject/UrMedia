@@ -19,7 +19,7 @@ export default function MediaCard({title, imageUrl, epWatched, score} : MediaCar
                     <div>
                         <p className={styles.title}>
                             <span className={styles.titleText}>
-                                {"The Odyssey and what if the name is a little longer? and what if the name is a little longer?"}
+                                {title}
                             </span>
                         </p>
 
