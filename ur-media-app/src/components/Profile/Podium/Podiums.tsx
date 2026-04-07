@@ -16,7 +16,9 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="The Dark Knight" 
+                        imageUrl="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"/>
                     </div>
 
                     <Image
@@ -28,7 +30,9 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="Interstellar"
+                        imageUrl="https://image.tmdb.org/t/p/w500/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg" />
                     </div>
 
                     <Image
@@ -40,7 +44,9 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="Your Name"
+                        imageUrl="https://myanimelist.net/images/anime/5/87048l.webp" />
                     </div>
 
                     <Image
@@ -64,7 +70,9 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="Fullmetal Alchemist: Brotherhood"
+                        imageUrl="https://myanimelist.net/images/anime/1208/94745l.webp" />
                     </div>
 
                     <Image
@@ -76,7 +84,9 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="Chernobyl"
+                        imageUrl="https://image.tmdb.org/t/p/w500/AmJLuHjxPdIJO6vmymeWADG6jK5.jpg" />
                     </div>
 
                     <Image
@@ -88,7 +98,9 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="A Knight of the Seven Kingdoms"
+                        imageUrl="https://image.tmdb.org/t/p/w500/k8yARbD9iYn2nRX2HvsopfKDN2r.jpg" />
                     </div>
 
                     <Image
@@ -112,7 +124,9 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="Red Dead Redemption 2"
+                        imageUrl="https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg" />
                     </div>
 
                     <Image
@@ -124,7 +138,9 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="Minecraft"
+                        imageUrl="https://media.rawg.io/media/games/b4e/b4e4c73d5aa4ec66bbf75375c4847a2b.jpg" />
                     </div>
 
                     <Image
@@ -136,7 +152,9 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="Dark Souls III"
+                        imageUrl="https://media.rawg.io/media/games/da1/da1b267764d77221f07a4386b6548e5a.jpg" />
                     </div>
 
                     <Image
@@ -160,7 +178,9 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="The Hunger Games (Hunger Games, Book One)"
+                        imageUrl="/test-images/hunger games.jpg" />
                     </div>
 
                     <Image
@@ -172,7 +192,9 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="The Lord of the Rings"
+                        imageUrl="/test-images/lord of the rings.jpg" />
                     </div>
 
                     <Image
@@ -184,7 +206,9 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <PodiumPoster />
+                        <PodiumPoster
+                        title="How to Win Friends and Influence People"
+                        imageUrl="/test-images/how to win friends and influence people.jpg" />
                     </div>
 
                     <Image
