@@ -69,30 +69,30 @@ export default function MediaDetailModal({
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 
-  useEffect(() => {
-    if (!media || !isOpen || !media.mediaType) {
-      console.log("Modal fetch blocked. media or mediaType missing:", media)
-      return
-    }
+  // useEffect(() => {
+  //   if (!media || !isOpen || !media.mediaType) {
+  //     console.log("Modal fetch blocked. media or mediaType missing:", media)
+  //     return
+  //   }
 
-    const loadTrackedData = async () => {
-      const url = `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`
+  //   const loadTrackedData = async () => {
+  //     const url = `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`
 
-      console.log("Media object being sent:", media)
-      console.log("Fetch URL:", url)
+  //     console.log("Media object being sent:", media)
+  //     console.log("Fetch URL:", url)
 
-      try {
-        const response = await fetch(url)
-        const data = await response.json()
+  //     try {
+  //       const response = await fetch(url)
+  //       const data = await response.json()
 
-        console.log("Tracked route response:", data)
-      } catch (error) {
-        console.error("Failed to load tracked data:", error)
-      }
-    }
+  //       console.log("Tracked route response:", data)
+  //     } catch (error) {
+  //       console.error("Failed to load tracked data:", error)
+  //     }
+  //   }
 
-    loadTrackedData()
-  }, [media, isOpen])
+  //   loadTrackedData()
+  // }, [media, isOpen])
 
   useEffect(() => {
     const checkUser = async () => {
