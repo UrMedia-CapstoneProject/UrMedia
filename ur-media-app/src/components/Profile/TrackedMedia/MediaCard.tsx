@@ -12,7 +12,7 @@ export default function () {
                     <div>
                         <p className={styles.title}>
                             <span className={styles.titleText}>
-                                {"The Odyssey and what if the name is a little longer? and what if the name is a little longer?"}
+                                {"The Odyssey"}
                             </span>
                         </p>
 
