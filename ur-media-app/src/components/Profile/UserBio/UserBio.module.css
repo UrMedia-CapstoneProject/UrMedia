@@ -27,7 +27,12 @@
     margin-left: 1rem;
 }
 
-.SettingsIcon{
+.SettingsButton {
+    position: relative;
+    display: inline-block;
+}
+
+.SettingsButton .icon {
     position: absolute;
     top: 0;
     right: 0;
