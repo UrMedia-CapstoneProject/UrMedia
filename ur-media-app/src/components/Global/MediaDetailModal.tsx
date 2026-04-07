@@ -15,22 +15,22 @@ type MediaDetailModalProps = {
 export function formatMediaType(mediaType?: string) {
   switch (mediaType) {
     case "movie": {
-      return "Movie"
+      return "Movie";
     }
     case "show": {
-      return "Show"
+      return "Show";
     }
     case "anime_movie": {
-      return "Anime Movie"
+      return "Anime Movie";
     }
     case "anime_show": {
-      return "Anime Show"
+      return "Anime Show";
     }
     case "game": {
-      return "Game"
+      return "Game";
     }
     case "book": {
-      return "Book"
+      return "Book";
     }
   }
 }
@@ -344,16 +344,30 @@ export default function MediaDetailModal({
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.content}>
 
-          <div className={styles.contentTop}>
-            <div className={styles.imageSection}>
-              <div className={styles.imageWrapper}>
-                <Image
-                  src={media.imageUrl}
-                  alt={media.title}
-                  fill
-                  style={{ objectFit: "cover" }}
-                />
-              </div>
+          <div className={styles.info}>
+            <h2>{media.title}</h2>
+            <p>
+              <strong>Type:</strong>{" "}
+              {formatMediaType(media.mediaType) ?? "Unknown"}
+            </p>
+            <p>
+              <strong>Release Date:</strong> {media.releaseDate ?? "N/A"}
+            </p>
+            <p>
+              <strong>Synopsis:</strong>{" "}
+              {media.synopsis ?? "No synopsis avaiable."}
+            </p>
+
+            <div>
+              <label>Status</label>
+              <select defaultValue="Status">
+                <option value="watching">Watching</option>
+                <option value="plan">Plan to Watch</option>
+                <option value="completed">Completed</option>
+                <option value="rewatching">Rewatching</option>
+                <option value="paused">Paused</option>
+                <option value="dropped">Dropped</option>
+              </select>
             </div>
 
             <div className={styles.infoSection}>
