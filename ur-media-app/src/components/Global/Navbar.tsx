@@ -10,7 +10,7 @@ export default function Navbar() {
             <div className={styles.search}>
                 <Link href="/catalog">
                     <Image
-                        src="/navbar-icons/browse.png"
+                        src="/navbar-icons/browse1.png"
                         title="Browse Catalog"
                         alt="Browse"
                         width={40}
@@ -22,11 +22,11 @@ export default function Navbar() {
                     <input type="text" placeholder="Search..." className={styles.searchBarInput} />
                     <Link href="/catalog" className={styles.searchBarButton}>
                         <Image
-                            src="/navbar-icons/search.png"
+                            src="/navbar-icons/search1.png"
                             title="Search"
                             alt="Search"
                             width={25}
-                            height={20}
+                            height={25}
                         />
                     </Link>
                 </div>
@@ -37,7 +37,7 @@ export default function Navbar() {
             <div className={styles.profile}>
                 <Link href="profile">
                     <Image
-                        src="/test-images/azusa.jpg"
+                        src="/test-images/dog1.jpg"
                         title="Username"
                         alt="Profile"
                         width={45}
@@ -46,7 +46,7 @@ export default function Navbar() {
                     />
                 </Link>
                 <Image
-                    src="/navbar-icons/caret-down.png"
+                    src="/navbar-icons/caret-down1.png"
                     title="Dropdown"
                     alt=""
                     width={18}

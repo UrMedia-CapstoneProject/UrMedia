@@ -1,38 +1,60 @@
 .main {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
     background-color: rgba(var(--surface-primary-rgb), 0.5);
     padding: 1rem;
     box-shadow: 4px 4px 4px rgba(24, 0, 37, 0.5);
     border-radius: 15px;
+    gap: 1rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 1.25rem;
 }
 
 .tabList {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-self: end;
+    align-self: start;
     flex: 1;
+    gap: 0.75rem;
+    margin-top: 5rem;
+    background-color: #22164d;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.45rem;
+    padding-right: 0.45rem;
+    border-radius: 10%;
 }
 
 .tabLink {
     background-color: transparent;
     color: var(--foreground);
     border: none;
-    font-size: large;
+    font-size: medium;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    padding-left: 0.55rem;
+    padding-right: 0.55rem;
+    border-radius: 8%;
 }
 
 .tabLink:hover {
     cursor: pointer;
-    color: #ddd8e77c;
+    opacity: 0.5;
 }
 
 .active {
-    color: #ddd8e77c;
+    opacity: 0.5;
+    background-color: #16102f;
 }
 
 .dropdown {
     position: relative;
     display: inline-block;
+    justify-self: end;
+    align-self: start;
 }
 
 .dropdownMenu {
@@ -78,4 +100,36 @@
     background-color: #3d36be;
     color: var(--foreground);
     cursor: pointer;
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    justify-self: start;
+    align-self: start;
+}
+
+.radioGroup input[type="radio"] {
+    accent-color: #3d36be;
+    cursor: pointer;
+    padding: 0;
+    appearance: none;
+}
+
+.listView input[type="radio"]::after{
+    content:"▦";
+    font-size: 1.5rem;
+}
+
+.tierView input[type="radio"]::after{
+    content:"▤";
+    font-size: 1.5rem;
+}
+
+.listView:hover,
+.tierView:hover,
+.listView input[type="radio"]:checked::after,
+.tierView input[type="radio"]:checked::after {
+    opacity: 0.5;
 }
