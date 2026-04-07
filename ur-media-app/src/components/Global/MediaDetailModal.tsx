@@ -436,9 +436,9 @@ export default function MediaDetailModal({
                       className={styles.podiumInput}
                     >
                       <option value="">Add to Favorites</option>
-                      <option value="1">Top 1</option>
-                      <option value="2">Top 2</option>
-                      <option value="3">Top 3</option>
+                      <option value="1">No. 1</option>
+                      <option value="2">No. 2</option>
+                      <option value="3">No. 3</option>
                     </select>
                   </div>
                 </div>

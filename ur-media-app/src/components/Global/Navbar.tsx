@@ -37,7 +37,7 @@ export default function Navbar() {
             <div className={styles.profile}>
                 <Link href="profile">
                     <Image
-                        src="/test-images/azusa.jpg"
+                        src="/test-images/dog1.jpg"
                         title="Username"
                         alt="Profile"
                         width={45}
