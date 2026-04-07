@@ -13,12 +13,14 @@
 }
 
 .browseIcon{
-    margin-right: 15px;
+    padding: 0;
+    margin: 0;
 }
 
 .search{
     display: flex;
     justify-self: start;
+    gap: 10px;
 }
 
 .searchBar{
@@ -29,7 +31,6 @@
 }
 
 .searchBarInput{
-    margin-left: 15px;
     border-radius: 15px;
     background-color: transparent;
     border-color: transparent;

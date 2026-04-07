@@ -59,12 +59,12 @@
 
 .epWatched{
     bottom: 3;
-    left: 3;
+    right: 3;
 }
 
 .score{
     bottom: 3;
-    right: 3;
+    left: 3;
 }
 
 @keyframes scrollText {
