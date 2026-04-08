@@ -91,6 +91,40 @@ export default function MediaDetailModal({
   //     }
   //   }
 
+  // useEffect(() => {
+  //   if (!media || !isOpen || !media.mediaType) return
+
+  //   const loadTrackedData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`
+  //       )
+
+  //       const data = await response.json()
+
+  //       if (!response.ok) {
+  //         setErrorMessage(data.error || "Failed to load tracked data.")
+  //         return
+  //       }
+
+  //       setIsTracked(true)
+  //       setStatus(data.status)
+  //       setScore(data.user_rating)
+  //       setHoursPlayed()
+  //       setEpisodesWatched()
+  //       setRewatches()
+  //       setStartDate(data.starting_data)
+  //       setFinishDate(data.ending_date)
+  //       setNotes(data.review)
+  //       setPodiumEnabled() // how do i return 'true' or 'false' for if media item is a favorite or not?
+  //       setPodiumRank(data.placement)
+  //       setErrorMessage()
+  //       setSuccessMessage()
+  //     }
+
+  //   }
+
+
   //   loadTrackedData()
   // }, [media, isOpen])
 
