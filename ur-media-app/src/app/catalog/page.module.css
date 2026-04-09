@@ -1,16 +1,4 @@
 .main {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    padding: 5rem 15rem;
-}
-
-.mediaGrid {
-    display: grid;
-    background-color: rgba(57, 3, 128, 0.5);
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    padding: 1rem;
-    gap: 1rem;
-    border-radius: 15px;
-    box-shadow: 4px 4px 4px rgba(24, 0, 37, 0.5);
 }
