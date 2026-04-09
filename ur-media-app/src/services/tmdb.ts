@@ -52,9 +52,9 @@ export async function getShows() {
   }
 }
 
-export async function getPopularShows() {
+export async function getPopularShows(page: number) {
   try {
-    const res = await tmdb.tv_lists.popular();
+    const res = await tmdb.tv_lists.popular({ page });
     return res;
   } catch (err) {
     if (err instanceof TMDBError) {

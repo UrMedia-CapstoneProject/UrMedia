@@ -1,27 +1,54 @@
 import styles from "./page.module.css";
 import MediaFilters from "@/components/Catalog/MediaFilters";
 import Poster from "@/components/Global/Poster";
-import { getPopularMovies } from "@/services/tmdb";
-import { MovieResultItem } from "@lorenzopant/tmdb";
+import { getPopularMovies, getPopularShows } from "@/services/tmdb";
+import { MovieResultItem, TVSeriesResultItem} from "@lorenzopant/tmdb";
+import { redirect } from "next/navigation";
 
 interface CatalogProps {
-  searchParams?: { page?: string };
+  searchParams?: {
+    page?: string;
+    category?: string;
+  };
+}
+interface MediaResultItems {
+    movies?: MovieResultItem[],
+    shows?: TVSeriesResultItem[]
 }
 export default async function CatalogPage({ searchParams }: CatalogProps) {
-  const page = Number(searchParams?.page || 1);
-  let movies: MovieResultItem[] = [];
+  const params = await searchParams;
+  const category = params?.category;
+  const page = Number(params?.page || 1);
 
-  const response = await getPopularMovies(page);
-  movies = response?.results || [];
+  let media: MediaResultItems = {};
+  let posters
+  if (!category) {
+    redirect("/catalog?category=movies")
+  }
 
-  const posters = movies.map((movie) => (
-    <Poster
-      key={movie.id}
-      title={movie.title}
-      imageUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}` || ""}
-    />
-  ));
+   if (category == "movies") {
+    const response = await getPopularMovies(page);
+    media.movies = response?.results || [];
 
+    posters = media.movies?.map((movie) => (
+      <Poster
+        key={movie.id}
+        title={movie.title}
+        imageUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}` || ""}
+      />
+    ));
+  } else if (category == "shows") {
+    const response = await getPopularShows(page);
+    media.shows = response?.results || [];
+
+    posters = media.shows.map((show) => (
+        <Poster
+            key={show.id}
+            title={show.name}
+            imageUrl={`https://image.tmdb.org/t/p/w500/${show.poster_path}` || ""}
+        />
+    ))
+  } 
   return (
     <div className={styles.main}>
       <MediaFilters />
