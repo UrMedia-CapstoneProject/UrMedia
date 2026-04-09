@@ -16,25 +16,37 @@
 }
 
 @media (max-width: 1900px) {
-  .main {
+  .grid {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
 @media (max-width: 1400px) {
-  .main {
+  .grid {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 1200px) {
-  .main {
+  .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (max-width: 1000px) {
-  .main {
-    grid-template-columns: 1fr;
+@media (max-width: 950px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 750) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 550) {
+  .grid {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

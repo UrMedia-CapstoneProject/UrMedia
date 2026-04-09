@@ -11,7 +11,6 @@ export default function() {
     return (
         <div className={styles.main}>
 
-
             <div className={styles.podium}>
                 <div className={styles.media}>
 
