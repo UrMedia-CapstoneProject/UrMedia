@@ -23,7 +23,7 @@ export default function MediaGrid({ items, onPosterClick }: MediaGridProps) {
   return (
     <div className={styles.posterGrid}>
       {items.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} className={styles.poster}>
           <Poster
             title={item.title}
             imageUrl={item.imageUrl}

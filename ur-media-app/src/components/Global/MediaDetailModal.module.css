@@ -195,3 +195,23 @@
     align-self: flex-end;
     gap: 10px;
 }
+
+@media (max-width: 1060) {
+    .contentTop{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 700) {
+    .contentTop{
+        grid-template-columns: 1fr;
+    }
+
+    .imageSection{
+        max-width: 250px;
+    }
+
+    .contentBottom{
+        grid-template-columns: 1fr;
+    }
+}

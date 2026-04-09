@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "./Navbar.module.css"
+import SignOutButton from "./SignOutButton"
 
 export default function Navbar() {
     return (
@@ -35,24 +36,33 @@ export default function Navbar() {
                 <h1 className={styles.logoText}>UrMedia</h1>
             </Link>
             <div className={styles.profile}>
-                <Link href="profile">
+                <div className={styles.dropdownWrapper}>
+                    <Link href="/profile">
+                        <Image
+                            src="/test-images/dog1.jpg"
+                            title="Username"
+                            alt="Profile"
+                            width={50}
+                            height={50}
+                            className={styles.pfp}
+                        />
+                    </Link>
+
                     <Image
-                        src="/test-images/dog1.jpg"
-                        title="Username"
-                        alt="Profile"
-                        width={45}
-                        height={45}
-                        className={styles.pfp}
+                        src="/navbar-icons/caret-down1.png"
+                        title="Dropdown"
+                        alt=""
+                        width={18}
+                        height={18}
+                        className={styles.dropdown}
                     />
-                </Link>
-                <Image
-                    src="/navbar-icons/caret-down1.png"
-                    title="Dropdown"
-                    alt=""
-                    width={18}
-                    height={18}
-                    className={styles.dropdown}
-                />
+
+                    <div className={styles.dropdownMenu}>
+                        <Link href="/profile">Profile</Link>
+                        <Link href="/profile/edit">Edit Profile</Link>
+                        <SignOutButton />
+                    </div>
+                </div>
             </div>
         </div>
     )
