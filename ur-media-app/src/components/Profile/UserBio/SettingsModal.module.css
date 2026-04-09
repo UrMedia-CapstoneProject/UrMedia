@@ -9,12 +9,81 @@
 }
 
 .modal {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
     background: rgba(var(--surface-primary-rgb), .95);
-    gap: 1rem;
+    gap: 4rem;
+    width: 700px;
+    min-width: 25%;
+    padding: 1.5rem;
+    border-radius: 15px;
 }
 
 .option {
     font-size: large;
+}
+
+.deleteAccount {
+    font-size: large;
+    font-weight: bold;
+    color: rgb(236, 56, 56);
+}
+
+.settingsItem {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    min-width: 0;
+}
+
+.filePicker {
+    padding: 10px;
+    width: 189px;
+    background-color: #3d36be;
+    border: 1px solid #7b7bad;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.input,
+.textarea {
+    padding: 8px;
+    outline: none;
+    border-color: none;
+    resize: none;
+    border:none;
+    background-color: #1b0942;
+}
+
+.exitOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.saveAndCancel {
+    display: flex;
+    gap: 10px;
+    align-items: right;
+    justify-content: right;
+}
+
+.saveButton {
+    background-color: #3d36be;
+    border-radius: 10px;
+    border: 1px solid #7b7bad;
+    width: 60px;
+    height: 35px;
+    color: var(--foreground);
+}
+
+.cancelButton {
+    background-color: #c8c7db;
+    border-radius: 10px;
+    border: 1px solid #636369;
+    width: 60px;
+    height: 35px;
+    color: black;
 }
