@@ -124,3 +124,77 @@
 .dropdownMenu button:hover {
     background: rgba(255, 255, 255, 0.1);
 }
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--foreground);
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.mobileMenu {
+    position: absolute;
+    top: 70px;
+    right: 1rem;
+
+    background: rgba(20, 0, 61, 0.95);
+    border-radius: 10px;
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    width: 220px;
+
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+
+    transition: all 0.2s ease;
+}
+.mobileMenu a,
+.mobileMenu button {
+    all: unset;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    display: block;
+    color: var(--foreground);
+}
+
+.mobileMenu a:hover,
+.mobileMenu button:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+.open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+
+    .main {
+        grid-template-columns: 1fr auto;
+    }
+
+    .logo {
+        justify-self: center;
+    }
+
+    .hamburger {
+        display: block;
+        justify-self: end;
+    }
+
+    .search {
+        display: none;
+    }
+
+    .profile {
+        display: none;
+    }
+}

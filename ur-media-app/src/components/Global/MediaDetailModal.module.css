@@ -34,7 +34,7 @@
     background-color: #1b0942;
     padding: 1rem;
     border-radius: 15px;
-    box-shadow: 4px 4px 8px rgba(var(--box-shadow-rgb), 0.5);
+    box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
 }
 
 .contentBottom {

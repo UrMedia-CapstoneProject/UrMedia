@@ -1,6 +1,10 @@
+.main{
+    width: 100%;
+}
 
 .button{
     border: none;
     padding: 0;
     font-size: 2rem;
+    width: 100%;
 }

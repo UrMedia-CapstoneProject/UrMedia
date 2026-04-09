@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import MediaGrid, { MediaItem } from "./MediaGrid"
 import MediaDetailModal from "../Global/MediaDetailModal"
+import styles from "./PopularMedia.module.css"
 
 type MediaCategory = "movies" | "shows" | "games" | "books"
 
@@ -140,42 +141,38 @@ export default function PopularMedia() {
     }
 
     return (
-        <div>
-            <section>
+        <div className={styles.main}>
+            <div className={styles.section}>
                 <h2>Popular Movies</h2>
                 <MediaGrid
                     items={popularMedia.movies}
                     onPosterClick={handlePosterClick}
                 />
-            </section>
-            <br />
+            </div>
 
-            <section>
+            <div className={styles.section}>
                 <h2>Popular Shows</h2>
                 <MediaGrid
                     items={popularMedia.shows}
                     onPosterClick={handlePosterClick}
                 />
-            </section>
-            <br />
+            </div>
 
-            <section>
+            <div className={styles.section}>
                 <h2>Popular Games</h2>
                 <MediaGrid
                     items={popularMedia.games}
                     onPosterClick={handlePosterClick}
                 />
-            </section>
-            <br />
+            </div>
 
-            <section>
+            <div className={styles.section}>
                 <h2>Popular Books</h2>
                 <MediaGrid
                     items={popularMedia.books}
                     onPosterClick={handlePosterClick}
                 />
-            </section>
-            <br />
+            </div>
 
             <MediaDetailModal
                 media={selectedMedia}
