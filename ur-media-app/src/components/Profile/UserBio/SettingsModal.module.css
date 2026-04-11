@@ -13,34 +13,39 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
     background: rgba(var(--surface-primary-rgb), .95);
-    gap: 4rem;
+    gap: 3rem;
     width: 700px;
     min-width: 25%;
     padding: 1.5rem;
     border-radius: 15px;
 }
 
-.option {
+.top {
     font-size: large;
 }
 
-.deleteAccount {
+.option {
     font-size: large;
+    margin-top: 22px;
+}
+
+.deleteAccount {
     font-weight: bold;
     color: rgb(236, 56, 56);
+    margin-top: 6px;
 }
 
 .settingsItem {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
     min-width: 0;
+    gap: 10px;
 }
 
 .filePicker {
     padding: 10px;
-    width: 189px;
+    width: 6.7rem;
     background-color: #3d36be;
     border: 1px solid #7b7bad;
     border-radius: 8px;
@@ -57,10 +62,17 @@
     background-color: #1b0942;
 }
 
+.signout button {
+    all: unset;
+    padding: 0.3rem;
+    border-radius: 10px;
+    border: 1px solid #434348;
+    background-color: rgb(236, 56, 56);
+}
+
 .exitOptions {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 2rem;
 }
 
 .saveAndCancel {

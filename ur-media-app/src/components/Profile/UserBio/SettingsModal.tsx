@@ -23,20 +23,44 @@ export default function SettingsModal({
         <div className={styles.main} onClick={onClose}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
                 <div className={styles.settingsItem}>
+                    <label className={styles.top}>Profile Picture:</label>
+
                     <Image
                         src="/profile-icons/default icon.png"
                         alt="Profile Picture"
-                        width={200}
-                        height={200}
+                        width={280}
+                        height={280}
                     />
-                    <label className={styles.option}>Change Profile Picture:</label>
 
                     <input type="file" id="filePicker" hidden />
                     <label htmlFor="filePicker" className={styles.filePicker}>Choose File</label>
                 </div>
 
-                <div className={styles.settingsItem}>
-                    <label className={styles.option}>Change User Biography:</label>
+                <div>
+                    <div className={styles.settingsItem}>
+                        <label className={styles.top}>Username:</label>
+
+                        <input
+                            type="string"
+                            onChange={(e) => handleUsernameChange(e.target.value)}
+                            placeholder="New Username"
+                            className={styles.input}
+                        />
+                    </div>
+
+                    <div className={styles.settingsItem}>
+                        <label className={styles.option}>Birthday:</label>
+
+                        <input
+                            type="date"
+                            onChange={(e) => setBirthday(e.target.value)}
+                            placeholder="mm/dd/yyyy"
+                            className={styles.input}
+                        />
+                    </div>
+
+                    <div className={styles.settingsItem}>
+                    <label className={styles.option}>User Biography:</label>
 
                     <textarea
                         rows={10}
@@ -44,32 +68,11 @@ export default function SettingsModal({
                         placeholder="Tell us about yourself..."
                         className={styles.textarea}
                     />
-                </div>
-
-                <div className={styles.settingsItem}>
-                    <label className={styles.option}>Change Username:</label>
-
-                    <input
-                        type="string"
-                        onChange={(e) => handleUsernameChange(e.target.value)}
-                        placeholder="New Username"
-                        className={styles.input}
-                    />
-                </div>
-
-                <div className={styles.settingsItem}>
-                    <label className={styles.option}>Change Birthday:</label>
-
-                    <input
-                        type="date"
-                        onChange={(e) => setBirthday(e.target.value)}
-                        placeholder="mm/dd/yyyy"
-                        className={styles.input}
-                    />
+                    </div>
                 </div>
 
                 <div className={styles.exitOptions}>
-                    <SignOutButton />
+                    <div className={styles.signout}><SignOutButton /></div>
                     <label className={styles.deleteAccount}>Delete Account</label>
                 </div>
 
