@@ -1,7 +1,7 @@
 'use client'
-
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
+import styles from './SignOutButton.module.css'
 
 export default function SignOutButton() {
     const router = useRouter()
@@ -16,15 +16,16 @@ export default function SignOutButton() {
             return
         }
 
-        router.push('/') // we can push to either the sign up page or the media home page
+        router.push('/')
         router.refresh()
     }
 
     return (
-        <button onClick={handleSignOut}
-            className="mt-4 px-4 py-2 bg-red-500 text-white rounded">
-            Sign Out
-        </button>
+        <div className={styles.main}>
+            <button onClick={handleSignOut}>
+                Sign Out
+            </button>
+        </div>
     )
 
 }

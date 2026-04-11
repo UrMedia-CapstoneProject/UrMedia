@@ -5,10 +5,10 @@
 }
 
 .poster{
-    width: 150px;
+    width: 135px;
     position: relative;
     overflow: hidden;
-    box-shadow: 4px 4px 4px rgba(32, 8, 51, 0.5);
+    box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
     border-radius: 3px;
 }
 
@@ -32,7 +32,6 @@
 
 .userStats{
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
@@ -42,24 +41,29 @@
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
+    text-align: center;
 }
 .title:hover .titleText {
-    animation: scrollText 3s linear forwards;
+    text-align: left;
+    transform: translateX(-20%);
 }
 
 .titleText {
     display: inline-block;
-    padding-right: 20px;
+    min-width: 100%;
+    text-align: center;
+
+    transition: transform 3s linear;
 }
 
 .epWatched{
     bottom: 3;
-    left: 3;
+    right: 3;
 }
 
 .score{
     bottom: 3;
-    right: 3;
+    left: 3;
 }
 
 @keyframes scrollText {
