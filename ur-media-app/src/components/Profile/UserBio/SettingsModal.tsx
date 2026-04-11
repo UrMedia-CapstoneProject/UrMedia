@@ -1,4 +1,4 @@
-import SignOutButton from "@/components/Media/SignOutButton"
+import SignOutButton from "@/components/Global/SignOutButton"
 import styles from "./SettingsModal.module.css"
 import Image from "next/image"
 
