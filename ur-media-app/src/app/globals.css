@@ -1,7 +1,8 @@
 :root {
   --background: #0a0a0a;
   --foreground: #ddd8e7;
-  --surface-primary-rgb: 57, 3, 128;
+  --surface-primary-rgb: 146, 69, 255;
+  --surface-primary-rgb-modal: 57, 3, 128;
   --surface-secondary-rgb: 20, 0, 61;
   --box-shadow-rgb: 24, 0, 37;
 }
@@ -57,7 +58,7 @@ select {
 
 html {
   background: linear-gradient(160deg,
-      #27007a 0%,
+      #2c017c 0%,
       #180048 50%,
       #17014bf3 100%);
   color: var(--foreground);

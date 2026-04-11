@@ -26,8 +26,8 @@ export default function MediaCard({title, imageUrl, epWatched, score} : MediaCar
                     </div>
 
                     <div className={styles.userStats}>
-                        <p className={styles.epWatched}>{epWatched}</p>
                         <p className={styles.score}>{score}</p>
+                        <p className={styles.epWatched}>{epWatched}</p>
                     </div>
 
                 </div>

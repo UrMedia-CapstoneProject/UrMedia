@@ -2,7 +2,7 @@ import styles from "./page.module.css"
 import UserBio from "@/components/Profile/UserBio/UserBio";
 import Podiums from "@/components/Profile/Podium/Podiums";
 import TrackedMedia from "@/components/Profile/TrackedMedia/TrackedMedia";
-import SignOutButton from "@/components/Media/SignOutButton";
+import SignOutButton from "@/components/Global/SignOutButton";
 import Stats from "@/components/Profile/Stats/Stats"
 
 export default async function ProfilePage() {
