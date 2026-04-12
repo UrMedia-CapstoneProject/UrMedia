@@ -177,7 +177,7 @@ export async function getUserTrackedMedia({
   }
 
   return {
-    ...normalizeTrackedRow(mediaType,trackedRow),
+    ...normalizeTrackedRow(mediaType, trackedRow),
     podiumEnabled,
     podiumRank
   };
