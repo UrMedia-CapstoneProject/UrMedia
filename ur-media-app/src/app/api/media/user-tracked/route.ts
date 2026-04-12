@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { getUserTrackedMedia } from '@/services/media/user_tracked/getUserTrackedMedia'
+import { upsertTrackedMedia } from '@/services/media/user_tracked/upsertUserTrackedMedia'
 
 export async function GET(request: NextRequest) {
     try {
@@ -16,11 +17,11 @@ export async function GET(request: NextRequest) {
         }
 
         const mediaId = Number(mediaIdParameter)
-        
+
         if (Number.isNaN(mediaId)) {
             return NextResponse.json(
-                { error: "mediaId must be a valid number"},
-                { status: 400}
+                { error: "mediaId must be a valid number" },
+                { status: 400 }
             )
         }
 
@@ -48,7 +49,41 @@ export async function GET(request: NextRequest) {
             {
                 error: error instanceof Error ? error.message : "Unknown server error."
             },
-            { status: 500}
+            { status: 500 }
         )
+    }
+}
+
+export async function POST(req: Request) {
+    try {
+        console.log("POST /api/media/user-tracked hit");
+        const payload = await req.json();
+
+        const supabase = await createClient();
+        const { data: authorizedUser, error: authorizedError } = await supabase.auth.getUser()
+
+        if (!authorizedUser || authorizedError) {
+            return NextResponse.json(
+                { error: "User not authenticated" },
+                { status: 401 }
+            )
+        }
+
+        const userId = authorizedUser.user.id;
+
+        // call your DB function
+        await upsertTrackedMedia({
+            supabase,
+            userId,
+            payload,
+        });
+
+        return NextResponse.json({ success: true });
+
+    } catch (err: any) {
+        return NextResponse.json(
+            { error: err.message },
+            { status: 500 }
+        );
     }
 }

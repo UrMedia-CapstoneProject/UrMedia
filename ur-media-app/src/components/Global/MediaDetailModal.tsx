@@ -298,7 +298,7 @@ export default function MediaDetailModal({
       mediaId: media.id,
       mediaType: media.mediaType,
       status: status || null,
-      score: score === "" ? null : Number(score).toFixed(1),
+      score: score === "" ? null : Number(score),
       hoursPlayed: hoursPlayed === "" ? null : hoursPlayed,
       episodesWatched: episodesWatched === "" ? null : episodesWatched,
       rewatches: rewatches === "" ? null : rewatches,
@@ -311,8 +311,13 @@ export default function MediaDetailModal({
 
     console.log("Save Changes payload:", payload)
 
-    // Later, save the changes
-     // await fetch("/api/media/untrack", { ... })
+    await fetch("/api/media/user-tracked", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
     setIsTracked(true)
     setSuccessMessage("Added to your tracked list.")
