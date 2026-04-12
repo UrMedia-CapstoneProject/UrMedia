@@ -1,49 +1,50 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import Image from "next/image"
-import styles from "./MediaDetailModal.module.css"
-import type { MediaItem } from "../Media/MediaGrid"
-import { createClient } from "@/lib/supabase/client"
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import styles from "./MediaDetailModal.module.css";
+// import type { MediaItem } from "../Media/MediaGrid" // Dont need this anymore
+import type { DisplayMediaItem } from "@/types/types";
+import { createClient } from "@/lib/supabase/client";
 
 type MediaDetailModalProps = {
-  media: MediaItem | null
-  isOpen: boolean
-  onClose: () => void
-}
+  media: DisplayMediaItem | null;
+  isOpen: boolean;
+  onClose: () => void;
+};
 
 export function formatMediaType(mediaType?: string) {
   switch (mediaType) {
     case "movie": {
-      return "Movie"
+      return "Movie";
     }
     case "show": {
-      return "Show"
+      return "Show";
     }
     case "anime_movie": {
-      return "Anime Movie"
+      return "Anime Movie";
     }
     case "anime_show": {
-      return "Anime Show"
+      return "Anime Show";
     }
     case "game": {
-      return "Game"
+      return "Game";
     }
     case "book": {
-      return "Book"
+      return "Book";
     }
   }
 }
 
 export function formatDate(releaseDate?: string | null) {
-  if (!releaseDate) return "N/A" // This handles the issue with Date() can't take a null or undefined value. This is will act as default value.
-  const date = new Date(releaseDate)
+  if (!releaseDate) return "N/A"; // This handles the issue with Date() can't take a null or undefined value. This is will act as default value.
+  const date = new Date(releaseDate);
 
   return date.toLocaleDateString("en-US", {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export default function MediaDetailModal({
@@ -51,72 +52,87 @@ export default function MediaDetailModal({
   isOpen,
   onClose,
 }: MediaDetailModalProps) {
-  const supabase = createClient()
+  const supabase = createClient();
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [isTracked, setIsTracked] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isTracked, setIsTracked] = useState(false);
 
-  const [status, setStatus] = useState("")
-  const [score, setScore] = useState("")
-  const [hoursPlayed, setHoursPlayed] = useState<number | "">("")
-  const [episodesWatched, setEpisodesWatched] = useState<number | "">("")
-  const [rewatches, setRewatches] = useState<number | "">("")
-  const [startDate, setStartDate] = useState("")
-  const [finishDate, setFinishDate] = useState("")
-  const [review, setReview] = useState("")
-  const [podiumEnabled, setPodiumEnabled] = useState(false)
-  const [podiumRank, setPodiumRank] = useState<number | "">("")
-  const [errorMessage, setErrorMessage] = useState("")
-  const [successMessage, setSuccessMessage] = useState("")
+  const [status, setStatus] = useState("");
+  const [score, setScore] = useState("");
+  const [hoursPlayed, setHoursPlayed] = useState<number | "">("");
+  const [episodesWatched, setEpisodesWatched] = useState<number | "">("");
+  const [rewatches, setRewatches] = useState<number | "">("");
+  const [startDate, setStartDate] = useState("");
+  const [finishDate, setFinishDate] = useState("");
+  const [review, setReview] = useState("");
+  const [podiumEnabled, setPodiumEnabled] = useState(false);
+  const [podiumRank, setPodiumRank] = useState<number | "">("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
-    if (!media || !isOpen || !media.mediaType) return
+    if (!media || !isOpen || !media.mediaType) return;
 
     const loadTrackedData = async () => {
       try {
-        const response = await fetch(
-          `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`
-        )
+        // If the media does not exist in db yet, there is no tracked row to load.
+        // Still need to figure out clearing the useStates when the modal is closed.
+        if (media.id === null) {
+          setIsTracked(false);
+          setStatus("");
+          setScore("");
+          setHoursPlayed("");
+          setEpisodesWatched("");
+          setRewatches("");
+          setStartDate("");
+          setFinishDate("");
+          setReview("");
+          setPodiumEnabled(false);
+          setPodiumRank("");
+          return;
+        }
 
-        const data = await response.json()
+        const response = await fetch(
+          `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`,
+        );
+
+        const data = await response.json();
 
         if (!response.ok) {
-          setErrorMessage(data.error || "Failed to load tracked data.")
-          return
+          setErrorMessage(data.error || "Failed to load tracked data.");
+          return;
         }
-        console.log(data)
+        console.log(data);
 
-        setIsTracked(true)
-        setStatus(data.status ?? "")
-        setScore(data.score ?? "")
-        setHoursPlayed(data.hoursPlayed ?? "")
-        setEpisodesWatched(data.episodesWatched ?? "")
-        setRewatches(data.rewatches ?? "")
-        setStartDate(data.startDate ?? "")
-        setFinishDate(data.finishDate ?? "")
-        setReview(data.review ?? "")
-        setPodiumEnabled(data.podiumEnabled ?? false) // how do i return 'true' or 'false' for if media item is a favorite or not?
-        setPodiumRank(data.podiumRank ?? "")
+        setIsTracked(true);
+        setStatus(data.status ?? "");
+        setScore(data.score ?? "");
+        setHoursPlayed(data.hoursPlayed ?? "");
+        setEpisodesWatched(data.episodesWatched ?? "");
+        setRewatches(data.rewatches ?? "");
+        setStartDate(data.startDate ?? "");
+        setFinishDate(data.finishDate ?? "");
+        setReview(data.review ?? "");
+        setPodiumEnabled(data.podiumEnabled ?? false); // how do i return 'true' or 'false' for if media item is a favorite or not?
+        setPodiumRank(data.podiumRank ?? "");
         //setSuccessMessage()
       } catch (error) {
-        console.error("Failed to laod the user tracked data", error)
-        setErrorMessage("Failed to load the user tracked data.")
+        console.error("Failed to laod the user tracked data", error);
+        setErrorMessage("Failed to load the user tracked data.");
       }
+    };
 
-    }
-
-
-    loadTrackedData()
-  }, [media, isOpen])
+    loadTrackedData();
+  }, [media, isOpen]);
 
   useEffect(() => {
     const checkUser = async () => {
-      const { data } = await supabase.auth.getUser()
-      setIsLoggedIn(!!data.user)
-    }
+      const { data } = await supabase.auth.getUser();
+      setIsLoggedIn(!!data.user);
+    };
 
-    checkUser()
-  }, [supabase])
+    checkUser();
+  }, [supabase]);
 
   // useEffect(() => {
   //   if (!media) return
@@ -139,18 +155,17 @@ export default function MediaDetailModal({
 
   // }, [media])
 
-  if (!isOpen || !media) return null
+  if (!isOpen || !media) return null;
 
-  const isGame = media.mediaType === "game"
-  const isBook = media.mediaType === "book"
-  const isShow =
-    media.mediaType === "show" || media.mediaType === "anime_show"
+  const isGame = media.mediaType === "game";
+  const isBook = media.mediaType === "book";
+  const isShow = media.mediaType === "show" || media.mediaType === "anime_show";
   const isMovie =
-    media.mediaType === "movie" || media.mediaType === "anime_movie"
+    media.mediaType === "movie" || media.mediaType === "anime_movie";
 
-  const showHoursPlayed = isGame
-  const showEpisodesWatched = isShow
-  const showRewatches = isMovie || isShow
+  const showHoursPlayed = isGame;
+  const showEpisodesWatched = isShow;
+  const showRewatches = isMovie || isShow;
 
   const getStatusOptions = () => {
     if (isGame) {
@@ -161,7 +176,7 @@ export default function MediaDetailModal({
         { value: "paused", label: "Paused" },
         { value: "completed", label: "Completed" },
         { value: "dropped", label: "Dropped" },
-      ]
+      ];
     }
 
     if (isBook) {
@@ -172,7 +187,7 @@ export default function MediaDetailModal({
         { value: "paused", label: "Paused" },
         { value: "completed", label: "Completed" },
         { value: "dropped", label: "Dropped" },
-      ]
+      ];
     }
 
     if (isMovie) {
@@ -181,7 +196,7 @@ export default function MediaDetailModal({
         { value: "paused", label: "Paused" },
         { value: "completed", label: "Completed" },
         { value: "dropped", label: "Dropped" },
-      ]
+      ];
     }
 
     return [
@@ -191,108 +206,103 @@ export default function MediaDetailModal({
       { value: "paused", label: "Paused" },
       { value: "completed", label: "Completed" },
       { value: "dropped", label: "Dropped" },
-    ]
-  }
+    ];
+  };
 
   const handleScoreChange = (value: string) => {
     if (value === "") {
-      setScore("")
-      return
+      setScore("");
+      return;
     }
 
-    const num = Number(value)
+    const num = Number(value);
 
-    if (isNaN(num)) return
-    if (num < 1 || num > 10) return
+    if (isNaN(num)) return;
+    if (num < 1 || num > 10) return;
 
-    setScore(value)
-  }
+    setScore(value);
+  };
 
   const formatScore = () => {
-    if (score === "") return
+    if (score === "") return;
 
-    const num = Number(score)
-    if (isNaN(num)) return
-    setScore(num.toFixed(1))
-  }
+    const num = Number(score);
+    if (isNaN(num)) return;
+    setScore(num.toFixed(1));
+  };
 
   const validateForm = () => {
     if (score !== "") {
-      const num = Number(score)
+      const num = Number(score);
 
       if (isNaN(num) || num < 1 || num > 10) {
-        return "Score must be between 1.0 and 10.0."
+        return "Score must be between 1.0 and 10.0.";
       }
 
-      const decimalPart = score.split(".")[1]
+      const decimalPart = score.split(".")[1];
       if (decimalPart && decimalPart.length > 1) {
-        return "Score can only have one decimal place."
+        return "Score can only have one decimal place.";
       }
     }
 
     if (hoursPlayed !== "" && Number(hoursPlayed) < 0) {
-      return "Hours played cannot be negative."
+      return "Hours played cannot be negative.";
     }
 
     if (episodesWatched !== "" && Number(episodesWatched) < 0) {
-      return "Episodes watched cannot be negative."
+      return "Episodes watched cannot be negative.";
     }
 
     if (rewatches !== "" && Number(rewatches) < 0) {
-      return "Rewatches cannot be negative."
+      return "Rewatches cannot be negative.";
     }
 
     if (
       showEpisodesWatched &&
       episodesWatched !== "" &&
       media.totalEpisodes != null &&
-      Number(episodesWatched) > media.totalEpisodes
+      Number(episodesWatched) > Number(media.totalEpisodes)
     ) {
-      return `Episodes watched cannot be more than ${media.totalEpisodes}.`
+      return `Episodes watched cannot be more than ${media.totalEpisodes}.`;
     }
 
-    if (
-      startDate &&
-      finishDate &&
-      new Date(finishDate) < new Date(startDate)
-    ) {
-      return "Finish date cannot be before start date."
+    if (startDate && finishDate && new Date(finishDate) < new Date(startDate)) {
+      return "Finish date cannot be before start date.";
     }
 
     if (podiumEnabled && podiumRank === "") {
-      return "Please select a podium rank."
+      return "Please select a podium rank.";
     }
-  }
+  };
 
   const handleTogglePodium = () => {
-    if (!isLoggedIn) return
+    if (!isLoggedIn) return;
 
     if (podiumEnabled) {
-      setPodiumEnabled(false)
-      setPodiumRank("")
+      setPodiumEnabled(false);
+      setPodiumRank("");
     } else {
-      setPodiumEnabled(true)
+      setPodiumEnabled(true);
 
       if (podiumRank === "") {
-        setPodiumRank(1)
+        setPodiumRank(1);
       }
     }
-  }
-
+  };
 
   const handleSaveChanges = async () => {
-    if (!isLoggedIn) return
+    if (!isLoggedIn) return;
 
-    const validationError = validateForm()
+    const validationError = validateForm();
 
     if (validationError) {
-      setErrorMessage(validationError)
-      setSuccessMessage("")
-      return
+      setErrorMessage(validationError);
+      setSuccessMessage("");
+      return;
     }
 
-    setErrorMessage("")
-    setSuccessMessage("")
+    setErrorMessage("");
+    setSuccessMessage("");
 
     const payload = {
       mediaId: media.id,
@@ -307,59 +317,58 @@ export default function MediaDetailModal({
       review: review || null,
       podiumEnabled,
       podiumRank: podiumEnabled ? podiumRank : null,
-    }
+    };
 
-    console.log("Save Changes payload:", payload)
+    console.log("Save Changes payload:", payload);
 
     // Later, save the changes
-     // await fetch("/api/media/untrack", { ... })
+    // await fetch("/api/media/untrack", { ... })
 
-    setIsTracked(true)
-    setSuccessMessage("Added to your tracked list.")
-  }
+    setIsTracked(true);
+    setSuccessMessage("Added to your tracked list.");
+  };
 
   const handleCancel = () => {
-    setErrorMessage("")
-    setSuccessMessage("")
-    onClose()
-  }
+    setErrorMessage("");
+    setSuccessMessage("");
+    onClose();
+  };
 
   const handleDeleteTracked = async () => {
-    if (!isLoggedIn || !media) return
+    if (!isLoggedIn || !media) return;
 
-    setErrorMessage("")
-    setSuccessMessage("")
+    setErrorMessage("");
+    setSuccessMessage("");
 
     const payload = {
       mediaId: media.id,
       mediaType: media.mediaType,
-    }
+    };
 
-    console.log("Delete tracked payload:", payload)
+    console.log("Delete tracked payload:", payload);
 
     // Later:
     // await fetch("/api/media/untrack", { ... })
 
-    setStatus("")
-    setScore("")
-    setHoursPlayed("")
-    setEpisodesWatched("")
-    setRewatches("")
-    setStartDate("")
-    setFinishDate("")
-    setReview("")
-    setPodiumRank("")
-    setPodiumEnabled(false)
-    setIsTracked(false)
+    setStatus("");
+    setScore("");
+    setHoursPlayed("");
+    setEpisodesWatched("");
+    setRewatches("");
+    setStartDate("");
+    setFinishDate("");
+    setReview("");
+    setPodiumRank("");
+    setPodiumEnabled(false);
+    setIsTracked(false);
 
-    setSuccessMessage("Removed from your tracked list.")
-  }
+    setSuccessMessage("Removed from your tracked list.");
+  };
 
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.content}>
-
           <div className={styles.contentTop}>
             <div className={styles.imageSection}>
               <div className={styles.imageWrapper}>
@@ -386,13 +395,14 @@ export default function MediaDetailModal({
 
               <div className={styles.synopsisBlock}>
                 <strong>Synopsis:</strong>
-                <p className={styles.synopsisText}>{media.synopsis ?? "No synopsis available."}</p>
+                <p className={styles.synopsisText}>
+                  {media.synopsis ?? "No synopsis available."}
+                </p>
               </div>
             </div>
           </div>
 
           <div className={styles.contentBottom}>
-
             <div className={styles.formGrid}>
               <div className={styles.formGroup}>
                 <label>Status</label>
@@ -434,18 +444,21 @@ export default function MediaDetailModal({
                     >
                       <Image
                         src={podiumEnabled ? "/heart1.png" : "/heart2.png"}
-                        alt={podiumEnabled ? "Remove from favorites" : "Add to favorites"}
+                        alt={
+                          podiumEnabled
+                            ? "Remove from favorites"
+                            : "Add to favorites"
+                        }
                         width={30}
                         height={30}
                       />
                     </button>
 
-
                     <select
                       value={podiumRank}
                       onChange={(e) =>
                         setPodiumRank(
-                          e.target.value === "" ? "" : Number(e.target.value)
+                          e.target.value === "" ? "" : Number(e.target.value),
                         )
                       }
                       disabled={!isLoggedIn || !podiumEnabled}
@@ -470,7 +483,7 @@ export default function MediaDetailModal({
                     value={hoursPlayed}
                     onChange={(e) =>
                       setHoursPlayed(
-                        e.target.value === "" ? "" : Number(e.target.value)
+                        e.target.value === "" ? "" : Number(e.target.value),
                       )
                     }
                     placeholder="Enter hours played"
@@ -493,7 +506,7 @@ export default function MediaDetailModal({
                     value={episodesWatched}
                     onChange={(e) =>
                       setEpisodesWatched(
-                        e.target.value === "" ? "" : Number(e.target.value)
+                        e.target.value === "" ? "" : Number(e.target.value),
                       )
                     }
                     placeholder="0"
@@ -512,7 +525,7 @@ export default function MediaDetailModal({
                     value={rewatches}
                     onChange={(e) =>
                       setRewatches(
-                        e.target.value === "" ? "" : Number(e.target.value)
+                        e.target.value === "" ? "" : Number(e.target.value),
                       )
                     }
                     placeholder="0"
@@ -540,8 +553,6 @@ export default function MediaDetailModal({
                   disabled={!isLoggedIn}
                 />
               </div>
-
-
             </div>
             <div className={styles.notesGroup}>
               <label>Review</label>
@@ -551,26 +562,19 @@ export default function MediaDetailModal({
                 onChange={(e) => setReview(e.target.value)}
                 placeholder="Write your thoughts here..."
                 disabled={!isLoggedIn}
-
               />
             </div>
-
-
           </div>
 
           <div className={styles.messages}>
-            {errorMessage && (
-              <p className={styles.errorText}>{errorMessage}</p>
-            )}
+            {errorMessage && <p className={styles.errorText}>{errorMessage}</p>}
 
             {successMessage && (
               <p className={styles.successText}>{successMessage}</p>
             )}
 
             {!isLoggedIn && (
-              <p className={styles.errorText}>
-                Sign in to save changes.
-              </p>
+              <p className={styles.errorText}>Sign in to save changes.</p>
             )}
           </div>
 
@@ -601,9 +605,8 @@ export default function MediaDetailModal({
               </button>
             )}
           </div>
-
         </div>
       </div>
     </div>
-  )
+  );
 }

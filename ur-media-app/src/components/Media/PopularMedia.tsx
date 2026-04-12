@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
-import MediaGrid, { MediaItem } from "./MediaGrid"
+// import MediaGrid, { MediaItem } from "./MediaGrid"
+import MediaGrid from "./MediaGrid"
+import { DisplayMediaItem } from "@/types/types"
 import MediaDetailModal from "../Global/MediaDetailModal"
 import styles from "./PopularMedia.module.css"
 
@@ -26,7 +28,7 @@ type PopularMediaCacheRow = {
     media: DatabaseMediaRecord | null
 }
 
-type PopularMediaByCategory = Record<MediaCategory, MediaItem[]>
+type PopularMediaByCategory = Record<MediaCategory, DisplayMediaItem[]>
 
 /*
 This function fixes the raw Supabase response shape. Convert media into a single object or null.
@@ -43,11 +45,11 @@ function normalizePopularMediaCacheRows(rawRows: any[]): PopularMediaCacheRow[] 
 /*
 Convert one database media record into the MediaItem shape used by MediaGrid and the modal.
 */
-function convertDatabaseMediaToMediaItem(mediaRecord: DatabaseMediaRecord): MediaItem {
+function convertDatabaseMediaToMediaItem(mediaRecord: DatabaseMediaRecord): DisplayMediaItem {
     return {
         id: mediaRecord.id,
-        source: mediaRecord.source as MediaItem["source"],
-        mediaType: mediaRecord.media_type as MediaItem["mediaType"],
+        source: mediaRecord.source as DisplayMediaItem["source"],
+        mediaType: mediaRecord.media_type as DisplayMediaItem["mediaType"],
         externalId: mediaRecord.external_id,
         title: mediaRecord.title,
         imageUrl: mediaRecord.image_url ?? "/test-images/default_no_image.png",
@@ -89,7 +91,7 @@ export default function PopularMedia() {
         games: [],
         books: [],
     })
-    const [selectedMedia, setSelectedMedia] = useState<MediaItem | null>(null)
+    const [selectedMedia, setSelectedMedia] = useState<DisplayMediaItem | null>(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
@@ -130,7 +132,7 @@ export default function PopularMedia() {
     }, [supabase])
 
 
-    const handlePosterClick = (item: MediaItem) => {
+    const handlePosterClick = (item: DisplayMediaItem) => {
         setSelectedMedia(item)
         setIsModalOpen(true)
     }
