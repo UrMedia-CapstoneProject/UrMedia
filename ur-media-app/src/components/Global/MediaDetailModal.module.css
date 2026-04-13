@@ -10,7 +10,7 @@
 }
 
 .modal {
-    background: rgba(var(--surface-primary-rgb), .95);
+    background: rgba(var(--surface-primary-rgb-modal), .95);
     width: 100%;
     max-width: 1000px;
     max-height: 90vh;

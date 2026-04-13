@@ -15,7 +15,7 @@ type GetUserTrackedMediaParameters = {
 type ModalTrackedResponse = {
   isTracked: boolean;
   status: string;
-  score: string;
+  score: number;
   hoursPlayed: number | "";
   episodesWatched: number | "";
   rewatches: number | "";
@@ -30,7 +30,7 @@ function emptyResponse(): ModalTrackedResponse {
   return {
     isTracked: false,
     status: "",
-    score: "",
+    score: NaN,
     hoursPlayed: "",
     episodesWatched: "",
     rewatches: "",
@@ -177,7 +177,7 @@ export async function getUserTrackedMedia({
   }
 
   return {
-    ...normalizeTrackedRow(mediaType,trackedRow),
+    ...normalizeTrackedRow(mediaType, trackedRow),
     podiumEnabled,
     podiumRank
   };

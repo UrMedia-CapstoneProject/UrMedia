@@ -1,11 +1,11 @@
 .posterGrid{
-    background-color: rgba(var(--surface-primary-rgb), 0.5);
+    background-color: rgba(var(--surface-primary-rgb), 0.2);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 1rem;
     padding: 1rem;
     border-radius: 15px;
-    box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
+    box-shadow: 0 8px 15px rgba(var(--box-shadow-rgb), 0.9);
 }
 
 .poster {

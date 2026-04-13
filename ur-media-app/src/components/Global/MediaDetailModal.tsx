@@ -233,28 +233,31 @@ export default function MediaDetailModal({
 
   const validateForm = () => {
     if (score !== "") {
-      const num = Number(score);
+      var num = Number(score)
 
-      if (isNaN(num) || num < 1 || num > 10) {
-        return "Score must be between 1.0 and 10.0.";
+      if (isNaN(num) || num > 10) {
+        setScore("10")
+      } else if (num < 1 ) {
+        setScore("1")
       }
 
-      const decimalPart = score.split(".")[1];
+      const decimalPart = String(score).split(".")[1]
       if (decimalPart && decimalPart.length > 1) {
-        return "Score can only have one decimal place.";
+        num = Math.floor(num * 10) / 10;
+        setScore(String(num));
       }
     }
 
     if (hoursPlayed !== "" && Number(hoursPlayed) < 0) {
-      return "Hours played cannot be negative.";
+      setHoursPlayed(0)
     }
 
     if (episodesWatched !== "" && Number(episodesWatched) < 0) {
-      return "Episodes watched cannot be negative.";
+      setEpisodesWatched(0)
     }
 
     if (rewatches !== "" && Number(rewatches) < 0) {
-      return "Rewatches cannot be negative.";
+      setRewatches(0)
     }
 
     if (
@@ -263,7 +266,7 @@ export default function MediaDetailModal({
       media.totalEpisodes != null &&
       Number(episodesWatched) > Number(media.totalEpisodes)
     ) {
-      return `Episodes watched cannot be more than ${media.totalEpisodes}.`;
+      setEpisodesWatched(Number(media.totalEpisodes))
     }
 
     if (startDate && finishDate && new Date(finishDate) < new Date(startDate)) {
@@ -308,7 +311,7 @@ export default function MediaDetailModal({
       mediaId: media.id,
       mediaType: media.mediaType,
       status: status || null,
-      score: score === "" ? null : Number(score).toFixed(1),
+      score: score === "" ? null : Number(score),
       hoursPlayed: hoursPlayed === "" ? null : hoursPlayed,
       episodesWatched: episodesWatched === "" ? null : episodesWatched,
       rewatches: rewatches === "" ? null : rewatches,
@@ -319,10 +322,19 @@ export default function MediaDetailModal({
       podiumRank: podiumEnabled ? podiumRank : null,
     };
 
-    console.log("Save Changes payload:", payload);
+    if(!podiumEnabled && podiumRank !== null){
+      handleDeletePodium
+    }
 
-    // Later, save the changes
-    // await fetch("/api/media/untrack", { ... })
+    console.log("Save Changes payload:", payload)
+
+    await fetch("/api/media/user-tracked", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
     setIsTracked(true);
     setSuccessMessage("Added to your tracked list.");
@@ -347,8 +359,13 @@ export default function MediaDetailModal({
 
     console.log("Delete tracked payload:", payload);
 
-    // Later:
-    // await fetch("/api/media/untrack", { ... })
+    await fetch("/api/media/user-tracked", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload)
+    })
 
     setStatus("");
     setScore("");
@@ -364,6 +381,27 @@ export default function MediaDetailModal({
 
     setSuccessMessage("Removed from your tracked list.");
   };
+
+  const handleDeletePodium = async () => {
+    if (!isLoggedIn || !media) return
+
+    setErrorMessage("")
+    setSuccessMessage("")
+
+    const payload = {
+      mediaId: media.id,
+      mediaType: media.mediaType,
+      deletePodiumOnly: true,
+    }
+
+    await fetch("/api/media/user-tracked", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+  }
 
   return (
     <div className={styles.overlay} onClick={onClose}>
