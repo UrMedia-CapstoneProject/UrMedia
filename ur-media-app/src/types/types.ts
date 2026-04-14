@@ -88,3 +88,10 @@ export type DisplayMediaItem =
     | ShowMediaItem
     | GameMediaItem
     | BookMediaItem
+
+
+/*For repopulating popular_media_cache*/
+export type PopularMediaGroup = "movies" | "shows" | "games" | "books"
+export type PopularTimeframe = "all_time" | "7d" | "30d"
+
+export type MediaCategory = "movies" | "shows" | "games" | "books"

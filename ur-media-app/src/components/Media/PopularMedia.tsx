@@ -1,8 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
 import PopularMediaClient from "./PopularMediaClient"
-import type { DisplayMediaItem } from "@/types/types"
-
-type MediaCategory = "movies" | "shows" | "games" | "books"
+import type { MediaCategory, DisplayMediaItem } from "@/types/types"
 
 type DatabaseMediaRecord = {
   id: number

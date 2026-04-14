@@ -4,9 +4,7 @@ import { useState } from "react"
 import MediaGrid from "./MediaGrid"
 import MediaDetailModal from "../Global/MediaDetailModal"
 import styles from "./PopularMedia.module.css"
-import type { DisplayMediaItem } from "@/types/types"
-
-type MediaCategory = "movies" | "shows" | "games" | "books"
+import type { MediaCategory, DisplayMediaItem } from "@/types/types"
 
 type PopularMediaByCategory = Record<MediaCategory, DisplayMediaItem[]>
 
