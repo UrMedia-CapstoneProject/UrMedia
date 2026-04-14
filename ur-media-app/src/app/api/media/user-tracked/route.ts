@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@/lib/supabase/server'
 import { getUserTrackedMedia } from '@/services/media/user_tracked/getUserTrackedMedia'
+import { upsertTrackedMedia } from '@/services/media/user_tracked/upsertUserTrackedMedia'
+import { deleteUserTrackedMedia } from '@/services/media/user_tracked/deleteTrackedMedia'
+import { DeleteTrackedMediaPayload } from '@/services/media/user_tracked/deleteTrackedMedia'
 
 export async function GET(request: NextRequest) {
     try {
@@ -16,11 +19,11 @@ export async function GET(request: NextRequest) {
         }
 
         const mediaId = Number(mediaIdParameter)
-        
+
         if (Number.isNaN(mediaId)) {
             return NextResponse.json(
-                { error: "mediaId must be a valid number"},
-                { status: 400}
+                { error: "mediaId must be a valid number" },
+                { status: 400 }
             )
         }
 
@@ -48,7 +51,77 @@ export async function GET(request: NextRequest) {
             {
                 error: error instanceof Error ? error.message : "Unknown server error."
             },
-            { status: 500}
+            { status: 500 }
         )
+    }
+}
+
+export async function POST(req: NextRequest) {
+    try {
+        console.log("POST /api/media/user-tracked hit");
+
+        const payload = await req.json();
+
+        const supabase = await createClient();
+        const { data: authorizedUser, error: authorizedError } = await supabase.auth.getUser()
+
+        if (!authorizedUser || authorizedError) {
+            return NextResponse.json(
+                { error: "User not authenticated" },
+                { status: 401 }
+            )
+        }
+
+        const userId = authorizedUser.user.id;
+
+        // call your DB function
+        console.log("Made it to upsert")
+        await upsertTrackedMedia({
+            supabase,
+            userId,
+            payload,
+        });
+
+        return NextResponse.json({ success: true });
+
+    } catch (err: any) {
+        return NextResponse.json(
+            { error: err.message },
+            { status: 500 }
+        );
+    }
+}
+
+export async function DELETE(req: NextRequest) {
+    try {
+        console.log("DELETE /api/media/user-tracked hit");
+
+        const payload = await req.json();
+
+        const supabase = await createClient();
+        const {data: authorizedUser, error: authorizedError } = await supabase.auth.getUser();
+
+        if (!authorizedUser || authorizedError) {
+            return NextResponse.json(
+                { error: "User not authenticated" },
+                { status: 401 }
+            )
+        }
+
+        const userId = authorizedUser.user.id;
+
+        await deleteUserTrackedMedia({
+            supabase,
+            userId,
+            payload,
+        });
+
+        return NextResponse.json({ success: true });
+
+    } catch (err: any) {
+        return NextResponse.json(
+            { error: err.message },
+            { status: 500 }
+        );
     }
 }
