@@ -39,10 +39,10 @@ export async function getPopularMovies(page: number) {
   }
 }
 
-export async function getShows() {
+export async function getShow(id: number) {
   try {
-    const res = await tmdb.tv_lists.on_the_air();
-    return res;
+    const res = await tmdb.tv_series.details({series_id: id})
+    return res
   } catch (err) {
     if (err instanceof TMDBError) {
       console.log(err.message);

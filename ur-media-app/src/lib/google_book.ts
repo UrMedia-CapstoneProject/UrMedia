@@ -1,4 +1,4 @@
-const BASE_URL="https://books.google.com/"
+const BASE_URL="https://books.google.com/books/v1/"
 
 export const googleBooksFetch = async <T>(endpoint: string, params: Record<string, string> = {}): Promise<T> => {
     const search = new URLSearchParams({key: process.env.GOOGLE_BOOK_API_KEY!, ...params});
