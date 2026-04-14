@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import styles from "./MediaDetailModal.module.css"
-import type { MediaItem } from "../Media/MediaGrid"
+import type { DisplayMediaItem } from "@/types/types"
 import { createClient } from "@/lib/supabase/client"
 
 type MediaDetailModalProps = {
-  media: MediaItem | null
+  media: DisplayMediaItem | null
   isOpen: boolean
   onClose: () => void
 }
@@ -251,9 +251,9 @@ export default function MediaDetailModal({
       episodesWatched !== "" &&
       epWatched &&
       media.totalEpisodes != null &&
-      epWatched > media.totalEpisodes
+      epWatched > Number(media.totalEpisodes)
     ) {
-      setEpisodesWatched(media.totalEpisodes)
+      setEpisodesWatched(Number(media.totalEpisodes))
     }
 
     if (
