@@ -15,22 +15,22 @@ type MediaDetailModalProps = {
 export function formatMediaType(mediaType?: string) {
   switch (mediaType) {
     case "movie": {
-      return "Movie";
+      return "Movie"
     }
     case "show": {
-      return "Show";
+      return "Show"
     }
     case "anime_movie": {
-      return "Anime Movie";
+      return "Anime Movie"
     }
     case "anime_show": {
-      return "Anime Show";
+      return "Anime Show"
     }
     case "game": {
-      return "Game";
+      return "Game"
     }
     case "book": {
-      return "Book";
+      return "Book"
     }
   }
 }
@@ -63,36 +63,51 @@ export default function MediaDetailModal({
   const [rewatches, setRewatches] = useState<number | "">("")
   const [startDate, setStartDate] = useState("")
   const [finishDate, setFinishDate] = useState("")
-  const [notes, setNotes] = useState("")
+  const [review, setReview] = useState("")
   const [podiumEnabled, setPodiumEnabled] = useState(false)
   const [podiumRank, setPodiumRank] = useState<number | "">("")
   const [errorMessage, setErrorMessage] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
 
-  // useEffect(() => {
-  //   if (!media || !isOpen || !media.mediaType) {
-  //     console.log("Modal fetch blocked. media or mediaType missing:", media)
-  //     return
-  //   }
+  useEffect(() => {
+    if (!media || !isOpen || !media.mediaType) return
 
-  //   const loadTrackedData = async () => {
-  //     const url = `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`
+    const loadTrackedData = async () => {
+      try {
+        const response = await fetch(
+          `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`
+        )
 
-  //     console.log("Media object being sent:", media)
-  //     console.log("Fetch URL:", url)
+        const data = await response.json()
 
-  //     try {
-  //       const response = await fetch(url)
-  //       const data = await response.json()
+        if (!response.ok) {
+          setErrorMessage(data.error || "Failed to load tracked data.")
+          return
+        }
+        console.log(data)
 
-  //       console.log("Tracked route response:", data)
-  //     } catch (error) {
-  //       console.error("Failed to load tracked data:", error)
-  //     }
-  //   }
+        setIsTracked(true)
+        setStatus(data.status ?? "")
+        setScore(data.score ?? "")
+        setHoursPlayed(data.hoursPlayed ?? "")
+        setEpisodesWatched(data.episodesWatched ?? "")
+        setRewatches(data.rewatches ?? "")
+        setStartDate(data.startDate ?? "")
+        setFinishDate(data.finishDate ?? "")
+        setReview(data.review ?? "")
+        setPodiumEnabled(data.podiumEnabled ?? false) // how do i return 'true' or 'false' for if media item is a favorite or not?
+        setPodiumRank(data.podiumRank ?? "")
+        //setSuccessMessage()
+      } catch (error) {
+        console.error("Failed to laod the user tracked data", error)
+        setErrorMessage("Failed to load the user tracked data.")
+      }
 
-  //   loadTrackedData()
-  // }, [media, isOpen])
+    }
+
+
+    loadTrackedData()
+  }, [media, isOpen])
 
   useEffect(() => {
     const checkUser = async () => {
@@ -103,26 +118,26 @@ export default function MediaDetailModal({
     checkUser()
   }, [supabase])
 
-  useEffect(() => {
-    if (!media) return
+  // useEffect(() => {
+  //   if (!media) return
 
-    setStatus("")
-    setScore("")
-    setHoursPlayed("")
-    setEpisodesWatched("")
-    setRewatches("")
-    setStartDate("")
-    setFinishDate("")
-    setNotes("")
-    setPodiumRank("")
-    setPodiumEnabled(false)
-    setErrorMessage("")
-    setSuccessMessage("")
-    setIsTracked(false)
+  //   setStatus("")
+  //   setScore("")
+  //   setHoursPlayed("")
+  //   setEpisodesWatched("")
+  //   setRewatches("")
+  //   setStartDate("")
+  //   setFinishDate("")
+  //   setReview("")
+  //   setPodiumRank("")
+  //   setPodiumEnabled(false)
+  //   setErrorMessage("")
+  //   setSuccessMessage("")
+  //   setIsTracked(false)
 
-    // Later, grab the data from supabase
+  //   // Later, grab the data from supabase
 
-  }, [media])
+  // }, [media])
 
   if (!isOpen || !media) return null
 
@@ -203,37 +218,42 @@ export default function MediaDetailModal({
 
   const validateForm = () => {
     if (score !== "") {
-      const num = Number(score)
+      var num = Number(score)
 
-      if (isNaN(num) || num < 1 || num > 10) {
-        return "Score must be between 1.0 and 10.0."
+      if (isNaN(num) || num > 10) {
+        setScore("10")
+      } else if (num < 1 ) {
+        setScore("1")
       }
 
-      const decimalPart = score.split(".")[1]
+      const decimalPart = String(score).split(".")[1]
       if (decimalPart && decimalPart.length > 1) {
-        return "Score can only have one decimal place."
+        num = Math.floor(num * 10) / 10;
+        setScore(String(num));
       }
     }
 
     if (hoursPlayed !== "" && Number(hoursPlayed) < 0) {
-      return "Hours played cannot be negative."
+      setHoursPlayed(0)
     }
 
     if (episodesWatched !== "" && Number(episodesWatched) < 0) {
-      return "Episodes watched cannot be negative."
+      setEpisodesWatched(0)
     }
 
     if (rewatches !== "" && Number(rewatches) < 0) {
-      return "Rewatches cannot be negative."
+      setRewatches(0)
     }
 
+    var epWatched = Number(episodesWatched);
     if (
       showEpisodesWatched &&
       episodesWatched !== "" &&
+      epWatched &&
       media.totalEpisodes != null &&
-      Number(episodesWatched) > media.totalEpisodes
+      epWatched > media.totalEpisodes
     ) {
-      return `Episodes watched cannot be more than ${media.totalEpisodes}.`
+      setEpisodesWatched(media.totalEpisodes)
     }
 
     if (
@@ -283,20 +303,30 @@ export default function MediaDetailModal({
       mediaId: media.id,
       mediaType: media.mediaType,
       status: status || null,
-      score: score === "" ? null : Number(score).toFixed(1),
+      score: score === "" ? null : Number(score),
       hoursPlayed: hoursPlayed === "" ? null : hoursPlayed,
       episodesWatched: episodesWatched === "" ? null : episodesWatched,
       rewatches: rewatches === "" ? null : rewatches,
       startDate: startDate || null,
       finishDate: finishDate || null,
-      notes: notes || null,
+      review: review || null,
       podiumEnabled,
       podiumRank: podiumEnabled ? podiumRank : null,
     }
 
+    if(!podiumEnabled && podiumRank !== null){
+      handleDeletePodium
+    }
+
     console.log("Save Changes payload:", payload)
 
-    // Later, save the changes
+    await fetch("/api/media/user-tracked", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
     setIsTracked(true)
     setSuccessMessage("Added to your tracked list.")
@@ -321,8 +351,13 @@ export default function MediaDetailModal({
 
     console.log("Delete tracked payload:", payload)
 
-    // Later:
-    // await fetch("/api/media/untrack", { ... })
+    await fetch("/api/media/user-tracked", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload)
+    })
 
     setStatus("")
     setScore("")
@@ -331,7 +366,7 @@ export default function MediaDetailModal({
     setRewatches("")
     setStartDate("")
     setFinishDate("")
-    setNotes("")
+    setReview("")
     setPodiumRank("")
     setPodiumEnabled(false)
     setIsTracked(false)
@@ -339,35 +374,42 @@ export default function MediaDetailModal({
     setSuccessMessage("Removed from your tracked list.")
   }
 
+  const handleDeletePodium = async () => {
+    if (!isLoggedIn || !media) return
+
+    setErrorMessage("")
+    setSuccessMessage("")
+
+    const payload = {
+      mediaId: media.id,
+      mediaType: media.mediaType,
+      deletePodiumOnly: true,
+    }
+
+    await fetch("/api/media/user-tracked", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    })
+  }
+
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <div className={styles.content}>
 
-          <div className={styles.info}>
-            <h2>{media.title}</h2>
-            <p>
-              <strong>Type:</strong>{" "}
-              {formatMediaType(media.mediaType) ?? "Unknown"}
-            </p>
-            <p>
-              <strong>Release Date:</strong> {media.releaseDate ?? "N/A"}
-            </p>
-            <p>
-              <strong>Synopsis:</strong>{" "}
-              {media.synopsis ?? "No synopsis avaiable."}
-            </p>
-
-            <div>
-              <label>Status</label>
-              <select defaultValue="Status">
-                <option value="watching">Watching</option>
-                <option value="plan">Plan to Watch</option>
-                <option value="completed">Completed</option>
-                <option value="rewatching">Rewatching</option>
-                <option value="paused">Paused</option>
-                <option value="dropped">Dropped</option>
-              </select>
+          <div className={styles.contentTop}>
+            <div className={styles.imageSection}>
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={media.imageUrl}
+                  alt={media.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
             </div>
 
             <div className={styles.infoSection}>
@@ -523,7 +565,7 @@ export default function MediaDetailModal({
                 <label>Start Date</label>
                 <input
                   type="date"
-                  value={startDate}
+                  value={startDate || ""}
                   onChange={(e) => setStartDate(e.target.value)}
                   disabled={!isLoggedIn}
                 />
@@ -533,7 +575,7 @@ export default function MediaDetailModal({
                 <label>Finish Date</label>
                 <input
                   type="date"
-                  value={finishDate}
+                  value={finishDate || ""}
                   onChange={(e) => setFinishDate(e.target.value)}
                   disabled={!isLoggedIn}
                 />
@@ -545,8 +587,8 @@ export default function MediaDetailModal({
               <label>Review</label>
               <textarea
                 rows={10}
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
                 placeholder="Write your thoughts here..."
                 disabled={!isLoggedIn}
 

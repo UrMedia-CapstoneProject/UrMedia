@@ -16,7 +16,7 @@
     display: grid;
     grid-template-columns: .5fr 2fr;
     gap: 4rem;
-    align-items: start; /*Fixes issue with TrackedMedia section trying to scale vertically with Stats section*/
+    align-items: start;
 }
 
 .signOutButton {
@@ -26,13 +26,27 @@
     margin-left: auto;
 }
 
-@media (max-width: 1000px) {
-  .grid {
-    grid-template-columns: .5fr 1fr;
+@media (max-width: 1900px) {
+  .grid{
+    grid-template-columns: 1fr 1fr;
+  }
+  .content{
+    margin-left: 9%;
+    margin-right: 9%;
   }
 }
 
-@media (max-width: 200px) {
+@media (max-width: 1750px) {
+  .grid{
+    grid-template-columns: 1fr 1fr;
+  }
+  .content{
+    margin-left: 6%;
+    margin-right: 6%;
+  }
+}
+
+@media (max-width: 950) {
   .grid {
     grid-template-columns: 1fr;
   }
