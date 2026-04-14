@@ -28,11 +28,7 @@ export async function POST(request: NextRequest) {
     const providedSecret = request.headers.get(
       "x-dev-refresh-popular-cache-secret-x",
     );
-
-    console.log("expectedSecret:", JSON.stringify(expectedSecret));
-      console.log("providedSecret:", JSON.stringify(providedSecret));
-      console.log("match:", expectedSecret === providedSecret);
-
+    
     if (!expectedSecret || providedSecret !== expectedSecret) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
