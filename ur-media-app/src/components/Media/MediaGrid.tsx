@@ -4,7 +4,7 @@ import Poster from "../Global/Poster";
 export type MediaItem = {
   id: number
   source?: "movie" | "jikan" | "rawg" | "google_books"
-  mediaType?: "movie" | "show" | "anime_movie" | "anime_show" | "game" | "book"
+  mediaType: "movie" | "show" | "anime_movie" | "anime_show" | "game" | "book"
   externalId?: string
   title: string;
   imageUrl: string;
@@ -12,7 +12,6 @@ export type MediaItem = {
   releaseDate?: string | null;
   totalEpisodes?: number | null; // Needed for keeping track how many max episodes that the user can track. Might not need it
 };
-
 
 type MediaGridProps = {
   items: MediaItem[];

@@ -13,6 +13,7 @@ export async function getMovie(id: number) {
     }
   }
 }
+
 export async function getMovies() {
   try {
     const res = await tmdb.movie_lists.now_playing();
