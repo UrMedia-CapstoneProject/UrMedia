@@ -12,7 +12,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    background: rgba(var(--surface-primary-rgb), .95);
+    background: rgba(var(--surface-primary-rgb-modal), .95);
     gap: 3rem;
     width: 700px;
     min-width: 25%;
@@ -27,12 +27,6 @@
 .option {
     font-size: large;
     margin-top: 22px;
-}
-
-.deleteAccount {
-    font-weight: bold;
-    color: rgb(236, 56, 56);
-    margin-top: 6px;
 }
 
 .settingsItem {
@@ -62,17 +56,41 @@
     background-color: #1b0942;
 }
 
-.signout button {
-    all: unset;
-    padding: 0.3rem;
-    border-radius: 10px;
-    border: 1px solid #434348;
-    background-color: rgb(236, 56, 56);
-}
-
 .exitOptions {
     display: flex;
     gap: 2rem;
+}
+
+.signout button {
+    all: unset;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #434348;
+    background-color: rgb(198, 47, 47);
+}
+
+.signout button:hover {
+    background-color: rgb(162, 37, 37);
+}
+
+.signout button:active {
+    transform: scale(0.98);
+}
+
+.deleteAccount {
+    all: unset;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #434348;
+    background-color: rgb(198, 47, 47);
+}
+
+.deleteAccount:hover {
+    background-color: rgb(162, 37, 37);
+}
+
+.deleteAccount:active {
+    transform: scale(0.98);
 }
 
 .saveAndCancel {
@@ -89,6 +107,15 @@
     width: 60px;
     height: 35px;
     color: var(--foreground);
+    cursor: pointer;
+}
+
+.saveButton:hover {
+    background-color: #2f2a93;
+}
+
+.saveButton:active {
+    transform: scale(0.98);
 }
 
 .cancelButton {
@@ -98,4 +125,13 @@
     width: 60px;
     height: 35px;
     color: black;
+    cursor: pointer;
+}
+
+.cancelButton:hover {
+    background-color: #a9a8b4;
+}
+
+.cancelButton:active {
+     transform: scale(0.98);
 }

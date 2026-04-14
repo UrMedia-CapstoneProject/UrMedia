@@ -1,3 +1,5 @@
+"use client"
+import { useEffect, useState } from "react"
 import SignOutButton from "@/components/Global/SignOutButton"
 import styles from "./SettingsModal.module.css"
 import Image from "next/image"
@@ -8,15 +10,59 @@ type SettingsModalProps = {
 }
 
 export default function SettingsModal({
-    isSettingsOpen,
     onClose
     }: SettingsModalProps) {
 
-    const handleUsernameChange = (value: string) => {}
-    const handleBioChange = (value: string) => {}
-    const setBirthday = (value: string) => {}
-    const handleSave = () => {}
-    const handleCancel = () => {}
+    const [username, setUsername] = useState("")
+    const [bio, setBio] = useState("")
+    const [birthday, setBirthday] = useState("")
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
+    const [successMessage, setSuccessMessage] = useState("")
+
+    const validateForm = () => {
+
+        if (username != "" && username.length <= 16) {
+            setUsername(username)
+        }
+
+        if (bio.length >= 500) {
+            setBio(bio)
+        }
+
+        setBirthday(birthday)
+        
+    }
+
+    const handleCancel = () => { onClose() }
+    const handleSave = () => {
+        if (!isLoggedIn) {return}
+
+        const validationError = validateForm()
+
+        if (validationError) {
+            setErrorMessage(validationError)
+            setSuccessMessage("")
+            return
+        }
+
+        setErrorMessage("")
+        setSuccessMessage("")
+
+        const payload = {
+
+        }
+        
+        await fetch("/api/media/user-tracked", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+        });
+
+    }
 
     return (
 
@@ -42,7 +88,8 @@ export default function SettingsModal({
 
                         <input
                             type="string"
-                            onChange={(e) => handleUsernameChange(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             placeholder="New Username"
                             className={styles.input}
                         />
@@ -53,6 +100,7 @@ export default function SettingsModal({
 
                         <input
                             type="date"
+                            value={birthday}
                             onChange={(e) => setBirthday(e.target.value)}
                             placeholder="mm/dd/yyyy"
                             className={styles.input}
@@ -64,7 +112,8 @@ export default function SettingsModal({
 
                     <textarea
                         rows={10}
-                        onChange={(e) => handleBioChange(e.target.value)}
+                        value={bio}
+                        onChange={(e) => setBio(e.target.value)}
                         placeholder="Tell us about yourself..."
                         className={styles.textarea}
                     />
@@ -73,7 +122,7 @@ export default function SettingsModal({
 
                 <div className={styles.exitOptions}>
                     <div className={styles.signout}><SignOutButton /></div>
-                    <label className={styles.deleteAccount}>Delete Account</label>
+                    <div className={styles.deleteAccount}>Delete Account</div>
                 </div>
 
                 <div className={styles.saveAndCancel}>
