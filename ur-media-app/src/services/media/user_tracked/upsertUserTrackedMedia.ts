@@ -84,7 +84,9 @@ export async function upsertTrackedMedia({
     const dbRow = mapPayloadToDbRow(mediaType, payload, userId);
 
     console.log("DB ROW:", dbRow);
-    const { error } = await supabase.from(trackedTable).upsert(dbRow);
+    const { error } = await supabase.from(trackedTable).upsert(dbRow, {
+        onConflict: "user_id,media_id",
+    });
 
     if (error) throw new Error(error.message);
 
@@ -96,10 +98,14 @@ export async function upsertTrackedMedia({
                 media_id: payload.mediaId,
                 podium_group: podiumGroup,
                 placement: payload.podiumRank,
-            });
+            },
+                {
+                    onConflict: "user_id,media_id,podium_group",
+                })
 
         if (podiumError) throw new Error(podiumError.message);
     } else {
+        console.log("No way im in the delete right?")
         await supabase
             .from("user_podium")
             .delete()

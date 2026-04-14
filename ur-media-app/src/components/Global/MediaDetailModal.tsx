@@ -245,11 +245,13 @@ export default function MediaDetailModal({
       setRewatches(0)
     }
 
+    var epWatched = Number(episodesWatched);
     if (
       showEpisodesWatched &&
       episodesWatched !== "" &&
+      epWatched &&
       media.totalEpisodes != null &&
-      Number(episodesWatched) > media.totalEpisodes
+      epWatched > media.totalEpisodes
     ) {
       setEpisodesWatched(media.totalEpisodes)
     }

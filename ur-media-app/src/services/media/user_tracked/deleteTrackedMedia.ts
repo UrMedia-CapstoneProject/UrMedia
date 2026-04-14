@@ -39,7 +39,7 @@ export async function deleteUserTrackedMedia({
             .delete()
             .eq("user_id", userId)
             .eq("media_id", mediaId)
-        
+
         await supabase
             .from("user_podium")
             .delete()

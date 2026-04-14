@@ -75,6 +75,7 @@ export async function POST(req: NextRequest) {
         const userId = authorizedUser.user.id;
 
         // call your DB function
+        console.log("Made it to upsert")
         await upsertTrackedMedia({
             supabase,
             userId,
@@ -114,6 +115,8 @@ export async function DELETE(req: NextRequest) {
             userId,
             payload,
         });
+
+        return NextResponse.json({ success: true });
 
     } catch (err: any) {
         return NextResponse.json(
