@@ -1,0 +1,49 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 70vh;
+}
+
+.sectionHeader{
+    justify-content: center;
+}
+
+.content{
+    background-color: rgba(var(--surface-primary-rgb), 0.2);
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tabBar{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    padding: .5rem;
+}
+
+.tabLink{
+    background-color: transparent;
+    color: var(--foreground);
+    border: none;
+    font-size: large;
+}
+.tabLink:hover{
+    cursor: pointer;
+}
+
+.upcomingHeader{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tabContent{
+    padding: 1.8rem;
+    flex: 1;
+    min-height: 0;
+}

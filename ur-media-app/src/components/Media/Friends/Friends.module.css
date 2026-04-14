@@ -1,0 +1,58 @@
+.main{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 70vh;
+}
+
+.content{
+    background-color: rgba(var(--surface-primary-rgb), 0.2);
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchBar{
+    width: 100%;
+    display: flex;
+}
+
+.searchBarInput{
+    border-radius: 15px;
+    background-color: #1b0942;
+    border-color: transparent;
+    width: 100%;
+    margin: 10px 5px 0px 3%;
+}
+.searchBarInput:focus {
+    outline: none;
+    border-color: none;
+}
+
+.add{
+    background-color: rgb(3, 77, 102);
+    color:#1b0942;
+    border-radius: 8px;
+    margin: 10px 3% 2px 5px;
+    padding: 0px 5px 0px 5px;
+}
+
+.recentHeader{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.updateCards{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    min-height: 0;
+    padding: 1.8rem;
+    flex: 1;
+    min-height: 0;
+}

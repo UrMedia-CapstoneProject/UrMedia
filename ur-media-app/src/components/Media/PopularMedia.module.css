@@ -1,9 +1,11 @@
 .main{
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 5rem;
 }
 
-.sectionHeader{
-    margin-bottom: 0.5rem;
+.section{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }

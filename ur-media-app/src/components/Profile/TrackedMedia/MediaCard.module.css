@@ -1,0 +1,76 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    border-radius: 5%;
+}
+
+.poster{
+    width: 135px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
+    border-radius: 3px;
+}
+
+.mediaInfo{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    background-color: rgba(24, 24, 24, 0.8);
+    padding: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 60px;
+    max-height: 100px;
+
+    transition: 0.1s ease;
+}
+
+.userStats{
+    display: flex;
+    align-items: center;
+}
+
+.title{
+    max-height: 40px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+}
+.title:hover .titleText {
+    text-align: left;
+    transform: translateX(-20%);
+}
+
+.titleText {
+    display: inline-block;
+    min-width: 100%;
+    text-align: center;
+
+    transition: transform 3s linear;
+}
+
+.epWatched{
+    bottom: 3;
+    right: 3;
+}
+
+.score{
+    bottom: 3;
+    left: 3;
+}
+
+@keyframes scrollText {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}

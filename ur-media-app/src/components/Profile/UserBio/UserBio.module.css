@@ -1,0 +1,35 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: rgba(var(--surface-primary-rgb), 0.2);
+    box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
+}
+
+.content{
+    display: flex;
+    flex-direction: row;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.Username{
+    margin-top: 1rem;
+    margin-right: 3rem;
+}
+
+.Pfp{
+    margin-right: 2rem;
+}
+
+.Bio{
+    margin-top: 4rem;
+    margin-left: 1rem;
+}
+
+.SettingsIcon{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0.75rem;
+}

@@ -17,5 +17,22 @@ export async function GET(request: Request) {
     return NextResponse.redirect(new URL('/signup', request.url))
   }
 
+  const { data: userData, error: userError } = await supabase.auth.getUser()
+
+  if (userError || !userData.user) {
+    console.error('Error getting user after login:', userError?.message)
+    return NextResponse.redirect(new URL('/signup', request.url))
+  }
+
+  const { error: profileError } = await supabase.from('profiles').upsert({
+    id: userData.user.id,
+    username: userData.user.email?.split('@')[0] ?? null,
+  })
+
+  if (profileError) {
+    console.error('Error creating profile:', profileError?.message)
+    return NextResponse.redirect(new URL('/signup', request.url))
+  }
+
   return NextResponse.redirect(new URL('/profile', request.url))
 }
