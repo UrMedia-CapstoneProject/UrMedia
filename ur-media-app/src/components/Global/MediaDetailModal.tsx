@@ -60,7 +60,7 @@ export default function MediaDetailModal({
   const [score, setScore] = useState("")
   const [hoursPlayed, setHoursPlayed] = useState<number | "">("")
   const [episodesWatched, setEpisodesWatched] = useState<number | "">("")
-  const [rewatches, setRewatches] = useState<number | "">("")
+  const [repeatCount, setRepeatCount] = useState<number | "">("")
   const [startDate, setStartDate] = useState("")
   const [finishDate, setFinishDate] = useState("")
   const [review, setReview] = useState("")
@@ -91,7 +91,7 @@ export default function MediaDetailModal({
         setScore(data.score ?? "")
         setHoursPlayed(data.hoursPlayed ?? "")
         setEpisodesWatched(data.episodesWatched ?? "")
-        setRewatches(data.rewatches ?? "")
+        setRepeatCount(data.repeatCount ?? "")
         setStartDate(data.startDate ?? "")
         setFinishDate(data.finishDate ?? "")
         setReview(data.review ?? "")
@@ -125,7 +125,7 @@ export default function MediaDetailModal({
   //   setScore("")
   //   setHoursPlayed("")
   //   setEpisodesWatched("")
-  //   setRewatches("")
+  //   setRepeatCount("")
   //   setStartDate("")
   //   setFinishDate("")
   //   setReview("")
@@ -241,8 +241,8 @@ export default function MediaDetailModal({
       setEpisodesWatched(0)
     }
 
-    if (rewatches !== "" && Number(rewatches) < 0) {
-      setRewatches(0)
+    if (repeatCount !== "" && Number(repeatCount) < 0) {
+      setRepeatCount(0)
     }
 
     var epWatched = Number(episodesWatched);
@@ -306,7 +306,7 @@ export default function MediaDetailModal({
       score: score === "" ? null : Number(score),
       hoursPlayed: hoursPlayed === "" ? null : hoursPlayed,
       episodesWatched: episodesWatched === "" ? null : episodesWatched,
-      rewatches: rewatches === "" ? null : rewatches,
+      repeatCounter: repeatCount === "" ? null : repeatCount,
       startDate: startDate || null,
       finishDate: finishDate || null,
       review: review || null,
@@ -363,7 +363,7 @@ export default function MediaDetailModal({
     setScore("")
     setHoursPlayed("")
     setEpisodesWatched("")
-    setRewatches("")
+    setRepeatCount("")
     setStartDate("")
     setFinishDate("")
     setReview("")
@@ -549,9 +549,9 @@ export default function MediaDetailModal({
                     type="number"
                     min={0}
                     step={1}
-                    value={rewatches}
+                    value={repeatCount}
                     onChange={(e) =>
-                      setRewatches(
+                      setRepeatCount(
                         e.target.value === "" ? "" : Number(e.target.value)
                       )
                     }

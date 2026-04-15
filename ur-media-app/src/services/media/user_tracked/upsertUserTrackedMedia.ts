@@ -12,7 +12,7 @@ export type TrackMediaPayload = {
 
     hoursPlayed: number | null;
     episodesWatched: number | null;
-    rewatches: number | null;
+    repeatCount: number | null;
 
     startDate: string | null;
     finishDate: string | null;
@@ -33,7 +33,7 @@ function mapPayloadToDbRow(
         media_id: payload.mediaId,
         watch_status: payload.status,
         rating: payload.score,
-        rewatches: payload.rewatches,
+        repeat_count: payload.repeatCounter,
         starting_date: payload.startDate,
         ending_date: payload.finishDate,
         review: payload.review,
