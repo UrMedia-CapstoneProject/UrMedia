@@ -33,11 +33,21 @@
 }
 
 .add{
-    background-color: rgb(3, 77, 102);
-    color:#1b0942;
+    background-color: #3d36be;
+    color: var(--foreground);
+    border: 1px solid #7b7bad;
     border-radius: 8px;
     margin: 10px 3% 2px 5px;
     padding: 0px 5px 0px 5px;
+    cursor: pointer;
+}
+
+.add:hover{
+    background-color: #2f2a93;
+}
+
+.add:active{
+    transform: scale(0.98);
 }
 
 .recentHeader{

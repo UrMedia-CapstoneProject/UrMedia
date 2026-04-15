@@ -67,6 +67,7 @@
     border-radius: 10px;
     border: 1px solid #434348;
     background-color: rgb(198, 47, 47);
+    cursor: pointer;
 }
 
 .signout button:hover {
@@ -83,6 +84,7 @@
     border-radius: 10px;
     border: 1px solid #434348;
     background-color: rgb(198, 47, 47);
+    cursor: pointer;
 }
 
 .deleteAccount:hover {

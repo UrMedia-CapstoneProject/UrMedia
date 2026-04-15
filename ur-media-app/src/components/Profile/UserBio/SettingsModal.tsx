@@ -5,7 +5,6 @@ import styles from "./SettingsModal.module.css"
 import Image from "next/image"
 
 type SettingsModalProps = {
-  isSettingsOpen: boolean
   onClose: () => void
 }
 
@@ -26,17 +25,18 @@ export default function SettingsModal({
         if (username != "" && username.length <= 16) {
             setUsername(username)
         }
+        else {return "Username must be 1-16 characters long"}
 
-        if (bio.length >= 500) {
+        if (bio.length <= 500) {
             setBio(bio)
         }
+        else {return "Biography must be 500 characters or less"}
 
         setBirthday(birthday)
-        
     }
 
     const handleCancel = () => { onClose() }
-    const handleSave = () => {
+    const handleSave = async () => {
         if (!isLoggedIn) {return}
 
         const validationError = validateForm()
@@ -51,10 +51,14 @@ export default function SettingsModal({
         setSuccessMessage("")
 
         const payload = {
-
+            username: username,
+            birthday: birthday || null,
+            bio: bio || null
         }
+
+        console.log("Save Changes payload:", payload)
         
-        await fetch("/api/media/user-tracked", {
+        await fetch("/api/user", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -62,6 +66,7 @@ export default function SettingsModal({
         body: JSON.stringify(payload),
         });
 
+        setSuccessMessage("Changes Saved")
     }
 
     return (
