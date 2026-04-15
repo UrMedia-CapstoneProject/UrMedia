@@ -60,9 +60,7 @@ export default function MediaDetailModal({
   const [score, setScore] = useState("")
   const [hoursPlayed, setHoursPlayed] = useState<number | "">("")
   const [episodesWatched, setEpisodesWatched] = useState<number | "">("")
-  const [repeatCount, setRepeatCount] = useState<number | "">("")
-  const [rewatches, setRewatches] = useState<number | "">("")
-  const [replays, setReplays] = useState<number | "">("")
+  const [repeatCount, setRepeatCount] = useState<number | "">("") // means the same thing as movies/shows/animes = "rewatches", games = "replays", books = "rereads"
   const [startDate, setStartDate] = useState("")
   const [finishDate, setFinishDate] = useState("")
   const [review, setReview] = useState("")
@@ -96,11 +94,10 @@ export default function MediaDetailModal({
         setRepeatCount(data.repeatCount ?? "")
         setStartDate(data.startDate ?? "")
         setFinishDate(data.finishDate ?? "")
-        setReplays(data.replays ?? "")
         setReview(data.review ?? "")
-        setPodiumEnabled(data.podiumEnabled ?? false) // how do i return 'true' or 'false' for if media item is a favorite or not?
+        setPodiumEnabled(data.podiumEnabled ?? false)
         setPodiumRank(data.podiumRank ?? "")
-        //setSuccessMessage()
+        setSuccessMessage("")
       } catch (error) {
         console.error("Failed to laod the user tracked data", error)
         setErrorMessage("Failed to load the user tracked data.")
@@ -241,9 +238,9 @@ export default function MediaDetailModal({
       setRepeatCount(0)
     }
 
-    if (replays !== "" && Number(replays) < 0) {
-      setReplays(0)
-    }
+    // if (replays !== "" && Number(replays) < 0) {
+    //   setReplays(0)
+    // }
 
     var epWatched = Number(episodesWatched);
     if (
@@ -307,8 +304,8 @@ export default function MediaDetailModal({
       hoursPlayed: hoursPlayed === "" ? null : hoursPlayed,
       episodesWatched: episodesWatched === "" ? null : episodesWatched,
       repeatCounter: repeatCount === "" ? null : repeatCount,
-      rewatches: rewatches === "" ? null : rewatches,
-      replays: replays === "" ? null : replays,
+      // rewatches: rewatches === "" ? null : rewatches,
+      // replays: replays === "" ? null : replays,
       startDate: startDate || null,
       finishDate: finishDate || null,
       review: review || null,
@@ -369,7 +366,7 @@ export default function MediaDetailModal({
     setStartDate("")
     setFinishDate("")
     setReview("")
-    setReplays("")
+    // setReplays("")
     setPodiumRank("")
     setPodiumEnabled(false)
     setIsTracked(false)
@@ -528,9 +525,9 @@ export default function MediaDetailModal({
                     type="number"
                     min={0}
                     step={1}
-                    value={hoursPlayed}
+                    value={repeatCount}
                     onChange={(e) =>
-                      setHoursPlayed(
+                      setRepeatCount(
                         e.target.value === "" ? "" : Number(e.target.value)
                       )
                     }

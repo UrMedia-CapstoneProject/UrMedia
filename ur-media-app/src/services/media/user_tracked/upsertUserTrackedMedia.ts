@@ -55,7 +55,6 @@ function mapPayloadToDbRow(
             return {
                 ...base,
                 hours_played: payload.hoursPlayed,
-                replays: payload.replays,
             };
 
         case "book":
