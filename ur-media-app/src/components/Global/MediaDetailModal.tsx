@@ -61,6 +61,7 @@ export default function MediaDetailModal({
   const [hoursPlayed, setHoursPlayed] = useState<number | "">("")
   const [episodesWatched, setEpisodesWatched] = useState<number | "">("")
   const [rewatches, setRewatches] = useState<number | "">("")
+  const [replays, setReplays] = useState<number | "">("")
   const [startDate, setStartDate] = useState("")
   const [finishDate, setFinishDate] = useState("")
   const [review, setReview] = useState("")
@@ -94,6 +95,7 @@ export default function MediaDetailModal({
         setRewatches(data.rewatches ?? "")
         setStartDate(data.startDate ?? "")
         setFinishDate(data.finishDate ?? "")
+        setReplays(data.replays ?? "")
         setReview(data.review ?? "")
         setPodiumEnabled(data.podiumEnabled ?? false) // how do i return 'true' or 'false' for if media item is a favorite or not?
         setPodiumRank(data.podiumRank ?? "")
@@ -149,6 +151,7 @@ export default function MediaDetailModal({
     media.mediaType === "movie" || media.mediaType === "anime_movie"
 
   const showHoursPlayed = isGame
+  const showReplays = isGame
   const showEpisodesWatched = isShow
   const showRewatches = isMovie || isShow
 
@@ -208,21 +211,13 @@ export default function MediaDetailModal({
     setScore(value)
   }
 
-  const formatScore = () => {
-    if (score === "") return
-
-    const num = Number(score)
-    if (isNaN(num)) return
-    setScore(num.toFixed(1))
-  }
-
   const validateForm = () => {
     if (score !== "") {
       var num = Number(score)
 
       if (isNaN(num) || num > 10) {
         setScore("10")
-      } else if (num < 1 ) {
+      } else if (num < 1) {
         setScore("1")
       }
 
@@ -243,6 +238,10 @@ export default function MediaDetailModal({
 
     if (rewatches !== "" && Number(rewatches) < 0) {
       setRewatches(0)
+    }
+
+    if (replays !== "" && Number(replays) < 0) {
+      setReplays(0)
     }
 
     var epWatched = Number(episodesWatched);
@@ -307,6 +306,7 @@ export default function MediaDetailModal({
       hoursPlayed: hoursPlayed === "" ? null : hoursPlayed,
       episodesWatched: episodesWatched === "" ? null : episodesWatched,
       rewatches: rewatches === "" ? null : rewatches,
+      replays: replays === "" ? null : replays,
       startDate: startDate || null,
       finishDate: finishDate || null,
       review: review || null,
@@ -314,7 +314,7 @@ export default function MediaDetailModal({
       podiumRank: podiumEnabled ? podiumRank : null,
     }
 
-    if(!podiumEnabled && podiumRank !== null){
+    if (!podiumEnabled && podiumRank !== null) {
       handleDeletePodium
     }
 
@@ -367,6 +367,7 @@ export default function MediaDetailModal({
     setStartDate("")
     setFinishDate("")
     setReview("")
+    setReplays("")
     setPodiumRank("")
     setPodiumEnabled(false)
     setIsTracked(false)
@@ -420,7 +421,6 @@ export default function MediaDetailModal({
               </p>
 
               <p>
-                {/* <strong>Release Date:</strong> {media.releaseDate ?? "N/A"} */}
                 <strong>Release Date:</strong> {formatDate(media.releaseDate)}
               </p>
 
@@ -519,6 +519,25 @@ export default function MediaDetailModal({
                 </div>
               )}
 
+              {showReplays && (
+                <div className={styles.formGroup}>
+                  <label>Replays</label>
+                  <input
+                    type="number"
+                    min={0}
+                    step={1}
+                    value={hoursPlayed}
+                    onChange={(e) =>
+                      setHoursPlayed(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
+                    placeholder="Enter times played"
+                    disabled={!isLoggedIn}
+                  />
+                </div>
+              )}
+
               {showEpisodesWatched && (
                 <div className={styles.formGroup}>
                   <label>
@@ -579,6 +598,43 @@ export default function MediaDetailModal({
                   onChange={(e) => setFinishDate(e.target.value)}
                   disabled={!isLoggedIn}
                 />
+              </div>
+
+              <div className={styles.mobilePodium}>
+                <label>Add to podium</label>
+
+                <div className={styles.podiumRowMobile}>
+                  <button
+                    type="button"
+                    onClick={handleTogglePodium}
+                    disabled={!isLoggedIn}
+                    className={styles.favoriteButton}
+                  >
+                    <Image
+                      src={podiumEnabled ? "/heart1.png" : "/heart2.png"}
+                      alt={podiumEnabled ? "Remove from favorites" : "Add to favorites"}
+                      width={30}
+                      height={30}
+                    />
+                  </button>
+
+
+                  <select
+                    value={podiumRank}
+                    onChange={(e) =>
+                      setPodiumRank(
+                        e.target.value === "" ? "" : Number(e.target.value)
+                      )
+                    }
+                    disabled={!isLoggedIn || !podiumEnabled}
+                    className={styles.podiumInput}
+                  >
+                    <option value="">Rank</option>
+                    <option value="1">No. 1</option>
+                    <option value="2">No. 2</option>
+                    <option value="3">No. 3</option>
+                  </select>
+                </div>
               </div>
 
 
