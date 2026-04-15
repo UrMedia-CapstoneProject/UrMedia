@@ -55,6 +55,7 @@ function mapPayloadToDbRow(
             return {
                 ...base,
                 hours_played: payload.hoursPlayed,
+                replays: payload.replays,
             };
 
         case "book":
@@ -105,7 +106,6 @@ export async function upsertTrackedMedia({
 
         if (podiumError) throw new Error(podiumError.message);
     } else {
-        console.log("No way im in the delete right?")
         await supabase
             .from("user_podium")
             .delete()

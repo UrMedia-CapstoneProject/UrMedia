@@ -4,6 +4,11 @@ export interface PosterProps {
   onClick?: () => void;
 }
 
+export interface MobileMediaCardProps{
+  item: BaseMediaItem;
+  onClick?: () => void;
+}
+
 export interface Game {
   id: number;
   name: string;

@@ -75,7 +75,7 @@
     gap: 5px;
 }
 
-.synopsisText{
+.synopsisText {
     margin-left: 5px;
 }
 
@@ -104,10 +104,13 @@
     outline: none;
     border-color: none;
     resize: none;
-    border:none;
+    border: none;
     background-color: #1b0942;
 }
-.formGroup input:disabled, .formGroup select:disabled, .notesGroup textarea:disabled{
+
+.formGroup input:disabled,
+.formGroup select:disabled,
+.notesGroup textarea:disabled {
     background-color: rgba(255, 255, 255, 0.1);
     color: rgba(255, 255, 255, 0.4);
 }
@@ -118,8 +121,9 @@
     gap: 10px;
     min-width: 0;
 }
-.scoreRow > * {
-  min-width: 0;
+
+.scoreRow>* {
+    min-width: 0;
 }
 
 .scoreBox {
@@ -138,7 +142,7 @@
     transform: scale(0.9);
 }
 
-.podiumInput{
+.podiumInput {
     flex: 1;
     min-width: 60px;
 }
@@ -196,22 +200,54 @@
     gap: 10px;
 }
 
-@media (max-width: 1060) {
-    .contentTop{
+.mobilePodium {
+    display: none;
+}
+
+@media (max-width: 1060px) {
+    .contentTop {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-@media (max-width: 700) {
-    .contentTop{
+@media (max-width: 700px) {
+    .modal {
+        padding: 10px;
+    }
+
+    .contentTop {
         grid-template-columns: 1fr;
     }
 
-    .imageSection{
+    .imageSection {
         max-width: 250px;
+        justify-self: center;
     }
 
-    .contentBottom{
+    .contentBottom {
         grid-template-columns: 1fr;
+    }
+
+    .scoreRow .podiumRow {
+        display: none;
+    }
+
+    .mobilePodium {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .podiumRowMobile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .podiumInput {
+        flex: 1;
+        width: 100%;
     }
 }
