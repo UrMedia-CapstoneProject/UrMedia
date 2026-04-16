@@ -66,9 +66,6 @@ export default async function Catalog({ searchParams }: CatalogProps) {
     }
 
     return (
-        <div className={styles.main}>
-            <MediaFilters />
-            <div className={styles.mediaGrid}>{posters}</div>
-        </div>
+        <div className={styles.mediaGrid}>{posters}</div>
     );
 }
