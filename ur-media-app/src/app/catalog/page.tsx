@@ -3,7 +3,9 @@ import MediaFilters from "@/components/Catalog/MediaFilters";
 import Poster from "@/components/Global/Poster";
 import { getPopularMovies, getPopularShows } from "@/services/tmdb";
 import { getPopularGames } from "@/services/rawg";
+import { getPopularAnime, getPopularManga } from "@/services/jikan";
 import { Game } from "@/types/types";
+import { Anime, Manga } from "@rushelasli/jikants";
 import { MovieResultItem, TVSeriesResultItem } from "@lorenzopant/tmdb";
 import { redirect } from "next/navigation";
 
@@ -17,6 +19,8 @@ interface MediaResultItems {
   movies?: MovieResultItem[];
   shows?: TVSeriesResultItem[];
   games?: Game[]
+  anime?: Anime[]
+  manga?: Manga[]
 }
 export default async function CatalogPage({ searchParams }: CatalogProps) {
   const params = await searchParams;
@@ -53,7 +57,7 @@ export default async function CatalogPage({ searchParams }: CatalogProps) {
     ));
   } else if (category == "games") {
     const response = await getPopularGames(page.toString(), '80,100');
-    media.games = response.results
+    media.games = response?.results || []
     
     posters = media.games.map((game) => (
         <Poster
@@ -62,6 +66,28 @@ export default async function CatalogPage({ searchParams }: CatalogProps) {
             imageUrl={game.background_image}
         />
     ));
+  } else if (category == "anime") {
+    const response = await getPopularAnime(page)
+    media.anime = response?.data || []
+
+    posters = media.anime.map((anime) => (
+      <Poster
+        key={anime.mal_id}
+        title={anime.title_english || anime.title}
+        imageUrl={anime.images.jpg.image_url || ""}
+      />
+    ))
+  } else if (category == "manga") {
+    const response = await getPopularManga(page)
+    media.manga = response?.data || []
+
+    posters = media.manga.map((manga) => (
+      <Poster
+        key={manga.mal_id}
+        title={manga.title_english || manga.title}
+        imageUrl={manga.images.jpg.image_url || ""}
+      />
+    ))
   }
 
   return (
