@@ -12,4 +12,10 @@ export default function PageButton() {
         params.set('page', page)
         router.push(`${pathname}?${params.toString()}`)
     }
+
+    return (
+        <div>
+            
+        </div>
+    )
 }
