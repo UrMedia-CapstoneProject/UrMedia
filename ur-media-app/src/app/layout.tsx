@@ -19,17 +19,17 @@ export const metadata: Metadata = {
   description: "Track all your favorite media in one place!",
 };
 
-const supabase = await createClient()
-const { data } = await supabase.auth.getUser()
 
-const isLoggedIn = !!data.user
-
-
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabase = await createClient()
+  const { data } = await supabase.auth.getUser()
+
+  const isLoggedIn = !!data.user
+  
   return (
     <html lang="en">
       <head>
@@ -38,7 +38,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar isLoggedIn={isLoggedIn}/>
+        <Navbar isLoggedIn={isLoggedIn} />
         {children}
       </body>
     </html>
