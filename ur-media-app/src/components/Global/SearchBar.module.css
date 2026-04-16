@@ -1,0 +1,21 @@
+.searchBar {
+    display: flex;
+    background-color: #200160;
+    border-radius: 20px;
+    padding-right: 5px;
+}
+
+.searchBarInput {
+    border-radius: 15px;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.searchBarInput:focus {
+    outline: none;
+    border-color: none;
+}
+
+.searchBarButton {
+    margin: 10px;
+}

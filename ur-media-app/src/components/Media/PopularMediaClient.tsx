@@ -31,7 +31,7 @@ export default function PopularMediaClient({
   return (
     <div className={styles.main}>
       <div className={styles.section}>
-        <h2>Popular Movies</h2>
+        <h2 className={styles.header}>Popular Movies</h2>
         <MediaGrid
           items={initialPopularMedia.movies}
           onPosterClick={handlePosterClick}
@@ -39,7 +39,7 @@ export default function PopularMediaClient({
       </div>
 
       <div className={styles.section}>
-        <h2>Popular Shows</h2>
+        <h2 className={styles.header}>Popular Shows</h2>
         <MediaGrid
           items={initialPopularMedia.shows}
           onPosterClick={handlePosterClick}
@@ -47,7 +47,7 @@ export default function PopularMediaClient({
       </div>
 
       <div className={styles.section}>
-        <h2>Popular Games</h2>
+        <h2 className={styles.header}>Popular Games</h2>
         <MediaGrid
           items={initialPopularMedia.games}
           onPosterClick={handlePosterClick}
@@ -55,7 +55,7 @@ export default function PopularMediaClient({
       </div>
 
       <div className={styles.section}>
-        <h2>Popular Books</h2>
+        <h2 className={styles.header}>Popular Books</h2>
         <MediaGrid
           items={initialPopularMedia.books}
           onPosterClick={handlePosterClick}
