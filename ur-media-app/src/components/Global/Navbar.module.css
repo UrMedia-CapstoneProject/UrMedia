@@ -134,6 +134,12 @@
     cursor: pointer;
 }
 
+.buttons{
+    display:flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
 .mobileMenu {
     position: absolute;
     top: 77px;
