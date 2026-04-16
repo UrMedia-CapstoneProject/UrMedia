@@ -34,5 +34,5 @@ export async function GET(request: Request) {
     return NextResponse.redirect(new URL('/signup', request.url))
   }
 
-  return NextResponse.redirect(new URL('/profile', request.url))
+  return NextResponse.redirect(new URL('/', request.url))
 }

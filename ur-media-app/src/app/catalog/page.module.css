@@ -5,12 +5,42 @@
     padding: 5rem 15rem;
 }
 
-.mediaGrid {
-    display: grid;
-    background-color: rgba(57, 3, 128, 0.5);
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    padding: 1rem;
-    gap: 1rem;
-    border-radius: 15px;
-    box-shadow: 4px 4px 4px rgba(24, 0, 37, 0.5);
+.searchBar {
+    display: none;
+}
+
+
+
+@media (max-width: 1900px) {
+    .main {
+        padding: 5rem 10rem;
+    }
+}
+
+@media (max-width: 1650px) {
+    .main {
+        padding: 5rem 5rem;
+    }
+}
+
+@media (max-width: 1350px) {
+    .main {
+        padding: 1rem 2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .main {
+        padding: 1rem 1rem;
+    }
+
+    .searchBar {
+        display: block;
+        width: 90%;
+        align-self: center;
+    }
+
+    .filters {
+        margin-left: 5%;
+    }
 }

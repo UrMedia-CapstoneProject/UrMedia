@@ -1,12 +1,13 @@
-"use client"
-import { useRef, useEffect, useState } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import styles from "./Navbar.module.css"
-import SignOutButton from "./SignOutButton"
+"use client";
+import { useRef, useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import styles from "./Navbar.module.css";
+import SignOutButton from "./SignOutButton";
+import SearchBar from "./SearchBar";
+import SignUpButton from "./SignUpButton";
 
-export default function Navbar() {
-
+export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -45,18 +46,7 @@ export default function Navbar() {
                         className={styles.browseIcon}
                     />
                 </Link>
-                <div className={styles.searchBar}>
-                    <input type="text" placeholder="Search..." className={styles.searchBarInput} />
-                    <Link href="/catalog" className={styles.searchBarButton}>
-                        <Image
-                            src="/navbar-icons/search1.png"
-                            title="Search"
-                            alt="Search"
-                            width={25}
-                            height={25}
-                        />
-                    </Link>
-                </div>
+                <SearchBar />
             </div>
 
             <Link href="/" className={styles.logo}>
@@ -72,41 +62,58 @@ export default function Navbar() {
             </button>
 
             <div className={styles.profile}>
-                <div className={styles.dropdownWrapper}>
-                    <Link href="/profile">
+                {isLoggedIn ? (
+                    <div className={styles.dropdownWrapper}>
+                        <Link href="/profile">
+                            <Image
+                                src="/test-images/dog1.jpg"
+                                title="Username"
+                                alt="Profile"
+                                width={50}
+                                height={50}
+                                className={styles.pfp}
+                            />
+                        </Link>
+
                         <Image
-                            src="/test-images/dog1.jpg"
-                            title="Username"
-                            alt="Profile"
-                            width={50}
-                            height={50}
-                            className={styles.pfp}
+                            src="/navbar-icons/caret-down1.png"
+                            title="Dropdown"
+                            alt=""
+                            width={18}
+                            height={18}
+                            className={styles.dropdown}
                         />
-                    </Link>
 
-                    <Image
-                        src="/navbar-icons/caret-down1.png"
-                        title="Dropdown"
-                        alt=""
-                        width={18}
-                        height={18}
-                        className={styles.dropdown}
-                    />
-
-                    <div className={styles.dropdownMenu}>
-                        <Link href="/profile">Profile</Link>
-                        <Link href="/">Settings</Link>
-                        <SignOutButton />
+                        <div className={styles.dropdownMenu}>
+                            <Link href="/profile">Profile</Link>
+                            <Link href="/">Settings</Link>
+                            <SignOutButton />
+                        </div>
                     </div>
-                </div>
+                ) : (
+                    <SignUpButton />
+                )}
             </div>
 
-            <div ref={menuRef} className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>
-                <Link href="/catalog" onClick={() => setMenuOpen(false)}>Search</Link>
-                <Link href="/profile" onClick={() => setMenuOpen(false)}>Profile</Link>
-                <Link href="/" onClick={() => setMenuOpen(false)}>Settings</Link>
-                <SignOutButton />
+            <div
+                ref={menuRef}
+                className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}
+            >
+                <Link href="/catalog" onClick={() => setMenuOpen(false)}>
+                    Search
+                </Link>
+                {isLoggedIn ? (
+                    <div className={styles.buttons}>
+                        <Link href="/profile" onClick={() => setMenuOpen(false)}>
+                            Profile
+                        </Link>
+                        <Link href="/" onClick={() => setMenuOpen(false)}>
+                            Settings
+                        </Link>
+                        <SignOutButton />
+                    </div>) : (<SignUpButton />)}
+
             </div>
         </div>
-    )
+    );
 }

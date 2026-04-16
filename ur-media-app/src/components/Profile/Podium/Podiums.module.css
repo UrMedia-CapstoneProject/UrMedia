@@ -57,3 +57,10 @@
     bottom: -3px;
     left: 194px;
 }
+
+@media(max-width: 700px){
+    .main{
+        justify-content: center;
+        gap: 5rem;
+    }
+}
