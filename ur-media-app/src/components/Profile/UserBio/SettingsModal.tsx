@@ -16,28 +16,24 @@ export default function SettingsModal({
     const [bio, setBio] = useState("")
     const [birthday, setBirthday] = useState("")
 
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
 
     const validateForm = () => {
 
-        if (username != "" && username.length <= 16) {
-            setUsername(username)
+        if (username === "" || username.length > 16) {
+            return "Username must be 1-16 characters long"
         }
-        else {return "Username must be 1-16 characters long"}
 
-        if (bio.length <= 500) {
-            setBio(bio)
+        if (bio.length > 500) {
+            return "Biography must be 500 characters or less"
         }
-        else {return "Biography must be 500 characters or less"}
 
-        setBirthday(birthday)
+        return null
     }
 
     const handleCancel = () => { onClose() }
     const handleSave = async () => {
-        if (!isLoggedIn) {return}
 
         const validationError = validateForm()
 
@@ -69,6 +65,16 @@ export default function SettingsModal({
         setSuccessMessage("Changes Saved")
     }
 
+    useEffect(() => {
+    // lock scroll
+    document.body.style.overflow = "hidden"
+
+    return () => {
+        // unlock scroll when modal closes
+        document.body.style.overflow = "auto"
+    }
+    }, [])
+
     return (
 
         <div className={styles.main} onClick={onClose}>
@@ -92,7 +98,7 @@ export default function SettingsModal({
                         <label className={styles.top}>Username:</label>
 
                         <input
-                            type="string"
+                            type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             placeholder="New Username"

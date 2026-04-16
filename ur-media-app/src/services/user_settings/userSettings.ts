@@ -1,8 +1,7 @@
-
 export type UserSettingsPayload = {
     username: string;
-    birthday: string;
-    bio: string;
+    birthday: string | null;
+    bio: string | null;
 }
 
 export async function updateUserSettings ({
@@ -22,7 +21,13 @@ export async function updateUserSettings ({
         birthday: payload.birthday,
         biography: payload.bio
     })
-    .eq("user_id", userId)
+    .eq("id", userId)
 
     if (error) throw new Error(error.message);
 }
+
+export async function getUserSettings ({
+    supabase,
+    userId,
+}:
+)
