@@ -20,7 +20,7 @@
 .search {
     display: flex;
     justify-self: start;
-    gap: 10px;
+    gap: 15px;
 }
 
 .searchBar {
@@ -136,8 +136,11 @@
 
 .mobileMenu {
     position: absolute;
-    top: 70px;
-    right: 1rem;
+    top: 77px;
+    right: 0;
+    width: 25vw;
+    max-width: 260px;
+    min-width: 180px;
 
     background: rgba(20, 0, 61, 0.95);
     border-radius: 10px;
@@ -147,7 +150,6 @@
     flex-direction: column;
     gap: 0.75rem;
 
-    width: 220px;
 
     opacity: 0;
     pointer-events: none;
@@ -178,16 +180,9 @@
 @media (max-width: 900px) {
 
     .main {
-        grid-template-columns: 1fr auto;
-    }
-
-    .logo {
-        justify-self: center;
-    }
-
-    .hamburger {
-        display: block;
-        justify-self: end;
+        grid-template-columns: 1fr auto 1fr;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 
     .search {
@@ -196,5 +191,16 @@
 
     .profile {
         display: none;
+    }
+
+    .hamburger {
+        display: block;
+        justify-self: end;
+        grid-column: 3; /* force it to the right column */
+    }
+
+    .logo {
+        grid-column: 2;
+        justify-self: center;
     }
 }

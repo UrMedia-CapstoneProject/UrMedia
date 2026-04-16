@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import styles from "./Navbar.module.css"
 import SignOutButton from "./SignOutButton"
+import SearchBar from "./SearchBar"
 
 export default function Navbar() {
 
@@ -45,18 +46,7 @@ export default function Navbar() {
                         className={styles.browseIcon}
                     />
                 </Link>
-                <div className={styles.searchBar}>
-                    <input type="text" placeholder="Search..." className={styles.searchBarInput} />
-                    <Link href="/catalog" className={styles.searchBarButton}>
-                        <Image
-                            src="/navbar-icons/search1.png"
-                            title="Search"
-                            alt="Search"
-                            width={25}
-                            height={25}
-                        />
-                    </Link>
-                </div>
+                <SearchBar />
             </div>
 
             <Link href="/" className={styles.logo}>
