@@ -5,8 +5,9 @@ import Image from "next/image"
 import styles from "./Navbar.module.css"
 import SignOutButton from "./SignOutButton"
 import SearchBar from "./SearchBar"
+import SignUpButton from "./SignUpButton"
 
-export default function Navbar() {
+export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -62,6 +63,7 @@ export default function Navbar() {
             </button>
 
             <div className={styles.profile}>
+                {isLoggedIn ? (
                 <div className={styles.dropdownWrapper}>
                     <Link href="/profile">
                         <Image
@@ -89,6 +91,11 @@ export default function Navbar() {
                         <SignOutButton />
                     </div>
                 </div>
+                ): (
+                    <div>
+                        <SignUpButton />
+                    </div>
+                )}
             </div>
 
             <div ref={menuRef} className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}>

@@ -22,6 +22,9 @@
 
 // <button onClick="signInWithGoogle()">click here</button>
 
+//I kept your comments idk if you need them
+
+
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
