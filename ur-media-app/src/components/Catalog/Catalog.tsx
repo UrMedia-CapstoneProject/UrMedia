@@ -35,33 +35,39 @@ export default async function Catalog({ searchParams }: CatalogProps) {
         media.movies = response?.results || [];
 
         posters = media.movies?.map((movie) => (
-            <Poster
-                key={movie.id}
-                title={movie.title}
-                imageUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}` || ""}
-            />
+            <div className={styles.imageWrapper}
+                key={movie.id}>
+                <Poster
+                    title={movie.title}
+                    imageUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}` || ""}
+                />
+            </div>
         ));
     } else if (category == "shows") {
         const response = await getPopularShows(page);
         media.shows = response?.results || [];
 
         posters = media.shows.map((show) => (
-            <Poster
-                key={show.id}
-                title={show.name}
-                imageUrl={`https://image.tmdb.org/t/p/w500/${show.poster_path}` || ""}
-            />
+            <div className={styles.imageWrapper} key={show.id}>
+                <Poster
+
+                    title={show.name}
+                    imageUrl={`https://image.tmdb.org/t/p/w500/${show.poster_path}` || ""}
+                />
+            </div>
         ));
     } else if (category == "games") {
         const response = await getPopularGames(page.toString(), '80,100');
         media.games = response.results
 
         posters = media.games.map((game) => (
-            <Poster
-                key={game.id}
-                title={game.name}
-                imageUrl={game.background_image}
-            />
+            <div className={styles.imageWrapper} key={game.id}>
+                <Poster
+
+                    title={game.name}
+                    imageUrl={game.background_image}
+                />
+            </div>
         ));
     }
 
