@@ -4,9 +4,9 @@ import MediaFilters from "@/components/Catalog/MediaFilters";
 import styles from "./page.module.css"
 import SearchBar from "@/components/Global/SearchBar";
 
-
 export default async function CatalogPage({ searchParams }: CatalogProps) {
   const params = await searchParams;
+
   return (
     <div className={styles.main}>
       <div className={styles.searchBar}>
