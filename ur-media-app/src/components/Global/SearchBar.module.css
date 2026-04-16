@@ -1,12 +1,20 @@
-.searchBar {
+.main{
     display: flex;
+    width: 100%;
     background-color: #200160;
     border-radius: 20px;
+}
+
+.searchBar {
+    display: flex;
+    width: 100%;
     padding-right: 5px;
 }
 
 .searchBarInput {
+    flex: 1;
     border-radius: 15px;
+    min-width: 0;
     background-color: transparent;
     border-color: transparent;
 }
@@ -18,4 +26,5 @@
 
 .searchBarButton {
     margin: 10px;
+    align-self: flex-end;
 }

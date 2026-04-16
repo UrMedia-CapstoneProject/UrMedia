@@ -5,7 +5,7 @@ import styles from "./SearchBar.module.css"
 
 export default function SearchBar(){
     return(
-        <div>
+        <div className={styles.main}>
             <div className={styles.searchBar}>
                     <input type="text" placeholder="Search..." className={styles.searchBarInput} />
                     <Link href="/catalog" className={styles.searchBarButton}>
