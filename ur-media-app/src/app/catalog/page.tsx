@@ -1,4 +1,5 @@
-import styles from "./page.module.css";
+import { CatalogProps } from "@/components/Catalog/Catalog";
+import Catalog from "@/components/Catalog/Catalog";
 import MediaFilters from "@/components/Catalog/MediaFilters";
 import Poster from "@/components/Global/Poster";
 import { getPopularMovies, getPopularShows } from "@/services/tmdb";
@@ -93,7 +94,7 @@ export default async function CatalogPage({ searchParams }: CatalogProps) {
   return (
     <div className={styles.main}>
       <MediaFilters />
-      <div className={styles.mediaGrid}>{posters}</div>
+      <Catalog searchParams={params} />
     </div>
-  );
+  )
 }
