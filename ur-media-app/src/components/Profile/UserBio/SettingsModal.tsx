@@ -5,12 +5,12 @@ import styles from "./SettingsModal.module.css"
 import Image from "next/image"
 
 type SettingsModalProps = {
-  onClose: () => void
+    onClose: () => void
 }
 
 export default function SettingsModal({
     onClose
-    }: SettingsModalProps) {
+}: SettingsModalProps) {
 
     const [username, setUsername] = useState("")
     const [bio, setBio] = useState("")
@@ -20,7 +20,6 @@ export default function SettingsModal({
     const [successMessage, setSuccessMessage] = useState("")
 
     const validateForm = () => {
-
         if (username === "" || username.length > 16) {
             return "Username must be 1-16 characters long"
         }
@@ -33,6 +32,18 @@ export default function SettingsModal({
     }
 
     const handleCancel = () => { onClose() }
+    const handleDeleteAccount = async () => {
+        setErrorMessage("");
+        setSuccessMessage("");
+
+        await fetch("/api/media/user-tracked", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(),
+        });
+    }
     const handleSave = async () => {
 
         const validationError = validateForm()
@@ -53,27 +64,55 @@ export default function SettingsModal({
         }
 
         console.log("Save Changes payload:", payload)
-        
+
         await fetch("/api/user", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
         });
 
         setSuccessMessage("Changes Saved")
     }
 
     useEffect(() => {
-    // lock scroll
-    document.body.style.overflow = "hidden"
+        // lock scroll
+        document.body.style.overflow = "hidden"
 
-    return () => {
-        // unlock scroll when modal closes
-        document.body.style.overflow = "auto"
-    }
+        return () => {
+            // unlock scroll when modal closes
+            document.body.style.overflow = "auto"
+        }
     }, [])
+
+    const loadUserSettings = async () => {
+        try {
+            const response = await fetch(
+                `/api/user/`,
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setErrorMessage(data.error || "Failed to load tracked data.");
+                return;
+            }
+            console.log(data);
+
+            setUsername(data.username ?? "")
+            setBirthday(data.birthday ?? "")
+            setBio(data.biography ?? "")
+
+        } catch (error) {
+            console.error("Failed to laod the user tracked data", error);
+            setErrorMessage("Failed to load the user tracked data.");
+        }
+    }
+
+    useEffect(() => {
+        loadUserSettings();
+    }, []);
 
     return (
 
@@ -119,21 +158,21 @@ export default function SettingsModal({
                     </div>
 
                     <div className={styles.settingsItem}>
-                    <label className={styles.option}>User Biography:</label>
+                        <label className={styles.option}>User Biography:</label>
 
-                    <textarea
-                        rows={10}
-                        value={bio}
-                        onChange={(e) => setBio(e.target.value)}
-                        placeholder="Tell us about yourself..."
-                        className={styles.textarea}
-                    />
+                        <textarea
+                            rows={10}
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)}
+                            placeholder="Tell us about yourself..."
+                            className={styles.textarea}
+                        />
                     </div>
                 </div>
 
                 <div className={styles.exitOptions}>
                     <div className={styles.signout}><SignOutButton /></div>
-                    <div className={styles.deleteAccount}>Delete Account</div>
+                    <div className={styles.deleteAccount} onClick={() => handleDeleteAccount()}>Delete Account</div>
                 </div>
 
                 <div className={styles.saveAndCancel}>

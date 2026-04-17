@@ -28,8 +28,10 @@
 }
 
 .username {
+    font-size: large;
     margin-top: 0.75rem;
-    text-align: center;
+    text-align: left;
+    width: 100%;
 }
 
 .SettingsButton {
