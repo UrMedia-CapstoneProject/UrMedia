@@ -17,6 +17,7 @@ export default function PageButton({currentPage, hasMore}: PageButtonProps) {
         params.set('page', page.toString())
         return `${pathname}?${params.toString()}`
     }
+    
     return (
        <nav>
         <Link
