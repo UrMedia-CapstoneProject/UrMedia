@@ -36,12 +36,8 @@ export default function SettingsModal({
         setErrorMessage("");
         setSuccessMessage("");
 
-        await fetch("/api/media/user-tracked", {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(),
+        await fetch("/api/user", {
+            method: "DELETE"
         });
     }
     const handleSave = async () => {
