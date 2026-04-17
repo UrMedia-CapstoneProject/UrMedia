@@ -1,3 +1,6 @@
+import { Anime, Manga } from "@rushelasli/jikants";
+import { MovieResultItem, TVSeriesResultItem } from "@lorenzopant/tmdb";
+
 export interface PosterProps {
   title: string;
   imageUrl: string;
@@ -15,6 +18,14 @@ export interface Game {
   released: string;
   rating: number;
   background_image: string;
+}
+
+export interface MediaResultItems {
+  movies?: MovieResultItem[];
+  shows?: TVSeriesResultItem[];
+  games?: Game[];
+  anime?: Anime[];
+  manga?: Manga[];
 }
 
 export type MediaSource = "tmdb" | "jikan" | "rawg" | "google_books";

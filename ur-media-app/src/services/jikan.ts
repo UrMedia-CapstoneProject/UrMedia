@@ -12,7 +12,7 @@ export async function anime () {
 export async function getPopularAnime(page: number) {
     try {
         await sleep(400)
-        return await jikan.top.getTopAnime({page: page, limit: 20})
+        return await jikan.top.getTopAnime({page: page, limit: 20, sfw: true})
     } catch (err) {
         console.log("Jikan API Error while fetching Anime, exiting with: " + err)
     }
