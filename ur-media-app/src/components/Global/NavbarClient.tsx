@@ -2,12 +2,17 @@
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "./Navbar.module.css";
+import styles from "./NavbarClient.module.css";
 import SignOutButton from "./SignOutButton";
 import SearchBar from "./SearchBar";
 import SignUpButton from "./SignUpButton";
 
-export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
+type NavbarClientProps = {
+  isLoggedIn: boolean
+  avatarUrl: string | null
+}
+
+export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
@@ -66,7 +71,7 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
                     <div className={styles.dropdownWrapper}>
                         <Link href="/profile">
                             <Image
-                                src="/test-images/dog1.jpg"
+                                src={avatarUrl || "/profile-icons/default icon.png"}
                                 title="Username"
                                 alt="Profile"
                                 width={50}

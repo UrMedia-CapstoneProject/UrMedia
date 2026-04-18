@@ -1,8 +1,7 @@
-import Navbar from "@/components/Global/Navbar";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css"
-import { createClient } from "@/lib/supabase/server";
+import ServerNavbar from "@/components/Global/ServerNavbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,11 +24,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const supabase = await createClient()
-  const { data } = await supabase.auth.getUser()
-
-  const isLoggedIn = !!data.user
-  
   return (
     <html lang="en">
       <head>
@@ -38,7 +32,7 @@ export default async function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar isLoggedIn={isLoggedIn} />
+        <ServerNavbar />
         {children}
       </body>
     </html>
