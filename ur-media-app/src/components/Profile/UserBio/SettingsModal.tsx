@@ -15,9 +15,20 @@ export default function SettingsModal({
     const [username, setUsername] = useState("")
     const [bio, setBio] = useState("")
     const [birthday, setBirthday] = useState("")
+    const [avatarURL, setAvatarURL] = useState("/profile-icons/default icon.png")
+    const [selectedFile, setSelectedFile] = useState<File | null>(null)
+    const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
+
+    useEffect(() => {
+        return () => {
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl)
+            }
+        }
+    }, [previewUrl])
 
     const validateForm = () => {
         if (username === "" || username.length > 16) {
@@ -53,23 +64,23 @@ export default function SettingsModal({
         setErrorMessage("")
         setSuccessMessage("")
 
-        const payload = {
-            username: username,
-            birthday: birthday || null,
-            bio: bio || null
-        }
+        const formData = new FormData();
 
-        console.log("Save Changes payload:", payload)
+        formData.append("username", username);
+        formData.append("birthday", birthday || "");
+        formData.append("bio", bio || "");
+
+        if (selectedFile) {
+            formData.append("avatar", selectedFile);
+        }
 
         await fetch("/api/user", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(payload),
+            body: formData,
         });
 
         setSuccessMessage("Changes Saved")
+        onClose()
     }
 
     useEffect(() => {
@@ -99,6 +110,8 @@ export default function SettingsModal({
             setUsername(data.username ?? "")
             setBirthday(data.birthday ?? "")
             setBio(data.biography ?? "")
+            setAvatarURL(data.avatarUrl)
+            console.log(data)
 
         } catch (error) {
             console.error("Failed to laod the user tracked data", error);
@@ -118,13 +131,23 @@ export default function SettingsModal({
                     <label className={styles.top}>Profile Picture:</label>
 
                     <Image
-                        src="/profile-icons/default icon.png"
+                        src={previewUrl || avatarURL}
                         alt="Profile Picture"
                         width={280}
                         height={280}
                     />
 
-                    <input type="file" id="filePicker" hidden />
+                    <input type="file" id="filePicker" hidden
+                        onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                                setSelectedFile(file);
+
+                                const preview = URL.createObjectURL(file);
+                                setPreviewUrl(preview);
+                            }
+                        }}
+                    />
                     <label htmlFor="filePicker" className={styles.filePicker}>Choose File</label>
                 </div>
 

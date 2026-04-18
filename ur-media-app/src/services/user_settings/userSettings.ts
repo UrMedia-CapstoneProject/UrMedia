@@ -4,29 +4,55 @@ export type UserSettingsPayload = {
     bio: string | null;
 }
 
-export async function updateUserSettings ({
+export async function updateUserSettings({
     supabase,
     userId,
-    payload
+    username,
+    birthday,
+    bio,
+    file,
 }: {
     supabase: any;
     userId: string;
-    payload: UserSettingsPayload;
+    username: string;
+    birthday: string;
+    bio: string;
+    file: File | null;
 }) {
 
+    if (file) {
+        const fileExt = file.name.split(".").pop();
+        const filePath = `${userId}/profile_pictures.${fileExt}`;
+        console.log("uploading to database", filePath);
+
+        const { error: uploadError } = await supabase.storage
+            .from("profile_pics")
+            .upload(filePath, file, { upsert: true });
+
+        if (uploadError) {
+            console.log(uploadError.message)
+            throw new Error(uploadError.message)
+        }
+
+        await supabase
+            .from("profiles")
+            .update({ profile_picture: filePath })
+            .eq("id", userId);
+    }
+
     const { error } = await supabase
-    .from("profiles")
-    .update({
-        username: payload.username,
-        birthday: payload.birthday,
-        biography: payload.bio
-    })
-    .eq("id", userId)
+        .from("profiles")
+        .update({
+            username: username,
+            birthday: birthday,
+            biography: bio
+        })
+        .eq("id", userId)
 
     if (error) throw new Error(error.message);
 }
 
-export async function getUserSettings ({
+export async function getUserSettings({
     supabase,
     userId,
 }: {
@@ -42,14 +68,28 @@ export async function getUserSettings ({
     if (settingsError) {
         throw new Error(settingsError.message);
     }
+    
+    let avatarUrl = null;
 
-    return data
+    if (data.profile_picture) {
+        const { data: publicUrlData } = supabase
+            .storage
+            .from("profile_pics")
+            .getPublicUrl(data.profile_picture);
+
+        avatarUrl = publicUrlData.publicUrl;
+    }
+
+    return {
+        ...data,
+        avatarUrl,
+    };
 }
 
-export async function deleteUserData ({
+export async function deleteUserData({
     supabase,
     userId
-} : {
+}: {
     supabase: any,
     userId: string
 }) {

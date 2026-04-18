@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
         console.error("GET /api/user error:", error)
 
         return NextResponse.json(
-            { error: error instanceof Error ? error.message : "Unknown server error."},
+            { error: error instanceof Error ? error.message : "Unknown server error." },
             { status: 500 }
         )
     }
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(req: NextRequest) {
     try {
-        const payload = await req.json()
+        const formData = await req.formData()
         const supabase = await createClient()
         const { data: authorizedUser, error: authorizedError } = await supabase.auth.getUser()
 
@@ -48,11 +48,18 @@ export async function POST(req: NextRequest) {
         }
 
         const userId = authorizedUser.user.id;
+        const username = formData.get("username") as string
+        const birthday = formData.get("birthday") as string
+        const bio = formData.get("bio") as string
+        const file = formData.get("avatar") as File | null
 
         await updateUserSettings({
             supabase,
             userId,
-            payload,
+            username,
+            birthday,
+            bio,
+            file,
         });
 
         return NextResponse.json({ success: true });
@@ -76,7 +83,7 @@ export async function DELETE(req: NextRequest) {
         const payload = await req.json();
 
         const supabase = await createClient();
-        const {data: authorizedUser, error: authorizedError } = await supabase.auth.getUser();
+        const { data: authorizedUser, error: authorizedError } = await supabase.auth.getUser();
 
         if (!authorizedUser || authorizedError) {
             return NextResponse.json(
