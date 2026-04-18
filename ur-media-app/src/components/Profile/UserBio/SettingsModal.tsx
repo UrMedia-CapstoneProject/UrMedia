@@ -39,6 +39,8 @@ export default function SettingsModal({
         await fetch("/api/user", {
             method: "DELETE"
         });
+
+        setSuccessMessage("Account deleted.");
     }
     const handleSave = async () => {
 
@@ -70,6 +72,7 @@ export default function SettingsModal({
         });
 
         setSuccessMessage("Changes Saved")
+        onClose()
     }
 
     useEffect(() => {

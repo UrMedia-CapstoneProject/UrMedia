@@ -9,7 +9,7 @@ type PosterPodiumProps = {
 export default function PosterPodium({title, imageUrl}: PosterPodiumProps) {
     return (
         <div>
-            <Poster title = {title} imageUrl = {imageUrl}/>
+            <Poster title={title} imageUrl={imageUrl} hoverEnabled={false}/>
         </div>
     )
 }

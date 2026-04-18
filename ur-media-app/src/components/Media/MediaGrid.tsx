@@ -33,6 +33,7 @@ export default function MediaGrid({ items, onPosterClick }: MediaGridProps) {
               title={item.title}
               imageUrl={item.imageUrl}
               onClick={() => onPosterClick?.(item)}
+              hoverEnabled={true}
             />
           </div>
         ))}

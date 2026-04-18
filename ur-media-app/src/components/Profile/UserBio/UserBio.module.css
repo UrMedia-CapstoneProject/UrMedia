@@ -37,7 +37,7 @@
 .SettingsButton {
     position: absolute;
     top: 15px;
-    right: 15px;
+    right: 25px;
 }
 
 @media (max-width: 700px) {

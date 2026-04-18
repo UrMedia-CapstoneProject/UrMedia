@@ -86,7 +86,6 @@ export default function Navbar({ isLoggedIn }: { isLoggedIn: boolean }) {
 
                         <div className={styles.dropdownMenu}>
                             <Link href="/profile">Profile</Link>
-                            <Link href="/">Settings</Link>
                             <SignOutButton />
                         </div>
                     </div>
