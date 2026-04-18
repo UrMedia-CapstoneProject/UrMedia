@@ -8,3 +8,7 @@ export interface RawgResponse<T> {
 export async function getPopularGames(page: string) {
     return rawgFetch<RawgResponse<Game>>('games', { page: page, metaCritic: "80,100" })
 }
+
+export async function searchGame(title: string, page: string) {
+    return rawgFetch<RawgResponse<Game>>('games', {page: page, search: title})
+}
