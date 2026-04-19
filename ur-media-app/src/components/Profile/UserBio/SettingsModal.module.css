@@ -137,3 +137,46 @@
 .cancelButton:active {
      transform: scale(0.98);
 }
+
+.alert {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: rgb(162, 37, 37);
+}
+
+.text {
+    font-size: 16px;
+    padding-bottom: 1.5rem;
+    wrap-text: auto;
+    width: 350px;
+    text-align: center;
+}
+
+.yesNoButtonLayout {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.noButton {
+    all: unset;
+    background: #c8c7db;
+    border-radius: 5px;
+    border: 1px solid #636369;
+    width: 80px;
+    color: black;
+    padding: 5px;
+}
+
+.yesButton {
+    all: unset;
+    background: #3d36be;
+    border-radius: 5px;
+    border: 1px solid #7b7bad;
+    width: 93px;
+    padding: 5px;
+}

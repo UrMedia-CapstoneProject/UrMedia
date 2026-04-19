@@ -2,11 +2,13 @@
 import styles from "./TrackedMedia.module.css"
 import { useState } from "react"
 import MediaList from "./MediaList";
+import TierView from "./TierView";
 
-export default function () {
+export default function TrackedMedia() {
 
     const [activeTab, setActiveTab] = useState("movies")
     const [activeFilter, setActiveFilter] = useState<string | null>("A-Z")
+    const [viewMode, setViewMode] = useState("list")
 
     function handleFilterSelect(filter: string) {
         setActiveFilter(filter)
@@ -17,10 +19,15 @@ export default function () {
         <div className={styles.main}>
             <div className={styles.radioGroup}>
                 <div className={styles.listView}>
-                    <input type="radio" name="viewMode" value="list" defaultChecked />
+                    <input type="radio" name="viewMode" value="list" 
+                    defaultChecked
+                    onChange={() => setViewMode("list")}
+                    />
                 </div>
                 <div className={styles.tierView}>
-                    <input type="radio" name="viewMode" value="tiers" />
+                    <input type="radio" name="viewMode" value="tiers"
+                    onChange={() => setViewMode("tiers")}
+                    />
                 </div>
             </div>
 
@@ -38,11 +45,22 @@ export default function () {
             </div>
 
             <div>
-                {activeTab === "movies" && <MediaList />}
-                {activeTab === "shows" && <MediaList />}
-                {activeTab === "games" && <MediaList />}
-                {activeTab === "books" && <MediaList />}
-                {activeTab === "filter" && <p>Filtering by: {activeFilter}</p>}
+                {viewMode === "tiers" ? (
+                    <>
+                    {activeTab === "movies" && <TierView />}
+                    {activeTab === "shows" && <TierView />}
+                    {activeTab === "games" && <TierView />}
+                    {activeTab === "books" && <TierView />}
+                    </>
+                ) : (
+                    <>
+                    {activeTab === "movies" && <MediaList />}
+                    {activeTab === "shows" && <MediaList />}
+                    {activeTab === "games" && <MediaList />}
+                    {activeTab === "books" && <MediaList />}
+                    {activeTab === "filter" && <p>Filtering by: {activeFilter}</p>}
+                    </>
+                )}
             </div>
 
             <div className={styles.tabList}>
