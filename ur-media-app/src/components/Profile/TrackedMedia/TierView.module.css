@@ -5,24 +5,92 @@
 }
 
 .tier {
+    display: flex;
+    flex-direction: row;
     background: #22164d;
     border-radius: 15px;
     padding-right: 1rem;
     padding-left: 1rem;
     padding-bottom: 2rem;
+    padding-top: 2rem;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 1rem;
-    padding-top: 2rem;
 }
 
-.text {
+.tierS {
     font-size: 100px;
-    justify-self: center;
-    align-self: center;
+    justify-self: left;
+    align-self: left;
+    margin-right: 1rem;
+    background: #e04f4f;
+    border-radius: 10px;
+    width: 90px;
+    padding: 0.75rem;
+    color: black;
+}
+
+.tierA {
+    font-size: 100px;
+    justify-self: left;
+    align-self: left;
+    margin-right: 1rem;
+    background: #e08b4f;
+    border-radius: 10px;
+    width: 90px;
+    padding: 0.75rem;
+    color: black;
+}
+
+.tierB {
+    font-size: 100px;
+    justify-self: left;
+    align-self: left;
+    margin-right: 1rem;
+    background: #e0d773;
+    border-radius: 10px;
+    width: 90px;
+    padding: 0.75rem;
+    color: black;
+}
+
+.tierC {
+    font-size: 100px;
+    justify-self: left;
+    align-self: left;
+    margin-right: 1rem;
+    background: #90e073;
+    border-radius: 10px;
+    width: 90px;
+    padding: 0.75rem;
+    color: black;
+}
+
+.tierD {
+    font-size: 100px;
+    justify-self: left;
+    align-self: left;
+    margin-right: 1rem;
+    background: #73a2e0;
+    border-radius: 10px;
+    width: 90px;
+    padding: 0.75rem;
+    color: black;
+}
+
+.tierF {
+    font-size: 100px;
+    justify-self: left;
+    align-self: left;
+    margin-right: 1rem;
+    background: #724eab;
+    border-radius: 10px;
+    width: 90px;
+    padding: 0.75rem;
+    color: black;
 }
 
 .tierPoster {
@@ -31,13 +99,13 @@
 
 @media (max-width: 1900px) {
   .grid {
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
 @media (max-width: 1400px) {
   .grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
@@ -49,13 +117,13 @@
 
 @media (max-width: 950px) {
   .grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 750) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

@@ -6,16 +6,16 @@ export default function () {
     return (
         <div className={styles.main}>
             <div className={styles.tier}>
+                <label className={styles.tierS}>S</label>
                 <div className={styles.grid}>
-                    <label className={styles.text}>S</label>
                     <div className={styles.tierPoster}>
                         <MediaCard title="Oppenheimer" imageUrl="https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg" epWatched="" score="9.3"/>
                     </div>
                 </div>
             </div>
             <div className={styles.tier}>
+                <label className={styles.tierA}>A</label>
                 <div className={styles.grid}>
-                    <label className={styles.text}>A</label>
                     <div className={styles.tierPoster}>
                         <MediaCard title="Harry Potter and the Deathly Hallows: Part 2" imageUrl="https://image.tmdb.org/t/p/w500/c54HpQmuwXjHq2C9wmoACjxoom3.jpg" epWatched="" score="8.9" />
                     </div>
@@ -43,8 +43,8 @@ export default function () {
                 </div>
             </div>
             <div className={styles.tier}>
+                <label className={styles.tierB}>B</label>
                 <div className={styles.grid}>
-                    <label className={styles.text}>B</label>
                     <div className={styles.tierPoster}>
                         <MediaCard title="Zootopia 2" imageUrl="https://image.tmdb.org/t/p/w500/oJ7g2CifqpStmoYQyaLQgEU32qO.jpg" epWatched="" score="6.9" />
                     </div>
@@ -57,18 +57,18 @@ export default function () {
                 </div>
             </div>
             <div className={styles.tier}>
+                <label className={styles.tierC}>C</label>
                 <div className={styles.grid}>
-                    <label className={styles.text}>C</label>
                 </div>
             </div>
             <div className={styles.tier}>
+                <label className={styles.tierD}>D</label>
                 <div className={styles.grid}>
-                    <label className={styles.text}>D</label>
                 </div>
             </div>
             <div className={styles.tier}>
+                <label className={styles.tierF}>F</label>
                 <div className={styles.grid}>
-                    <label className={styles.text}>F</label>
                 </div>
             </div>
         </div>
