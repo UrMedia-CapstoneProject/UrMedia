@@ -40,7 +40,7 @@ export async function refreshPopularMediaCache({
   const supabase = createServiceRoleClient();
 
   const { error: initialRefreshError } = await supabase.rpc(
-    "refresh_popular_media_cache_new_copy",
+    "refresh_popular_media_cache",
     {
       target_media_group: mediaGroup,
       target_timeframe: timeframe,
@@ -54,7 +54,7 @@ export async function refreshPopularMediaCache({
   }
 
   const { data: rows, error: rowsError } = await supabase
-    .from("popular_media_cache_copy")
+    .from("popular_media_cache")
     .select(
       `
       media_id,
@@ -114,7 +114,7 @@ export async function refreshPopularMediaCache({
   }
 
   const { error: finalRefreshError } = await supabase.rpc(
-    "refresh_popular_media_cache_new_copy",
+    "refresh_popular_media_cache",
     {
       target_media_group: mediaGroup,
       target_timeframe: timeframe,
