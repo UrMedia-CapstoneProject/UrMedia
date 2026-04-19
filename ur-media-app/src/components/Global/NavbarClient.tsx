@@ -91,7 +91,6 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
 
                         <div className={styles.dropdownMenu}>
                             <Link href="/profile">Profile</Link>
-                            <Link href="/">Settings</Link>
                             <SignOutButton />
                         </div>
                     </div>
