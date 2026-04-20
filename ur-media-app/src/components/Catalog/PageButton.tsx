@@ -19,13 +19,16 @@ export default function PageButton({currentPage, hasMore}: PageButtonProps) {
     }
     
     return (
-       <nav>
+       <nav className={styles.main}>
         <Link
+            className={styles.pageButton}
             href={handlePageChange(currentPage - 1)}
         >
             Previous
         </Link>
         <Link
+            className={styles.pageButton}
+            style={{fontSize: '1.1rem'}}
             href={handlePageChange(currentPage + 1)}
         >
             Next

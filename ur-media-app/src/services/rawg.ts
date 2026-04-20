@@ -5,6 +5,7 @@ export interface RawgResponse<T> {
     next?: string
     results: T[];
 }
+
 export async function getPopularGames(page: string) {
     return rawgFetch<RawgResponse<Game>>('games', { page: page, metaCritic: "80,100" })
 }
