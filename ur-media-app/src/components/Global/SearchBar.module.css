@@ -18,4 +18,9 @@
 
 .searchBarButton {
     margin: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
 }

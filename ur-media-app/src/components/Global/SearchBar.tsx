@@ -1,37 +1,28 @@
 'use client'
 
-import { useSearchParams, usePathname, useRouter } from "next/navigation";
-import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import styles from "./SearchBar.module.css";
 
-export default function SearchBar() {
+interface searchBarProps {
+  isDisabled: boolean
+}
+export default function SearchBar({isDisabled}: searchBarProps) {
 
-    const searchParams = useSearchParams();
-    const { replace } = useRouter();
-
-    function handleSearch(input: string) {
-        const params = new URLSearchParams(searchParams)
-        if (input) {
-            params.set('title', input)
-        } else {
-            params.delete('title')
-        }
-        replace(`/catalog?${params.toString()}`)
-    }
+  const searchParams = useSearchParams();
 
   return (
     <div>
       <div className={styles.searchBar}>
         <input
+          name="title"
           type="text"
-          placeholder="Search..."
-          onChange={(e) => {
-            handleSearch(e.target.value)
-          }}
+          placeholder={isDisabled ? "Select a Category" : "Search..."}
+          disabled={isDisabled}
+          defaultValue={searchParams.get('title') || ''}
           className={styles.searchBarInput}
         />
-        <Link href="/catalog" className={styles.searchBarButton}>
+        <button type="submit" className={styles.searchBarButton}>
           <Image
             src="/navbar-icons/search1.png"
             title="Search"
@@ -39,7 +30,7 @@ export default function SearchBar() {
             width={25}
             height={25}
           />
-        </Link>
+        </button>
       </div>
     </div>
   );

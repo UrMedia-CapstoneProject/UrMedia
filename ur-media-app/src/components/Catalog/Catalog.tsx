@@ -42,7 +42,7 @@ export default async function Catalog({ data, category }: CatalogProps) {
         />
       </div>
     ));
-  } else if (category == "anime") {
+  } else if (category == "animes") {
     posters = data.anime?.map((anime) => (
       <Poster
         key={anime.mal_id}
@@ -50,7 +50,7 @@ export default async function Catalog({ data, category }: CatalogProps) {
         imageUrl={anime.images.jpg.large_image_url || ""}
       />
     ));
-  } else if (category == "manga") {
+  } else if (category == "mangas") {
     posters = data.manga?.map((manga) => (
       <Poster
         key={manga.mal_id}

@@ -23,6 +23,11 @@
     gap: 15px;
 }
 
+.searchForm {
+    display: flex;
+    gap: 15px
+}
+
 .searchBar {
     display: flex;
     background-color: #200160;

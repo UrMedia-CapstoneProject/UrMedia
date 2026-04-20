@@ -3,25 +3,33 @@
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export default function MediaFilters() {
-  const mediaTypes = ["movies", "games", "shows", "books", "anime", "manga"];
+  const mediaTypes = ["movies", "games", "shows", "books", "animes", "mangas"];
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  
+  const currentValue = searchParams.get("category") || ""
+
   const handleFilterChange = (genre: string) => {
     const params = new URLSearchParams(searchParams.toString());
     params.set('category', genre);
-    params.set('page', '1')
+    params.delete('page')
     router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
     <div>
-      <h1>Media Type</h1>
       <select
+        name="category"
         onChange={(media) => handleFilterChange(media.target.value)}
-        value={searchParams.get("category") || "movie"}
+        value={currentValue}
       >
+        <option
+          value=""
+          disabled
+          hidden
+        >
+          Category
+        </option>
         {mediaTypes.map((media, idx) => (
           <option key={idx}>{media}</option>
         ))}

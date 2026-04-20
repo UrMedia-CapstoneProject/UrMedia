@@ -1,5 +1,4 @@
 import Catalog from "@/components/Catalog/Catalog";
-import MediaFilters from "@/components/Catalog/MediaFilters";
 import PageButton from "@/components/Catalog/PageButton";
 import { getCatalogMedia } from "@/services/media/catalog/getMedia";
 import styles from "./page.module.css";
@@ -19,9 +18,11 @@ export default async function CatalogPage({ searchParams }: SearchParams) {
   const page = Number(params?.page || 1);
 
   const { media, hasNext } = await getCatalogMedia(category, page, title)
+
+  
+   
   return (
     <div className={styles.main}>
-      <MediaFilters />
       <Catalog data={media} category={category} />
       <PageButton currentPage={page} hasMore={hasNext} />
     </div>

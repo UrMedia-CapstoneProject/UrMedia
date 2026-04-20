@@ -12,3 +12,7 @@ export async function getPopularGames(page: string) {
 export async function searchGame(title: string, page: string) {
     return rawgFetch<RawgResponse<Game>>('games', {page: page, search: title})
 }
+
+export async function getGame(id: string) {
+    return rawgFetch<RawgResponse<Game>>('games', {id: id})
+}
