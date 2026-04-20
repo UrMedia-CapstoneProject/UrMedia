@@ -42,199 +42,199 @@ export default function Podiums({ podiums }: PodiumProps) {
 
             <div className={styles.podiumWrapper}>
 
-            <div className={styles.podium}>
-                <div className={styles.media}>
+                <div className={styles.podium}>
+                    <div className={styles.media}>
 
-                    <div className={styles.secondPlace}>
-                        <PodiumSlot item={getSlot("movies", 2)} />
+                        <div className={styles.secondPlace}>
+                            <PodiumSlot item={getSlot("movies", 2)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/silver ribbon.png"
+                            alt="2nd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.secondRibbon}
+                        />
+
+                        <div className={styles.firstPlace}>
+                            <PodiumSlot item={getSlot("movies", 1)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/gold ribbon.png"
+                            alt="1st Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.firstRibbon}
+                        />
+
+                        <div className={styles.thirdPlace}>
+                            <PodiumSlot item={getSlot("movies", 3)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/bronze ribbon.png"
+                            alt="3rd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.thirdRibbon}
+                        />
                     </div>
 
-                    <Image
-                        src="/profile-icons/silver ribbon.png"
-                        alt="2nd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.secondRibbon}
-                    />
-
-                    <div className={styles.firstPlace}>
-                        <PodiumSlot item={getSlot("movies", 1)} />
+                    <div className={styles.podiumLabel}>
+                        <p>Movies</p>
                     </div>
-
-                    <Image
-                        src="/profile-icons/gold ribbon.png"
-                        alt="1st Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.firstRibbon}
-                    />
-
-                    <div className={styles.thirdPlace}>
-                        <PodiumSlot item = {getSlot("movies", 3)} />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/bronze ribbon.png"
-                        alt="3rd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.thirdRibbon}
-                    />
-                </div>
-
-                <div className={styles.podiumLabel}>
-                    <p>Movies</p>
-                </div>
-            </div>
-            </div>
-
-
-
-<div className={styles.podiumWrapper}>
-            <div className={styles.podium}>
-                <div className={styles.media}>
-
-                    <div className={styles.secondPlace}>
-                        <PodiumSlot item = {getSlot("shows", 2)} />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/silver ribbon.png"
-                        alt="2nd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.secondRibbon}
-                    />
-
-                    <div className={styles.firstPlace}>
-                        <PodiumSlot item = {getSlot("shows", 1)} />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/gold ribbon.png"
-                        alt="1st Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.firstRibbon}
-                    />
-
-                    <div className={styles.thirdPlace}>
-                        <PodiumSlot item = {getSlot("shows", 3)} />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/bronze ribbon.png"
-                        alt="3rd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.thirdRibbon}
-                    />
-                </div>
-
-                <div className={styles.podiumLabel}>
-                    <p>Shows</p>
                 </div>
             </div>
-</div>
 
 
-<div className={styles.podiumWrapper}>
-            <div className={styles.podium}>
-                <div className={styles.media}>
 
-                    <div className={styles.secondPlace}>
-                        <PodiumSlot item = {getSlot("games", 2)} />
+            <div className={styles.podiumWrapper}>
+                <div className={styles.podium}>
+                    <div className={styles.media}>
+
+                        <div className={styles.secondPlace}>
+                            <PodiumSlot item={getSlot("shows", 2)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/silver ribbon.png"
+                            alt="2nd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.secondRibbon}
+                        />
+
+                        <div className={styles.firstPlace}>
+                            <PodiumSlot item={getSlot("shows", 1)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/gold ribbon.png"
+                            alt="1st Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.firstRibbon}
+                        />
+
+                        <div className={styles.thirdPlace}>
+                            <PodiumSlot item={getSlot("shows", 3)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/bronze ribbon.png"
+                            alt="3rd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.thirdRibbon}
+                        />
                     </div>
 
-                    <Image
-                        src="/profile-icons/silver ribbon.png"
-                        alt="2nd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.secondRibbon}
-                    />
-
-                    <div className={styles.firstPlace}>
-                        <PodiumSlot item = {getSlot("games", 1)} />
+                    <div className={styles.podiumLabel}>
+                        <p>Shows</p>
                     </div>
-
-                    <Image
-                        src="/profile-icons/gold ribbon.png"
-                        alt="1st Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.firstRibbon}
-                    />
-
-                    <div className={styles.thirdPlace}>
-                        <PodiumSlot item = {getSlot("games", 3)} />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/bronze ribbon.png"
-                        alt="3rd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.thirdRibbon}
-                    />
-                </div>
-
-                <div className={styles.podiumLabel}>
-                    <p>Video Games</p>
-                </div>
-            </div>
-</div>
-
-
-<div className={styles.podiumWrapper}>
-            <div className={styles.podium}>
-                <div className={styles.media}>
-
-                    <div className={styles.secondPlace}>
-                        <PodiumPoster
-                            imageUrl="/test-images/hunger games.jpg" />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/silver ribbon.png"
-                        alt="2nd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.secondRibbon}
-                    />
-
-                    <div className={styles.firstPlace}>
-                        <PodiumPoster
-                            imageUrl="/test-images/lord of the rings.jpg" />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/gold ribbon.png"
-                        alt="1st Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.firstRibbon}
-                    />
-
-                    <div className={styles.thirdPlace}>
-                        <PodiumPoster
-                            imageUrl="/test-images/how to win friends and influence people.jpg" />
-                    </div>
-
-                    <Image
-                        src="/profile-icons/bronze ribbon.png"
-                        alt="3rd Place"
-                        width={ribbonWidth}
-                        height={ribbonHeight}
-                        className={styles.thirdRibbon}
-                    />
-                </div>
-
-                <div className={styles.podiumLabel}>
-                    <p>Books</p>
                 </div>
             </div>
-</div>
+
+
+            <div className={styles.podiumWrapper}>
+                <div className={styles.podium}>
+                    <div className={styles.media}>
+
+                        <div className={styles.secondPlace}>
+                            <PodiumSlot item={getSlot("games", 2)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/silver ribbon.png"
+                            alt="2nd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.secondRibbon}
+                        />
+
+                        <div className={styles.firstPlace}>
+                            <PodiumSlot item={getSlot("games", 1)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/gold ribbon.png"
+                            alt="1st Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.firstRibbon}
+                        />
+
+                        <div className={styles.thirdPlace}>
+                            <PodiumSlot item={getSlot("games", 3)} />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/bronze ribbon.png"
+                            alt="3rd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.thirdRibbon}
+                        />
+                    </div>
+
+                    <div className={styles.podiumLabel}>
+                        <p>Video Games</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div className={styles.podiumWrapper}>
+                <div className={styles.podium}>
+                    <div className={styles.media}>
+
+                        <div className={styles.secondPlace}>
+                            <PodiumPoster
+                                imageUrl="/test-images/hunger games.jpg" />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/silver ribbon.png"
+                            alt="2nd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.secondRibbon}
+                        />
+
+                        <div className={styles.firstPlace}>
+                            <PodiumPoster
+                                imageUrl="/test-images/lord of the rings.jpg" />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/gold ribbon.png"
+                            alt="1st Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.firstRibbon}
+                        />
+
+                        <div className={styles.thirdPlace}>
+                            <PodiumPoster
+                                imageUrl="/test-images/how to win friends and influence people.jpg" />
+                        </div>
+
+                        <Image
+                            src="/profile-icons/bronze ribbon.png"
+                            alt="3rd Place"
+                            width={ribbonWidth}
+                            height={ribbonHeight}
+                            className={styles.thirdRibbon}
+                        />
+                    </div>
+
+                    <div className={styles.podiumLabel}>
+                        <p>Books</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
     )

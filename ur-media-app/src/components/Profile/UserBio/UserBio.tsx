@@ -4,14 +4,21 @@ import styles from "./UserBio.module.css"
 import Image from "next/image"
 import SettingsModal from "./SettingsModal"
 
-export default function UserBio() {
+export interface UserBioProps {
+    username: string;
+    birthday: string | null;
+    biography: string | null;
+    avatarUrl: string | null;
+}
 
-    const [username, setUsername] = useState("")
-    const [bio, setBio] = useState("")
-    const [birthday, setBirthday] = useState("")
+export default function UserBio({ settings }: { settings: UserBioProps }) {
+
+    // const [username, setUsername] = useState("")
+    // const [bio, setBio] = useState("")
+    // const [birthday, setBirthday] = useState("")
 
     const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("")
+    // const [errorMessage, setErrorMessage] = useState("")
 
     function openSettingsModal() {
         setIsSettingsOpen(true)
@@ -21,33 +28,33 @@ export default function UserBio() {
         setIsSettingsOpen(false)
     }
 
-    const loadUserSettings = async () => {
-        try {
-            const response = await fetch(
-                `/api/user/`,
-            );
+    // const loadUserSettings = async () => {
+    //     try {
+    //         const response = await fetch(
+    //             `/api/user/`,
+    //         );
 
-            const data = await response.json();
+    //         const data = await response.json();
 
-            if (!response.ok) {
-                setErrorMessage(data.error || "Failed to load tracked data.");
-                return;
-            }
-            console.log(data);
+    //         if (!response.ok) {
+    //             setErrorMessage(data.error || "Failed to load tracked data.");
+    //             return;
+    //         }
+    //         console.log(data);
 
-            setUsername(data.username ?? "")
-            setBirthday(data.birthday ?? "")
-            setBio(data.biography ?? "")
+    //         setUsername(data.username ?? "")
+    //         setBirthday(data.birthday ?? "")
+    //         setBio(data.biography ?? "")
 
-        } catch (error) {
-            console.error("Failed to laod the user tracked data", error);
-            setErrorMessage("Failed to load the user tracked data.");
-        }
-    }
+    //     } catch (error) {
+    //         console.error("Failed to laod the user tracked data", error);
+    //         setErrorMessage("Failed to load the user tracked data.");
+    //     }
+    // }
 
-    useEffect(() => {
-        loadUserSettings();
-    }, []);
+    // useEffect(() => {
+    //     loadUserSettings();
+    // }, []);
 
     return (
         <div className={styles.main}>
@@ -56,20 +63,20 @@ export default function UserBio() {
                 <div className={styles.info}>
                     <div className={styles.left}>
                         <Image
-                            src="/profile-icons/default icon.png"
+                            src={settings.avatarUrl || "/profile-icons/default icon.png"}
                             alt="Profile Picture"
                             width={200}
                             height={200}
                             className={styles.pfp}
                         />
 
-                        <div className={styles.username}>{username}</div>
+                        <div className={styles.username}>{settings.username}</div>
                     </div>
 
-                    <div className={styles.bio}>{bio}</div>
+                    <div className={styles.bio}>{settings.biography}</div>
                 </div>
 
-                <div className={styles.SettingsButton} onClick = {openSettingsModal}>
+                <div className={styles.SettingsButton} onClick={openSettingsModal}>
                     <Image
                         src="/profile-icons/settings.png"
                         title="Settings"
@@ -81,7 +88,7 @@ export default function UserBio() {
             </div>
 
             {isSettingsOpen && (
-                <SettingsModal onClose = {closeSettingsModal} />
+                <SettingsModal settings={settings} onClose={closeSettingsModal} />
             )}
         </div>
     )
