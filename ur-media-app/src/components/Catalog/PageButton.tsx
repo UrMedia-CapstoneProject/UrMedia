@@ -1,21 +1,35 @@
 'use client'
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import styles from "./PageButton.module.css"
+import { usePathname, useSearchParams } from "next/navigation"
+import Link from "next/link"
 
-export default function PageButton() {
-    const router = useRouter();
+interface PageButtonProps {
+    currentPage: number,
+    hasMore: boolean
+}
+export default function PageButton({currentPage, hasMore}: PageButtonProps) {
     const pathname = usePathname();
-    const searchParams = useSearchParams();
+    const searchParams = useSearchParams()
 
-    const handlePageChange = (page: string) => {
-        const params = new URLSearchParams(searchParams.toString());
-        params.set('page', page)
-        router.push(`${pathname}?${params.toString()}`)
+    const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(searchParams.toString())
+        params.set('page', page.toString())
+        return `${pathname}?${params.toString()}`
     }
-
+    
     return (
-        <div>
-            
-        </div>
+       <nav>
+        <Link
+            href={handlePageChange(currentPage - 1)}
+        >
+            Previous
+        </Link>
+        <Link
+            href={handlePageChange(currentPage + 1)}
+        >
+            Next
+        </Link>
+       </nav>
     )
 }
