@@ -12,7 +12,7 @@ async function getJikanPoster(id: string): Promise<string | null> {
     try {
         const res = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
         if (!res.ok) {
-            console.error("Jikan fetch failed:", res.status);
+            console.log("Jikan fetch failed on id", id);
             return null;
         }
 

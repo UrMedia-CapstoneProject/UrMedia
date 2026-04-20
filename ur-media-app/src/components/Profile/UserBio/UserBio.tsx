@@ -4,7 +4,7 @@ import styles from "./UserBio.module.css"
 import Image from "next/image"
 import SettingsModal from "./SettingsModal"
 
-export default function () {
+export default function UserBio() {
 
     const [username, setUsername] = useState("")
     const [bio, setBio] = useState("")
@@ -53,19 +53,21 @@ export default function () {
         <div className={styles.main}>
             <div className={styles.content}>
 
-                <div className={styles.left}>
-                    <Image
-                        src="/profile-icons/default icon.png"
-                        alt="Profile Picture"
-                        width={200}
-                        height={200}
-                        className={styles.pfp}
-                    />
+                <div className={styles.info}>
+                    <div className={styles.left}>
+                        <Image
+                            src="/profile-icons/default icon.png"
+                            alt="Profile Picture"
+                            width={200}
+                            height={200}
+                            className={styles.pfp}
+                        />
 
-                    <div className={styles.username}>{username}</div>
+                        <div className={styles.username}>{username}</div>
+                    </div>
+
+                    <div className={styles.bio}>{bio}</div>
                 </div>
-
-                <div className={styles.bio}>{bio}</div>
 
                 <div className={styles.SettingsButton} onClick = {openSettingsModal}>
                     <Image

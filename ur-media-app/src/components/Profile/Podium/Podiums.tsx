@@ -40,6 +40,8 @@ export default function Podiums({ podiums }: PodiumProps) {
     return (
         <div className={styles.main}>
 
+            <div className={styles.podiumWrapper}>
+
             <div className={styles.podium}>
                 <div className={styles.media}>
 
@@ -84,10 +86,11 @@ export default function Podiums({ podiums }: PodiumProps) {
                     <p>Movies</p>
                 </div>
             </div>
+            </div>
 
 
 
-
+<div className={styles.podiumWrapper}>
             <div className={styles.podium}>
                 <div className={styles.media}>
 
@@ -132,10 +135,10 @@ export default function Podiums({ podiums }: PodiumProps) {
                     <p>Shows</p>
                 </div>
             </div>
+</div>
 
 
-
-
+<div className={styles.podiumWrapper}>
             <div className={styles.podium}>
                 <div className={styles.media}>
 
@@ -180,10 +183,10 @@ export default function Podiums({ podiums }: PodiumProps) {
                     <p>Video Games</p>
                 </div>
             </div>
+</div>
 
 
-
-
+<div className={styles.podiumWrapper}>
             <div className={styles.podium}>
                 <div className={styles.media}>
 
@@ -231,7 +234,7 @@ export default function Podiums({ podiums }: PodiumProps) {
                     <p>Books</p>
                 </div>
             </div>
-
+</div>
 
         </div>
     )

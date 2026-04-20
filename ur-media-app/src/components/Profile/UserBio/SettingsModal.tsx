@@ -132,6 +132,7 @@ export default function SettingsModal({
                         alt="Profile Picture"
                         width={280}
                         height={280}
+                        className={styles.avatarPreview}
                     />
 
                     <input type="file" id="filePicker" hidden
