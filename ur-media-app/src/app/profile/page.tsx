@@ -15,9 +15,6 @@ export default async function ProfilePage() {
                     <Stats />
                     <TrackedMedia />
                 </div>
-                <div className={styles.signOutButton}>
-                    <SignOutButton />
-                </div>
             </div>
         </div>
     );

@@ -1,7 +1,54 @@
+"use client"
+import { useEffect, useState } from "react"
 import styles from "./UserBio.module.css"
 import Image from "next/image"
+import SettingsModal from "./SettingsModal"
 
 export default function () {
+
+    const [username, setUsername] = useState("")
+    const [bio, setBio] = useState("")
+    const [birthday, setBirthday] = useState("")
+
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("")
+
+    function openSettingsModal() {
+        setIsSettingsOpen(true)
+    }
+
+    function closeSettingsModal() {
+        setIsSettingsOpen(false)
+    }
+
+    const loadUserSettings = async () => {
+        try {
+            const response = await fetch(
+                `/api/user/`,
+            );
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                setErrorMessage(data.error || "Failed to load tracked data.");
+                return;
+            }
+            console.log(data);
+
+            setUsername(data.username ?? "")
+            setBirthday(data.birthday ?? "")
+            setBio(data.biography ?? "")
+
+        } catch (error) {
+            console.error("Failed to laod the user tracked data", error);
+            setErrorMessage("Failed to load the user tracked data.");
+        }
+    }
+
+    useEffect(() => {
+        loadUserSettings();
+    }, []);
+
     return (
         <div className={styles.main}>
             <div className={styles.content}>
@@ -15,25 +62,25 @@ export default function () {
                         className={styles.pfp}
                     />
 
-                    <h2 className={styles.username}>
-                        Username
-                    </h2>
+                    <div className={styles.username}>{username}</div>
                 </div>
 
-                <p className={styles.bio}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
+                <div className={styles.bio}>{bio}</div>
 
-                <Image
-                    src="/profile-icons/settings icon.png"
-                    title="Settings"
-                    alt="Settings"
-                    width={40}
-                    height={40}
-                    className={styles.settingsIcon}
-                />
-
+                <div className={styles.SettingsButton} onClick = {openSettingsModal}>
+                    <Image
+                        src="/profile-icons/settings.png"
+                        title="Settings"
+                        alt="Settings"
+                        width={45}
+                        height={45}
+                    />
+                </div>
             </div>
+
+            {isSettingsOpen && (
+                <SettingsModal onClose = {closeSettingsModal} />
+            )}
         </div>
     )
 }

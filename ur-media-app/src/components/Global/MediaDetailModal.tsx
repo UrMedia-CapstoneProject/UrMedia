@@ -656,12 +656,12 @@ export default function MediaDetailModal({
               onClick={handleSaveChanges}
               disabled={!isLoggedIn}
             >
-              Save Changes
+              Save
             </button>
 
             <button
               // type="button"
-              className={styles.saveButton}
+              className={styles.cancelButton}
               onClick={handleCancel}
             >
               Cancel

@@ -28,18 +28,13 @@
 }
 
 .username {
+    font-size: large;
     margin-top: 0.75rem;
-    text-align: center;
+    text-align: left;
+    width: 100%;
 }
 
-.bio{
-    margin: 0;
-    line-height: 1.4;
-    align-self: center;
-    max-width: 600px;
-}
-
-.settingsIcon{
+.SettingsButton {
     position: absolute;
     top: 15px;
     right: 15px;
