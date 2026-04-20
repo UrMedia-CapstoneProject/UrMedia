@@ -57,13 +57,10 @@ export default async function getPodiums(): Promise<PodiumItem[]> {
 
     const rows = data as unknown as RawPodiumRow[];
 
-    console.log("rows after cast:", rows);
-
     const result = await Promise.all(
         rows.map(async (row) => {
             const media = row.media;
             if (!media) return null;
-            console.log("media row inside of the result", media)
 
             const posterUrl = await getPosterUrl({
                 source: media.source,

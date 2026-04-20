@@ -8,21 +8,6 @@ type GetPosterUrlArgs = {
     externalId: string;
 };
 
-type JikanImageResponse = {
-    data?: {
-        images?: {
-            jpg?: {
-                image_url?: string;
-                large_image_url?: string;
-            };
-            webp?: {
-                image_url?: string;
-                large_image_url?: string;
-            };
-        };
-    };
-};
-
 async function getJikanPoster(id: string): Promise<string | null> {
     try {
         const res = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
@@ -32,7 +17,6 @@ async function getJikanPoster(id: string): Promise<string | null> {
         }
 
         const data = await res.json();
-        console.log("data from jikan", data)
 
         return (
             data.data?.images?.webp?.large_image_url ||
@@ -71,8 +55,6 @@ export async function getPosterUrl({
 
         if (source === "rawg" && mediaType === "game") {
             const game = await getGameByExternalId(externalId);
-            //console.log("game returned by rawg for poster",game?.id)
-            console.log("game id sent:", externalId)
             return game?.background_image ?? null;
         }
 
