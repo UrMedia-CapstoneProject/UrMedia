@@ -13,7 +13,6 @@ export async function updateUserSettings ({
     userId: string;
     payload: UserSettingsPayload;
 }) {
-
     const { error } = await supabase
     .from("profiles")
     .update({
