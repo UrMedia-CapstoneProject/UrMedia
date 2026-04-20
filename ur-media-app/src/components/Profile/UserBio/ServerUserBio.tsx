@@ -15,8 +15,6 @@ export async function ServerUserBio() {
 
     const settings = await getUserSettings({supabase, userId});
 
-    console.log("User settings for profile page", settings)
-
     return (
         <UserBio settings={settings}/>
     )
