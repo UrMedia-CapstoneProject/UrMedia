@@ -62,43 +62,73 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
         </Form>
       </div>
 
-            <Link href="/" className={styles.logo}>
-                <h1 className={styles.logoText}>UrMedia</h1>
+      <Link href="/" className={styles.logo}>
+        <h1 className={styles.logoText}>UrMedia</h1>
+      </Link>
+
+      <button
+        className={styles.hamburger}
+        ref={buttonRef}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        ☰
+      </button>
+
+      <div className={styles.profile}>
+        {isLoggedIn ? (
+          <div className={styles.dropdownWrapper}>
+            <Link href="/profile">
+              <Image
+                src={avatarUrl || "/profile-icons/default icon.png"}
+                title="Username"
+                alt="Profile"
+                width={50}
+                height={50}
+                className={styles.pfp}
+              />
             </Link>
 
-            <button
-                className={styles.hamburger}
-                ref={buttonRef}
-                onClick={() => setMenuOpen(!menuOpen)}
-            >
-                ☰
-            </button>
+            <Image
+              src="/navbar-icons/caret-down1.png"
+              title="Dropdown"
+              alt=""
+              width={18}
+              height={18}
+              className={styles.dropdown}
+            />
 
             <div className={styles.dropdownMenu}>
               <Link href="/profile">Profile</Link>
               <Link href="/">Settings</Link>
               <SignOutButton />
             </div>
+          </div>
+        ) : (
+          <SignUpButton />
+        )}
+      </div>
 
-            <div
-                ref={menuRef}
-                className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}
-            >
-                <Link href="/catalog" onClick={() => setMenuOpen(false)}>
-                    Search
-                </Link>
-                {isLoggedIn ? (
-                    <div className={styles.buttons}>
-                        <Link href="/profile" onClick={() => setMenuOpen(false)}>
-                            Profile
-                        </Link>
-                        <Link href="/" onClick={() => setMenuOpen(false)}>
-                            Settings
-                        </Link>
-                        <SignOutButton />
-                    </div>) : (<SignUpButton />)}
-
-            </div>
-        </div>
-    );
+      <div
+        ref={menuRef}
+        className={`${styles.mobileMenu} ${menuOpen ? styles.open : ""}`}
+      >
+        <Link href="/catalog" onClick={() => setMenuOpen(false)}>
+          Search
+        </Link>
+        {isLoggedIn ? (
+          <div className={styles.buttons}>
+            <Link href="/profile" onClick={() => setMenuOpen(false)}>
+              Profile
+            </Link>
+            <Link href="/" onClick={() => setMenuOpen(false)}>
+              Settings
+            </Link>
+            <SignOutButton />
+          </div>
+        ) : (
+          <SignUpButton />
+        )}
+      </div>
+    </div>
+  );
 }
