@@ -1,13 +1,42 @@
 import styles from "./Podiums.module.css"
 import Image from "next/image"
 import PodiumPoster from "./PodiumPoster";
+import { PodiumItem } from "@/services/podium/getPodiums";
 
-const width: number = 67.5
-const height: number = 100
 const ribbonHeight: number = 45
 const ribbonWidth: number = 30
 
-export default function() {
+type PodiumProps = {
+    podiums: PodiumItem[];
+}
+
+function PodiumSlot({ item }: { item?: PodiumItem }) {
+    if (!item?.posterUrl) {
+        return <div className="podium-empty" />;
+    }
+
+    return <PodiumPoster imageUrl={item.posterUrl} />;
+}
+
+export default function Podiums({ podiums }: PodiumProps) {
+
+    //this is vibecoded bro i have no fricking clue how this code works like why tf are there 4 arrow signs
+    const podiumMap = (podiums).reduce<Record<string, Partial<Record<number, PodiumItem>>>>(
+        (acc, item) => {
+            if (!acc[item.podiumGroup]) {
+                acc[item.podiumGroup] = {};
+            }
+
+            acc[item.podiumGroup][item.placement] = item;
+            return acc;
+        },
+        {}
+    );
+
+    const getSlot = (group: string, placement: 1 | 2 | 3) => {
+        return podiumMap[group]?.[placement];
+    };
+
     return (
         <div className={styles.main}>
 
@@ -15,9 +44,7 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <PodiumPoster
-                        title="The Dark Knight" 
-                        imageUrl="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg"/>
+                        <PodiumSlot item={getSlot("movies", 2)} />
                     </div>
 
                     <Image
@@ -29,9 +56,7 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <PodiumPoster
-                        title="Interstellar"
-                        imageUrl="https://image.tmdb.org/t/p/w500/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg" />
+                        <PodiumSlot item={getSlot("movies", 1)} />
                     </div>
 
                     <Image
@@ -43,9 +68,7 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <PodiumPoster
-                        title="Your Name"
-                        imageUrl="https://myanimelist.net/images/anime/5/87048l.webp" />
+                        <PodiumSlot item = {getSlot("movies", 3)} />
                     </div>
 
                     <Image
@@ -69,9 +92,7 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <PodiumPoster
-                        title="Fullmetal Alchemist: Brotherhood"
-                        imageUrl="https://myanimelist.net/images/anime/1208/94745l.webp" />
+                        <PodiumSlot item = {getSlot("shows", 2)} />
                     </div>
 
                     <Image
@@ -83,9 +104,7 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <PodiumPoster
-                        title="Chernobyl"
-                        imageUrl="https://image.tmdb.org/t/p/w500/AmJLuHjxPdIJO6vmymeWADG6jK5.jpg" />
+                        <PodiumSlot item = {getSlot("shows", 1)} />
                     </div>
 
                     <Image
@@ -97,9 +116,7 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <PodiumPoster
-                        title="A Knight of the Seven Kingdoms"
-                        imageUrl="https://image.tmdb.org/t/p/w500/k8yARbD9iYn2nRX2HvsopfKDN2r.jpg" />
+                        <PodiumSlot item = {getSlot("shows", 3)} />
                     </div>
 
                     <Image
@@ -123,9 +140,7 @@ export default function() {
                 <div className={styles.media}>
 
                     <div className={styles.secondPlace}>
-                        <PodiumPoster
-                        title="Red Dead Redemption 2"
-                        imageUrl="https://media.rawg.io/media/games/511/5118aff5091cb3efec399c808f8c598f.jpg" />
+                        <PodiumSlot item = {getSlot("games", 2)} />
                     </div>
 
                     <Image
@@ -137,9 +152,7 @@ export default function() {
                     />
 
                     <div className={styles.firstPlace}>
-                        <PodiumPoster
-                        title="Minecraft"
-                        imageUrl="https://media.rawg.io/media/games/b4e/b4e4c73d5aa4ec66bbf75375c4847a2b.jpg" />
+                        <PodiumSlot item = {getSlot("games", 1)} />
                     </div>
 
                     <Image
@@ -151,9 +164,7 @@ export default function() {
                     />
 
                     <div className={styles.thirdPlace}>
-                        <PodiumPoster
-                        title="Dark Souls III"
-                        imageUrl="https://media.rawg.io/media/games/da1/da1b267764d77221f07a4386b6548e5a.jpg" />
+                        <PodiumSlot item = {getSlot("games", 3)} />
                     </div>
 
                     <Image
@@ -178,8 +189,7 @@ export default function() {
 
                     <div className={styles.secondPlace}>
                         <PodiumPoster
-                        title="The Hunger Games (Hunger Games, Book One)"
-                        imageUrl="/test-images/hunger games.jpg" />
+                            imageUrl="/test-images/hunger games.jpg" />
                     </div>
 
                     <Image
@@ -192,8 +202,7 @@ export default function() {
 
                     <div className={styles.firstPlace}>
                         <PodiumPoster
-                        title="The Lord of the Rings"
-                        imageUrl="/test-images/lord of the rings.jpg" />
+                            imageUrl="/test-images/lord of the rings.jpg" />
                     </div>
 
                     <Image
@@ -206,8 +215,7 @@ export default function() {
 
                     <div className={styles.thirdPlace}>
                         <PodiumPoster
-                        title="How to Win Friends and Influence People"
-                        imageUrl="/test-images/how to win friends and influence people.jpg" />
+                            imageUrl="/test-images/how to win friends and influence people.jpg" />
                     </div>
 
                     <Image

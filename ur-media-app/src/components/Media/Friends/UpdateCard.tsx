@@ -11,9 +11,7 @@ export default function MediaCard(){
                 <div className={styles.title}>
                     <h3>Joimes</h3>
                 </div>
-                <div className={styles.countdown}>
-                    <p>Plans to watch The Odyssey</p>
-                </div>
+                <p>Plans to watch The Odyssey</p>
             </div>
         </div>
     )

@@ -43,24 +43,21 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
     };
   }, []);
 
-  return (
-    <div className={styles.main}>
-      <div className={styles.search}>
-        <Link href="/catalog?category=movies">
-          <Image
-            src="/navbar-icons/browse1.png"
-            title="Browse Catalog"
-            alt="Browse"
-            width={40}
-            height={40}
-            className={styles.browseIcon}
-          />
-        </Link>
-        <Form action={`/catalog`} className={styles.searchForm}>
-          <SearchBar isDisabled={!selectedCategory} />
-          <MediaFilters />
-        </Form>
-      </div>
+    return (
+        <div className={styles.main}>
+            <div className={styles.search}>
+                <Link href="/catalog">
+                    <Image
+                        src="/navbar-icons/browse1.png"
+                        title="Browse Catalog"
+                        alt="Browse"
+                        width={40}
+                        height={40}
+                        className={styles.browseIcon}
+                    />
+                </Link>
+                <SearchBar isDisabled={false}/>
+            </div>
 
       <Link href="/" className={styles.logo}>
         <h1 className={styles.logoText}>UrMedia</h1>
@@ -97,10 +94,37 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
               className={styles.dropdown}
             />
 
-            <div className={styles.dropdownMenu}>
-              <Link href="/profile">Profile</Link>
-              <Link href="/">Settings</Link>
-              <SignOutButton />
+            <div className={styles.profile}>
+                {isLoggedIn ? (
+                    <div className={styles.dropdownWrapper}>
+                        <Link href="/profile">
+                            <Image
+                                src={avatarUrl || "/profile-icons/default icon.png"}
+                                title="Username"
+                                alt="Profile"
+                                width={50}
+                                height={50}
+                                className={styles.pfp}
+                            />
+                        </Link>
+
+                        <Image
+                            src="/navbar-icons/caret-down1.png"
+                            title="Dropdown"
+                            alt=""
+                            width={18}
+                            height={18}
+                            className={styles.dropdown}
+                        />
+
+                        <div className={styles.dropdownMenu}>
+                            <Link href="/profile">Profile</Link>
+                            <SignOutButton />
+                        </div>
+                    </div>
+                ) : (
+                    <SignUpButton />
+                )}
             </div>
           </div>
         ) : (

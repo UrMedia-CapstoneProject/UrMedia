@@ -5,11 +5,16 @@ export interface PosterProps {
   title: string;
   imageUrl: string;
   onClick?: () => void;
+  hoverEnabled: boolean;
 }
 
-export interface MobileMediaCardProps{
+export interface MobileMediaCardProps {
   item: BaseMediaItem;
   onClick?: () => void;
+}
+
+export interface PosterPodiumProps {
+  imageUrl?: string
 }
 
 export interface Game {

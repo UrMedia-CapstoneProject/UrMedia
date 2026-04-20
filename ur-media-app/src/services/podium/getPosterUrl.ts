@@ -1,0 +1,88 @@
+import { getShow } from "@/services/tmdb";
+import { getMovie } from "@/services/tmdb";
+import { getGameByExternalId } from "@/services/rawg";
+
+type GetPosterUrlArgs = {
+    source: string;
+    mediaType: string;
+    externalId: string;
+};
+
+type JikanImageResponse = {
+    data?: {
+        images?: {
+            jpg?: {
+                image_url?: string;
+                large_image_url?: string;
+            };
+            webp?: {
+                image_url?: string;
+                large_image_url?: string;
+            };
+        };
+    };
+};
+
+async function getJikanPoster(id: string): Promise<string | null> {
+    try {
+        const res = await fetch(`https://api.jikan.moe/v4/anime/${id}`);
+        if (!res.ok) {
+            console.error("Jikan fetch failed:", res.status);
+            return null;
+        }
+
+        const data = await res.json();
+        console.log("data from jikan", data)
+
+        return (
+            data.data?.images?.webp?.large_image_url ||
+            data.data?.images?.jpg?.large_image_url ||
+            data.data?.images?.webp?.image_url ||
+            data.data?.images?.jpg?.image_url ||
+            null
+        );
+    } catch (error) {
+        console.error("Error fetching Jikan poster:", error);
+        return null;
+    }
+}
+
+export async function getPosterUrl({
+    source,
+    mediaType,
+    externalId,
+}: GetPosterUrlArgs): Promise<string | null> {
+    try {
+        if (source === "tmdb") {
+            if (mediaType === "show") {
+                const show = await getShow(Number(externalId));
+                return show?.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
+                    : null;
+            }
+
+            if (mediaType === "movie") {
+                const movie = await getMovie(Number(externalId));
+                return movie?.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : null;
+            }
+        }
+
+        if (source === "rawg" && mediaType === "game") {
+            const game = await getGameByExternalId(externalId);
+            //console.log("game returned by rawg for poster",game?.id)
+            console.log("game id sent:", externalId)
+            return game?.background_image ?? null;
+        }
+
+        if (source === "jikan") {
+            return await getJikanPoster(externalId);
+        }
+
+        return null;
+    } catch (error) {
+        console.error("Error in getPosterUrl:", error);
+        return null;
+    }
+}
