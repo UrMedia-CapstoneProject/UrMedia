@@ -16,8 +16,6 @@ export default async function ServerNavbar() {
             .eq("id", user.id)
             .single()
 
-        console.log("Profile picture,", profile)
-
         if (profile?.profile_picture) {
             const { data } = supabase
                 .storage

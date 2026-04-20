@@ -14,8 +14,7 @@ export interface MobileMediaCardProps {
 }
 
 export interface PosterPodiumProps {
-  title: string
-  imageUrl: string
+  imageUrl?: string
 }
 
 export interface Game {

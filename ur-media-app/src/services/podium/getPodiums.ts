@@ -1,4 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
+import { getPosterUrl } from "./getPosterUrl";
 
 type RawPodiumRow = {
     media_id: number;
@@ -11,7 +12,7 @@ type RawPodiumRow = {
     } | null;
 };
 
-type PodiumItem = {
+export type PodiumItem = {
     mediaId: number;
     podiumGroup: string;
     placement: number;
@@ -54,34 +55,33 @@ export default async function getPodiums(): Promise<PodiumItem[]> {
         return [];
     }
 
-    const rows = data as RawPodiumRow[];
+    const rows = data as unknown as RawPodiumRow[];
 
-    const podiumsWithPosters = await Promise.all(
-    rows.map(async (row) => {
-      if (!row.media) {
-        return null;
-      }
+    console.log("rows after cast:", rows);
 
-      const posterUrl = await getPosterUrl({
-        source: row.media.source,
-        mediaType: row.media.media_type,
-        externalId: row.media.external_id,
-      });
+    const result = await Promise.all(
+        rows.map(async (row) => {
+            const media = row.media;
+            if (!media) return null;
+            console.log("media row inside of the result", media)
 
-      return {
-        mediaId: row.media_id,
-        podiumGroup: row.podium_group,
-        placement: row.placement,
-        source: row.media.source,
-        mediaType: row.media.media_type,
-        externalId: row.media.external_id,
-        posterUrl,
-      };
-    })
-  );
+            const posterUrl = await getPosterUrl({
+                source: media.source,
+                mediaType: media.media_type,
+                externalId: media.external_id,
+            });
 
-  return podiumsWithPosters.filter(
-    (item): item is PodiumItem => item !== null
-  );
+            return {
+                mediaId: row.media_id,
+                podiumGroup: row.podium_group,
+                placement: row.placement,
+                source: media.source,
+                mediaType: media.media_type,
+                externalId: media.external_id,
+                posterUrl,
+            };
+        })
+    );
 
+    return result.filter((item): item is PodiumItem => item !== null);
 }

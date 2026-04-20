@@ -51,7 +51,7 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
                         className={styles.browseIcon}
                     />
                 </Link>
-                <SearchBar />
+                <SearchBar isDisabled={false}/>
             </div>
 
             <Link href="/" className={styles.logo}>

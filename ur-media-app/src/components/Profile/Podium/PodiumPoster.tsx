@@ -3,10 +3,13 @@ import styles from "./PodiumPoster.module.css"
 import { PosterPodiumProps } from "@/types/types"
 
 
-export default function PosterPodium({title, imageUrl}: PosterPodiumProps) {
+export default function PosterPodium({ imageUrl }: PosterPodiumProps) {
+    if (!imageUrl) {
+        return <div className="podium-empty" />;
+    }
     return (
         <div>
-            <Poster title={title} imageUrl={imageUrl} hoverEnabled={false}/>
+            <Poster title={""} imageUrl={imageUrl} hoverEnabled={false} />
         </div>
     )
 }
