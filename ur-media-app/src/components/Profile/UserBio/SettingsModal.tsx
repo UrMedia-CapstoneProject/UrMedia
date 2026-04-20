@@ -21,6 +21,7 @@ export default function SettingsModal({
 
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
+    const [showAlert, setShowAlert] = useState(false);
 
     useEffect(() => {
         return () => {
@@ -43,18 +44,12 @@ export default function SettingsModal({
     }
 
     const handleCancel = () => { onClose() }
-    const handleDeleteAccount = async () => {
-        setErrorMessage("");
-        setSuccessMessage("");
 
-        await fetch("/api/user", {
-            method: "DELETE"
-        });
-
-        setSuccessMessage("Account deleted.");
+    const showWarningAlert = () => {
+        setShowAlert(true)
     }
-    const handleSave = async () => {
 
+    const handleSave = async () => {
         const validationError = validateForm()
 
         if (validationError) {
@@ -193,7 +188,7 @@ export default function SettingsModal({
 
                 <div className={styles.exitOptions}>
                     <div className={styles.signout}><SignOutButton /></div>
-                    <div className={styles.deleteAccount} onClick={() => handleDeleteAccount()}>Delete Account</div>
+                    <div className={styles.deleteAccount} onClick={() => showWarningAlert()}>Delete Account</div>
                 </div>
 
                 <div className={styles.saveAndCancel}>
@@ -201,6 +196,21 @@ export default function SettingsModal({
                     <button className={styles.saveButton} onClick={() => handleSave()}>Save</button>
                 </div>
             </div>
+
+            {showAlert && (
+                <div className={styles.main} onClick={(e) => e.stopPropagation()}>
+                    <div className={styles.alert}>
+                        <label className={styles.text}>
+                            Are you sure you want to delete your account?
+                            This action is permanent.
+                        </label>
+                        <div className={styles.yesNoButtonLayout}>
+                            <button className={styles.noButton} onClick={() => setShowAlert(false)}>Nevermind</button>
+                            <button className={styles.yesButton} onClick={() => setShowAlert(false)}>Yes, I'm sure</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
