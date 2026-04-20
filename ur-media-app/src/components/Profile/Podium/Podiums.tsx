@@ -2,12 +2,10 @@ import styles from "./Podiums.module.css"
 import Image from "next/image"
 import PodiumPoster from "./PodiumPoster";
 
-const width: number = 67.5
-const height: number = 100
 const ribbonHeight: number = 45
 const ribbonWidth: number = 30
 
-export default function() {
+export default function Podiums() {
     return (
         <div className={styles.main}>
 

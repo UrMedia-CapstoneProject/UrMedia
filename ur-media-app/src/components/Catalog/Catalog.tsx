@@ -45,6 +45,7 @@ export default async function Catalog({ searchParams }: CatalogProps) {
           imageUrl={
             `https://image.tmdb.org/t/p/w500/${movie.poster_path}` || ""
           }
+          hoverEnabled={true}
         />
       </div>
     ));
@@ -58,6 +59,7 @@ export default async function Catalog({ searchParams }: CatalogProps) {
           key={show.id}
           title={show.name}
           imageUrl={`https://image.tmdb.org/t/p/w500/${show.poster_path}` || ""}
+          hoverEnabled={true}
         />
       </div>
     ));
@@ -71,6 +73,7 @@ export default async function Catalog({ searchParams }: CatalogProps) {
           key={game.id}
           title={game.name}
           imageUrl={game.background_image}
+          hoverEnabled={true}
         />
       </div>
     ));
@@ -83,6 +86,7 @@ export default async function Catalog({ searchParams }: CatalogProps) {
           key={anime.mal_id}
           title={anime.title_english || anime.title}
           imageUrl={anime.images.jpg.image_url || ""}
+          hoverEnabled={true}
         />
       ))
     } else if (category == "manga") {
@@ -94,6 +98,7 @@ export default async function Catalog({ searchParams }: CatalogProps) {
           key={manga.mal_id}
           title={manga.title_english || manga.title}
           imageUrl={manga.images.jpg.image_url || ""}
+          hoverEnabled={true}
         />
       ))
     }

@@ -1,10 +1,7 @@
 import Poster from "@/components/Global/Poster"
 import styles from "./PodiumPoster.module.css"
+import { PosterPodiumProps } from "@/types/types"
 
-type PosterPodiumProps = {
-  title: string
-  imageUrl: string
-}
 
 export default function PosterPodium({title, imageUrl}: PosterPodiumProps) {
     return (
@@ -13,15 +10,3 @@ export default function PosterPodium({title, imageUrl}: PosterPodiumProps) {
         </div>
     )
 }
-
-// Old code
-// import Poster from "@/components/Global/Poster"
-// import styles from "./PodiumPoster.module.css"
-
-// export default function() {
-//     return (
-//         <div>
-//             <Poster title = {"The Odyssey"} imageUrl = {"/test-images/the-odyssey.jpg"}/>
-//         </div>
-//     )
-// }
