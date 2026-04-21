@@ -5,6 +5,7 @@ export interface PosterProps {
   title: string;
   imageUrl: string;
   onClick?: () => void;
+  hoverEnabled: boolean;
 }
 
 export interface MobileMediaCardProps{
