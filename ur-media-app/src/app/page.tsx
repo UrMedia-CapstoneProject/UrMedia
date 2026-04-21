@@ -1,6 +1,6 @@
 import styles from "./page.module.css"
 import PopularMedia from "@/components/Media/PopularMedia";
-import Countdown from "@/components/Media/Countdown/Countdown";
+import ProfileCountdown from "@/components/Media/Countdown/ProfileCountdown";
 import Friends from "@/components/Media/Friends/Friends";
 
 export default function Home() {
@@ -8,7 +8,7 @@ export default function Home() {
     <div className={styles.main}>
       <PopularMedia />
       <div className={styles.sidebar}>
-        <Countdown />
+        <ProfileCountdown />
         <Friends />
       </div>
     </div>
