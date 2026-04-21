@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react"
 import styles from "./Friends.module.css"
 import UpdateCard from "./UpdateCard"
+import FriendCard from "./FriendCard"
 
 export default function() {
 
@@ -15,6 +16,28 @@ export default function() {
             return "Invalid username"
         }
         return null
+    }
+
+    const loadFriendInfo = async () => {
+        const validationError = validateForm()
+
+        if (validationError) {
+            setErrorMessage(validationError)
+            setSuccessMessage("")
+            return
+        }
+
+        setErrorMessage("")
+        setSuccessMessage("")
+
+        await fetch("/api/friends", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        setSuccessMessage("Friends loaded!")
     }
 
     const handleAdd = async () => {

@@ -16,8 +16,6 @@ export async function GET(request: NextRequest) {
             )
         }
 
-        const userId = authorizedUser.user.id;
-
         const result = await getUserSettings({
             supabase,
             userId: authorizedUser.user.id

@@ -2,6 +2,25 @@ export type addFriendPayload = {
     friend: string
 }
 
+export async function getFriendInfo ({
+    supabase,
+    userId
+}: {
+    supabase: any;
+    userId: string;
+}) {
+    const { data: friends, error: friendError } = await supabase
+        .from("friends")
+        .select("following_id")
+        .eq("follower_id", userId)
+    
+    if (friendError) {
+        throw new Error(friendError.message)
+    }
+
+    const { data: friends, error: dataError }
+}
+
 export async function addFriend ({
     supabase,
     userId,
