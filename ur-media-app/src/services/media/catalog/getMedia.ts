@@ -67,7 +67,7 @@ export async function getCatalogMedia(
 
     return {
       media: { manga: manga?.data || [] },
-      hasNext: manga?.pagination.has_next_page || false,
+      hasNext: manga?.pagination?.has_next_page || false,
     };
   } else {
     return {
