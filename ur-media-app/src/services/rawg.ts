@@ -3,7 +3,8 @@ import { Game } from "@/types/types";
 
 export interface RawgResponse<T> {
     next?: string
-    results: T[];
+    results?: T[];
+    result: T;
 }
 
 export async function getPopularGames(page: string) {
@@ -16,4 +17,8 @@ export async function searchGame(title: string, page: string) {
 
 export async function getGameDetails(id: string) {
     return rawgFetch<RawgResponse<Game>>('games', {id: id})
+}
+
+export async function getGameByExternalId(rawgId: string) {
+  return rawgFetch<Game>(`games/${rawgId}`)
 }

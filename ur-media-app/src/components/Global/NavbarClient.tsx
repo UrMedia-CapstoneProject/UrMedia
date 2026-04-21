@@ -1,47 +1,47 @@
 "use client";
 import { useRef, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
-import Form from "next/form";
-import MediaFilters from "./MediaFilters";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./NavbarClient.module.css";
 import SignOutButton from "./SignOutButton";
 import SearchBar from "./SearchBar";
 import SignUpButton from "./SignUpButton";
+import MediaFilters from "./MediaFilters";
+import Form from "next/form"
+import { useSearchParams } from "next/navigation";
 
 type NavbarClientProps = {
-  isLoggedIn: boolean;
-  avatarUrl: string | null;
-};
+  isLoggedIn: boolean
+  avatarUrl: string | null
+}
 
 export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const searchParams = useSearchParams();
-  const selectedCategory = searchParams.get('category') || '';
-  const menuRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const searchParams = useSearchParams();
+    const selectedCategory = searchParams.get("category") || "";
+    const menuRef = useRef<HTMLDivElement>(null);
+    const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (!menuRef.current || !buttonRef.current) return;
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (!menuRef.current || !buttonRef.current) return;
 
-      const target = event.target as Node;
+            const target = event.target as Node;
 
-      if (
-        !menuRef.current.contains(target) &&
-        !buttonRef.current.contains(target)
-      ) {
-        setMenuOpen(false);
-      }
-    };
+            if (
+                !menuRef.current.contains(target) &&
+                !buttonRef.current.contains(target)
+            ) {
+                setMenuOpen(false);
+            }
+        };
 
-    document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
   return (
     <div className={styles.main}>

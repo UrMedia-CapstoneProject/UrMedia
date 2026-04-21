@@ -1,27 +1,15 @@
 import Poster from "@/components/Global/Poster"
 import styles from "./PodiumPoster.module.css"
+import { PosterPodiumProps } from "@/types/types"
 
-type PosterPodiumProps = {
-  title: string
-  imageUrl: string
-}
 
-export default function PosterPodium({title, imageUrl}: PosterPodiumProps) {
+export default function PosterPodium({ imageUrl }: PosterPodiumProps) {
+    if (!imageUrl) {
+        return <div className="podium-empty" />;
+    }
     return (
         <div>
-            <Poster title = {title} imageUrl = {imageUrl}/>
+            <Poster title={""} imageUrl={imageUrl} hoverEnabled={false} />
         </div>
     )
 }
-
-// Old code
-// import Poster from "@/components/Global/Poster"
-// import styles from "./PodiumPoster.module.css"
-
-// export default function() {
-//     return (
-//         <div>
-//             <Poster title = {"The Odyssey"} imageUrl = {"/test-images/the-odyssey.jpg"}/>
-//         </div>
-//     )
-// }

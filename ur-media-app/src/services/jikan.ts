@@ -1,4 +1,5 @@
 import { JikanClient } from "@rushelasli/jikants";
+import { JikanResponseWithPagination } from "@rushelasli/jikants";
 
 const jikan = new JikanClient();
 
@@ -9,9 +10,11 @@ function sleep(ms: number) {
 export async function getPopularAnime(page: number) {
     try {
         await sleep(400)
-        return await jikan.top.getTopAnime({page: page, limit: 20, sfw: true})
+        const res = await jikan.top.getTopAnime({page: page, limit: 20, sfw: true})
+        const data = res as JikanResponseWithPagination<typeof res.data>
+        return data
     } catch (err) {
-        console.log("Jikan API Error while fetching Anime, exiting with: " + err)
+         console.log("Jikan API Error while fetching Anime, exiting with: " + err)
     }
 }
 
@@ -26,17 +29,19 @@ export async function searchAnime(title: string, page: number) {
 
 export async function getAnimeDetails(id: number) {
     try {
-        sleep(400)
+        await sleep(400)
         return await jikan.anime.getAnimeById(id)
     } catch (err) {
-         console.log("Jikan API Error while fetching Anime, exiting with: " + err)
+        console.log("Jikan API Error while fetching Anime, exiting with: " + err)
     }
 }
 
 export async function getPopularManga(page: number) {
     try {
         await sleep(400)
-        return await jikan.top.getTopManga({page: page, limit: 20})
+        const res = await jikan.top.getTopManga({page: page, limit: 20})
+        const data = res as JikanResponseWithPagination<typeof res.data>
+        return data
     } catch (err) {
         console.log("Jikan API Error while fetching Manga, exiting with: " + err)
     }

@@ -6,3 +6,15 @@
     min-height: 0;
     min-width: 300px;
 }
+
+
+/* Chat added this*/
+.emptyState{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    color: var(--foreground);
+    opacity: 0.8;
+    text-align: center;
+}

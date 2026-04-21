@@ -1,17 +1,19 @@
 import Poster from "@/components/Global/Poster";
-import styles from "./UpdateCard.module.css"
+import styles from "./MediaCard.module.css"
 
 export default function MediaCard(){
     return(
         <div className={styles.main}>
             <div className={styles.poster}>
-                <Poster title = {"The Odyssey"} imageUrl = {"/test-images/the-odyssey.jpg"} hoverEnabled={false}/>
+                <Poster title={"The Odyssey"} imageUrl={"/test-images/the-odyssey.jpg"} hoverEnabled={false}/>
             </div>
             <div className={styles.info}>
                 <div className={styles.title}>
-                    <h3>Joimes</h3>
+                    <h2>The Odyssey</h2>
                 </div>
-                <p>Plans to watch The Odyssey</p>
+                <div className={styles.countdown}>
+                    <p>3 Months, 13 Days</p>
+                </div>
             </div>
         </div>
     )
