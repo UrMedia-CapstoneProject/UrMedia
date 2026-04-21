@@ -29,9 +29,3 @@
     color: var(--foreground);
     height: 100%;
 }
-
-/* Chat added this*/
-.active{
-    font-weight: 700;
-    border-bottom: 2px solid var(--foreground);
-}
