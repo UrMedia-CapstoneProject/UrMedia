@@ -5,7 +5,7 @@ export default function MediaCard(){
     return(
         <div className={styles.main}>
             <div className={styles.poster}>
-                <Poster title = {"The Odyssey"} imageUrl = {"/test-images/the-odyssey.jpg"}/>
+                <Poster title = {"The Odyssey"} imageUrl = {"/test-images/the-odyssey.jpg"} hoverEnabled={true}/>
             </div>
             <div className={styles.info}>
                 <div className={styles.title}>
