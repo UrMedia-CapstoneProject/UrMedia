@@ -1,7 +1,6 @@
 import { createClient } from "@/lib/supabase/server"
 import PopularMediaClient from "./PopularMediaClient"
 import type { MediaCategory, DisplayMediaItem } from "@/types/types"
-import { getNormalizedProfileStatsRows, getProfileStats } from "@/services/profile/stats/getProfileStats"
 
 type DatabaseMediaRecord = {
   id: number

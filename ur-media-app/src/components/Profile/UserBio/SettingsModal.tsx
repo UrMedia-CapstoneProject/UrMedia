@@ -3,25 +3,39 @@ import { useEffect, useState } from "react"
 import SignOutButton from "@/components/Global/SignOutButton"
 import styles from "./SettingsModal.module.css"
 import Image from "next/image"
+import { UserBioProps } from "./UserBio"
+import { useRouter } from "next/navigation";
 
 type SettingsModalProps = {
-    onClose: () => void
+    onClose: () => void;
+    settings: UserBioProps;
 }
 
 export default function SettingsModal({
-    onClose
+    onClose,
+    settings
 }: SettingsModalProps) {
 
-    const [username, setUsername] = useState("")
-    const [bio, setBio] = useState("")
-    const [birthday, setBirthday] = useState("")
-    const [avatarURL, setAvatarURL] = useState("/profile-icons/default icon.png")
+    const [username, setUsername] = useState(settings.username || "")
+    const [bio, setBio] = useState(settings.biography || "")
+    const [birthday, setBirthday] = useState(settings.birthday || "")
+    const [avatarURL, setAvatarURL] = useState<string>(settings.avatarUrl || "/profile-icons/default icon.png");
     const [selectedFile, setSelectedFile] = useState<File | null>(null)
     const [previewUrl, setPreviewUrl] = useState<string | null>(null)
 
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
     const [showAlert, setShowAlert] = useState(false);
+    
+    const router = useRouter();
+
+    useEffect(() => {
+        if (settings.avatarUrl) {
+            setAvatarURL(`${settings.avatarUrl}?v=${Date.now()}`);
+        } else {
+            setAvatarURL("/profile-icons/default icon.png");
+        }
+    }, [settings.avatarUrl]);
 
     useEffect(() => {
         return () => {
@@ -36,8 +50,10 @@ export default function SettingsModal({
             return "Username must be 1-16 characters long"
         }
 
-        if (bio.length > 500) {
-            return "Biography must be 500 characters or less"
+        if (bio) {
+            if (bio.length > 500) {
+                return "Biography must be 500 characters or less"
+            }
         }
 
         return null
@@ -77,6 +93,7 @@ export default function SettingsModal({
         });
 
         setSuccessMessage("Changes Saved")
+        router.refresh();
         onClose()
     }
 
@@ -90,36 +107,6 @@ export default function SettingsModal({
         }
     }, [])
 
-    const loadUserSettings = async () => {
-        try {
-            const response = await fetch(
-                `/api/user/`,
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                setErrorMessage(data.error || "Failed to load tracked data.");
-                return;
-            }
-            console.log(data);
-
-            setUsername(data.username ?? "")
-            setBirthday(data.birthday ?? "")
-            setBio(data.biography ?? "")
-            setAvatarURL(data.avatarUrl)
-            console.log(data)
-
-        } catch (error) {
-            console.error("Failed to laod the user tracked data", error);
-            setErrorMessage("Failed to load the user tracked data.");
-        }
-    }
-
-    useEffect(() => {
-        loadUserSettings();
-    }, []);
-
     return (
 
         <div className={styles.main} onClick={onClose}>
@@ -128,10 +115,11 @@ export default function SettingsModal({
                     <label className={styles.top}>Profile Picture:</label>
 
                     <Image
-                        src={previewUrl || avatarURL}
+                        src={previewUrl || avatarURL || "/profile-icons/default icon.png"}
                         alt="Profile Picture"
                         width={280}
                         height={280}
+                        className={styles.avatarPreview}
                     />
 
                     <input type="file" id="filePicker" hidden

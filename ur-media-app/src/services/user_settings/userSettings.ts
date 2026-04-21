@@ -19,37 +19,63 @@ export async function updateUserSettings({
     bio: string;
     file: File | null;
 }) {
+    let profilePicturePath: string | undefined;
+
+    let oldProfilePicturePath: string | null = null;
 
     if (file) {
-        const fileExt = file.name.split(".").pop();
-        const filePath = `${userId}/profile_pictures.${fileExt}`;
-        console.log("uploading to database", filePath);
+        const { data: currentProfile, error: fetchError } = await supabase
+            .from("profiles")
+            .select("profile_picture")
+            .eq("id", userId)
+            .single();
+
+        if (fetchError) {
+            throw new Error(fetchError.message);
+        }
+
+        oldProfilePicturePath = currentProfile?.profile_picture ?? null;
+
+        const fileExt = file.name.split(".").pop()?.toLowerCase() || "jpg";
+        profilePicturePath = `${userId}/avatar-${Date.now()}.${fileExt}`;
 
         const { error: uploadError } = await supabase.storage
             .from("profile_pics")
-            .upload(filePath, file, { upsert: true });
+            .upload(profilePicturePath, file, { upsert: false });
 
         if (uploadError) {
-            console.log(uploadError.message)
-            throw new Error(uploadError.message)
+            throw new Error(uploadError.message);
         }
-
-        await supabase
-            .from("profiles")
-            .update({ profile_picture: filePath })
-            .eq("id", userId);
     }
 
-    const { error } = await supabase
-        .from("profiles")
-        .update({
-            username: username,
-            birthday: birthday,
-            biography: bio
-        })
-        .eq("id", userId)
+    const updateData: Record<string, any> = {
+        username,
+        birthday,
+        biography: bio,
+    };
 
-    if (error) throw new Error(error.message);
+    if (profilePicturePath) {
+        updateData.profile_picture = profilePicturePath;
+    }
+
+    const { error: updateError } = await supabase
+        .from("profiles")
+        .update(updateData)
+        .eq("id", userId);
+
+    if (updateError) {
+        throw new Error(updateError.message);
+    }
+
+    if (profilePicturePath && oldProfilePicturePath) {
+        const { error: removeError } = await supabase.storage
+            .from("profile_pics")
+            .remove([oldProfilePicturePath]);
+
+        if (removeError) {
+            console.log("Failed to delete old avatar:", removeError.message);
+        }
+    }
 }
 
 export async function getUserSettings({
@@ -68,7 +94,7 @@ export async function getUserSettings({
     if (settingsError) {
         throw new Error(settingsError.message);
     }
-    
+
     let avatarUrl = null;
 
     if (data.profile_picture) {

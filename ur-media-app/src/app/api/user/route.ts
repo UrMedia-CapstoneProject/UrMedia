@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
 
         const result = await getUserSettings({
             supabase,
-            userId: authorizedUser.user.id
+            userId: userId
         })
         return NextResponse.json(result)
 

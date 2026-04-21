@@ -2,6 +2,7 @@ import Catalog from "@/components/Catalog/Catalog";
 import PageButton from "@/components/Catalog/PageButton";
 import { getCatalogMedia } from "@/services/media/catalog/getMedia";
 import styles from "./page.module.css";
+import SearchBar from "@/components/Global/SearchBar";
 
 interface SearchParams {
   searchParams?: {
@@ -23,6 +24,9 @@ export default async function CatalogPage({ searchParams }: SearchParams) {
    
   return (
     <div className={styles.main}>
+      <div className={styles.searchBar}>
+        <SearchBar isDisabled={false}/>
+      </div>
       <Catalog data={media} category={category} />
       <PageButton currentPage={page} hasMore={hasNext} />
     </div>

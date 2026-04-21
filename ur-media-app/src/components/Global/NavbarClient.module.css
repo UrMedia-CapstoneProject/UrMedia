@@ -63,11 +63,11 @@
 .profile {
     justify-self: end;
     display: flex;
-
 }
 
 .pfp {
     border-radius: 15%;
+    object-fit: cover;
 }
 
 .dropdown {
