@@ -6,6 +6,14 @@ function sleep(ms: number) {
     return new Promise(res => setTimeout(res, ms))
 }
 
+export async function getAnime(externalId: number) {
+    try {
+        return await jikan.anime.getAnimeById(externalId)
+    } catch (err) {
+        console.log("Jikan API Error while fetching Anime by id, exiting with: " + err)
+    }
+}
+
 export async function searchAnime(title: string, page: number) {
     try {
         sleep(400)

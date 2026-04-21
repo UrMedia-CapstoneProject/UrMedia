@@ -1,4 +1,7 @@
-import { getMovie, getShow } from "../../tmdb"; //need to get getShows in here as well
+import { getMovie, getShow } from "../../tmdb";
+import { getGameByExternalId } from "@/services/rawg";
+// add jikan in here
+
 import type { MediaSource, MediaType } from "@/types/types";
 
 const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
@@ -49,8 +52,8 @@ export async function refreshMediaMetadata({
     const show = await getShow(Number(media.external_id));
 
     if (!show) {
-      console.log("Failed to fetch TMDB movie data");
-      throw new Error("Failed to fetch TMDB movie data");
+      console.log("Failed to fetch TMDB show data");
+      throw new Error("Failed to fetch TMDB show data");
     }
 
     updateData = {
@@ -62,8 +65,27 @@ export async function refreshMediaMetadata({
       metadata_updated_at: new Date().toISOString(),
     };
 
-    console.log(updateData)
-    // add else if for (media.source === "rawg" && media.media_type === "game")
+    // console.log(updateData);
+  } else if (media.source === "rawg" && media.media_type === "game") {
+    const game = await getGameByExternalId(media.external_id);
+    // console.log(game);
+
+    if (!game) {
+      console.log("Failed to fetch RAWG game data");
+      throw new Error("Failed to fetch RAWG gamed data");
+    }
+
+    // - Introduce a helper function for removing the html tags for description and fix it.
+    // - Fix issue with red squiggly line
+    updateData = {
+      title: game.name ?? null,
+      image_url: game.background_image,
+      synopsis: game.description ?? null,
+      release_date: game.released ?? null,
+      next_release_date: null,
+      metadata_updated_at: new Date().toISOString(),
+    };
+
     // add else if for (media.source === "google_books" && media.media_type === "book")
   } else {
     throw new Error(
@@ -71,8 +93,8 @@ export async function refreshMediaMetadata({
     );
   }
 
-    // console.log("refreshMediaMetadata media:", media);
-    // console.log("updateData:", updateData);
+  // console.log("refreshMediaMetadata media:", media);
+  // console.log("updateData:", updateData);
 
   const { data, error } = await supabase
     .from("media")
@@ -90,9 +112,10 @@ export async function refreshMediaMetadata({
       release_date,
       next_release_date,
       metadata_updated_at
-      `)
-      .maybeSingle()
-    // .single();
+      `,
+    )
+    .maybeSingle();
+  // .single();
 
   if (error) {
     console.log(error.message);
