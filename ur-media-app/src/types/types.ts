@@ -22,6 +22,7 @@ export interface Game {
   name: string;
   released: string;
   rating: number;
+  description?: string | null;
   background_image: string;
 }
 
