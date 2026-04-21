@@ -55,7 +55,7 @@ export default function MediaDetailModal({
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isTracked, setIsTracked] = useState(false);
-
+  
   const [status, setStatus] = useState("");
   const [score, setScore] = useState("");
   const [hoursPlayed, setHoursPlayed] = useState<number | "">("");

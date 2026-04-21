@@ -1,7 +1,7 @@
 import { TMDBError } from "@lorenzopant/tmdb";
 import { tmdb } from "../lib/tmdb";
 
-export async function getMovie(id: number) {
+export async function getMovieDetails(id: number) {
   try {
     const res = await tmdb.movies.details({movie_id: id})
     return res
@@ -40,7 +40,7 @@ export async function getPopularMovies(page: number) {
   }
 }
 
-export async function getShow(id: number) {
+export async function getShowDetails(id: number) {
   try {
     const res = await tmdb.tv_series.details({series_id: id})
     return res

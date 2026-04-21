@@ -6,6 +6,15 @@ function sleep(ms: number) {
     return new Promise(res => setTimeout(res, ms))
 }
 
+export async function getPopularAnime(page: number) {
+    try {
+        await sleep(400)
+        return await jikan.top.getTopAnime({page: page, limit: 20, sfw: true})
+    } catch (err) {
+        console.log("Jikan API Error while fetching Anime, exiting with: " + err)
+    }
+}
+
 export async function searchAnime(title: string, page: number) {
     try {
         sleep(400)
@@ -15,12 +24,12 @@ export async function searchAnime(title: string, page: number) {
     }
 }
 
-export async function getPopularAnime(page: number) {
+export async function getAnimeDetails(id: number) {
     try {
-        await sleep(400)
-        return await jikan.top.getTopAnime({page: page, limit: 20, sfw: true})
+        sleep(400)
+        return await jikan.anime.getAnimeById(id)
     } catch (err) {
-        console.log("Jikan API Error while fetching Anime, exiting with: " + err)
+         console.log("Jikan API Error while fetching Anime, exiting with: " + err)
     }
 }
 
@@ -37,6 +46,15 @@ export async function searchManga(title: string, page: number) {
     try {
         sleep(400)
         return await jikan.manga.searchManga({q: title, page: page, limit: 20})
+    } catch (err) {
+         console.log("Jikan API Error while fetching Manga, exiting with: " + err)
+    }
+}
+
+export async function getMangaDetails(id: number) {
+    try {
+        sleep(400)
+        return await jikan.manga.getMangaById(id)
     } catch (err) {
          console.log("Jikan API Error while fetching Manga, exiting with: " + err)
     }

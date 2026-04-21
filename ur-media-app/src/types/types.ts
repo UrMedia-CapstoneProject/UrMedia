@@ -12,6 +12,24 @@ export interface MobileMediaCardProps{
   onClick?: () => void;
 }
 
+export interface JikanResponseWithPagination<T> {
+  data: T;
+  pagination: Pagination;
+}
+
+export interface Pagination {
+  last_visible_page: number;
+  has_next_page: boolean;
+  current_page?: number;
+  items?: PaginationItems;
+}
+
+export interface PaginationItems {
+	count: number;
+	total: number;
+	per_page: number;
+}
+
 export interface Game {
   id: number;
   name: string;
