@@ -14,9 +14,9 @@ export async function getMovie(id: number) {
   }
 }
 
-export async function getMovies() {
+export async function searchMovies(title: string, page: number) {
   try {
-    const res = await tmdb.movie_lists.now_playing();
+    const res = await tmdb.search.movies({query: title, page: page});
     return res;
   } catch (err) {
     if (err instanceof TMDBError) {
@@ -53,9 +53,9 @@ export async function getShow(id: number) {
   }
 }
 
-export async function getShows() {
+export async function searchShows(title: string, page: number) {
   try {
-    const res = await tmdb.tv_lists.on_the_air();
+    const res = await tmdb.search.tv_series({query: title, page: page});
     return res;
   } catch (err) {
     if (err instanceof TMDBError) {

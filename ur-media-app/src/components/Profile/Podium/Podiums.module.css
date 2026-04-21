@@ -1,9 +1,14 @@
 .main {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 3rem;
+}
+
+.podiumWrapper{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
 }
 
 .podium {
@@ -20,6 +25,7 @@
 .media {
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 0.5rem;
 }
 
@@ -58,9 +64,9 @@
     left: 194px;
 }
 
-@media(max-width: 700px){
-    .main{
-        justify-content: center;
-        gap: 5rem;
+@media(max-width: 560px) {
+    .main {
+        grid-template-columns: 1fr;
+        gap: 3rem;
     }
 }

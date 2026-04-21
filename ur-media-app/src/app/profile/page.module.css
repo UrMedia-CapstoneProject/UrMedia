@@ -1,52 +1,66 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  margin-top: 3%;
 }
 
-.content{
-    display: flex;
-    flex-direction: column;
-    margin-left: 13%;
-    margin-right: 13%;
-    gap: 4rem;
+.userInfo {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
-.grid{
-    display: grid;
-    grid-template-columns: .5fr 2fr;
-    gap: 4rem;
-    align-items: start;
+.content {
+  display: flex;
+  flex-direction: column;
+  margin-left: 13%;
+  margin-right: 13%;
+  gap: 4rem;
 }
 
-.signOutButton {
-    width: 100px;
-    height: 50px;
-    margin-top: 3rem;
-    margin-left: auto;
+.grid {
+  display: grid;
+  grid-template-columns: .5fr 2fr;
+  gap: 4rem;
+  align-items: start;
 }
 
 @media (max-width: 1900px) {
-  .grid{
+  .grid {
     grid-template-columns: 1fr 1fr;
   }
-  .content{
+
+  .content {
     margin-left: 9%;
     margin-right: 9%;
   }
 }
 
 @media (max-width: 1750px) {
-  .grid{
+  .grid {
     grid-template-columns: 1fr 1fr;
   }
-  .content{
+
+  .content {
     margin-left: 6%;
     margin-right: 6%;
   }
 }
 
-@media (max-width: 950) {
+@media (max-width: 1470px) {
+  .userInfo{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1250px){
+  .userInfo{
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 950px) {
   .grid {
     grid-template-columns: 1fr;
   }

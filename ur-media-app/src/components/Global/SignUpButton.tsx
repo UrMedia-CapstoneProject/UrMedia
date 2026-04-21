@@ -28,6 +28,7 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
+import styles from './SignUpButton.module.css'
 
 export default function SignupPage() {
   const signInWithGoogle = async () => {
@@ -46,8 +47,8 @@ export default function SignupPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <button onClick={signInWithGoogle}>
+    <main className={styles.main}>
+      <button onClick={signInWithGoogle} className={styles.button}>
         Sign in with Google
       </button>
     </main>

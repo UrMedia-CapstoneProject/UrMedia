@@ -37,6 +37,13 @@
     gap: 10px;
 }
 
+.avatarPreview {
+  width: 280px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 8px; /* optional */
+}
+
 .filePicker {
     padding: 10px;
     width: 6.7rem;
@@ -149,7 +156,6 @@
 .text {
     font-size: 16px;
     padding-bottom: 1.5rem;
-    wrap-text: auto;
     width: 350px;
     text-align: center;
 }
