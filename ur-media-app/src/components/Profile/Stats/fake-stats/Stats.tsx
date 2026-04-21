@@ -1,8 +1,8 @@
 "use client"
 
 import { useMemo, useState } from "react"
-import styles from "./fake-stats/fake_profile_stats.module.css"
-import { profileStatsDemoData } from "./fake-stats/fake_profile_stats"
+import styles from "./fake_profile_stats.module.css"
+import { profileStatsDemoData } from "./fake_profile_stats"
 
 type StatsFilter = "all" | "movies" | "shows" | "games" | "books"
 

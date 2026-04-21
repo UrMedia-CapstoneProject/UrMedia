@@ -1,7 +1,20 @@
+import { Anime, Manga } from "@rushelasli/jikants";
+import { MovieResultItem, TVSeriesResultItem } from "@lorenzopant/tmdb";
+
 export interface PosterProps {
   title: string;
   imageUrl: string;
   onClick?: () => void;
+  hoverEnabled: boolean;
+}
+
+export interface MobileMediaCardProps {
+  item: BaseMediaItem;
+  onClick?: () => void;
+}
+
+export interface PosterPodiumProps {
+  imageUrl?: string
 }
 
 export interface Game {
@@ -9,7 +22,24 @@ export interface Game {
   name: string;
   released: string;
   rating: number;
+  description?: string | null;
   background_image: string;
+}
+
+export interface MediaResultItems {
+  movies?: MovieResultItem[];
+  shows?: TVSeriesResultItem[];
+  games?: Game[];
+  anime?: Anime[];
+  manga?: Manga[];
+}
+
+export interface MediaResultItems {
+  movies?: MovieResultItem[];
+  shows?: TVSeriesResultItem[];
+  games?: Game[];
+  anime?: Anime[];
+  manga?: Manga[];
 }
 
 export interface JikanResponseWithPagination<T> {

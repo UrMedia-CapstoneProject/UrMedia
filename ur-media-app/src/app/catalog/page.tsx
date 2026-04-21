@@ -1,73 +1,34 @@
+import Catalog from "@/components/Catalog/Catalog";
+import PageButton from "@/components/Catalog/PageButton";
+import { getCatalogMedia } from "@/services/media/catalog/getMedia";
 import styles from "./page.module.css";
-import MediaFilters from "@/components/Catalog/MediaFilters";
-import Poster from "@/components/Global/Poster";
-import { getPopularMovies, getPopularShows } from "@/services/tmdb";
-import { getPopularGames } from "@/services/rawg";
-import { Game } from "@/types/types";
-import { MovieResultItem, TVSeriesResultItem } from "@lorenzopant/tmdb";
-import { redirect } from "next/navigation";
+import SearchBar from "@/components/Global/SearchBar";
 
-interface CatalogProps {
+interface SearchParams {
   searchParams?: {
     page?: string;
     category?: string;
+    title?: string;
   };
 }
-interface MediaResultItems {
-  movies?: MovieResultItem[];
-  shows?: TVSeriesResultItem[];
-  games?: Game[]
-}
-export default async function CatalogPage({ searchParams }: CatalogProps) {
+
+export default async function CatalogPage({ searchParams }: SearchParams) {
   const params = await searchParams;
-  const category = params?.category;
+  const category = params?.category || 'movies';
+  const title = params?.title;
   const page = Number(params?.page || 1);
 
-  let media: MediaResultItems = {};
-  let posters;
-  if (!category) {
-    redirect("/catalog?category=movies");
-  }
+  const { media, hasNext } = await getCatalogMedia(category, page, title)
 
-  if (category == "movies") {
-    const response = await getPopularMovies(page);
-    media.movies = response?.results || [];
-
-    posters = media.movies?.map((movie) => (
-      <Poster
-        key={movie.id}
-        title={movie.title}
-        imageUrl={`https://image.tmdb.org/t/p/w500/${movie.poster_path}` || ""}
-      />
-    ));
-  } else if (category == "shows") {
-    const response = await getPopularShows(page);
-    media.shows = response?.results || [];
-
-    posters = media.shows.map((show) => (
-      <Poster
-        key={show.id}
-        title={show.name}
-        imageUrl={`https://image.tmdb.org/t/p/w500/${show.poster_path}` || ""}
-      />
-    ));
-  } else if (category == "games") {
-    const response = await getPopularGames(page.toString(), '80,100');
-    media.games = response.results
-    
-    posters = media.games.map((game) => (
-        <Poster
-            key={game.id}
-            title={game.name}
-            imageUrl={game.background_image}
-        />
-    ));
-  }
-
+  
+   
   return (
     <div className={styles.main}>
-      <MediaFilters />
-      <div className={styles.mediaGrid}>{posters}</div>
+      <div className={styles.searchBar}>
+        <SearchBar isDisabled={false}/>
+      </div>
+      <Catalog data={media} category={category} />
+      <PageButton currentPage={page} hasMore={hasNext} />
     </div>
   );
 }

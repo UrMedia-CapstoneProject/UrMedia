@@ -14,7 +14,7 @@ export default function MediaCard({title, imageUrl, epWatched, score} : MediaCar
     return (
         <div className={styles.main}>
             <div className={styles.poster}>
-                <Poster title={title} imageUrl={imageUrl} />
+                <Poster title={title} imageUrl={imageUrl} hoverEnabled={false} />
                 <div className={styles.mediaInfo}>
                     <div>
                         <p className={styles.title}>

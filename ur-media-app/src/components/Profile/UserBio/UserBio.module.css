@@ -1,35 +1,94 @@
-.main{
-    display: flex;
-    flex-direction: row;
+.main {
     position: relative;
+    border-radius: 15px;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 900px;
     background-color: rgba(var(--surface-primary-rgb), 0.2);
     box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
+    min-width: 700px;
 }
 
-.content{
+.content {
+    width: 100%;
+}
+
+.info {
+    background-color: rgba(var(--surface-secondary-rgb), 0.8);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    align-items: stretch;
+}
+
+.left {
     display: flex;
-    flex-direction: row;
-    margin-left: 10%;
-    margin-right: 10%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-.Username{
-    margin-top: 1rem;
-    margin-right: 3rem;
+.pfp {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
 }
 
-.Pfp{
-    margin-right: 2rem;
+.username {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 0.75rem;
+    text-align: left;
+    width: 100%;
+    margin-left: 40px;
 }
 
-.Bio{
-    margin-top: 4rem;
-    margin-left: 1rem;
+.bio {
+    white-space: pre-wrap;
+    line-height: 1.5;
+    min-width: 0;
+    max-height: 200px;
+    overflow-y: auto;
 }
 
-.SettingsIcon{
+.SettingsButton {
     position: absolute;
-    top: 0;
-    right: 0;
-    margin: 0.75rem;
+    bottom: 40px;
+    right: 35px;
+    cursor: pointer;
+}
+
+@media (max-width: 1470px) {
+  .main{
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 700px) {
+    .main {
+        padding: 1rem;
+        min-width: 0;
+    }
+
+    .info {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 1.25rem;
+    }
+
+    .left {
+        align-items: center;
+    }
+
+    .bio {
+        text-align: left;
+    }
+
+    .SettingsButton {
+        top: 35px;
+        right: 40px;
+    }
 }

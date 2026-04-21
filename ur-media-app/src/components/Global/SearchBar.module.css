@@ -1,0 +1,35 @@
+.main{
+    display: flex;
+    width: 100%;
+    background-color: #200160;
+    border-radius: 20px;
+}
+
+.searchBar {
+    display: flex;
+    width: 100%;
+    padding-right: 5px;
+}
+
+.searchBarInput {
+    flex: 1;
+    border-radius: 15px;
+    min-width: 0;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.searchBarInput:focus {
+    outline: none;
+    border-color: none;
+}
+
+.searchBarButton {
+    margin: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: inherit;
+    align-self: flex-end;
+}

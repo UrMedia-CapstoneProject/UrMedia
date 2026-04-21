@@ -18,7 +18,7 @@ type ModalTrackedResponse = {
   score: number;
   hoursPlayed: number | "";
   episodesWatched: number | "";
-  rewatches: number | "";
+  repeatCount: number | "";
   startDate: string;
   finishDate: string;
   review: string;
@@ -33,7 +33,7 @@ function emptyResponse(): ModalTrackedResponse {
     score: NaN,
     hoursPlayed: "",
     episodesWatched: "",
-    rewatches: "",
+    repeatCount: "",
     startDate: "",
     finishDate: "",
     review: "",
@@ -54,7 +54,7 @@ function normalizeTrackedRow(
         score: trackedRow.rating ?? "",
         hoursPlayed: "",
         episodesWatched: "",
-        rewatches: trackedRow.rewatches ?? "",
+        repeatCount: trackedRow.repeat_count ?? "",
         startDate: trackedRow.starting_date ?? "",
         finishDate: trackedRow.ending_date ?? "",
         review: trackedRow.review ?? "",
@@ -66,7 +66,7 @@ function normalizeTrackedRow(
         score: trackedRow.rating ?? "",
         hoursPlayed: "",
         episodesWatched: "",
-        rewatches: trackedRow.rewatches ?? "",
+        repeatCount: trackedRow.repeat_count ?? "",
         startDate: trackedRow.starting_date ?? "",
         finishDate: trackedRow.ending_date ?? "",
         review: trackedRow.review ?? "",
@@ -79,7 +79,7 @@ function normalizeTrackedRow(
         score: trackedRow.rating ?? "",
         hoursPlayed: "",
         episodesWatched: trackedRow.episodes_watched,
-        rewatches: trackedRow.rewatches ?? "",
+        repeatCount: trackedRow.repeat_count ?? "",
         startDate: trackedRow.starting_date ?? "",
         finishDate: trackedRow.ending_date ?? "",
         review: trackedRow.review ?? "",
@@ -92,7 +92,7 @@ function normalizeTrackedRow(
         score: trackedRow.rating ?? "",
         hoursPlayed: "",
         episodesWatched: trackedRow.episodes_watched,
-        rewatches: trackedRow.rewatches ?? "",
+        repeatCount: trackedRow.repeat_count ?? "",
         startDate: trackedRow.starting_date ?? "",
         finishDate: trackedRow.ending_date ?? "",
         review: trackedRow.review ?? "",
@@ -105,7 +105,7 @@ function normalizeTrackedRow(
         score: trackedRow.rating ?? "",
         hoursPlayed: trackedRow.hours_played,
         episodesWatched: "",
-        rewatches: trackedRow.rewatches ?? "",
+        repeatCount: trackedRow.repeat_count ?? "",
         startDate: trackedRow.starting_date ?? "",
         finishDate: trackedRow.ending_date ?? "",
         review: trackedRow.review ?? "",
@@ -118,7 +118,7 @@ function normalizeTrackedRow(
         score: trackedRow.rating ?? "",
         hoursPlayed: "",
         episodesWatched: "",
-        rewatches: trackedRow.rewatches ?? "",
+        repeatCount: trackedRow.repeat_count ?? "",
         startDate: trackedRow.starting_date ?? "",
         finishDate: trackedRow.ending_date ?? "",
         review: trackedRow.review ?? "",
