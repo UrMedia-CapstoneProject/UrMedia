@@ -1,8 +1,8 @@
 /*Fetches title and poster from the correct external API*/
 
-import { getMovie, getShow } from "@/services/tmdb";
+import { getMovieDetails, getShowDetails } from "@/services/tmdb";
 import { getGameByExternalId } from "@/services/rawg";
-import { getAnime } from "@/services/jikan";
+import { getAnimeDetails } from "@/services/jikan";
 // Missing getBook
 
 type GetCountdownMetadataArgs = {
@@ -32,7 +32,7 @@ export async function getCountdownTitleAndPosterUrl({
 }: GetCountdownMetadataArgs): Promise<CountdownTitleAndUrl> {
   try {
     if (source === "tmdb" && mediaType === "movie") {
-      const movie = await getMovie(Number(externalId));
+      const movie = await getMovieDetails(Number(externalId));
 
       if (!movie) {
         console.log("Failed to fetch TMDB movie data");
@@ -44,7 +44,7 @@ export async function getCountdownTitleAndPosterUrl({
         imageUrl: buildTMDBImageUrl(movie.poster_path),
       };
     } else if (source === "tmdb" && mediaType === "show") {
-      const show = await getShow(Number(externalId));
+      const show = await getShowDetails(Number(externalId));
 
       if (!show) {
         console.log("Failed to fetch TMDB show data");
@@ -68,7 +68,7 @@ export async function getCountdownTitleAndPosterUrl({
         imageUrl: game.background_image,
       };
     } else if (source === "jikan" || mediaType === "anime_movie" || mediaType === "anime_show") {
-      const anime = await getAnime(Number(externalId));
+      const anime = await getAnimeDetails(Number(externalId));
 
       if (!anime) {
         console.log("Failed to fetch JIKAN anime data");

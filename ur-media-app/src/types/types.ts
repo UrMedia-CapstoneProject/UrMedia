@@ -1,5 +1,5 @@
 import { Anime, Manga } from "@rushelasli/jikants";
-import { MovieResultItem, TVSeriesResultItem } from "@lorenzopant/tmdb";
+import { MovieResultItem, TVSeriesResultItem, MovieDetails, TVSeriesDetails } from "@lorenzopant/tmdb";
 
 export interface PosterProps {
   title: string;
@@ -17,31 +17,14 @@ export interface PosterPodiumProps {
   imageUrl?: string
 }
 
-export interface JikanResponseWithPagination<T> {
-  data: T;
-  pagination: Pagination;
-}
-
-export interface Pagination {
-  last_visible_page: number;
-  has_next_page: boolean;
-  current_page?: number;
-  items?: PaginationItems;
-}
-
-export interface PaginationItems {
-	count: number;
-	total: number;
-	per_page: number;
-}
-
 export interface Game {
   id: number;
   name: string;
   released: string;
   rating: number;
-  description?: string | null;
   background_image: string;
+  description?: string | undefined;
+  tba?: boolean,
 }
 
 export interface MediaResultItems {
@@ -52,30 +35,12 @@ export interface MediaResultItems {
   manga?: Manga[];
 }
 
-export interface MediaResultItems {
-  movies?: MovieResultItem[];
-  shows?: TVSeriesResultItem[];
-  games?: Game[];
-  anime?: Anime[];
-  manga?: Manga[];
-}
-
-export interface JikanResponseWithPagination<T> {
-  data: T;
-  pagination: Pagination;
-}
-
-export interface Pagination {
-  last_visible_page: number;
-  has_next_page: boolean;
-  current_page?: number;
-  items?: PaginationItems;
-}
-
-export interface PaginationItems {
-	count: number;
-	total: number;
-	per_page: number;
+export interface MediaResultItem {
+  movie?: MovieDetails;
+  show?: TVSeriesDetails;
+  game?: Game;
+  anime?: Anime;
+  manga?: Manga;
 }
 export type MediaSource = "tmdb" | "jikan" | "rawg" | "google_books";
 
@@ -143,6 +108,7 @@ export type GameMediaItem = BaseMediaItem & {
 export type BookMediaItem = BaseMediaItem & {
   mediaType: "book";
 
+  titleJapanese?: string | null
   volumeInfo?: string[]
   tba?: string | null;
   genre?: string | null; // Not sure what it is stored as from the api

@@ -7,7 +7,7 @@ import type { DisplayMediaItem } from "@/types/types";
 import { createClient } from "@/lib/supabase/client";
 
 type MediaDetailModalProps = {
-  media: DisplayMediaItem | null;
+  media: DisplayMediaItem | undefined;
   isOpen: boolean;
   onClose: () => void;
 };
