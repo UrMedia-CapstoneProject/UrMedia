@@ -3,6 +3,14 @@ import styles from "./TrackedMedia.module.css"
 import { useState } from "react"
 import MediaList from "./MediaList";
 import TierView from "./TierView";
+import { ProfileTrackedMediaProps } from "@/services/profile/lists/getFollowedLists";
+
+export interface TrackedMediaProps {
+    movies: ProfileTrackedMediaProps[];
+    shows: ProfileTrackedMediaProps[];
+    games: ProfileTrackedMediaProps[];
+    books: ProfileTrackedMediaProps[];
+}
 
 export default function TrackedMedia() {
 
