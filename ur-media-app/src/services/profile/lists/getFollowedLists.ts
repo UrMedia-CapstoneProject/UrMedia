@@ -175,6 +175,7 @@ export async function getFollowedLists(
           review: tracked.review ?? null,
           repeatCount: tracked.repeat_count ?? null,
           posterUrl: posterUrl ?? null,
+          title: title ?? null,
         };
       }),
     );

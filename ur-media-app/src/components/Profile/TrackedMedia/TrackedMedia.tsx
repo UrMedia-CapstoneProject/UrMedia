@@ -12,8 +12,6 @@ export interface TrackedMediaProps {
     books: ProfileTrackedMediaProps[];
 }
 
-const status = ["plan", "playing", "replaying", "reading", "rereading", "watching",
-    "rewatching", "paused", "completed", "dropped"]
 
 export default function TrackedMedia({lists}: {lists: TrackedMediaProps}) {
 
@@ -65,10 +63,10 @@ export default function TrackedMedia({lists}: {lists: TrackedMediaProps}) {
                     </>
                 ) : (
                     <>
-                    {activeTab === "movies" && <MediaList />}
-                    {activeTab === "shows" && <MediaList />}
-                    {activeTab === "games" && <MediaList />}
-                    {activeTab === "books" && <MediaList />}
+                    {activeTab === "movies" && <MediaList list={lists.movies}/>}
+                    {activeTab === "shows" && <MediaList list={lists.shows}/>}
+                    {activeTab === "games" && <MediaList list={lists.games}/>}
+                    {activeTab === "books" && <MediaList list={lists.books}/>}
                     {activeTab === "filter" && <p>Filtering by: {activeFilter}</p>}
                     </>
                 )}
