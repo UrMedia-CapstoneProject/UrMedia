@@ -1,5 +1,6 @@
 import { TrackedMediaProps } from "@/components/Profile/TrackedMedia/TrackedMedia";
 import { getPosterUrl } from "../podium/getPosterUrl";
+import { getCountdownTitleAndPosterUrl } from "@/services/media/countdown/getCountdownTitleAndPosterUrl";
 
 type FollowedMediaRow = {
   media_id: number;
@@ -22,6 +23,7 @@ export interface ProfileTrackedMediaProps {
   review: string | null;
   repeatCount: string | null;
   posterUrl: string | null;
+  title: string | null;
 }
 
 export async function getFollowedLists(
@@ -154,10 +156,10 @@ export async function getFollowedLists(
         const tracked = trackedMap.get(row.media_id);
         if (!tracked) return null;
 
-        const posterUrl =
+        const data =
           row.media.media_type === "book"
             ? null
-            : await getPosterUrl({
+            : await getCountdownTitleAndPosterUrl({
                 source: row.media.source,
                 mediaType: row.media.media_type,
                 externalId: row.media.external_id,
@@ -174,8 +176,8 @@ export async function getFollowedLists(
           hoursPlayed: tracked.hours_played ?? null,
           review: tracked.review ?? null,
           repeatCount: tracked.repeat_count ?? null,
-          posterUrl: posterUrl ?? null,
-          title: title ?? null,
+          posterUrl: data?.imageUrl ?? null,
+          title: data?.title ?? null,
         };
       }),
     );
