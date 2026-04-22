@@ -1,7 +1,7 @@
 import styles from "./Podiums.module.css"
 import Image from "next/image"
 import PodiumPoster from "./PodiumPoster";
-import { PodiumItem } from "@/services/podium/getPodiums";
+import { PodiumItem } from "@/services/profile/podium/getPodiums";
 
 const ribbonHeight: number = 45
 const ribbonWidth: number = 30
