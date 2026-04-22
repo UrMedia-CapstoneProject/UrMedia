@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
-import TrackedMedia from "./TrackedMedia";
 import { getFollowedLists } from "@/services/profile/lists/getFollowedLists";
+import TrackedMedia from "./TrackedMedia";
 
 
 export default async function ServerTrackedMedia(){
@@ -18,9 +18,9 @@ export default async function ServerTrackedMedia(){
 
     const userId = user.id;
 
-    const TrackedMedia = getFollowedLists(supabase, userId);
+    const lists = await getFollowedLists(supabase, userId);
 
     return(
-        <div></div>
+        <TrackedMedia lists={lists}/>
     )
 }

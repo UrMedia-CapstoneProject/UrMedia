@@ -12,7 +12,10 @@ export interface TrackedMediaProps {
     books: ProfileTrackedMediaProps[];
 }
 
-export default function TrackedMedia() {
+const status = ["plan", "playing", "replaying", "reading", "rereading", "watching",
+    "rewatching", "paused", "completed", "dropped"]
+
+export default function TrackedMedia({lists}: {lists: TrackedMediaProps}) {
 
     const [activeTab, setActiveTab] = useState("movies")
     const [activeFilter, setActiveFilter] = useState<string | null>("A-Z")
