@@ -4,9 +4,9 @@ import { useState } from "react";
 import styles from "./fake-stats/fake_profile_stats.module.css";
 import type { ProfileStatsResponse, StatsTab } from "@/services/profile/stats/getProfileStats";
 
-type ProfileStatsSectionProps = {
-  stats: ProfileStatsResponse;
-};
+// type ProfileStatsSectionProps = {
+//   stats: ProfileStatsResponse;
+// };
 
 /*
   Labels what text should be shown for each tab
@@ -43,7 +43,7 @@ function getTrackedCountLabel(tab: StatsTab): string {
 
 export default function ProfileStatsClient({
   stats,
-}: ProfileStatsSectionProps) {
+}: {stats: ProfileStatsResponse}) {
   const [activeTab, setActiveTab] = useState<StatsTab>("all");
 
   const { cards, formatDistribution, scoreDistribution } = stats;
