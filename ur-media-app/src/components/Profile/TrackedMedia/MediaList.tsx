@@ -1,26 +1,20 @@
 "use client";
 import styles from "./MediaList.module.css";
 import MediaCard from "./MediaCard";
+import { useState } from "react";
 import { ProfileTrackedMediaProps } from "@/services/profile/lists/getFollowedLists";
+import { getMediaDetails } from "@/services/media/catalog/getMediaDetails";
+import { MediaResultItem } from "@/types/types";
+import MediaDetailModal from "@/components/Global/MediaDetailModal";
+import { mapMedia } from "@/utils/mapDataHelper";
 
 export default function MediaList({
   list,
 }: {
   list: ProfileTrackedMediaProps[];
 }) {
-  const status = [
-    "plan",
-    "playing",
-    "replaying",
-    "reading",
-    "rereading",
-    "watching",
-    "rewatching",
-    "paused",
-    "completed",
-    "dropped",
-  ];
-
+  const [media, setMedia] = useState<MediaResultItem | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const watchingItems = list.filter(
     (item) =>
       item.watchStatus === "watching" ||
@@ -34,6 +28,31 @@ export default function MediaList({
   const droppedItems = list.filter((item) => item.watchStatus === "dropped");
   const plannedItems = list.filter((item) => item.watchStatus === "plan");
 
+  const handleMediaCardClick = async (id: number, category: string) => {
+    if (category == "movie") {
+      category = 'movies'
+    } else if (category == "show") {
+      category = 'shows'
+    } else if (category == "game") {
+      category = 'games'
+    } else if (category == "anime_moive" || category == "anime_show") {
+      category = 'animes'
+    } else if (category == 'manga') {
+      category = 'mangas'
+    }
+    const response = await getMediaDetails(id, category)
+    console.log(category)
+    const media: MediaResultItem = response.media;
+    console.log(media)
+    setMedia(media);
+    setIsModalOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setMedia(null)
+    setIsModalOpen(false)
+  }
+
   return (
     <div className={styles.main}>
       {watchingItems.length > 0 && (
@@ -45,9 +64,13 @@ export default function MediaList({
           <div className={styles.grid}>
             {watchingItems.map((item) => (
               <div key={item.mediaId}>
-                <MediaCard title={item.title || "No title"}
-                  imageUrl={item.posterUrl || "/test-images/default-poster-image"}
+                <MediaCard
+                  title={item.title || "No title"}
+                  imageUrl={
+                    item.posterUrl || "/test-images/default-poster-image"
+                  }
                   score={item.rating != null ? String(item.rating) : ""}
+                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
                 />
               </div>
             ))}
@@ -64,9 +87,13 @@ export default function MediaList({
           <div className={styles.grid}>
             {completedItems.map((item) => (
               <div key={item.mediaId}>
-                <MediaCard title={item.title || "No title"}
-                  imageUrl={item.posterUrl || "/test-images/default-poster-image"}
+                <MediaCard
+                  title={item.title || "No title"}
+                  imageUrl={
+                    item.posterUrl || "/test-images/default-poster-image"
+                  }
                   score={item.rating != null ? String(item.rating) : ""}
+                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
                 />
               </div>
             ))}
@@ -83,9 +110,13 @@ export default function MediaList({
           <div className={styles.grid}>
             {pausedItems.map((item) => (
               <div key={item.mediaId}>
-                <MediaCard title={item.title || "No title"}
-                  imageUrl={item.posterUrl || "/test-images/default-poster-image"}
+                <MediaCard
+                  title={item.title || "No title"}
+                  imageUrl={
+                    item.posterUrl || "/test-images/default-poster-image"
+                  }
                   score={item.rating != null ? String(item.rating) : ""}
+                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
                 />
               </div>
             ))}
@@ -102,9 +133,13 @@ export default function MediaList({
           <div className={styles.grid}>
             {droppedItems.map((item) => (
               <div key={item.mediaId}>
-                <MediaCard title={item.title || "No title"}
-                  imageUrl={item.posterUrl || "/test-images/default-poster-image"}
+                <MediaCard
+                  title={item.title || "No title"}
+                  imageUrl={
+                    item.posterUrl || "/test-images/default-poster-image"
+                  }
                   score={item.rating != null ? String(item.rating) : ""}
+                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
                 />
               </div>
             ))}
@@ -121,15 +156,25 @@ export default function MediaList({
           <div className={styles.grid}>
             {plannedItems.map((item) => (
               <div key={item.mediaId}>
-                <MediaCard title={item.title || "No title"}
-                  imageUrl={item.posterUrl || "/test-images/default-poster-image"}
+                <MediaCard
+                  title={item.title || "No title"}
+                  imageUrl={
+                    item.posterUrl || "/test-images/default-poster-image"
+                  }
                   score={item.rating != null ? String(item.rating) : ""}
+                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
                 />
               </div>
             ))}
           </div>
         </>
       )}
+
+      <MediaDetailModal
+        media={media ? mapMedia(media) : undefined}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 }

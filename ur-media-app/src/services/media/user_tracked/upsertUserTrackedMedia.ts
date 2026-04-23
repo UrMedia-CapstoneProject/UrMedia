@@ -62,6 +62,7 @@ function mapPayloadToDbRow(
             };
 
         case "book":
+        case "manga":
             return base;
 
         default:

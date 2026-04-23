@@ -50,7 +50,8 @@ export type MediaType =
   | "show"
   | "anime_show"
   | "game"
-  | "book";
+  | "book"
+  | "manga";
 
 /*
     This will be the base prop for storing a MediaItem on our site. Other props will be added
@@ -107,7 +108,7 @@ export type GameMediaItem = BaseMediaItem & {
 };
 
 export type BookMediaItem = BaseMediaItem & {
-  mediaType: "book";
+  mediaType: "book" | "manga";
 
   titleJapanese?: string | null
   volumeInfo?: string[]

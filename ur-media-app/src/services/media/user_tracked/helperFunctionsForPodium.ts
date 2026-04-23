@@ -9,7 +9,8 @@ export type SupportedMediaType =
   | "show"
   | "anime_show"
   | "game"
-  | "book";
+  | "book"
+  | "manga";
 
 export function isSupportedMediaType(
   value: string,
@@ -20,7 +21,8 @@ export function isSupportedMediaType(
     value === "show" ||
     value === "anime_show" ||
     value === "game" ||
-    value === "book"
+    value === "book" ||
+    value === "manga"
   );
 }
 
