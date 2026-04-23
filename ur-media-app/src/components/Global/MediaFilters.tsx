@@ -4,7 +4,7 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import styles from "./MediaFilters.module.css"
 
 export default function MediaFilters() {
-  const mediaTypes = ["movies", "games", "shows", "books", "animes", "mangas"];
+  const mediaTypes = ["movies", "games", "shows", "animes", "mangas"];
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();

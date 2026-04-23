@@ -2,11 +2,6 @@ interface mediaPayload {
     source: string,
     media_type: string,
     external_id: string
-    title: string,
-    image_url?: string,
-    release_date?: Date,
-    next_release_date?: Date,
-    synopsis?: string,
 }
 
 export async function insertMedia({
@@ -23,7 +18,7 @@ export async function insertMedia({
         .insert(payload)
         .select('id')
         .single();
-
+        
     if (!error && data) {
         return data.id
     }
@@ -32,6 +27,7 @@ export async function insertMedia({
         .from('media')
         .select('id')
         .eq('external_id', payload.external_id)
+        .eq('media_type', payload.media_type)
         .single()
 
     if (fetchError) throw new Error(fetchError.message);

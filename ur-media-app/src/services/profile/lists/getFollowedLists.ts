@@ -14,6 +14,7 @@ type FollowedMediaRow = {
 export interface ProfileTrackedMediaProps {
   mediaId: number;
   externalId: string;
+  mediaType: string;
   watchStatus: string;
   startingDate: string | null;
   endingDate: string | null;
@@ -55,7 +56,9 @@ export async function getFollowedLists(
     (row) => row.media?.media_type === "anime_show",
   );
   const gameRows = rows.filter((row) => row.media?.media_type === "game");
-  const bookRows = rows.filter((row) => row.media?.media_type === "book");
+  const bookRows = rows.filter(
+    (row) => row.media?.media_type === "book" || "manga",
+  );
 
   const movieIds = movieRows.map((row) => row.media_id);
   const showIds = showRows.map((row) => row.media_id);
@@ -144,58 +147,54 @@ export async function getFollowedLists(
   const bookMap = new Map<number, FollowedMediaRow>(
     (trackedBooksRes.data ?? []).map((item: any) => [item.media_id, item]),
   );
-  
+
   async function buildItems(
     sourceRows: FollowedMediaRow[],
     trackedMap: Map<number, any>,
   ): Promise<ProfileTrackedMediaProps[]> {
-    const items = await Promise.all(
-      sourceRows.map(async (row) => {
-        if (!row.media) return null;
+    const items: ProfileTrackedMediaProps[] = [];
 
-        const tracked = trackedMap.get(row.media_id);
-        if (!tracked) return null;
+    for (const row of sourceRows) {
+      if (!row.media) continue;
 
-        const data =
-          row.media.media_type === "book"
-            ? null
-            : await getCountdownTitleAndPosterUrl({
-                source: row.media.source,
-                mediaType: row.media.media_type,
-                externalId: row.media.external_id,
-              });
+      const tracked = trackedMap.get(row.media_id);
+      if (!tracked) continue;
 
-        return {
-          mediaId: row.media_id,
-          externalId: row.media.external_id,
-          watchStatus: tracked.watch_status,
-          startingDate: tracked.starting_date ?? null,
-          endingDate: tracked.ending_date ?? null,
-          rating: tracked.rating ?? null,
-          episodesWatched: tracked.episodes_watched ?? null,
-          hoursPlayed: tracked.hours_played ?? null,
-          review: tracked.review ?? null,
-          repeatCount: tracked.repeat_count ?? null,
-          posterUrl: data?.imageUrl ?? null,
-          title: data?.title ?? null,
-        };
-      }),
-    );
+      const data =
+        row.media.media_type === "book"
+          ? null
+          : await getCountdownTitleAndPosterUrl({
+              source: row.media.source,
+              mediaType: row.media.media_type,
+              externalId: row.media.external_id,
+            });
 
-    return items.filter(
-      (item): item is ProfileTrackedMediaProps => item !== null,
-    );
+      items.push({
+        mediaId: row.media_id,
+        externalId: row.media.external_id,
+        mediaType: row.media.media_type,
+        watchStatus: tracked.watch_status,
+        startingDate: tracked.starting_date ?? null,
+        endingDate: tracked.ending_date ?? null,
+        rating: tracked.rating ?? null,
+        episodesWatched: tracked.episodes_watched ?? null,
+        hoursPlayed: tracked.hours_played ?? null,
+        review: tracked.review ?? null,
+        repeatCount: tracked.repeat_count ?? null,
+        posterUrl: data?.imageUrl ?? null,
+        title: data?.title ?? null,
+      });
+    }
+
+    return items;
   }
 
-  const [movies, shows, animeMovies, animeShows, games, books] =
-    await Promise.all([
-      buildItems(movieRows, movieMap),
-      buildItems(showRows, showMap),
-      buildItems(animeMovieRows, animeMap),
-      buildItems(animeShowRows, animeMap),
-      buildItems(gameRows, gameMap),
-      buildItems(bookRows, bookMap),
-    ]);
+  const movies = await buildItems(movieRows, movieMap);
+  const shows = await buildItems(showRows, showMap);
+  const animeMovies = await buildItems(animeMovieRows, animeMap);
+  const animeShows = await buildItems(animeShowRows, animeMap);
+  const games = await buildItems(gameRows, gameMap);
+  const books = await buildItems(bookRows, bookMap);
 
   return {
     movies: [...movies, ...animeMovies],

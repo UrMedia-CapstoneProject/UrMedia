@@ -2,7 +2,7 @@
 
 import { getMovieDetails, getShowDetails } from "@/services/tmdb";
 import { getGameByExternalId } from "@/services/rawg";
-import { getAnimeDetails } from "@/services/jikan";
+import { getAnimeDetails, getMangaDetails } from "@/services/jikan";
 // Missing getBook
 
 type GetCountdownMetadataArgs = {
@@ -67,13 +67,13 @@ export async function getCountdownTitleAndPosterUrl({
         title: game.name ?? null,
         imageUrl: game.background_image,
       };
-    } else if (source === "jikan" || mediaType === "anime_movie" || mediaType === "anime_show") {
+    } else if (source === "jikan" && (mediaType === "anime_movie" || mediaType === "anime_show")) {
       const anime = await getAnimeDetails(Number(externalId));
 
       if (!anime) {
         console.log("Failed to fetch JIKAN anime data");
         throw new Error("Failed to fetch JIKAN anime data");
-      }
+      } 
 
       return {
         title:
@@ -89,14 +89,36 @@ export async function getCountdownTitleAndPosterUrl({
           anime?.data?.images?.jpg?.image_url ??
           null,
       };
-    } else {
+    } else if (source === "jikan" && mediaType === "manga"){
+      const manga = await getMangaDetails(Number(externalId))
+      if(!manga) {
+        console.log("Failed to fetch JIKAN manga data");
+        throw new Error("Failed to fetch JIKAN manga data")
+      }
+
+      return {
+        title:
+          manga?.data?.title_english ??
+          manga?.data?.title ??
+          manga?.data?.title_japanese ??
+          null,
+
+          imageUrl:
+          manga?.data?.images?.webp?.large_image_url ??
+          manga?.data?.images?.jpg?.large_image_url ??
+          manga?.data?.images?.webp?.image_url ??
+          manga?.data?.images?.jpg?.image_url ??
+          null,
+      }
+    }
+    else {
       return {
         title: null,
         imageUrl: null,
       };
     }
   } catch (error) {
-    console.error("Failed to fetch countdown title and poster url");
+    console.error("Failed to fetch countdown title and poster url", error);
     return {
       title: null,
       imageUrl: null,
