@@ -54,8 +54,8 @@ export default function MediaDetailModal({
   const supabase = createClient();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isTracked, setIsTracked] = useState(false);;
-  
+  const [isTracked, setIsTracked] = useState(false);
+
   const [status, setStatus] = useState("");
   const [score, setScore] = useState("");
   const [hoursPlayed, setHoursPlayed] = useState<number | "">("");
@@ -69,47 +69,68 @@ export default function MediaDetailModal({
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
+  async function getId(external_id: number) {
+    const {data} = await supabase
+      .from("media")
+      .select("id")
+      .eq("external_id", external_id)
+      .single()
+
+    return data;
+  }
+
   useEffect(() => {
     if (!media || !isOpen || !media.mediaType) {
       resetFormStates();
       return;
     }
 
-    console.log("modal open:", isOpen);
-    const loadTrackedData = async () => {
-      try {
-    
-        const response = await fetch(
-          `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`,
-        );
-
-        const trackedData = await response.json();
-
-        if (!response.ok) {
-          setErrorMessage(trackedData.error || "Failed to load tracked data.");
-          return;
+    if (getId(Number(media.externalId)) != null) {
+      console.log("modal open:", isOpen);
+      const loadTrackedData = async () => {
+        const data = await getId(Number(media.externalId))
+        console.log(data)
+        if(data == null) {
+          resetFormStates()
+          return
         }
-        console.log(trackedData);
+        try {
+          const response = await fetch(
+            `/api/media/user-tracked?mediaId=${data.id}&mediaType=${media.mediaType}`,
+          );
 
-        setIsTracked(true);
-        setStatus(trackedData.status ?? "");
-        setScore(trackedData.score ?? "");
-        setHoursPlayed(trackedData.hoursPlayed ?? "");
-        setEpisodesWatched(trackedData.episodesWatched ?? "");
-        setRepeatCount(trackedData.repeatCount ?? "");
-        setStartDate(trackedData.startDate ?? "");
-        setFinishDate(trackedData.finishDate ?? "");
-        setReview(trackedData.review ?? "");
-        setPodiumEnabled(trackedData.podiumEnabled ?? false);
-        setPodiumRank(trackedData.podiumRank ?? "");
-        setSuccessMessage("");
-      } catch (error) {
-        console.error("Failed to laod the user tracked data", error);
-        setErrorMessage("Failed to load the user tracked data.");
-      }
-    };
+          const trackedData = await response.json();
 
-    loadTrackedData();
+          if (!response.ok) {
+            setErrorMessage(
+              trackedData.error || "Failed to load tracked data.",
+            );
+            return;
+          }
+          console.log(trackedData);
+
+          setIsTracked(true);
+          setStatus(trackedData.status ?? "");
+          setScore(trackedData.score ?? "");
+          setHoursPlayed(trackedData.hoursPlayed ?? "");
+          setEpisodesWatched(trackedData.episodesWatched ?? "");
+          setRepeatCount(trackedData.repeatCount ?? "");
+          setStartDate(trackedData.startDate ?? "");
+          setFinishDate(trackedData.finishDate ?? "");
+          setReview(trackedData.review ?? "");
+          setPodiumEnabled(trackedData.podiumEnabled ?? false);
+          setPodiumRank(trackedData.podiumRank ?? "");
+          setSuccessMessage("");
+        } catch (error) {
+          console.error("Failed to laod the user tracked data", error);
+          setErrorMessage("Failed to load the user tracked data.");
+        }
+      };
+
+      loadTrackedData();
+    } else {
+      resetFormStates();
+    }
   }, [media, isOpen]);
 
   useEffect(() => {
@@ -288,19 +309,19 @@ export default function MediaDetailModal({
       source: media.source,
       media_type: media.mediaType,
       external_id: media.externalId,
-    }
+    };
 
-      const res = await fetch("/api/media", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(externalMediaPayload)
-      })
+    const res = await fetch("/api/media", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(externalMediaPayload),
+    });
 
-      const { id } = await res.json()
+    const { id } = await res.json();
 
-      const trackedMediaPayload = {
+    const trackedMediaPayload = {
       mediaId: id,
       mediaType: media.mediaType,
       status: status || "plan",
@@ -316,7 +337,7 @@ export default function MediaDetailModal({
       podiumEnabled,
       podiumRank: podiumEnabled ? podiumRank : null,
     };
-    
+
     if (!podiumEnabled && podiumRank !== null) {
       handleDeletePodium();
     }
