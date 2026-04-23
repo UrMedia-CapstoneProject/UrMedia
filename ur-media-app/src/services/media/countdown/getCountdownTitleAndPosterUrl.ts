@@ -87,7 +87,7 @@ export async function getCountdownTitleAndPosterUrl({
           anime?.data?.images?.jpg?.large_image_url ??
           anime?.data?.images?.webp?.image_url ??
           anime?.data?.images?.jpg?.image_url ??
-          null,
+          "/test-images/default-poster-image.png"
       };
     } else {
       return {
@@ -96,10 +96,10 @@ export async function getCountdownTitleAndPosterUrl({
       };
     }
   } catch (error) {
-    console.error("Failed to fetch countdown title and poster url");
+    console.error("Failed to fetch countdown title and poster url", error);
     return {
       title: null,
-      imageUrl: null,
+      imageUrl: "/test-images/default-poster-image.png",
     };
   }
 }
