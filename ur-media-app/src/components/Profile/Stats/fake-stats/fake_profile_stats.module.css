@@ -585,3 +585,14 @@
 .statsMiniGridCompact {
   grid-template-columns: 1fr;
 }
+
+.loggedOutMessage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  text-align: center;
+  color: var(--foreground);
+  opacity: 0.8;
+  font-size: 1rem;
+}

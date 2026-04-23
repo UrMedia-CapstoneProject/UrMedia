@@ -2,11 +2,15 @@
 
 import { useState } from "react";
 import styles from "./fake-stats/fake_profile_stats.module.css";
-import type { ProfileStatsResponse, StatsTab } from "@/services/profile/stats/getProfileStats";
+import type {
+  ProfileStatsResponse,
+  StatsTab,
+} from "@/services/profile/stats/getProfileStats";
 
-// type ProfileStatsSectionProps = {
-//   stats: ProfileStatsResponse;
-// };
+type ProfileStatsSectionProps = {
+  stats: ProfileStatsResponse;
+  isLoggedIn: boolean;
+};
 
 /*
   Labels what text should be shown for each tab
@@ -43,7 +47,8 @@ function getTrackedCountLabel(tab: StatsTab): string {
 
 export default function ProfileStatsClient({
   stats,
-}: {stats: ProfileStatsResponse}) {
+  isLoggedIn
+}: ProfileStatsSectionProps) {
   const [activeTab, setActiveTab] = useState<StatsTab>("all");
 
   const { cards, formatDistribution, scoreDistribution } = stats;
@@ -85,7 +90,12 @@ export default function ProfileStatsClient({
         </div>
       </div>
 
-      <div className={styles.statsPageSection}>
+      {!isLoggedIn ? (
+        <div className={styles.loggedOutMessage}>
+          Please log in to view your data
+        </div>
+      ) : (
+         <div className={styles.statsPageSection}>
         {/* Main summary card */}
         <div className={styles.statsSummaryCard}>
           <div className={styles.statsSummaryTop}>
@@ -220,6 +230,7 @@ export default function ProfileStatsClient({
           </div>
         </div>
       </div>
+      )}
     </div>
   );
 }
