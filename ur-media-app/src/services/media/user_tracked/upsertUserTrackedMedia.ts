@@ -23,6 +23,10 @@ export type TrackMediaPayload = {
     podiumRank: number | null;
 };
 
+// function getPodiumGroup(media_type: string): string {
+//     return "games"
+// }
+
 function mapPayloadToDbRow(
     mediaType: SupportedMediaType,
     payload: any,
@@ -91,6 +95,18 @@ export async function upsertTrackedMedia({
     if (error) throw new Error(error.message);
 
     if (payload.podiumEnabled && payload.podiumRank !== null) {
+        const {error: errorDeletePodium} = await supabase
+            .from("user_podium")
+            .delete()
+            .eq("user_id", userId)
+            .eq("podium_group", podiumGroup)
+            .eq("placement", payload.podiumRank)
+
+        if(errorDeletePodium) {
+            console.error("deleting podium is not working")
+            throw new Error(errorDeletePodium.message);
+        }
+
         const { error: podiumError } = await supabase
             .from("user_podium")
             .upsert({

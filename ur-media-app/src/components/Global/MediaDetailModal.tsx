@@ -55,6 +55,7 @@ export default function MediaDetailModal({
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isTracked, setIsTracked] = useState(false);
+  const [mediaExists, setMediaExists] = useState(false);
   
   const [status, setStatus] = useState("");
   const [score, setScore] = useState("");
@@ -77,29 +78,39 @@ export default function MediaDetailModal({
 
     const loadTrackedData = async () => {
       try {
+        const { data } =  await supabase
+          .from('media')
+          .select('external_id')
+          .eq('column_name', media.externalId)
+          .maybeSingle()
+
+        if (data) {
+          setMediaExists(true)
+        }
+    
         const response = await fetch(
           `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`,
         );
 
-        const data = await response.json();
+        const trackedData = await response.json();
 
         if (!response.ok) {
-          setErrorMessage(data.error || "Failed to load tracked data.");
+          setErrorMessage(trackedData.error || "Failed to load tracked data.");
           return;
         }
-        console.log(data);
+        console.log(trackedData);
 
         setIsTracked(true);
-        setStatus(data.status ?? "");
-        setScore(data.score ?? "");
-        setHoursPlayed(data.hoursPlayed ?? "");
-        setEpisodesWatched(data.episodesWatched ?? "");
-        setRepeatCount(data.repeatCount ?? "");
-        setStartDate(data.startDate ?? "");
-        setFinishDate(data.finishDate ?? "");
-        setReview(data.review ?? "");
-        setPodiumEnabled(data.podiumEnabled ?? false);
-        setPodiumRank(data.podiumRank ?? "");
+        setStatus(trackedData.status ?? "");
+        setScore(trackedData.score ?? "");
+        setHoursPlayed(trackedData.hoursPlayed ?? "");
+        setEpisodesWatched(trackedData.episodesWatched ?? "");
+        setRepeatCount(trackedData.repeatCount ?? "");
+        setStartDate(trackedData.startDate ?? "");
+        setFinishDate(trackedData.finishDate ?? "");
+        setReview(trackedData.review ?? "");
+        setPodiumEnabled(trackedData.podiumEnabled ?? false);
+        setPodiumRank(trackedData.podiumRank ?? "");
         setSuccessMessage("");
       } catch (error) {
         console.error("Failed to laod the user tracked data", error);
@@ -282,8 +293,29 @@ export default function MediaDetailModal({
     setErrorMessage("");
     setSuccessMessage("");
 
-    const payload = {
-      mediaId: media.id,
+    const externalMediaPayload = {
+      source: media.source,
+      media_type: media.mediaType,
+      external_id: media.externalId,
+      title: media.title,
+      image_url: media.imageUrl,
+      release_date: media.releaseDate,
+      next_release_date: media.nextReleaseDate,
+      synopsis: media.synopsis
+    }
+
+      const res = await fetch("/api/media", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(externalMediaPayload)
+      })
+
+      const { id } = await res.json()
+
+      const trackedMediaPayload = {
+      mediaId: id,
       mediaType: media.mediaType,
       status: status || "plan",
       score: score === "" ? null : Number(score),
@@ -298,19 +330,19 @@ export default function MediaDetailModal({
       podiumEnabled,
       podiumRank: podiumEnabled ? podiumRank : null,
     };
-
+    
     if (!podiumEnabled && podiumRank !== null) {
-      handleDeletePodium;
+      handleDeletePodium();
     }
 
-    console.log("Save Changes payload:", payload);
+    console.log("Save Changes payload:", trackedMediaPayload);
 
     await fetch("/api/media/user-tracked", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(trackedMediaPayload),
     });
 
     setIsTracked(true);

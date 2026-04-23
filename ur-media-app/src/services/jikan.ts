@@ -49,7 +49,7 @@ export async function getPopularManga(page: number) {
 
 export async function searchManga(title: string, page: number) {
     try {
-        sleep(400)
+        await sleep(400)
         return await jikan.manga.searchManga({q: title, page: page, limit: 20})
     } catch (err) {
          console.log("Jikan API Error while fetching Manga, exiting with: " + err)
@@ -58,7 +58,7 @@ export async function searchManga(title: string, page: number) {
 
 export async function getMangaDetails(id: number) {
     try {
-        sleep(400)
+        await sleep(400)
         return await jikan.manga.getMangaById(id)
     } catch (err) {
          console.log("Jikan API Error while fetching Manga, exiting with: " + err)

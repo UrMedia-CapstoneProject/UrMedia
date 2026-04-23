@@ -87,9 +87,11 @@ export async function POST(req: NextRequest) {
             payload,
         });
 
+        
         return NextResponse.json({ success: true });
 
     } catch (err: any) {
+        console.log("Error with post: " + err)
         return NextResponse.json(
             { error: err.message },
             { status: 500 }
