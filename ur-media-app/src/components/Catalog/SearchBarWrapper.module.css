@@ -1,0 +1,10 @@
+.searchForm{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.searchBarWrapper{
+    flex: 1;
+    min-width: 0;
+}
