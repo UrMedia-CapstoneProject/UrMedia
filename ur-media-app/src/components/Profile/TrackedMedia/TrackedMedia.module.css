@@ -46,6 +46,7 @@
     padding-left: 0.45rem;
     padding-right: 0.45rem;
     border-radius: 10%;
+    display: none;
 }
 
 .tabLink {
@@ -71,7 +72,6 @@
 }
 
 .mobileTabDropdown {
-    display: none;
     position: relative;
     justify-self: end;
     align-self: start;

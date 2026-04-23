@@ -16,7 +16,7 @@ export interface TrackedMediaProps {
 export default function TrackedMedia({ lists }: { lists: TrackedMediaProps }) {
 
     const [activeTab, setActiveTab] = useState("movies")
-    const [activeFilter, setActiveFilter] = useState<string | null>("A-Z")
+    const [activeFilter, setActiveFilter] = useState<string | null>("Score")
     const [viewMode, setViewMode] = useState("list")
 
     function handleFilterSelect(filter: string) {
@@ -35,7 +35,7 @@ export default function TrackedMedia({ lists }: { lists: TrackedMediaProps }) {
                         />
                     </div>
                     <div className={styles.tierView}>
-                        <input type="radio" name="viewMode" value="tiers"
+                        <input type="radio" name="viewMode" value="tiers" disabled
                             onChange={() => setViewMode("tiers")}
                         />
                     </div>
@@ -56,7 +56,7 @@ export default function TrackedMedia({ lists }: { lists: TrackedMediaProps }) {
                     </div>
 
                     <div className={styles.dropdown}>
-                        <button className={`${styles.filterButton} ${activeTab === "filter"}`}>
+                        <button className={`${styles.filterButton} ${activeTab === "filter"}`} disabled>
                             {activeFilter}
                         </button>
 
