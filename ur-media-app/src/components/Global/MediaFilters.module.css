@@ -1,20 +1,4 @@
-.main {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .filterBox {
     display: flex;
-    flex-direction: column;
-}
-
-.header {
-    font-size: 1.7rem;
-}
-
-.filters {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    
 }

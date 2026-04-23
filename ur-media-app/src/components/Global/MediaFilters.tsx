@@ -18,8 +18,9 @@ export default function MediaFilters() {
   };
 
   return (
-    <div>
+    <div className={styles.filterBox}>
       <select
+        className={styles.filterBox}
         name="category"
         onChange={(media) => handleFilterChange(media.target.value)}
         value={currentValue}
