@@ -44,7 +44,7 @@ export default function Catalog({ data, category }: CatalogProps) {
       return {
         mediaType: 'movie',
         id: media.movie.id,
-        externalId: media.movie.imdb_id || "",
+        externalId: media.movie.id.toString(),
         source: "tmdb",
         title: media.movie.title,
         imageUrl: `https://image.tmdb.org/t/p/w500/${media.movie.poster_path}`,
