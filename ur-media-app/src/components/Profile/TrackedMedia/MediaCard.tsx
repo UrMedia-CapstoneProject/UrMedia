@@ -1,6 +1,5 @@
 import styles from "./MediaCard.module.css"
 import Image from "next/image";
-import Poster from "@/components/Global/Poster";
 
 type MediaCardProps = {
     title: string

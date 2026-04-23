@@ -78,21 +78,8 @@ function buildPopularMediaByCategory(
 }
 
 export default async function PopularMedia() {
+
   const supabase = await createClient()
-
-  // Testing stat values based on logged in user
-  // const rows = await getNormalizedProfileStatsRows('enter_user_id')
-  // const rows2 = await getProfileStats('enter_user_id')
-
-  //   console.log({
-  //     total: rows.length,
-  //     movies: rows.filter((row) => row.bucket === "movies").length,
-  //     shows: rows.filter((row) => row.bucket === "shows").length,
-  //     games: rows.filter((row) => row.bucket === "games").length,
-  //     books: rows.filter((row) => row.bucket === "books").length,
-  //   })
-
-  //   console.log("profile-stats", rows2)
 
   const { data, error } = await supabase
     .from("popular_media_cache")
@@ -134,4 +121,8 @@ export default async function PopularMedia() {
   const groupedMedia = buildPopularMediaByCategory(normalizedRows)
 
   return <PopularMediaClient initialPopularMedia={groupedMedia} />
+}
+
+function getNormalizedProfileStatsRow(arg0: string) {
+  throw new Error("Function not implemented.")
 }
