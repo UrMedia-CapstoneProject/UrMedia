@@ -4,6 +4,7 @@ import { getUserTrackedMedia } from '@/services/media/user_tracked/getUserTracke
 import { upsertTrackedMedia } from '@/services/media/user_tracked/upsertUserTrackedMedia'
 import { deleteUserTrackedMedia } from '@/services/media/user_tracked/deleteTrackedMedia'
 import { DeleteTrackedMediaPayload } from '@/services/media/user_tracked/deleteTrackedMedia'
+import { insertMediaFollowed } from '@/services/media/user_tracked/insertMediaFollowed'
 
 export async function GET(request: NextRequest) {
     try {
@@ -73,6 +74,13 @@ export async function POST(req: NextRequest) {
         }
 
         const userId = authorizedUser.user.id;
+
+        console.log("Made it to insert for media_follows")
+        await insertMediaFollowed({
+            supabase,
+            userId,
+            payload
+        })
 
         // call your DB function
         console.log("Made it to upsert")

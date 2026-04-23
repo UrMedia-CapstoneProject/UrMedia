@@ -1,6 +1,6 @@
-import { getMovie, getShow } from "../../tmdb";
+import { getMovieDetails, getShowDetails } from "../../tmdb";
 import { getGameByExternalId } from "@/services/rawg";
-// add jikan in here
+import { getAnimeDetails } from "@/services/jikan";
 
 import type { MediaSource, MediaType } from "@/types/types";
 
@@ -25,6 +25,16 @@ function buildTMDBImageUrl(posterPath?: string | null) {
   return `${TMDB_IMAGE_BASE}${posterPath}`;
 }
 
+function replaceHtml(description: string | undefined) {
+  if (!description) return;
+  return description.replace(/<[^>]+>/g, "");
+}
+
+function cleanText(description: string | undefined) {
+  if (!description) return;
+  return description.replace(/[\n\r\t]+/g, " ").replace(/\s+/g, "").trim()
+}
+
 export async function refreshMediaMetadata({
   supabase,
   media,
@@ -32,7 +42,7 @@ export async function refreshMediaMetadata({
   let updateData: Record<string, unknown> | null = null;
 
   if (media.source === "tmdb" && media.media_type === "movie") {
-    const movie = await getMovie(Number(media.external_id));
+    const movie = await getMovieDetails(Number(media.external_id));
     // console.log(movie);
 
     if (!movie) {
@@ -49,7 +59,7 @@ export async function refreshMediaMetadata({
       metadata_updated_at: new Date().toISOString(),
     };
   } else if (media.source === "tmdb" && media.media_type === "show") {
-    const show = await getShow(Number(media.external_id));
+    const show = await getShowDetails(Number(media.external_id));
 
     if (!show) {
       console.log("Failed to fetch TMDB show data");
@@ -66,8 +76,8 @@ export async function refreshMediaMetadata({
     };
 
     // console.log(updateData);
-  } else if (media.source === "rawg" && media.media_type === "game") {
-    const game = await getGameByExternalId(media.external_id);
+  } else if ((media.source === "jikan" || media.media_type === "anime_movie" || media.media_type === "anime_show")) {
+    const animeMovie = await getGameByExternalId(media.external_id);
     // console.log(game);
 
     if (!game) {
@@ -80,12 +90,13 @@ export async function refreshMediaMetadata({
     updateData = {
       title: game.name ?? null,
       image_url: game.background_image,
-      synopsis: game.description ?? null,
+      synopsis: replaceHtml(game.description) ?? null,
       release_date: game.released ?? null,
       next_release_date: null,
       metadata_updated_at: new Date().toISOString(),
     };
 
+    // add jikan if for (media.source === "jikan" && media.source === "anime_movie")
     // add else if for (media.source === "google_books" && media.media_type === "book")
   } else {
     throw new Error(

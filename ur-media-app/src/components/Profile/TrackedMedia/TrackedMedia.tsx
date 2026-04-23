@@ -3,8 +3,17 @@ import styles from "./TrackedMedia.module.css"
 import { useState } from "react"
 import MediaList from "./MediaList";
 import TierView from "./TierView";
+import { ProfileTrackedMediaProps } from "@/services/profile/lists/getFollowedLists";
 
-export default function TrackedMedia() {
+export interface TrackedMediaProps {
+    movies: ProfileTrackedMediaProps[];
+    shows: ProfileTrackedMediaProps[];
+    games: ProfileTrackedMediaProps[];
+    books: ProfileTrackedMediaProps[];
+}
+
+
+export default function TrackedMedia({lists}: {lists: TrackedMediaProps}) {
 
     const [activeTab, setActiveTab] = useState("movies")
     const [activeFilter, setActiveFilter] = useState<string | null>("A-Z")
@@ -54,10 +63,10 @@ export default function TrackedMedia() {
                     </>
                 ) : (
                     <>
-                    {activeTab === "movies" && <MediaList />}
-                    {activeTab === "shows" && <MediaList />}
-                    {activeTab === "games" && <MediaList />}
-                    {activeTab === "books" && <MediaList />}
+                    {activeTab === "movies" && <MediaList list={lists.movies}/>}
+                    {activeTab === "shows" && <MediaList list={lists.shows}/>}
+                    {activeTab === "games" && <MediaList list={lists.games}/>}
+                    {activeTab === "books" && <MediaList list={lists.books}/>}
                     {activeTab === "filter" && <p>Filtering by: {activeFilter}</p>}
                     </>
                 )}

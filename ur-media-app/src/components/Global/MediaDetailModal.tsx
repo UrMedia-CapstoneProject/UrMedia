@@ -155,14 +155,14 @@ export default function MediaDetailModal({
       ];
     }
 
-    if (isMovie) {
-      return [
-        { value: "plan", label: "Plan to Watch" },
-        { value: "paused", label: "Paused" },
-        { value: "completed", label: "Completed" },
-        { value: "dropped", label: "Dropped" },
-      ];
-    }
+    // if (isMovie) {
+    //   return [
+    //     { value: "plan", label: "Plan to Watch" },
+    //     { value: "paused", label: "Paused" },
+    //     { value: "completed", label: "Completed" },
+    //     { value: "dropped", label: "Dropped" },
+    //   ];
+    // }
 
     return [
       { value: "plan", label: "Plan to Watch" },

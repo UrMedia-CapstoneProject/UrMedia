@@ -1,9 +1,8 @@
 import styles from "./page.module.css"
-import UserBio from "@/components/Profile/UserBio/UserBio";
-import TrackedMedia from "@/components/Profile/TrackedMedia/TrackedMedia";
 import ProfileStats from "@/components/Profile/Stats/ProfileStats";
 import ServerPodiums from "@/components/Profile/Podium/ServerPodiums";
 import { ServerUserBio } from "@/components/Profile/UserBio/ServerUserBio";
+import ServerTrackedMedia from "@/components/Profile/TrackedMedia/ServerTrackedMedia";
 
 export default async function ProfilePage() {
     return (
@@ -14,8 +13,8 @@ export default async function ProfilePage() {
                     <ServerPodiums />
                 </div>
                 <div className={styles.grid}>
-                    <ProfileStats />
-                    <TrackedMedia />
+                    {/* <ProfileStats />
+                    <ServerTrackedMedia /> */}
                 </div>
             </div>
         </div>
