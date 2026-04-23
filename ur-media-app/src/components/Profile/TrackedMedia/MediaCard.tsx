@@ -1,39 +1,40 @@
-"use client"
-import styles from "./MediaCard.module.css"
-import { useState } from "react"
+"use client";
+import styles from "./MediaCard.module.css";
+import { useState } from "react";
 import Poster from "@/components/Global/Poster";
 
 type MediaCardProps = {
-  title: string
-  imageUrl: string
-  epWatched: string
-  score?: string
-}
+  title: string;
+  imageUrl: string;
+  epWatched: string;
+  score?: string;
+};
 
-export default function MediaCard({title, imageUrl, epWatched, score} : MediaCardProps) {
-    return (
-        <div className={styles.main}>
-            <div className={styles.poster}>
-                <Poster title={title} imageUrl={imageUrl} hoverEnabled={false} />
-                <div className={styles.mediaInfo}>
-                    <div>
-                        <p className={styles.title}>
-                            <span className={styles.titleText}>
-                                {title}
-                            </span>
-                        </p>
+export default function MediaCard({
+  title,
+  imageUrl,
+  epWatched,
+  score,
+}: MediaCardProps) {
+  return (
+    <div className={styles.main}>
+      <div className={styles.poster}>
+        <Poster title={title} imageUrl={imageUrl} hoverEnabled={false} />
+        <div className={styles.mediaInfo}>
+          <div>
+            <p className={styles.title}>
+              <span className={styles.titleText}>{title}</span>
+            </p>
+          </div>
 
-                    </div>
-
-                    <div className={styles.userStats}>
-                        <p className={styles.score}>{score}</p>
-                        <p className={styles.epWatched}>{epWatched}</p>
-                    </div>
-
-                </div>
-            </div>
+          <div className={styles.userStats}>
+            <p className={styles.score}>{score}</p>
+            <p className={styles.epWatched}>{epWatched}</p>
+          </div>
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
 // "use client"

@@ -1,12 +1,10 @@
 /* This file builds the final grouped countdown data for one user*/
 
 import { createClient } from "@/lib/supabase/server";
-import { getPosterUrl } from "@/services/podium/getPosterUrl";
 import {
   CountdownTitleAndUrl,
   getCountdownTitleAndPosterUrl,
 } from "./getCountdownTitleAndPosterUrl";
-import { group } from "console";
 
 export type CountdownTab = "movies" | "shows" | "games" | "books"; // "book" will be taken out. "anime" could replace it?\
 
