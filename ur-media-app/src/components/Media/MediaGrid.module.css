@@ -10,6 +10,17 @@
     width: 100%;
 }
 
+.defaultMessage{
+    background-color: rgba(var(--surface-primary-rgb), 0.2);
+    padding: 1rem;
+    box-shadow: 0 8px 15px rgba(var(--box-shadow-rgb), 0.9);
+    border-radius: 15px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .posterGrid {
     background-color: rgba(var(--surface-primary-rgb), 0.2);
     display: grid;

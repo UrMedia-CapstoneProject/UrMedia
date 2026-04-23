@@ -6,35 +6,48 @@ import MobileMediaCard from "../Global/MobileMediaCard";
 type MediaGridProps = {
   items: DisplayMediaItem[];
   onPosterClick?: (item: DisplayMediaItem) => void;
+  isBooks?: boolean;
 };
 
-export default function MediaGrid({ items, onPosterClick }: MediaGridProps) {
+export default function MediaGrid({
+  items,
+  onPosterClick,
+  isBooks,
+}: MediaGridProps) {
   return (
-    <div className={styles.wrapper}>
+    <div>
+      {!isBooks ? (
+        <>
+          <div className={styles.wrapper}>
+            <div className={styles.posterGrid}>
+              {items.map((item) => (
+                <div key={`${item.source}-${item.externalId}`}>
+                  <Poster
+                    title={item.title}
+                    imageUrl={item.imageUrl}
+                    onClick={() => onPosterClick?.(item)}
+                    hoverEnabled={true}
+                  />
+                </div>
+              ))}
+            </div>
 
-      <div className={styles.posterGrid}>
-        {items.map((item) => (
-          <div key={`${item.source}-${item.externalId}`}>
-            <Poster
-              title={item.title}
-              imageUrl={item.imageUrl}
-              onClick={() => onPosterClick?.(item)}
-              hoverEnabled={true}
-            />
+            <div className={styles.mobileRow}>
+              {items.map((item) => (
+                <MobileMediaCard
+                  key={`${item.source}-${item.externalId}`}
+                  item={item}
+                  onClick={() => onPosterClick?.(item)}
+                />
+              ))}
+            </div>
           </div>
-        ))}
-      </div>
-
-      <div className={styles.mobileRow}>
-        {items.map((item) => (
-          <MobileMediaCard
-            key={`${item.source}-${item.externalId}`}
-            item={item}
-            onClick={() => onPosterClick?.(item)}
-          />
-        ))}
-      </div>
-
+        </>
+      ) : (
+        <div className={styles.defaultMessage}>
+          <h2>Books coming soon!</h2>
+        </div>
+      )}
     </div>
   );
 }

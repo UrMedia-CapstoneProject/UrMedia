@@ -59,6 +59,7 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .updateCards{
@@ -70,4 +71,15 @@
     padding: 1.8rem;
     flex: 1;
     min-height: 0;
+}
+
+.emptyMessage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 180px;
+    color: var(--foreground);
+    opacity: 0.8;
+    font-size: 1.8rem;
+    text-align: center;
 }

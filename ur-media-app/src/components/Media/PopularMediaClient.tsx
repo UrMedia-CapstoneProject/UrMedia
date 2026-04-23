@@ -59,6 +59,7 @@ export default function PopularMediaClient({
         <MediaGrid
           items={initialPopularMedia.books}
           onPosterClick={handlePosterClick}
+          isBooks={true}
         />
       </div>
 
