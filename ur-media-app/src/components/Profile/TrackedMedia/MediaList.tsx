@@ -15,6 +15,7 @@ export default function MediaList({
 }) {
   const [media, setMedia] = useState<MediaResultItem | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [realMediaId, setRealMediaId] = useState(0);
   const watchingItems = list.filter(
     (item) =>
       item.watchStatus === "watching" ||
@@ -28,7 +29,7 @@ export default function MediaList({
   const droppedItems = list.filter((item) => item.watchStatus === "dropped");
   const plannedItems = list.filter((item) => item.watchStatus === "plan");
 
-  const handleMediaCardClick = async (id: number, category: string) => {
+  const handleMediaCardClick = async (id: number, category: string, externalId: number) => {
     if (category == "movie") {
       category = 'movies'
     } else if (category == "show") {
@@ -40,12 +41,11 @@ export default function MediaList({
     } else if (category == 'manga') {
       category = 'mangas'
     }
-    const response = await getMediaDetails(id, category)
-    console.log(category)
+    const response = await getMediaDetails(externalId, category)
     const media: MediaResultItem = response.media;
-    console.log(media)
     setMedia(media);
-    setIsModalOpen(true)
+    setIsModalOpen(true);
+    setRealMediaId(id)
   }
 
   const handleCloseModal = () => {
@@ -70,7 +70,7 @@ export default function MediaList({
                     item.posterUrl || "/test-images/default-poster-image"
                   }
                   score={item.rating != null ? String(item.rating) : ""}
-                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
+                  onClick={() => handleMediaCardClick(item.mediaId, item.mediaType, Number(item.externalId))}
                 />
               </div>
             ))}
@@ -93,7 +93,7 @@ export default function MediaList({
                     item.posterUrl || "/test-images/default-poster-image"
                   }
                   score={item.rating != null ? String(item.rating) : ""}
-                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
+                  onClick={() => handleMediaCardClick(item.mediaId, item.mediaType, Number(item.externalId))}
                 />
               </div>
             ))}
@@ -116,7 +116,7 @@ export default function MediaList({
                     item.posterUrl || "/test-images/default-poster-image"
                   }
                   score={item.rating != null ? String(item.rating) : ""}
-                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
+                  onClick={() => handleMediaCardClick(item.mediaId, item.mediaType, Number(item.externalId))}
                 />
               </div>
             ))}
@@ -139,7 +139,7 @@ export default function MediaList({
                     item.posterUrl || "/test-images/default-poster-image"
                   }
                   score={item.rating != null ? String(item.rating) : ""}
-                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
+                  onClick={() => handleMediaCardClick(item.mediaId, item.mediaType, Number(item.externalId))}
                 />
               </div>
             ))}
@@ -162,7 +162,7 @@ export default function MediaList({
                     item.posterUrl || "/test-images/default-poster-image"
                   }
                   score={item.rating != null ? String(item.rating) : ""}
-                  onClick={() => handleMediaCardClick(Number(item.externalId), item.mediaType)}
+                  onClick={() => handleMediaCardClick(item.mediaId, item.mediaType, Number(item.externalId))}
                 />
               </div>
             ))}
@@ -171,7 +171,7 @@ export default function MediaList({
       )}
 
       <MediaDetailModal
-        media={media ? mapMedia(media) : undefined}
+        media={media ? mapMedia(media, realMediaId) : undefined}
         isOpen={isModalOpen}
         onClose={handleCloseModal}
       />

@@ -54,8 +54,7 @@ export default function MediaDetailModal({
   const supabase = createClient();
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isTracked, setIsTracked] = useState(false);
-  const [mediaExists, setMediaExists] = useState(false);
+  const [isTracked, setIsTracked] = useState(false);;
   
   const [status, setStatus] = useState("");
   const [score, setScore] = useState("");

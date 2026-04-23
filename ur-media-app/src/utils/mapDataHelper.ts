@@ -5,14 +5,19 @@ export function replaceHtml(description: string | undefined) {
     return description.replace(/<[^>]+>/g, "");
   }
 
-export function mapMedia(media: MediaResultItem | null): DisplayMediaItem | undefined{
+export function mapMedia(media: MediaResultItem | null, id?: number): DisplayMediaItem | undefined{
+    console.log("We are in mapMedia" + id)
+    let isId = false
     if (!media) {
       return undefined
+    }
+    if (id) {
+      isId = true
     }
     if(media.movie) {
       return {
         mediaType: 'movie',
-        id: media.movie.id,
+        id: isId ? id || null : media.movie.id,
         externalId: media.movie.id.toString(),
         source: "tmdb",
         title: media.movie.title,
@@ -24,7 +29,7 @@ export function mapMedia(media: MediaResultItem | null): DisplayMediaItem | unde
     } else if (media.show) {
       return {
         mediaType: 'show',
-        id: media.show.id,
+        id: isId ? id || null : media.show.id,
         externalId: media.show.id.toString(),
         source: 'tmdb',
         title: media.show.name,
@@ -36,7 +41,7 @@ export function mapMedia(media: MediaResultItem | null): DisplayMediaItem | unde
     }else if (media.game) {
       return {
         mediaType: 'game',
-        id: media.game.id,
+        id: isId ? id || null : media.game.id,
         externalId: media.game.id.toString(),
         source: 'rawg',
         title: media.game.name,
@@ -48,7 +53,7 @@ export function mapMedia(media: MediaResultItem | null): DisplayMediaItem | unde
       let animeType = media.anime.type === 'Movie'
       return {
         mediaType: animeType ? 'anime_movie' : 'anime_show',
-        id: media.anime.mal_id,
+        id: isId ? id || null : media.anime.mal_id,
         externalId: media.anime.mal_id.toString(),
         source: 'jikan',
         title: media.anime.title_english || '',
@@ -61,7 +66,7 @@ export function mapMedia(media: MediaResultItem | null): DisplayMediaItem | unde
     }else if (media.manga) {
       return {
         mediaType: 'manga',
-        id: media.manga.mal_id,
+        id: isId ? id || null : media.manga.mal_id,
         externalId: media.manga.mal_id.toString(),
         source: 'jikan',
         title: media.manga.title,
