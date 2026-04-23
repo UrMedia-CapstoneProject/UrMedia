@@ -1,12 +1,20 @@
+import { Anime, Manga } from "@rushelasli/jikants";
+import { MovieResultItem, TVSeriesResultItem, MovieDetails, TVSeriesDetails } from "@lorenzopant/tmdb";
+
 export interface PosterProps {
   title: string;
   imageUrl: string;
   onClick?: () => void;
+  hoverEnabled: boolean;
 }
 
-export interface MobileMediaCardProps{
+export interface MobileMediaCardProps {
   item: BaseMediaItem;
   onClick?: () => void;
+}
+
+export interface PosterPodiumProps {
+  imageUrl?: string
 }
 
 export interface Game {
@@ -15,8 +23,25 @@ export interface Game {
   released: string;
   rating: number;
   background_image: string;
+  description?: string | undefined;
+  tba?: boolean,
 }
 
+export interface MediaResultItems {
+  movies?: MovieResultItem[];
+  shows?: TVSeriesResultItem[];
+  games?: Game[];
+  anime?: Anime[];
+  manga?: Manga[];
+}
+
+export interface MediaResultItem {
+  movie?: MovieDetails;
+  show?: TVSeriesDetails;
+  game?: Game;
+  anime?: Anime;
+  manga?: Manga;
+}
 export type MediaSource = "tmdb" | "jikan" | "rawg" | "google_books";
 
 export type MediaType =
@@ -83,6 +108,7 @@ export type GameMediaItem = BaseMediaItem & {
 export type BookMediaItem = BaseMediaItem & {
   mediaType: "book";
 
+  titleJapanese?: string | null
   volumeInfo?: string[]
   tba?: string | null;
   genre?: string | null; // Not sure what it is stored as from the api

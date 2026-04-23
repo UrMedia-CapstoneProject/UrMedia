@@ -174,9 +174,9 @@
 }
 
 .saveButton {
-    background-color: #116494;
+    background-color: #3d36be;
     color: white;
-    border: none;
+    border: 1px solid #7b7bad;
     padding: 12px 24px;
     border-radius: 8px;
     font-size: 16px;
@@ -186,11 +186,31 @@
 }
 
 .saveButton:hover {
-    background-color: #1c83bb;
+    background-color: #2f2a93;
 }
 
 .saveButton:active {
     transform: scale(0.98);
+}
+
+.cancelButton {
+    background-color: #c8c7db;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: 1px solid #636369;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.cancelButton:hover {
+    background-color: #a9a8b4;
+}
+
+.cancelButton:active {
+     transform: scale(0.98);
 }
 
 .podiumRow {
