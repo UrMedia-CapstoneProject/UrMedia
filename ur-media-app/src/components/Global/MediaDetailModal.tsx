@@ -299,6 +299,22 @@ export default function MediaDetailModal({
       podiumRank: podiumEnabled ? podiumRank : null,
     };
 
+    const { data } =  await supabase
+      .from('media')
+      .select('external_id')
+      .eq('column_name', payload.mediaId)
+      .maybeSingle()
+    
+    if (!data) {
+      await fetch("/api/media"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      }
+    }
+    
     if (!podiumEnabled && podiumRank !== null) {
       handleDeletePodium;
     }
