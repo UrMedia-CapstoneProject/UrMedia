@@ -145,47 +145,91 @@ export async function getFollowedLists(
     (trackedBooksRes.data ?? []).map((item: any) => [item.media_id, item]),
   );
   
+  // async function buildItems(
+  //   sourceRows: FollowedMediaRow[],
+  //   trackedMap: Map<number, any>,
+  // ): Promise<ProfileTrackedMediaProps[]> {
+  //   const items = await Promise.all(
+  //     sourceRows.map(async (row) => {
+  //       if (!row.media) return null;
+
+  //       const tracked = trackedMap.get(row.media_id);
+  //       if (!tracked) return null;
+
+  //       const data =
+  //         row.media.media_type === "book"
+  //           ? null
+  //           : await getCountdownTitleAndPosterUrl({
+  //               source: row.media.source,
+  //               mediaType: row.media.media_type,
+  //               externalId: row.media.external_id,
+  //             });
+
+  //       return {
+  //         mediaId: row.media_id,
+  //         externalId: row.media.external_id,
+  //         watchStatus: tracked.watch_status,
+  //         startingDate: tracked.starting_date ?? null,
+  //         endingDate: tracked.ending_date ?? null,
+  //         rating: tracked.rating ?? null,
+  //         episodesWatched: tracked.episodes_watched ?? null,
+  //         hoursPlayed: tracked.hours_played ?? null,
+  //         review: tracked.review ?? null,
+  //         repeatCount: tracked.repeat_count ?? null,
+  //         posterUrl: data?.imageUrl ?? null,
+  //         title: data?.title ?? null,
+  //       };
+  //     }),
+  //   );
+
+  //   return items.filter(
+  //     (item): item is ProfileTrackedMediaProps => item !== null,
+  //   );
+  // }
+
+  // We're going to switch from 'await Promise.all' to a for or loop
+  // to let the fetches from jikan runs sequentially instead of
+  // possibly in parrallel, which most likely would have been causing
+  // the 429 status code.
   async function buildItems(
-    sourceRows: FollowedMediaRow[],
-    trackedMap: Map<number, any>,
-  ): Promise<ProfileTrackedMediaProps[]> {
-    const items = await Promise.all(
-      sourceRows.map(async (row) => {
-        if (!row.media) return null;
+  sourceRows: FollowedMediaRow[],
+  trackedMap: Map<number, any>,
+): Promise<ProfileTrackedMediaProps[]> {
+  const items: ProfileTrackedMediaProps[] = [];
 
-        const tracked = trackedMap.get(row.media_id);
-        if (!tracked) return null;
+  for (const row of sourceRows) {
+    if (!row.media) continue;
 
-        const data =
-          row.media.media_type === "book"
-            ? null
-            : await getCountdownTitleAndPosterUrl({
-                source: row.media.source,
-                mediaType: row.media.media_type,
-                externalId: row.media.external_id,
-              });
+    const tracked = trackedMap.get(row.media_id);
+    if (!tracked) continue;
 
-        return {
-          mediaId: row.media_id,
-          externalId: row.media.external_id,
-          watchStatus: tracked.watch_status,
-          startingDate: tracked.starting_date ?? null,
-          endingDate: tracked.ending_date ?? null,
-          rating: tracked.rating ?? null,
-          episodesWatched: tracked.episodes_watched ?? null,
-          hoursPlayed: tracked.hours_played ?? null,
-          review: tracked.review ?? null,
-          repeatCount: tracked.repeat_count ?? null,
-          posterUrl: data?.imageUrl ?? null,
-          title: data?.title ?? null,
-        };
-      }),
-    );
+    const data =
+      row.media.media_type === "book"
+        ? null
+        : await getCountdownTitleAndPosterUrl({
+            source: row.media.source,
+            mediaType: row.media.media_type,
+            externalId: row.media.external_id,
+          });
 
-    return items.filter(
-      (item): item is ProfileTrackedMediaProps => item !== null,
-    );
+    items.push({
+      mediaId: row.media_id,
+      externalId: row.media.external_id,
+      watchStatus: tracked.watch_status,
+      startingDate: tracked.starting_date ?? null,
+      endingDate: tracked.ending_date ?? null,
+      rating: tracked.rating ?? null,
+      episodesWatched: tracked.episodes_watched ?? null,
+      hoursPlayed: tracked.hours_played ?? null,
+      review: tracked.review ?? null,
+      repeatCount: tracked.repeat_count ?? null,
+      posterUrl: data?.imageUrl ?? null,
+      title: data?.title ?? null,
+    });
   }
+
+  return items;
+}
 
   const [movies, shows, animeMovies, animeShows, games, books] =
     await Promise.all([
