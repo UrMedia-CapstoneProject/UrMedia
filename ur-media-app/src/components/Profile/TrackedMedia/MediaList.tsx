@@ -2,7 +2,6 @@
 import styles from "./MediaList.module.css";
 import MediaCard from "./MediaCard";
 import { ProfileTrackedMediaProps } from "@/services/profile/lists/getFollowedLists";
-import Poster from "@/components/Global/Poster";
 
 export default function MediaList({
   list,
