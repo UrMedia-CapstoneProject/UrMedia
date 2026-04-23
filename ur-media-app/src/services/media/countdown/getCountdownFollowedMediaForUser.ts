@@ -269,7 +269,7 @@ export async function getCountdownFollowedMediaForUser(
       return {
         ...candidate,
         title: metadata.title,
-        imageUrl: metadata.imageUrl,
+        imageUrl: metadata.imageUrl ?? "/test-images/default-poster-image.png",
       } satisfies CountdownItem;
     }),
   );

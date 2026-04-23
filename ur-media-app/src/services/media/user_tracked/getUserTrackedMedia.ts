@@ -123,6 +123,19 @@ function normalizeTrackedRow(
         finishDate: trackedRow.ending_date ?? "",
         review: trackedRow.review ?? "",
       };
+    
+    case "manga":
+      return {
+        isTracked: true,
+        status: trackedRow.watch_status ?? "",
+        score: trackedRow.rating ?? "",
+        hoursPlayed: "",
+        episodesWatched: "",
+        repeatCount: trackedRow.repeat_count ?? "",
+        startDate: trackedRow.starting_date ?? "",
+        finishDate: trackedRow.ending_date ?? "",
+        review: trackedRow.review ?? "",
+      }
 
     default:
       throw new Error("Unsupported media type");

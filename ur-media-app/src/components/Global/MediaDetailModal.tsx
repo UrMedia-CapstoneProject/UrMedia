@@ -76,17 +76,9 @@ export default function MediaDetailModal({
       return;
     }
 
+    console.log("modal open:", isOpen);
     const loadTrackedData = async () => {
       try {
-        const { data } =  await supabase
-          .from('media')
-          .select('external_id')
-          .eq('column_name', media.externalId)
-          .maybeSingle()
-
-        if (data) {
-          setMediaExists(true)
-        }
     
         const response = await fetch(
           `/api/media/user-tracked?mediaId=${media.id}&mediaType=${media.mediaType}`,
@@ -133,7 +125,7 @@ export default function MediaDetailModal({
   if (!isOpen || !media) return null;
 
   const isGame = media.mediaType === "game";
-  const isBook = media.mediaType === "book";
+  const isBook = media.mediaType === "book" || media.mediaType === "manga";
   const isShow = media.mediaType === "show" || media.mediaType === "anime_show";
   const isMovie =
     media.mediaType === "movie" || media.mediaType === "anime_movie";
@@ -297,11 +289,6 @@ export default function MediaDetailModal({
       source: media.source,
       media_type: media.mediaType,
       external_id: media.externalId,
-      title: media.title,
-      image_url: media.imageUrl,
-      release_date: media.releaseDate,
-      next_release_date: media.nextReleaseDate,
-      synopsis: media.synopsis
     }
 
       const res = await fetch("/api/media", {

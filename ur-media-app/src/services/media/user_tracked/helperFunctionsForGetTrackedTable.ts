@@ -20,6 +20,9 @@ export function getTrackedTable(mediaType: SupportedMediaType) {
     case "book": {
       return "user_tracked_books";
     }
+    case "manga": {
+      return "user_tracked_books"
+    }
     default:
       throw new Error("Unsupported media type");
   }

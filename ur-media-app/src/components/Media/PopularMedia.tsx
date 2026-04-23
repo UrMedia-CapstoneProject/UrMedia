@@ -47,7 +47,7 @@ function convertDatabaseMediaToMediaItem(
     mediaType: mediaRecord.media_type as DisplayMediaItem["mediaType"],
     externalId: mediaRecord.external_id,
     title: mediaRecord.title,
-    imageUrl: mediaRecord.image_url ?? "/test-images/default_no_image.png",
+    imageUrl: mediaRecord.image_url ?? "/test-images/default-poster-image.png",
     synopsis: mediaRecord.synopsis ?? undefined,
     releaseDate: mediaRecord.release_date ?? null,
   }
