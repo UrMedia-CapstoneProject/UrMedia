@@ -192,7 +192,7 @@ export default function Podiums({ podiums }: PodiumProps) {
 
                         <div className={styles.secondPlace}>
                             <PodiumPoster
-                                imageUrl="/test-images/hunger games.jpg" />
+                                imageUrl="/default-images/2nd-place-stock.png" />
                         </div>
 
                         <Image
@@ -205,7 +205,7 @@ export default function Podiums({ podiums }: PodiumProps) {
 
                         <div className={styles.firstPlace}>
                             <PodiumPoster
-                                imageUrl="/test-images/lord of the rings.jpg" />
+                                imageUrl="/default-images/1st-place-stock.png" />
                         </div>
 
                         <Image
@@ -218,7 +218,7 @@ export default function Podiums({ podiums }: PodiumProps) {
 
                         <div className={styles.thirdPlace}>
                             <PodiumPoster
-                                imageUrl="/test-images/how to win friends and influence people.jpg" />
+                                imageUrl="/default-images/3rd-place-stock.png" />
                         </div>
 
                         <Image
