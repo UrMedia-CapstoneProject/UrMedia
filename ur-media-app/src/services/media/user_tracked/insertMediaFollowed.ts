@@ -17,7 +17,7 @@ export async function insertMediaFollowed({
         media_id: payload.mediaId,
       },
       {
-        // Ignore the error with the user already following the media.
+        // // Ignore the error with the user already following the media.
         onConflict: "user_id,media_id",
         ignoreDuplicates: true,
       },
