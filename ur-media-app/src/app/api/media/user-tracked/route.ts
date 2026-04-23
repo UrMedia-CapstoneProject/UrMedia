@@ -75,15 +75,12 @@ export async function POST(req: NextRequest) {
 
         const userId = authorizedUser.user.id;
 
-        console.log("Made it to insert for media_follows")
         await insertMediaFollowed({
             supabase,
             userId,
             payload
         })
 
-        // call your DB function
-        console.log("Made it to upsert")
         await upsertTrackedMedia({
             supabase,
             userId,

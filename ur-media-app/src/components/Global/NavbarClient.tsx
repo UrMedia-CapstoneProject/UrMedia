@@ -23,7 +23,7 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handlePointerDown = (event: PointerEvent) => {
       if (!menuRef.current || !buttonRef.current) return;
 
       const target = event.target as Node;
@@ -36,10 +36,10 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", handlePointerDown);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("pointerdown", handlePointerDown);
     };
   }, []);
 
