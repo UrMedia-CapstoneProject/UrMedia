@@ -1,8 +1,10 @@
+import { getAnimeDetails } from "@/services/jikan";
 import { getMovieDetails, getShowDetails } from "../../tmdb";
 import { getGameByExternalId } from "@/services/rawg";
-import { getAnimeDetails } from "@/services/jikan";
+// add jikan in here
 
 import type { MediaSource, MediaType } from "@/types/types";
+import { metadata } from "@/app/layout";
 
 const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
 
@@ -30,9 +32,9 @@ function replaceHtml(description: string | undefined) {
   return description.replace(/<[^>]+>/g, "");
 }
 
-function cleanText(description: string | undefined) {
+function cleanText(description: string | null) {
   if (!description) return;
-  return description.replace(/[\n\r\t]+/g, " ").replace(/\s+/g, "").trim()
+  return description.replace(/[\n\r\t]+/g, " ").replace(/\s+/g, " ").replace("[Written by MAL Rewrite]", "").trim() //[Written by MAL Rewrite] is added by default at the end of the synopsis
 }
 
 export async function refreshMediaMetadata({
@@ -77,12 +79,36 @@ export async function refreshMediaMetadata({
 
     // console.log(updateData);
   } else if ((media.source === "jikan" || media.media_type === "anime_movie" || media.media_type === "anime_show")) {
-    const animeMovie = await getGameByExternalId(media.external_id);
-    // console.log(game);
+    const anime = await getAnimeDetails(Number(media.external_id))
+
+    if (!anime) {
+      console.log("Failed to fetch JIKAN anime")
+      throw new Error("Failed to fetch JIKAN anime");
+    }
+
+    const parseJikanDate = (anime.data.aired.from)?.split("T")[0]; //"2019-08-09T00:00:00+00:00" -> 2019-08-09
+
+    updateData = {
+      title: anime.data.title ?? null,
+      image_url:
+          anime?.data?.images?.webp?.large_image_url ??
+          anime?.data?.images?.jpg?.large_image_url ??
+          anime?.data?.images?.webp?.image_url ??
+          anime?.data?.images?.jpg?.image_url ??
+          null,
+      synopsis: cleanText(anime.data.synopsis) ?? null,
+      release_date: parseJikanDate ?? null, //"2019-08-09T00:00:00+00:00"
+      next_release_date: null, // jikan doesn't have next_release_date but tmdb does
+      metadata_updated_at: new Date().toISOString(),
+    }
+    // console.log("animes", updateData)
+  } else if (media.source === "rawg" && media.media_type === "game") {
+    const game = await getGameByExternalId(media.external_id);
+    console.log(game);
 
     if (!game) {
       console.log("Failed to fetch RAWG game data");
-      throw new Error("Failed to fetch RAWG gamed data");
+      throw new Error("Failed to fetch RAWG game data");
     }
 
     // - Introduce a helper function for removing the html tags for description and fix it.
@@ -95,8 +121,8 @@ export async function refreshMediaMetadata({
       next_release_date: null,
       metadata_updated_at: new Date().toISOString(),
     };
+    console.log("games", updateData)    
 
-    // add jikan if for (media.source === "jikan" && media.source === "anime_movie")
     // add else if for (media.source === "google_books" && media.media_type === "book")
   } else {
     throw new Error(
