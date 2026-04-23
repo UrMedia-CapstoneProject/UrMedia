@@ -1,8 +1,8 @@
 import Catalog from "@/components/Catalog/Catalog";
 import PageButton from "@/components/Catalog/PageButton";
-import { getCatalogMedia } from "@/services/media/catalog/getMedia";
+import { getCatalogMedia } from "@/services/media/catalog/getPageMedia";
 import styles from "./page.module.css";
-import SearchBar from "@/components/Global/SearchBar";
+import SearchBarWrapper from "@/components/Catalog/SearchBarWrapper";
 
 interface SearchParams {
   searchParams?: {
@@ -20,12 +20,10 @@ export default async function CatalogPage({ searchParams }: SearchParams) {
 
   const { media, hasNext } = await getCatalogMedia(category, page, title)
 
-  
-   
   return (
     <div className={styles.main}>
       <div className={styles.searchBar}>
-        <SearchBar isDisabled={false}/>
+        <SearchBarWrapper />
       </div>
       <Catalog data={media} category={category} />
       <PageButton currentPage={page} hasMore={hasNext} />

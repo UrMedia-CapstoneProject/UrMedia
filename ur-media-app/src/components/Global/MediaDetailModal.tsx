@@ -7,7 +7,7 @@ import type { DisplayMediaItem } from "@/types/types";
 import { createClient } from "@/lib/supabase/client";
 
 type MediaDetailModalProps = {
-  media: DisplayMediaItem | null;
+  media: DisplayMediaItem | undefined;
   isOpen: boolean;
   onClose: () => void;
 };
@@ -55,7 +55,7 @@ export default function MediaDetailModal({
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isTracked, setIsTracked] = useState(false);
-
+  
   const [status, setStatus] = useState("");
   const [score, setScore] = useState("");
   const [hoursPlayed, setHoursPlayed] = useState<number | "">("");
@@ -155,14 +155,14 @@ export default function MediaDetailModal({
       ];
     }
 
-    if (isMovie) {
-      return [
-        { value: "plan", label: "Plan to Watch" },
-        { value: "paused", label: "Paused" },
-        { value: "completed", label: "Completed" },
-        { value: "dropped", label: "Dropped" },
-      ];
-    }
+    // if (isMovie) {
+    //   return [
+    //     { value: "plan", label: "Plan to Watch" },
+    //     { value: "paused", label: "Paused" },
+    //     { value: "completed", label: "Completed" },
+    //     { value: "dropped", label: "Dropped" },
+    //   ];
+    // }
 
     return [
       { value: "plan", label: "Plan to Watch" },

@@ -1,5 +1,5 @@
-import { getShow } from "@/services/tmdb";
-import { getMovie } from "@/services/tmdb";
+import { getShowDetails } from "@/services/tmdb";
+import { getMovieDetails } from "@/services/tmdb";
 import { getGameByExternalId } from "@/services/rawg";
 
 type GetPosterUrlArgs = {
@@ -39,14 +39,14 @@ export async function getPosterUrl({
     try {
         if (source === "tmdb") {
             if (mediaType === "show") {
-                const show = await getShow(Number(externalId));
+                const show = await getShowDetails(Number(externalId));
                 return show?.poster_path
                     ? `https://image.tmdb.org/t/p/w500${show.poster_path}`
                     : null;
             }
 
             if (mediaType === "movie") {
-                const movie = await getMovie(Number(externalId));
+                const movie = await getMovieDetails(Number(externalId));
                 return movie?.poster_path
                     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
                     : null;

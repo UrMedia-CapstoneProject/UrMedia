@@ -145,6 +145,10 @@ export async function getFollowedLists(
     (trackedBooksRes.data ?? []).map((item: any) => [item.media_id, item]),
   );
 
+    console.log("movies after filtering:", movieMap)
+  console.log("shows after filtering:", showMap)
+  console.log("games after filtering:", gameMap)
+
   async function buildItems(
     sourceRows: FollowedMediaRow[],
     trackedMap: Map<number, any>,
