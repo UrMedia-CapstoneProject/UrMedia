@@ -15,7 +15,7 @@ type PopularMediaClientProps = {
 export default function PopularMediaClient({
   initialPopularMedia,
 }: PopularMediaClientProps) {
-  const [selectedMedia, setSelectedMedia] = useState<DisplayMediaItem | null>(null)
+  const [selectedMedia, setSelectedMedia] = useState<DisplayMediaItem | undefined>(undefined)
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handlePosterClick = (item: DisplayMediaItem) => {
@@ -24,7 +24,7 @@ export default function PopularMediaClient({
   }
 
   const handleCloseModal = () => {
-    setSelectedMedia(null)
+    setSelectedMedia(undefined)
     setIsModalOpen(false)
   }
 
