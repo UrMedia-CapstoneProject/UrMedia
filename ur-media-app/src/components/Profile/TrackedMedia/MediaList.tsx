@@ -36,11 +36,11 @@ export default function MediaList({
   const droppedItems = list.filter((item) => item.watchStatus === "dropped");
   const plannedItems = list.filter((item) => item.watchStatus === "plan");
 
-  console.log("watching list", watchingItems);
-  console.log("pausedItems list", pausedItems);
-  console.log("droppedItems list", droppedItems);
-  console.log("plannedItems list", plannedItems);
-    console.log("completed list", completedItems);
+  // console.log("watching list", watchingItems);
+  // console.log("pausedItems list", pausedItems);
+  // console.log("droppedItems list", droppedItems);
+  // console.log("plannedItems list", plannedItems);
+  //   console.log("completed list", completedItems);
 
   return (
     <div className={styles.main}>

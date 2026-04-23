@@ -45,6 +45,7 @@ export async function getFollowedLists(
     .eq("user_id", userId);
 
   const rows = (followedRows ?? []) as unknown as FollowedMediaRow[];
+  console.log("database rows for user followed media:", rows)
 
   const movieRows = rows.filter((row) => row.media?.media_type === "movie");
   const showRows = rows.filter((row) => row.media?.media_type === "show");
@@ -123,6 +124,11 @@ export async function getFollowedLists(
       : Promise.resolve({ data: [], error: null }),
   ]);
 
+  console.log("rows after the second query,", trackedMoviesRes,
+    trackedShowsRes,
+    trackedAnimeRes,
+    trackedGamesRes,)
+
   if (trackedMoviesRes.error) throw new Error(trackedMoviesRes.error.message);
   if (trackedShowsRes.error) throw new Error(trackedShowsRes.error.message);
   if (trackedAnimeRes.error) throw new Error(trackedAnimeRes.error.message);
@@ -144,6 +150,10 @@ export async function getFollowedLists(
   const bookMap = new Map<number, FollowedMediaRow>(
     (trackedBooksRes.data ?? []).map((item: any) => [item.media_id, item]),
   );
+
+    console.log("movies after filtering:", movieMap)
+  console.log("shows after filtering:", showMap)
+  console.log("games after filtering:", gameMap)
 
   async function buildItems(
     sourceRows: FollowedMediaRow[],

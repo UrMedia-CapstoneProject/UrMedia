@@ -9,6 +9,7 @@ function sleep(ms: number) {
 
 export async function getAnime(externalId: number) {
     try {
+        sleep(600)
         return await jikan.anime.getAnimeById(externalId)
     } catch (err) {
         console.log("Jikan API Error while fetching Anime by id, exiting with: " + err)
