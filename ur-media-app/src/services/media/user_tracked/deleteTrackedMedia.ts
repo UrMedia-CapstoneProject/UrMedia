@@ -46,6 +46,12 @@ export async function deleteUserTrackedMedia({
             .eq("user_id", userId)
             .eq("media_id", mediaId)
             .eq("podium_group", podiumGroup)
+
+        await supabase
+            .from("media_follows")
+            .delete()
+            .eq("user_id", userId)
+            .eq("media_id", mediaId)
     }
 
 }
