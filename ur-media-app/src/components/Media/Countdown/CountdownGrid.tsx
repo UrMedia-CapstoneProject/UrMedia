@@ -1,6 +1,3 @@
-/*Renders the list for the active tab*/
-// "use client"; // Don't really need use client
-
 import styles from "./CountdownGrid.module.css";
 import MediaCard from "./MediaCard";
 import { CountdownItem } from "@/services/media/countdown/getCountdownFollowedMediaForUser";

@@ -12,7 +12,7 @@ type PodiumProps = {
 
 function PodiumSlot({ item }: { item?: PodiumItem }) {
     if (!item?.posterUrl) {
-        return <div className="podium-empty" />;
+        return <PodiumPoster imageUrl="/default-images/generic-stock.png" />;
     }
 
     return <PodiumPoster imageUrl={item.posterUrl} />;
