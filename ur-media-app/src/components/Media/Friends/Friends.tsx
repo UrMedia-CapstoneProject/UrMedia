@@ -2,32 +2,10 @@
 import { useEffect, useState } from "react"
 import styles from "./Friends.module.css"
 import { FriendTrackedMedia } from "@/types/types"
+import { CountdownTitleAndUrl } from "@/services/media/countdown/getCountdownTitleAndPosterUrl"
 import UpdateCard from "./UpdateCard"
-import FriendCard from "./FriendCard"
 
-export default function Friends({ friendInfo }: { friendInfo: FriendTrackedMedia[] }) {
-
-    //const loadFriendInfo = async () => {
-    //    const validationError = validateForm()
-    //
-    //    if (validationError) {
-    //        setErrorMessage(validationError)
-    //        setSuccessMessage("")
-    //        return
-    //    }
-
-    //    setErrorMessage("")
-    //    setSuccessMessage("")
-
-    //    await fetch("/api/friends", {
-    //        method: "GET",
-    //       headers: {
-    //            "Content-Type": "application/json",
-    //        },
-    //    });
-
-    //    setSuccessMessage("Friends loaded!")
-    //}
+export default function Friends({ friendInfo, posterInfo }: { friendInfo: FriendTrackedMedia[], posterInfo: CountdownTitleAndUrl[] }) {
 
     const [newFriend, setNewFriend] = useState("")
 
@@ -64,6 +42,7 @@ export default function Friends({ friendInfo }: { friendInfo: FriendTrackedMedia
         });
 
         setSuccessMessage("Friend Added!")
+        setNewFriend("")
     }
 
     return (
@@ -83,7 +62,9 @@ export default function Friends({ friendInfo }: { friendInfo: FriendTrackedMedia
                 </div>
                 <h3 className={styles.recentHeader}>Recent Activity</h3>
                 <div className={styles.updateCards}>
-                    <UpdateCard />
+                    {friendInfo?.map((friend, index) => (
+                        <UpdateCard key={friend.username} updateInfo={friend} mediaInfo={posterInfo[index]} />
+                    ))}
                 </div>
             </div>
         </div>

@@ -115,17 +115,18 @@ export type BookMediaItem = BaseMediaItem & {
 };
 
 export type FriendTrackedMedia = {
-  usernames: string;
+  username: string;
   status: string;
   date: string;
   rating: number;
   review: string;
   quantityConsumed: number;
+  media: {
+    source: string;
+    mediaType: string;
+    externalId: string;
+  }
 };
-
-export type newFriend = {
-  username: string;
-}
 
 export type DisplayMediaItem =
     | MovieMediaItem
