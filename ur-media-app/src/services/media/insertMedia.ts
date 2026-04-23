@@ -17,9 +17,23 @@ export async function insertMedia({
     payload: mediaPayload
 }) {
     console.log("Inserting media into media table")
-    const { error } = await supabase.from('media').insert(payload, {
-        ignoreDuplicates: true
-    })
+    console.log(payload)
+    const { data, error } = await supabase
+        .from('media')
+        .insert(payload)
+        .select('id')
+        .single();
 
-    if (error) throw new error(error.message);
+    if (!error && data) {
+        return data.id
+    }
+
+    const {data: existing, error: fetchError} = await supabase
+        .from('media')
+        .select('id')
+        .eq('external_id', payload.external_id)
+        .single()
+
+    if (fetchError) throw new Error(fetchError.message);
+    return existing.id
 }

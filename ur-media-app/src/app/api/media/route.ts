@@ -20,12 +20,13 @@ export async function POST(req: NextRequest) {
     }
 
     console.log("Made it to insert");
-    await insertMedia({
+    
+    const id = await insertMedia({
       supabase,
       payload,
     });
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, id});
   } catch (err: any) {
     console.log("Error with POST: " + err);
     return NextResponse.json({ error: err.message }, { status: 500 });

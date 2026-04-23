@@ -73,6 +73,7 @@ export type BaseMediaItem = {
   imageUrl: string;
   synopsis?: string;
   releaseDate?: string | null;
+  nextReleaseDate?: string | null;
 };
 
 export type MovieMediaItem = BaseMediaItem & {
