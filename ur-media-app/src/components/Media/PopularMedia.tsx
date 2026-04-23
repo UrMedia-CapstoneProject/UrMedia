@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server"
 import PopularMediaClient from "./PopularMediaClient"
 import type { MediaCategory, DisplayMediaItem } from "@/types/types"
-import { getNormalizedProfileStatsRow } from "@/services/profile/stats/getProfileStats"
+import { getNormalizedProfileStatsRows } from "@/services/profile/stats/getProfileStats"
 
 type DatabaseMediaRecord = {
   id: number
@@ -80,7 +80,7 @@ function buildPopularMediaByCategory(
 
 export default async function PopularMedia() {
 
-  const rows = await getNormalizedProfileStatsRow('f6108ce8-44c2-4203-bf1f-27f5668c1f9b')
+  const rows = await getNormalizedProfileStatsRows('f6108ce8-44c2-4203-bf1f-27f5668c1f9b')
 
 console.log({
   total: rows.length,
