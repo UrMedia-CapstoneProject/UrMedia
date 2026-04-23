@@ -1,19 +1,19 @@
 "use client"
 import { useEffect, useState } from "react"
 import styles from "./Friends.module.css"
+import { FriendTrackedMedia } from "@/types/types"
+import { CountdownTitleAndUrl } from "@/services/media/countdown/getCountdownTitleAndPosterUrl"
 import UpdateCard from "./UpdateCard"
 
-export default function() {
+export default function Friends({ friendInfo, posterInfo }: { friendInfo: FriendTrackedMedia[], posterInfo: CountdownTitleAndUrl[] }) {
 
-    const [friend, setFriend] = useState("")
+    const [newFriend, setNewFriend] = useState("")
 
     const [errorMessage, setErrorMessage] = useState("")
     const [successMessage, setSuccessMessage] = useState("")
 
     const validateForm = () => {
-        if (friend === "" || friend.length > 16) {
-            return "Invalid username"
-        }
+        if (newFriend === "" || newFriend.length > 16) { return "Invalid username" }
         return null
     }
 
@@ -29,9 +29,7 @@ export default function() {
         setErrorMessage("")
         setSuccessMessage("")
 
-        const payload = {
-            friend: friend
-        }
+        const payload = { friend: newFriend }
 
         console.log("Add friend payload:", payload)
 
@@ -44,6 +42,7 @@ export default function() {
         });
 
         setSuccessMessage("Friend Added!")
+        setNewFriend("")
     }
 
     return (
@@ -54,8 +53,8 @@ export default function() {
                 <div className={styles.searchBar}>
                     <input 
                         type="text"
-                        value={friend}
-                        onChange={(e) => setFriend(e.target.value)}
+                        value={newFriend}
+                        onChange={(e) => setNewFriend(e.target.value)}
                         placeholder="Search for friends"
                         className={styles.searchBarInput}
                     />
@@ -63,7 +62,9 @@ export default function() {
                 </div>
                 <h3 className={styles.recentHeader}>Recent Activity</h3>
                 <div className={styles.updateCards}>
-                    <UpdateCard />
+                    {friendInfo?.map((friend, index) => (
+                        <UpdateCard key={friend.username} updateInfo={friend} mediaInfo={posterInfo[index]} />
+                    ))}
                 </div>
             </div>
         </div>
