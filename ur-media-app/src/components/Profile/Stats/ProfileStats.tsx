@@ -1,5 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
-import { getProfileStats } from "@/services/profile/stats/getProfileStats";
+import { getNormalizedProfileStatsRow } from "@/services/profile/stats/getProfileStats";
 import ProfileStatsClient from "./ProfileStatsClient";
 
 export default async function ProfileStats() {
@@ -12,7 +12,7 @@ export default async function ProfileStats() {
     return <div>Please Log in to view stats. </div>;
   }
 
-  const stats = await getProfileStats(authorizedUser.user.id)
+  const stats = await getNormalizedProfileStatsRow(authorizedUser.user.id)
 
   return (
     <div>

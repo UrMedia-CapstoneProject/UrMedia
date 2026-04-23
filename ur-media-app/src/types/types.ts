@@ -130,6 +130,19 @@ export type BookMediaItem = BaseMediaItem & {
   genre?: string | null; // Not sure what it is stored as from the api
 };
 
+export type FriendTrackedMedia = {
+  usernames: string;
+  status: string;
+  date: string;
+  rating: number;
+  review: string;
+  quantityConsumed: number;
+};
+
+export type newFriend = {
+  username: string;
+}
+
 export type DisplayMediaItem =
     | MovieMediaItem
     | ShowMediaItem

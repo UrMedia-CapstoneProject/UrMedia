@@ -1,7 +1,7 @@
 import styles from "./page.module.css"
 import PopularMedia from "@/components/Media/PopularMedia";
 import ProfileCountdown from "@/components/Media/Countdown/ProfileCountdown";
-import Friends from "@/components/Media/Friends/Friends";
+import { ServerFriends } from "@/components/Media/Friends/ServerFriends";
 
 export default function Home() {
   return (

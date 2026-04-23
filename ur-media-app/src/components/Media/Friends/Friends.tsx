@@ -1,30 +1,11 @@
 "use client"
 import { useEffect, useState } from "react"
 import styles from "./Friends.module.css"
+import { FriendTrackedMedia } from "@/types/types"
 import UpdateCard from "./UpdateCard"
 import FriendCard from "./FriendCard"
 
-export interface friendInfoProps {
-    friendUsername: string;
-    titles: string[];
-    statuses: string[];
-    dates: string[];
-    ratings: number[];
-}
-
-export default function Friends({ friendInfo }: { friendInfo: friendInfoProps }) {
-
-    const [friend, setFriend] = useState("")
-
-    const [errorMessage, setErrorMessage] = useState("")
-    const [successMessage, setSuccessMessage] = useState("")
-
-    const validateForm = () => {
-        if (friendInfo.friendUsername === "" || friendInfo.friendUsername.length > 16) {
-            return "Invalid username"
-        }
-        return null
-    }
+export default function Friends({ friendInfo }: { friendInfo: FriendTrackedMedia[] }) {
 
     //const loadFriendInfo = async () => {
     //    const validationError = validateForm()
@@ -48,6 +29,16 @@ export default function Friends({ friendInfo }: { friendInfo: friendInfoProps })
     //    setSuccessMessage("Friends loaded!")
     //}
 
+    const [newFriend, setNewFriend] = useState("")
+
+    const [errorMessage, setErrorMessage] = useState("")
+    const [successMessage, setSuccessMessage] = useState("")
+
+    const validateForm = () => {
+        if (newFriend === "" || newFriend.length > 16) { return "Invalid username" }
+        return null
+    }
+
     const handleAdd = async () => {
         const validationError = validateForm()
 
@@ -60,9 +51,7 @@ export default function Friends({ friendInfo }: { friendInfo: friendInfoProps })
         setErrorMessage("")
         setSuccessMessage("")
 
-        const payload = {
-            friend: friend
-        }
+        const payload = { friend: newFriend }
 
         console.log("Add friend payload:", payload)
 
@@ -85,8 +74,8 @@ export default function Friends({ friendInfo }: { friendInfo: friendInfoProps })
                 <div className={styles.searchBar}>
                     <input 
                         type="text"
-                        value={friend}
-                        onChange={(e) => setFriend(e.target.value)}
+                        value={newFriend}
+                        onChange={(e) => setNewFriend(e.target.value)}
                         placeholder="Search for friends"
                         className={styles.searchBarInput}
                     />
