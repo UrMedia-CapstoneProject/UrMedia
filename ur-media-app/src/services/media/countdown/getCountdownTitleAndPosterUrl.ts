@@ -5,7 +5,7 @@ import { getGameByExternalId } from "@/services/rawg";
 import { getAnimeDetails, getMangaDetails } from "@/services/jikan";
 // Missing getBook
 
-type GetCountdownMetadataArgs = {
+export type GetCountdownMetadataArgs = {
   source: string;
   mediaType: string;
   externalId: string;
