@@ -11,6 +11,7 @@
     border-radius: 15px;
     min-width: 0;
     border-color: transparent;
+    font-size: 1.1rem;
 }
 
 .searchBarInput:focus {

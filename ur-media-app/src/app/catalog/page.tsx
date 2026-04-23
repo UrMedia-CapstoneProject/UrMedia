@@ -2,7 +2,6 @@ import Catalog from "@/components/Catalog/Catalog";
 import PageButton from "@/components/Catalog/PageButton";
 import { getCatalogMedia } from "@/services/media/catalog/getPageMedia";
 import styles from "./page.module.css";
-import SearchBar from "@/components/Global/SearchBar";
 import SearchBarWrapper from "@/components/Catalog/SearchBarWrapper";
 
 interface SearchParams {
