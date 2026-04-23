@@ -13,8 +13,8 @@ export default async function ProfilePage() {
                     <ServerPodiums />
                 </div>
                 <div className={styles.grid}>
-                    <ProfileStats />
-                    <ServerTrackedMedia />
+                    {/* <ProfileStats />
+                    <ServerTrackedMedia /> */}
                 </div>
             </div>
         </div>

@@ -1,6 +1,6 @@
 import { getMovieDetails, getShowDetails } from "../../tmdb";
 import { getGameByExternalId } from "@/services/rawg";
-// add jikan in here
+import { getAnimeDetails } from "@/services/jikan";
 
 import type { MediaSource, MediaType } from "@/types/types";
 
@@ -28,6 +28,11 @@ function buildTMDBImageUrl(posterPath?: string | null) {
 function replaceHtml(description: string | undefined) {
   if (!description) return;
   return description.replace(/<[^>]+>/g, "");
+}
+
+function cleanText(description: string | undefined) {
+  if (!description) return;
+  return description.replace(/[\n\r\t]+/g, " ").replace(/\s+/g, "").trim()
 }
 
 export async function refreshMediaMetadata({
@@ -71,8 +76,8 @@ export async function refreshMediaMetadata({
     };
 
     // console.log(updateData);
-  } else if (media.source === "rawg" && media.media_type === "game") {
-    const game = await getGameByExternalId(media.external_id);
+  } else if ((media.source === "jikan" || media.media_type === "anime_movie" || media.media_type === "anime_show")) {
+    const animeMovie = await getGameByExternalId(media.external_id);
     // console.log(game);
 
     if (!game) {
