@@ -31,7 +31,7 @@ export async function getFriendInfo ({
 
             const { data: animes, error: animeError } = await supabase
                 .from("user_tracked_animes")
-                .select("watch_status, rating, episodes_watched, review, updated_at, media(source, media_type, external_id)")
+                .select("watch_status, rating, episodes_watched, review, updated_at, media:media_id(source, media_type, external_id)")
                 .eq("user_id", following_id)
                 .order("updated_at", { ascending: false })
                 .limit(1)
@@ -40,7 +40,7 @@ export async function getFriendInfo ({
 
             const { data: books, error: bookError } = await supabase
                 .from("user_tracked_books")
-                .select("watch_status, rating, repeat_count, review, updated_at, media(source, media_type, external_id)")
+                .select("watch_status, rating, repeat_count, review, updated_at, media:media_id(source, media_type, external_id)")
                 .eq("user_id", following_id)
                 .order("updated_at", { ascending: false })
                 .limit(1)
@@ -49,7 +49,7 @@ export async function getFriendInfo ({
 
             const { data: games, error: gameError } = await supabase
                 .from("user_tracked_games")
-                .select("watch_status, rating, hours_played, review, updated_at, media(source, media_type, external_id)")
+                .select("watch_status, rating, hours_played, review, updated_at, media:media_id(source, media_type, external_id)")
                 .eq("user_id", following_id)
                 .order("updated_at", { ascending: false })
                 .limit(1)
@@ -58,7 +58,7 @@ export async function getFriendInfo ({
 
             const { data: movies, error: movieError } = await supabase
                 .from("user_tracked_movies")
-                .select("watch_status, rating, repeat_count, review, updated_at, media(source, media_type, external_id)")
+                .select("watch_status, rating, repeat_count, review, updated_at, media:media_id(source, media_type, external_id)")
                 .eq("user_id", following_id)
                 .order("updated_at", { ascending: false })
                 .limit(1)
@@ -67,7 +67,7 @@ export async function getFriendInfo ({
 
             const { data: shows, error: showError } = await supabase
                 .from("user_tracked_shows")
-                .select("watch_status, rating, episodes_watched, review, updated_at, media(source, media_type, external_id)")
+                .select("watch_status, rating, episodes_watched, review, updated_at, media:media_id(source, media_type, external_id)")
                 .eq("user_id", following_id)
                 .order("updated_at", { ascending: false })
                 .limit(1)
@@ -133,12 +133,8 @@ export async function getFriendInfo ({
             ].filter(Boolean);
 
             const mostRecent = allMedia.sort((a, b) => 
-                new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime()
+                new Date(b.date).getTime() - new Date(a.date).getTime()
             )[0];
-
-            if (!mostRecent) {
-                return ""
-            }
 
             return {
                 username: username.username,

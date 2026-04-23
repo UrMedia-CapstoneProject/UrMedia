@@ -24,7 +24,9 @@ export async function ServerFriends () {
                 mediaType: friend.media.mediaType,
                 externalId: friend.media.externalId,
             };
-            return await getCountdownTitleAndPosterUrl(posterProps);
+            const result = await getCountdownTitleAndPosterUrl(posterProps);
+            console.log("posterProps:", posterProps, "result:", result);
+            return result
         })
     );
 

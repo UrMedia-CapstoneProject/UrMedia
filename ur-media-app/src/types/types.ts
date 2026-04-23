@@ -116,11 +116,11 @@ export type BookMediaItem = BaseMediaItem & {
 
 export type FriendTrackedMedia = {
   username: string;
-  status: string;
-  date: string;
-  rating: number;
-  review: string;
-  quantityConsumed: number;
+  status: string | null;
+  date: string | null;
+  rating: number | null;
+  review: string | null;
+  quantityConsumed: number | null;
   media: {
     source: string;
     mediaType: string;

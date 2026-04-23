@@ -7,7 +7,7 @@ export default function MediaCard({ updateInfo, mediaInfo }: { updateInfo: Frien
     return(
         <div className={styles.main}>
             <div className={styles.poster}>
-                <Poster title={mediaInfo.title} imageUrl={mediaInfo.imageUrl} hoverEnabled={true}/>
+                <Poster title={mediaInfo?.title ?? ""} imageUrl={mediaInfo?.imageUrl ?? ""} hoverEnabled={true}/>
             </div>
             <div className={styles.info}>
                 <div className={styles.title}>
