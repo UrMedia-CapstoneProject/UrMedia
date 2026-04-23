@@ -22,7 +22,6 @@ export default function Catalog({ data, category }: CatalogProps) {
   const handlePosterClick = async (id: number, category: string) => {
     const response = await getMediaDetails(id, category);
     const media: MediaResultItem = response.media;
-    console.log(media)
     setSelectedMedia(media);
     setIsModalOpen(true);
   };

@@ -14,7 +14,7 @@ export default async function ProfilePage() {
                 </div>
                 <div className={styles.grid}>
                     <ProfileStats />
-                    <ServerTrackedMedia /> 
+                    <ServerTrackedMedia />
                 </div>
             </div>
         </div>

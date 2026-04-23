@@ -29,7 +29,7 @@ export async function searchAnime(title: string, page: number) {
 
 export async function getAnimeDetails(id: number) {
     try {
-        await sleep(400)
+        await sleep(1000)
         return await jikan.anime.getAnimeById(id)
     } catch (err) {
         console.log("Jikan API Error while fetching Anime, exiting with: " + err)

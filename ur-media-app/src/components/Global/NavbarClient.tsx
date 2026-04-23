@@ -16,32 +16,32 @@ type NavbarClientProps = {
 }
 
 export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
-    const [menuOpen, setMenuOpen] = useState(false);
-    const searchParams = useSearchParams();
-    const selectedCategory = searchParams.get("category") || "";
-    const menuRef = useRef<HTMLDivElement>(null);
-    const buttonRef = useRef<HTMLButtonElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const selectedCategory = searchParams.get("category") || "";
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (!menuRef.current || !buttonRef.current) return;
+  useEffect(() => {
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!menuRef.current || !buttonRef.current) return;
 
-            const target = event.target as Node;
+      const target = event.target as Node;
 
-            if (
-                !menuRef.current.contains(target) &&
-                !buttonRef.current.contains(target)
-            ) {
-                setMenuOpen(false);
-            }
-        };
+      if (
+        !menuRef.current.contains(target) &&
+        !buttonRef.current.contains(target)
+      ) {
+        setMenuOpen(false);
+      }
+    };
 
-        document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", handlePointerDown);
 
-        return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
-    }, []);
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, []);
 
   return (
     <div className={styles.main}>
@@ -98,8 +98,8 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
             />
 
             <div className={styles.dropdownMenu}>
+              <Link href="/">Home</Link>
               <Link href="/profile">Profile</Link>
-              <Link href="/">Settings</Link>
               <SignOutButton />
             </div>
           </div>
@@ -117,11 +117,11 @@ export default function Navbar({ isLoggedIn, avatarUrl }: NavbarClientProps) {
         </Link>
         {isLoggedIn ? (
           <div className={styles.buttons}>
+            <Link href="/" onClick={() => setMenuOpen(false)}>
+              Home
+            </Link>
             <Link href="/profile" onClick={() => setMenuOpen(false)}>
               Profile
-            </Link>
-            <Link href="/" onClick={() => setMenuOpen(false)}>
-              Settings
             </Link>
             <SignOutButton />
           </div>

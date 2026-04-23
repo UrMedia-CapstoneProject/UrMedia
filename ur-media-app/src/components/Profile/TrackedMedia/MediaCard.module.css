@@ -4,73 +4,57 @@
     border-radius: 5%;
 }
 
-.poster{
+.poster {
     width: 135px;
+    aspect-ratio: 2 / 3;
     position: relative;
     overflow: hidden;
     box-shadow: 0 6px 15px rgba(var(--box-shadow-rgb), 0.7);
     border-radius: 3px;
 }
 
-.mediaInfo{
+.posterImage {
+    object-fit: cover;
+}
+
+.mediaInfo {
     position: absolute;
     bottom: 0;
     width: 100%;
-
+    box-sizing: border-box;
     background-color: rgba(24, 24, 24, 0.8);
     padding: 10px;
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    z-index: 2;
 
     min-height: 60px;
-    max-height: 100px;
-
-    transition: 0.1s ease;
+    max-height: 66.666%;
+    overflow-y: auto;
 }
 
-.userStats{
+.userStats {
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.title{
-    max-height: 40px;
+.title {
     margin-bottom: 10px;
-    overflow: hidden;
-    white-space: nowrap;
     width: 100%;
     text-align: center;
-}
-.title:hover .titleText {
-    text-align: left;
-    transform: translateX(-20%);
+    overflow: hidden;
+    white-space: normal;
+    word-break: break-word;
 }
 
 .titleText {
-    display: inline-block;
-    min-width: 100%;
+    display: block;
     text-align: center;
-
-    transition: transform 3s linear;
 }
 
-.epWatched{
-    bottom: 3;
-    right: 3;
-}
-
-.score{
-    bottom: 3;
-    left: 3;
-}
-
-@keyframes scrollText {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-100%);
-    }
+.score,
+.epWatched {
+    margin: 0;
 }

@@ -144,7 +144,7 @@ export async function getFollowedLists(
   const bookMap = new Map<number, FollowedMediaRow>(
     (trackedBooksRes.data ?? []).map((item: any) => [item.media_id, item]),
   );
-
+  
   async function buildItems(
     sourceRows: FollowedMediaRow[],
     trackedMap: Map<number, any>,
