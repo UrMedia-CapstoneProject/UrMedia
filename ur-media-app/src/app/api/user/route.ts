@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
 
         const result = await getUserSettings({
             supabase,
-            userId: userId
+            userId: authorizedUser.user.id
         })
         return NextResponse.json(result)
 
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
             username,
             birthday,
             bio,
-            file,
+            file
         });
 
         return NextResponse.json({ success: true });

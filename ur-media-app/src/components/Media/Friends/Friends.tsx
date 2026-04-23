@@ -4,7 +4,15 @@ import styles from "./Friends.module.css"
 import UpdateCard from "./UpdateCard"
 import FriendCard from "./FriendCard"
 
-export default function() {
+export interface friendInfoProps {
+    friendUsername: string;
+    titles: string[];
+    statuses: string[];
+    dates: string[];
+    ratings: number[];
+}
+
+export default function Friends({ friendInfo }: { friendInfo: friendInfoProps }) {
 
     const [friend, setFriend] = useState("")
 
@@ -12,33 +20,33 @@ export default function() {
     const [successMessage, setSuccessMessage] = useState("")
 
     const validateForm = () => {
-        if (friend === "" || friend.length > 16) {
+        if (friendInfo.friendUsername === "" || friendInfo.friendUsername.length > 16) {
             return "Invalid username"
         }
         return null
     }
 
-    const loadFriendInfo = async () => {
-        const validationError = validateForm()
+    //const loadFriendInfo = async () => {
+    //    const validationError = validateForm()
+    //
+    //    if (validationError) {
+    //        setErrorMessage(validationError)
+    //        setSuccessMessage("")
+    //        return
+    //    }
 
-        if (validationError) {
-            setErrorMessage(validationError)
-            setSuccessMessage("")
-            return
-        }
+    //    setErrorMessage("")
+    //    setSuccessMessage("")
 
-        setErrorMessage("")
-        setSuccessMessage("")
+    //    await fetch("/api/friends", {
+    //        method: "GET",
+    //       headers: {
+    //            "Content-Type": "application/json",
+    //        },
+    //    });
 
-        await fetch("/api/friends", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        });
-
-        setSuccessMessage("Friends loaded!")
-    }
+    //    setSuccessMessage("Friends loaded!")
+    //}
 
     const handleAdd = async () => {
         const validationError = validateForm()
