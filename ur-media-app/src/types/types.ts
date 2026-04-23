@@ -125,8 +125,8 @@ export type FriendTrackedMedia = {
   quantityConsumed: number | null;
   media: {
     source: string;
-    mediaType: string;
-    externalId: string;
+    media_type: string;
+    external_id: string;
   }
 };
 
