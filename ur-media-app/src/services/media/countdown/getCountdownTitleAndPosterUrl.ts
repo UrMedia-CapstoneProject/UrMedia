@@ -114,7 +114,7 @@ export async function getCountdownTitleAndPosterUrl({
     else {
       return {
         title: null,
-        imageUrl: null,
+        imageUrl: "/test-images/default-poster-image.png",
       };
     }
   } catch (error) {

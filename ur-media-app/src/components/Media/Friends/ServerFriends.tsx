@@ -21,8 +21,8 @@ export async function ServerFriends () {
         friendInfo.map(async (friend) => {
             const posterProps: GetCountdownMetadataArgs = {
                 source: friend.media.source,
-                mediaType: friend.media.mediaType,
-                externalId: friend.media.externalId,
+                mediaType: friend.media.media_type,
+                externalId: friend.media.external_id,
             };
             const result = await getCountdownTitleAndPosterUrl(posterProps);
             console.log("posterProps:", posterProps, "result:", result);
