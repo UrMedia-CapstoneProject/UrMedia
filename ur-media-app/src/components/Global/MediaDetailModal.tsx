@@ -309,6 +309,7 @@ export default function MediaDetailModal({
       source: media.source,
       media_type: media.mediaType,
       external_id: media.externalId,
+      release_date: media.releaseDate
     };
 
     const res = await fetch("/api/media", {
