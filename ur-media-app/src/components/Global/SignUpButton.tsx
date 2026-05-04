@@ -27,10 +27,13 @@
 
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import styles from './SignUpButton.module.css'
 
 export default function SignupPage() {
+  const router = useRouter()
+  
   const signInWithGoogle = async () => {
     const supabase = createClient()
 
@@ -44,6 +47,9 @@ export default function SignupPage() {
     if (error) {
       console.error('Error signing in with Google:', error.message)
     }
+
+    router.refresh()
+
   }
 
   return (
