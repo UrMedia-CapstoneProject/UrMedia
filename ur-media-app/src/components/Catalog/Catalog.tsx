@@ -2,7 +2,7 @@
 import styles from "./Catalog.module.css";
 import Poster from "@/components/Global/Poster";
 import { useState } from "react";
-import { getMediaDetails } from "@/services/media/catalog/getMediaDetails";
+import { getMediaDetails } from "@/services/catalog/getMediaDetails";
 import MediaDetailModal from "../Global/MediaDetailModal";
 import { MediaResultItems, MediaResultItem } from "@/types/types";
 import { mapMedia } from "@/utils/mapDataHelper";

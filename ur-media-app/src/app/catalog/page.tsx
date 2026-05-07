@@ -1,6 +1,6 @@
 import Catalog from "@/components/Catalog/Catalog";
 import PageButton from "@/components/Catalog/PageButton";
-import { getCatalogMedia } from "@/services/media/catalog/getPageMedia";
+import { getCatalogMedia } from "@/services/catalog/getPageMedia";
 import styles from "./page.module.css";
 import SearchBarWrapper from "@/components/Catalog/SearchBarWrapper";
 

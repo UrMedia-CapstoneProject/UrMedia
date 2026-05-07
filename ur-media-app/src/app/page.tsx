@@ -5,9 +5,8 @@ import Friends from "@/components/Media/Friends/Friends";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function Home() {
-  let hasProfile = false;
   let userId;
-  let username
+  let username;
 
   const supabase = await createClient();
   const { data: authorizedUser, error: authorizedError } =
@@ -15,23 +14,18 @@ export default async function Home() {
 
   if (authorizedUser && !authorizedError) {
     userId = authorizedUser.user.id;
-    username = authorizedUser.user.email?.split('@')[0] ?? null;
-  }
+    username = authorizedUser.user.email?.split("@")[0] ?? null;
+    const { data } = await supabase
+      .from("profile")
+      .select()
+      .eq("user_id", userId);
 
-  const { data } = await supabase
-    .from("profile")
-    .select()
-    .eq("user_id", userId);
-  
-  if (data) {
-    hasProfile = true
-  }
-  
-  if (!hasProfile) {
-    await supabase.from('profiles').upsert({
-      id: userId,
-      username: username
-    })
+    if (!data) {
+      await supabase.from("profiles").upsert({
+        id: userId,
+        username: username,
+      });
+    }
   }
 
   return (

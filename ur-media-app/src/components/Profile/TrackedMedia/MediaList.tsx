@@ -3,7 +3,7 @@ import styles from "./MediaList.module.css";
 import MediaCard from "./MediaCard";
 import { useState } from "react";
 import { ProfileTrackedMediaProps } from "@/services/profile/lists/getFollowedLists";
-import { getMediaDetails } from "@/services/media/catalog/getMediaDetails";
+import { getMediaDetails } from "@/services/catalog/getMediaDetails";
 import { MediaResultItem } from "@/types/types";
 import MediaDetailModal from "@/components/Global/MediaDetailModal";
 import { mapMedia } from "@/utils/mapDataHelper";
